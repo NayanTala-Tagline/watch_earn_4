@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../gen/assets.gen.dart';
 import '../../gen/fonts.gen.dart';
 import '../../utils/app_size.dart';
+import '../../widgets/app_button.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -25,9 +26,9 @@ class LoginScreen extends StatelessWidget {
                 SizedBox(height: AppSize.h30),
                 _buildHeadline(),
                 const Spacer(),
-                _buildButtons(context),
+                _buildButtons(),
                 SizedBox(height: AppSize.h16),
-                _buildTerms(context),
+                _buildTerms(),
                 SizedBox(height: AppSize.h28),
               ],
             ),
@@ -103,29 +104,20 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildButtons(BuildContext context) {
+  Widget _buildButtons() {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: AppSize.w24),
       child: Column(
         children: [
-          _ThreeDButton(
-            onTap: () {},
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Assets.icons.icGoogle.svg(width: 26.w, height: 26.w),
-                SizedBox(width: AppSize.w12),
-                Text(
-                  'Continue with Google',
-                  style: TextStyle(
-                    fontFamily: FontFamily.kommonGrotesk,
-                    fontSize: AppSize.sp17,
-                    fontWeight: FontWeight.w700,
-                    color: const Color(0xFF1C2359),
-                  ),
-                ),
-              ],
-            ),
+          AppButton(
+            text: 'Continue with Google',
+            icon: Assets.icons.icGoogle.svg(width: 26.w, height: 26.w),
+            isLoginButton: true,
+            buttonColor: Colors.white,
+            shadowColor: const Color(0xFFB0BDD6),
+            foregroundColor: const Color(0xFF1C2359),
+            borderRadius: 29.r,
+            onPressed: () {},
           )
               .animate()
               .fadeIn(delay: 350.ms, duration: 500.ms, curve: Curves.easeOut)
@@ -137,17 +129,13 @@ class LoginScreen extends StatelessWidget {
                 curve: Curves.easeOut,
               ),
           SizedBox(height: AppSize.h16),
-          _ThreeDButton(
-            onTap: () {},
-            child: Text(
-              'Continue as Guest',
-              style: TextStyle(
-                fontFamily: FontFamily.kommonGrotesk,
-                fontSize: AppSize.sp17,
-                fontWeight: FontWeight.w700,
-                color: const Color(0xFF1C2359),
-              ),
-            ),
+          AppButton(
+            text: 'Continue as Guest',
+            buttonColor: Colors.white,
+            shadowColor: const Color(0xFFB0BDD6),
+            foregroundColor: const Color(0xFF1C2359),
+            borderRadius: 29.r,
+            onPressed: () {},
           )
               .animate()
               .fadeIn(delay: 450.ms, duration: 500.ms, curve: Curves.easeOut)
@@ -163,7 +151,7 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildTerms(BuildContext context) {
+  Widget _buildTerms() {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: AppSize.w24),
       child: Text.rich(
@@ -217,97 +205,6 @@ class LoginScreen extends StatelessWidget {
       )
           .animate()
           .fadeIn(delay: 550.ms, duration: 500.ms, curve: Curves.easeOut),
-    );
-  }
-}
-
-// ── 3D pill button ─────────────────────────────────────────────────────────
-
-class _ThreeDButton extends StatefulWidget {
-  const _ThreeDButton({required this.onTap, required this.child});
-
-  final VoidCallback onTap;
-  final Widget child;
-
-  @override
-  State<_ThreeDButton> createState() => _ThreeDButtonState();
-}
-
-class _ThreeDButtonState extends State<_ThreeDButton>
-    with SingleTickerProviderStateMixin {
-  late final AnimationController _controller;
-  late final Animation<double> _pressAnim;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 80),
-      reverseDuration: const Duration(milliseconds: 150),
-    );
-    _pressAnim = CurvedAnimation(parent: _controller, curve: Curves.easeOut);
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  void _onTapDown(_) => _controller.forward();
-  void _onTapUp(_) {
-    _controller.reverse();
-    widget.onTap();
-  }
-  void _onTapCancel() => _controller.reverse();
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTapDown: _onTapDown,
-      onTapUp: _onTapUp,
-      onTapCancel: _onTapCancel,
-      child: AnimatedBuilder(
-        animation: _pressAnim,
-        builder: (context, child) {
-          // When pressed: button shifts down by 4px, bottom wall shrinks to 0
-          final pressOffset = _pressAnim.value * 4.0;
-          final wallHeight = (1 - _pressAnim.value) * 5.0;
-          final shadowOpacity = (1 - _pressAnim.value) * 0.18;
-
-          return Transform.translate(
-            offset: Offset(0, pressOffset),
-            child: Container(
-              width: double.infinity,
-              height: 58.h,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(29.r),
-                boxShadow: [
-                  // Bottom "wall" — solid offset gives 3D depth
-                  BoxShadow(
-                    color: const Color(0xFFB0BDD6),
-                    offset: Offset(0, wallHeight),
-                    blurRadius: 0,
-                    spreadRadius: 0,
-                  ),
-                  // Ambient drop shadow
-                  BoxShadow(
-                    color: Colors.black.withValues(alpha: shadowOpacity),
-                    offset: const Offset(0, 8),
-                    blurRadius: 16,
-                    spreadRadius: 0,
-                  ),
-                ],
-              ),
-              alignment: Alignment.center,
-              child: child,
-            ),
-          );
-        },
-        child: widget.child,
-      ),
     );
   }
 }

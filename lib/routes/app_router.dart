@@ -2,6 +2,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../features/login/login_screen.dart';
+import '../features/onboarding/onboarding1_screen.dart';
+import '../features/onboarding/onboarding2_screen.dart';
+import '../features/onboarding/onboarding3_screen.dart';
 import '../features/splash/splash_screen.dart';
 
 part 'app_routes.dart';
@@ -43,6 +46,24 @@ final appRouter = GoRouter(
       name: AppRoutes.splash,
       pageBuilder: (context, state) =>
           MaterialPage(key: state.pageKey, child: const SplashScreen()),
+    ),
+    GoRoute(
+      path: '/${AppRoutes.onboarding1}',
+      name: AppRoutes.onboarding1,
+      pageBuilder: (context, state) =>
+          MaterialPage(key: state.pageKey, child: const Onboarding1Screen()),
+    ),
+    GoRoute(
+      path: '/${AppRoutes.onboarding2}',
+      name: AppRoutes.onboarding2,
+      pageBuilder: (context, state) =>
+          MaterialPage(key: state.pageKey, child: const Onboarding2Screen()),
+    ),
+    GoRoute(
+      path: '/${AppRoutes.onboarding3}',
+      name: AppRoutes.onboarding3,
+      pageBuilder: (context, state) =>
+          MaterialPage(key: state.pageKey, child: const Onboarding3Screen()),
     ),
     GoRoute(
       path: '/${AppRoutes.login}',

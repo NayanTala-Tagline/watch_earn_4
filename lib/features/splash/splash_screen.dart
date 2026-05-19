@@ -25,7 +25,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Future<void> _navigate() async {
     await Future.delayed(const Duration(milliseconds: 3000));
     if (!mounted) return;
-    context.goNamed(AppRoutes.login);
+    context.goNamed(AppRoutes.onboarding1);
   }
 
   @override

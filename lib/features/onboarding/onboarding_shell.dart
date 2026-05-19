@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:watch_earn_4/extension/ext_context.dart';
 
 import '../../gen/assets.gen.dart';
 import '../../gen/fonts.gen.dart';
@@ -144,8 +145,8 @@ class OnboardingShell extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: AppSize.w24),
               child: AppButton(
                 text: buttonText,
-                buttonColor: const Color(0xFF3B4FE0),
-                shadowColor: const Color(0xFF1E2BB8),
+                buttonColor: context.themeColors.buttonColor,
+                shadowColor: context.themeColors.buttonBorderColor,
                 foregroundColor: Colors.white,
                 trailingIcon: const Icon(
                   Icons.arrow_forward_rounded,

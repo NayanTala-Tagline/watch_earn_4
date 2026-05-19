@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import '../features/home/home_screen.dart';
 import '../features/login/login_screen.dart';
 import '../features/onboarding/onboarding1_screen.dart';
 import '../features/onboarding/onboarding2_screen.dart';
@@ -70,6 +71,12 @@ final appRouter = GoRouter(
       name: AppRoutes.login,
       pageBuilder: (context, state) =>
           MaterialPage(key: state.pageKey, child: const LoginScreen()),
+    ),
+    GoRoute(
+      path: '/${AppRoutes.home}',
+      name: AppRoutes.home,
+      pageBuilder: (context, state) =>
+          MaterialPage(key: state.pageKey, child: const HomeScreen()),
     ),
 
     // Loan-finder flow — shared LoanFinderProvider (form) +

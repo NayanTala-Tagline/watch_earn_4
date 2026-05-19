@@ -2,14 +2,34 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
+import 'package:watch_earn_4/extension/ext_context.dart';
 
 import '../../gen/assets.gen.dart';
 import '../../gen/fonts.gen.dart';
+import '../../routes/app_router.dart';
 import '../../utils/app_size.dart';
 import '../../widgets/app_button.dart';
+import 'provider/auth_provider.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    // Provider scoped to this screen only — same pattern as clip_earn.
+    return ChangeNotifierProvider(
+      create: (_) => AuthProvider(),
+      child: const _LoginBody(),
+    );
+  }
+}
+
+// ── Body (has access to AuthProvider via Consumer) ─────────────────────────
+
+class _LoginBody extends StatelessWidget {
+  const _LoginBody();
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +46,7 @@ class LoginScreen extends StatelessWidget {
                 SizedBox(height: AppSize.h30),
                 _buildHeadline(),
                 const Spacer(),
-                _buildButtons(),
+                _buildButtons(context),
                 SizedBox(height: AppSize.h16),
                 _buildTerms(),
                 SizedBox(height: AppSize.h28),
@@ -37,6 +57,8 @@ class LoginScreen extends StatelessWidget {
       ),
     );
   }
+
+  // ── Logo ─────────────────────────────────────────────────────────────────
 
   Widget _buildLogo() {
     return Padding(
@@ -53,6 +75,8 @@ class LoginScreen extends StatelessWidget {
           ),
     );
   }
+
+  // ── Headline ─────────────────────────────────────────────────────────────
 
   Widget _buildHeadline() {
     return Padding(
@@ -104,20 +128,27 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildButtons() {
+  // ── Buttons ───────────────────────────────────────────────────────────────
+
+  Widget _buildButtons(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: AppSize.w24),
       child: Column(
         children: [
-          AppButton(
-            text: 'Continue with Google',
-            icon: Assets.icons.icGoogle.svg(width: 26.w, height: 26.w),
-            isLoginButton: true,
-            buttonColor: Colors.white,
-            shadowColor: const Color(0xFFB0BDD6),
-            foregroundColor: const Color(0xFF1C2359),
-            borderRadius: 29.r,
-            onPressed: () {},
+          // Google sign-in
+          Consumer<AuthProvider>(
+            builder: (context, auth, _) => AppButton(
+              text: 'Continue with Google',
+              icon: Assets.icons.icGoogle.svg(width: 26.w, height: 26.w),
+              isLoginButton: true,
+              isLoading: auth.isGoogleLoading,
+              isDisabled: auth.isGuestLoading,
+              buttonColor: Colors.white,
+              shadowColor: context.themeColors.borderColor,
+              foregroundColor: const Color(0xFF1C2359),
+              borderRadius: 29.r,
+              onPressed: () => _handleGoogle(context, auth),
+            ),
           )
               .animate()
               .fadeIn(delay: 350.ms, duration: 500.ms, curve: Curves.easeOut)
@@ -128,14 +159,21 @@ class LoginScreen extends StatelessWidget {
                 duration: 500.ms,
                 curve: Curves.easeOut,
               ),
+
           SizedBox(height: AppSize.h16),
-          AppButton(
-            text: 'Continue as Guest',
-            buttonColor: Colors.white,
-            shadowColor: const Color(0xFFB0BDD6),
-            foregroundColor: const Color(0xFF1C2359),
-            borderRadius: 29.r,
-            onPressed: () {},
+
+          // Guest
+          Consumer<AuthProvider>(
+            builder: (context, auth, _) => AppButton(
+              text: 'Continue as Guest',
+              isLoading: auth.isGuestLoading,
+              isDisabled: auth.isGoogleLoading,
+              buttonColor: Colors.white,
+              shadowColor: context.themeColors.borderColor,
+              foregroundColor: const Color(0xFF1C2359),
+              borderRadius: 29.r,
+              onPressed: () => _handleGuest(context, auth),
+            ),
           )
               .animate()
               .fadeIn(delay: 450.ms, duration: 500.ms, curve: Curves.easeOut)
@@ -146,10 +184,31 @@ class LoginScreen extends StatelessWidget {
                 duration: 500.ms,
                 curve: Curves.easeOut,
               ),
+
+          // Error message
+          Consumer<AuthProvider>(
+            builder: (context, auth, _) {
+              if (auth.errorMessage == null) return const SizedBox.shrink();
+              return Padding(
+                padding: EdgeInsets.only(top: AppSize.h12),
+                child: Text(
+                  auth.errorMessage!,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontFamily: FontFamily.kommonGrotesk,
+                    fontSize: AppSize.sp13,
+                    color: Colors.redAccent,
+                  ),
+                ),
+              );
+            },
+          ),
         ],
       ),
     );
   }
+
+  // ── Terms ─────────────────────────────────────────────────────────────────
 
   Widget _buildTerms() {
     return Padding(
@@ -202,9 +261,19 @@ class LoginScreen extends StatelessWidget {
           ],
         ),
         textAlign: TextAlign.center,
-      )
-          .animate()
-          .fadeIn(delay: 550.ms, duration: 500.ms, curve: Curves.easeOut),
+      ).animate().fadeIn(delay: 550.ms, duration: 500.ms, curve: Curves.easeOut),
     );
+  }
+
+  // ── Handlers ──────────────────────────────────────────────────────────────
+
+  Future<void> _handleGoogle(BuildContext context, AuthProvider auth) async {
+    final ok = await auth.signInWithGoogle();
+    if (ok && context.mounted) context.goNamed(AppRoutes.home);
+  }
+
+  Future<void> _handleGuest(BuildContext context, AuthProvider auth) async {
+    final ok = await auth.continueAsGuest();
+    if (ok && context.mounted) context.goNamed(AppRoutes.home);
   }
 }

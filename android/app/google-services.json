@@ -12,7 +12,20 @@
           "package_name": "com.reward.cash.rewardo.earn"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "671806358764-gls2ia07pp8tvv5942fne9c2dp94ck6g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.reward.cash.rewardo.earn",
+            "certificate_hash": "657ed653226c7638be52f45c2b0e59f43dced130"
+          }
+        },
+        {
+          "client_id": "671806358764-jf22aaa0du0v1ts1h2vfi4lfepsiqglk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyAkpWe0n5CZQYgURNTB1af_V5b0H2E82Rs"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "671806358764-jf22aaa0du0v1ts1h2vfi4lfepsiqglk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

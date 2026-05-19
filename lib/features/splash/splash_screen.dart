@@ -5,6 +5,8 @@ import 'package:go_router/go_router.dart';
 
 import '../../gen/assets.gen.dart';
 import '../../gen/fonts.gen.dart';
+import '../../db/app_db.dart';
+import '../../di/injector.dart';
 import '../../routes/app_router.dart';
 import '../../utils/app_size.dart';
 
@@ -25,7 +27,12 @@ class _SplashScreenState extends State<SplashScreen> {
   Future<void> _navigate() async {
     await Future.delayed(const Duration(milliseconds: 3000));
     if (!mounted) return;
-    context.goNamed(AppRoutes.onboarding1);
+    final isLoggedIn = Injector.instance<AppDB>().userModel != null;
+    if (isLoggedIn) {
+      context.goNamed(AppRoutes.home);
+    } else {
+      context.goNamed(AppRoutes.onboarding1);
+    }
   }
 
   @override

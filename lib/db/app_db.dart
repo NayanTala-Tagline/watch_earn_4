@@ -81,11 +81,11 @@ class AppDB {
 
   /// to get user data
   UserModel? get userModel => getValue<Map<dynamic, dynamic>?>('userModel') != null
-      ? UserModel.fromMap(Map<String, dynamic>.from(getValue('userModel')))
+      ? UserModel.fromLocalMap(Map<String, dynamic>.from(getValue('userModel')))
       : null;
 
   /// to set user data
-  set userModel(UserModel? data) => setValue('userModel', data?.toMap());
+  set userModel(UserModel? data) => setValue('userModel', data?.toLocalMap());
 
   /// notifies user on value change
   Stream<BoxEvent> userListenable() {

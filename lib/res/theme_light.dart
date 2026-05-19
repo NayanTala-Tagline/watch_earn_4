@@ -45,34 +45,34 @@ final TextTheme _textTheme = _lightThemeData.textTheme.copyWith(
     titleLarge: TextStyle(
         fontWeight: FontWeight.w700,
         color: _themeTextColors.textColor,
-        fontFamily: FontFamily.stackSansHeadline,
+        fontFamily: FontFamily.kommonGrotesk,
         fontSize: AppSize.sp16,
         inherit: false,
     ),
     titleMedium: TextStyle(
         fontWeight: FontWeight.w700,
-        fontFamily: FontFamily.stackSansHeadline,
+        fontFamily: FontFamily.kommonGrotesk,
         color: _themeTextColors.textColor,
         // inherit: false,
         fontSize: AppSize.sp14,
     ),
     titleSmall: TextStyle(
         fontWeight: FontWeight.w600,
-        fontFamily: FontFamily.stackSansHeadline,
+        fontFamily: FontFamily.kommonGrotesk,
         color: _themeTextColors.textColor,
         // inherit: false,
         fontSize: AppSize.sp14,
     ),
     bodyLarge: TextStyle(
         fontWeight: FontWeight.w500,
-        fontFamily:FontFamily.stackSansHeadline,
+        fontFamily:FontFamily.kommonGrotesk,
         color: _themeTextColors.textColor,
         // inherit: false,
         fontSize: AppSize.sp14,
     ),
     bodyMedium: TextStyle(
         fontWeight: FontWeight.w400,
-        fontFamily:FontFamily.stackSansHeadline,
+        fontFamily:FontFamily.kommonGrotesk,
         color: _themeTextColors.textColor,
 
         // inherit: false,
@@ -80,14 +80,14 @@ final TextTheme _textTheme = _lightThemeData.textTheme.copyWith(
     ),
     bodySmall: TextStyle(
         fontWeight: FontWeight.w400,
-        fontFamily: FontFamily.stackSansHeadline,
+        fontFamily: FontFamily.kommonGrotesk,
         color: _themeTextColors.textColor,
 
         // inherit: false,
         fontSize: AppSize.sp14,
     ),
     /*labelSmall: TextStyle(
-          fontFamily: FontFamily.stackSansHeadline,
+          fontFamily: FontFamily.kommonGrotesk,
           fontWeight: FontWeight.w200,
           color: _themeTextColors.text,
         ),*/
@@ -120,7 +120,7 @@ final ThemeData lightTheme = _lightThemeData.copyWith(
         elevation: 0,
         titleTextStyle: TextStyle(
             fontWeight: FontWeight.w700,
-            fontFamily: FontFamily.stackSansHeadline,
+            fontFamily: FontFamily.kommonGrotesk,
             color: _themeTextColors.textColor,
             fontSize: AppSize.sp16,
         ),

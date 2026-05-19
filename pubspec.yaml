@@ -101,27 +101,19 @@ flutter:
     generate: true,
     assets:
       [
-        "assets/compareIcons/",
         "assets/icons/",
-        "assets/fonts/",
-        "assets/homeIcons/",
         "assets/images/",
-        "assets/loan_finder/",
-        "assets/navIcons/",
-        "assets/settingIcons/",
-        "assets/toolsIcons/",
-        "assets/splash/",
       ],
     fonts:
       [
         {
-          family: StackSansHeadline,
+          family: KommonGrotesk,
           fonts:
             [
-              { asset: assets/fonts/StackSansHeadline-Regular.ttf, weight: 300 },
-              { asset: assets/fonts/StackSansHeadline-Medium.ttf, weight: 500 },
-              { asset: assets/fonts/StackSansHeadline-SemiBold.ttf, weight: 600 },
-              { asset: assets/fonts/StackSansHeadline-Bold.ttf, weight: 700 },
+              { asset: assets/fonts/KommonGrotesk-Regular.ttf, weight: 300 },
+              { asset: assets/fonts/KommonGrotesk-Medium.ttf, weight: 500 },
+              { asset: assets/fonts/KommonGrotesk-SemiBold.ttf, weight: 600 },
+              { asset: assets/fonts/KommonGrotesk-Bold.ttf, weight: 700 },
             ],
         },
       ],

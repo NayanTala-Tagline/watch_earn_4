@@ -1,4 +1,4 @@
-package com.example.watch_earn_4
+package com.reward.cash.rewardo.earn
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -7,6 +7,7 @@ class AppRoutes {
   const AppRoutes._();
 
   static const String splash = 'SplashScreen';
+  static const String login = 'LoginScreen';
   static const String onboarding1 = 'Onboarding1Screen';
   static const String onboarding2 = 'Onboarding2Screen';
   static const String onboarding3 = 'Onboarding3Screen';

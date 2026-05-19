@@ -53,7 +53,7 @@ class LocalNotificationHelper {
         ?.requestPermissions(alert: true, badge: true, sound: true);
     // await iZooto.setSubscription(true);
     await flutterLocalNotificationsPlugin.initialize(
-      const InitializationSettings(android: initializationSettingsAndroid, iOS: initializationSettingsDarwin),
+     settings: const InitializationSettings(android: initializationSettingsAndroid, iOS: initializationSettingsDarwin),
 
       onDidReceiveNotificationResponse: (details) {
         NotificationHelper.notificationOnTapHandler(localData: details, isLocal: true);
@@ -68,11 +68,11 @@ class LocalNotificationHelper {
   /// show Notification
   Future<void> showNotification(RemoteMessage remoteMessage) async {
     await flutterLocalNotificationsPlugin.show(
-       remoteMessage.notification.hashCode,
-       remoteMessage.notification?.title,
-      remoteMessage.notification?.body,
+       id: remoteMessage.notification.hashCode,
+       title: remoteMessage.notification?.title,
+      body: remoteMessage.notification?.body,
       payload: remoteMessage.data.isNotEmpty ? jsonEncode(remoteMessage.data) : null,
-      NotificationDetails(
+      notificationDetails: NotificationDetails(
         android: androidNotificationDetails,
         iOS: darwinNotificationDetails,
       ),

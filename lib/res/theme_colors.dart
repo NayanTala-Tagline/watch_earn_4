@@ -19,6 +19,8 @@ class ThemeColors extends ThemeExtension<ThemeColors> {
     required this.redColor2,
     required this.buttonColor,
     required this.buttonColor2,
+    required this.buttonBorderColor,
+    required this.buttonBorderColor2,
     required this.gradientColor,
     required this.gradientColor2,
     required this.secondary2,
@@ -38,6 +40,8 @@ class ThemeColors extends ThemeExtension<ThemeColors> {
   final Color redColor2;
   final Color buttonColor;
   final Color buttonColor2;
+  final Color buttonBorderColor;
+  final Color buttonBorderColor2;
   final Color gradientColor;
   final Color gradientColor2;
   final Color secondary2;
@@ -58,6 +62,8 @@ class ThemeColors extends ThemeExtension<ThemeColors> {
     Color? redColor2,
     Color? buttonColor,
     Color? buttonColor2,
+    Color? buttonBorderColor,
+    Color? buttonBorderColor2,
     Color? gradientColor,
     Color? gradientColor2,
     Color? purpleGradientColor,
@@ -80,6 +86,8 @@ class ThemeColors extends ThemeExtension<ThemeColors> {
       redColor2: redColor2 ?? this.redColor2,
       buttonColor: buttonColor ?? this.buttonColor,
       buttonColor2: buttonColor2 ?? this.buttonColor2,
+      buttonBorderColor: buttonBorderColor ?? this.buttonBorderColor,
+      buttonBorderColor2: buttonBorderColor2 ?? this.buttonBorderColor2,
       gradientColor: gradientColor ?? this.gradientColor,
       gradientColor2: gradientColor2 ?? this.gradientColor2,
       secondary2: secondary2 ?? this.secondary2,
@@ -107,6 +115,8 @@ class ThemeColors extends ThemeExtension<ThemeColors> {
       redColor2: Color.lerp(redColor2, other.redColor2, t)!,
       buttonColor: Color.lerp(buttonColor, other.buttonColor, t)!,
       buttonColor2: Color.lerp(buttonColor2, other.buttonColor2, t)!,
+      buttonBorderColor: Color.lerp(buttonBorderColor, other.buttonBorderColor, t)!,
+      buttonBorderColor2: Color.lerp(buttonBorderColor2, other.buttonBorderColor2, t)!,
       gradientColor: Color.lerp(gradientColor, other.gradientColor, t)!,
       gradientColor2: Color.lerp(gradientColor2, other.gradientColor2, t)!,
       secondary2: Color.lerp(secondary2, other.secondary2, t)!,

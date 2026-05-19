@@ -1,14 +1,14 @@
 import 'dart:ui';
 
-import 'package:ad_manager/ad_manager.dart';
-import 'package:watch_earn_4/utils/remote_config.dart';
-import 'package:firebase_core/firebase_core.dart';
+// import 'package:ad_manager/ad_manager.dart';
+// import 'package:watch_earn_4/utils/remote_config.dart';
+// import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_sign_in/google_sign_in.dart';
+// import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hive_ce_flutter/adapters.dart';
-import 'package:provider/provider.dart';
+// import 'package:provider/provider.dart';
 
 import 'db/app_db.dart';
 import 'di/injector.dart';
@@ -21,9 +21,9 @@ import 'utils/crashlytics_manager.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  FlutterError.onError = (FlutterErrorDetails details) {
-    CrashlyticsManager.instance.logFlutterError(details);
-  };
+  // FlutterError.onError = (FlutterErrorDetails details) {
+    // CrashlyticsManager.instance.logFlutterError(details);
+  // };
   // PlatformDispatcher.instance.onError = (Object error, StackTrace stack) {
   //   CrashlyticsManager.instance.logHandledDartError(error: error, stackTrace: stack);
   //   return true;

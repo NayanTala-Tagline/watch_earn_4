@@ -23,6 +23,8 @@ const _themeColors = ThemeColors(
   cardColor: Color(0xFF192E40),
   buttonColor: Color(0xFF1CFF0C),
   buttonColor2: Color(0xFF1C6599),
+  buttonBorderColor: Color(0xFF0E0F66),
+  buttonBorderColor2: Color(0xFF9C004D),
   redColor: Color(0xFFFF3624),
 
   redColor2: Color(0xFFFF0040),

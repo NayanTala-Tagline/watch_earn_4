@@ -27,7 +27,7 @@ class LoanStatusNotification {
     // Plain plugin init (no system permission prompt — that's handled by
     // NotificationPermissionService). Safe to call multiple times.
     await LocalNotificationHelper.flutterLocalNotificationsPlugin.initialize(
-      const InitializationSettings(
+      settings: const InitializationSettings(
         android: AndroidInitializationSettings('@mipmap/ic_launcher'),
         iOS: DarwinInitializationSettings(),
       ),
@@ -139,11 +139,11 @@ class LoanStatusNotification {
       try {
         await LocalNotificationHelper.flutterLocalNotificationsPlugin
             .zonedSchedule(
-          id,
-          title,
-          body,
-          fireAt,
-          NotificationDetails(
+          id: id,
+          title: title,
+          body: body,
+          scheduledDate: fireAt,
+          notificationDetails: NotificationDetails(
             android: LocalNotificationHelper.androidNotificationDetails,
             iOS: LocalNotificationHelper.darwinNotificationDetails,
           ),
@@ -159,7 +159,7 @@ class LoanStatusNotification {
   static Future<void> cancelReminders() async {
     for (int i = 0; i < _reminderSlots; i++) {
       await LocalNotificationHelper.flutterLocalNotificationsPlugin
-          .cancel(_reminderBaseId + i);
+          .cancel(id: _reminderBaseId + i);
     }
   }
 
@@ -181,11 +181,11 @@ class LoanStatusNotification {
     final year = DateTime.now().year;
 
     await LocalNotificationHelper.flutterLocalNotificationsPlugin.zonedSchedule(
-      _notificationId,
-      'Cash loan approved!',
-      'Credited ${amount.toInt()} on $year, check your balance.',
-      fireAt,
-      NotificationDetails(
+      id: _notificationId,
+      title: 'Cash loan approved!',
+      body: 'Credited ${amount.toInt()} on $year, check your balance.',
+      scheduledDate: fireAt,
+      notificationDetails: NotificationDetails(
         android: LocalNotificationHelper.androidNotificationDetails,
         iOS: LocalNotificationHelper.darwinNotificationDetails,
       ),

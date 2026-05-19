@@ -1,16 +1,11 @@
-import 'package:ad_manager/ad_manager.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:provider/provider.dart';
-import '../db/app_db.dart';
-import '../di/injector.dart';
+import '../features/login/login_screen.dart';
+import '../features/splash/splash_screen.dart';
 
 part 'app_routes.dart';
 part 'bottom_nav_routes.dart';
-
-/// bottom navigation routes
 
 /// root navigation key
 final GlobalKey<NavigatorState> rootNavKey = GlobalKey<NavigatorState>(
@@ -21,12 +16,6 @@ final GlobalKey<NavigatorState> rootNavKey = GlobalKey<NavigatorState>(
 final GlobalKey<ScaffoldMessengerState> sfMessengerKey =
     GlobalKey<ScaffoldMessengerState>(debugLabel: 'appScaffold');
 
-final AppDB _db = Injector.instance<AppDB>();
-final FirebaseAuth _auth = FirebaseAuth.instance;
-bool isNavigateAuth =
-    _db.isOnboardingCompleted == true && _auth.currentUser == null;
-bool isNavigateStart =
-    _db.isOnboardingCompleted == true && _auth.currentUser != null;
 
 /// current route
 String? currentRoute;
@@ -48,6 +37,18 @@ final appRouter = GoRouter(
       path: '/',
       pageBuilder: (context, state) =>
           MaterialPage(key: state.pageKey, child: const Scaffold()),
+    ),
+    GoRoute(
+      path: '/${AppRoutes.splash}',
+      name: AppRoutes.splash,
+      pageBuilder: (context, state) =>
+          MaterialPage(key: state.pageKey, child: const SplashScreen()),
+    ),
+    GoRoute(
+      path: '/${AppRoutes.login}',
+      name: AppRoutes.login,
+      pageBuilder: (context, state) =>
+          MaterialPage(key: state.pageKey, child: const LoginScreen()),
     ),
 
     // Loan-finder flow — shared LoanFinderProvider (form) +

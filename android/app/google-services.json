@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "671806358764",
+    "project_id": "rewardo-ad9ae",
+    "storage_bucket": "rewardo-ad9ae.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:671806358764:android:684e69ffebfa321db451c9",
+        "android_client_info": {
+          "package_name": "com.reward.cash.rewardo.earn"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAkpWe0n5CZQYgURNTB1af_V5b0H2E82Rs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

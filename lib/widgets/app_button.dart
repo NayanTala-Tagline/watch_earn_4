@@ -325,8 +325,10 @@ class _AppButtonState extends State<AppButton>
           fit: BoxFit.scaleDown,
           child: CircularProgressIndicator.adaptive(
             valueColor: AlwaysStoppedAnimation(
-              widget.foregroundColor ?? context.themeColors.iconColor,
+              widget.foregroundColor ?? context.themeTextColors.textColor,
             ),
+            strokeWidth: 2,
+            padding: EdgeInsets.all(AppSize.w14),
           ),
         ),
       ),
@@ -335,7 +337,7 @@ class _AppButtonState extends State<AppButton>
 
   Widget _content(BuildContext context) {
     final textColor = widget.isDisabled
-        ? Colors.grey.shade400
+        ? context.themeTextColors.descriptionColor
         : (widget.foregroundColor ?? context.themeTextColors.textColor);
 
     final label = Text(

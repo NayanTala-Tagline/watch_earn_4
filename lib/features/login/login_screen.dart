@@ -18,15 +18,12 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Provider scoped to this screen only — same pattern as clip_earn.
     return ChangeNotifierProvider(
       create: (_) => AuthProvider(),
       child: const _LoginBody(),
     );
   }
 }
-
-// ── Body (has access to AuthProvider via Consumer) ─────────────────────────
 
 class _LoginBody extends StatelessWidget {
   const _LoginBody();

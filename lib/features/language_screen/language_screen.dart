@@ -106,7 +106,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
             // Language list
             Expanded(
               child: ListView.separated(
-                padding: EdgeInsets.symmetric(horizontal: AppSize.w24),
+                padding: EdgeInsets.symmetric(horizontal: AppSize.w24, vertical: AppSize.h12),
                 itemCount: _languages.length,
                 separatorBuilder: (_, _) => SizedBox(height: AppSize.h12),
                 itemBuilder: (context, index) {
@@ -142,32 +142,6 @@ class _LanguageScreenState extends State<LanguageScreen> {
                   .animate()
                   .fadeIn(delay: 200.ms, duration: 400.ms, curve: Curves.easeOut)
                   .slideY(begin: 0.2, end: 0, delay: 200.ms, duration: 400.ms, curve: Curves.easeOut),
-            ),
-
-            SizedBox(height: AppSize.h16),
-
-            // AD placeholder
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: AppSize.w16),
-              child: Container(
-                height: 100.h,
-                decoration: BoxDecoration(
-                  color: const Color(0xFFFFF0F0),
-                  borderRadius: BorderRadius.circular(AppSize.r12),
-                  border: Border.all(color: const Color(0xFFEED0CC), width: 1),
-                ),
-                alignment: Alignment.center,
-                child: Text(
-                  'AD',
-                  style: TextStyle(
-                    fontFamily: FontFamily.kommonGrotesk,
-                    fontSize: AppSize.sp14,
-                    fontWeight: FontWeight.w600,
-                    color: const Color(0xFFD060A0),
-                    letterSpacing: 1.2,
-                  ),
-                ),
-              ),
             ),
 
             SizedBox(height: AppSize.h16),

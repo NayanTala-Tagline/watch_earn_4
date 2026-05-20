@@ -38,4 +38,5 @@ class AppRoutes {
   static const String loanDetail = 'LoanDetailScreen';
   static const String documentRequired = 'DocumentRequiredScreen';
   static const String tipsAdvice = 'TipsAdviceScreen';
+  static const String spinWheel = 'SpinWheelScreen';
 }

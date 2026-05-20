@@ -40,11 +40,13 @@ class AppButton extends StatefulWidget {
     this.borderColor,
     this.borderWidth,
     this.horizontalPad,
+    this.verticalPad,
     this.gradient,
     this.backgroundColor,
     this.primary,
     this.buttonStyle,
     this.visualDensity,
+    this.wallOffset,
   });
 
   final String text;
@@ -81,10 +83,15 @@ class AppButton extends StatefulWidget {
   final double? borderWidth;
   final double? borderRadius;
   final double? horizontalPad;
+  final double? verticalPad;
   final Gradient? gradient;
   final TextStyle? textStyle;
   final ButtonStyle? buttonStyle;
   final VisualDensity? visualDensity;
+
+  /// Fixed shadow wall offset for 3-D mode. When null, the wall animates
+  /// from 6→0 on press. When provided, the wall stays fixed at this value.
+  final double? wallOffset;
 
   bool get _is3D => isFillButton && !isOutlined && shadowColor != null;
 
@@ -179,7 +186,7 @@ class _AppButtonState extends State<AppButton>
           height: null,
           padding: EdgeInsets.symmetric(
             horizontal: widget.horizontalPad ?? AppSize.w12,
-            vertical: AppSize.h4,
+            vertical: widget.verticalPad ?? AppSize.h4,
           ),
           inner: inner,
         ),
@@ -197,7 +204,7 @@ class _AppButtonState extends State<AppButton>
             height: AppSize.h42,
             padding: EdgeInsets.symmetric(
               horizontal: widget.horizontalPad ?? AppSize.w44,
-              vertical: AppSize.h8,
+              vertical: widget.verticalPad ?? AppSize.h8,
             ),
             inner: inner,
           ),
@@ -268,7 +275,7 @@ class _AppButtonState extends State<AppButton>
                     color: widget.isDisabled
                         ? Colors.grey.shade600
                         : widget.shadowColor!,
-                    offset: Offset(0, wallH),
+                    offset: Offset(0, widget.wallOffset ?? wallH),
                     blurRadius: 0,
                   ),
                 ],
@@ -295,7 +302,8 @@ class _AppButtonState extends State<AppButton>
             spreadRadius: AppSize.sp2,
           ),
         ],
-        gradient: widget.gradient ??
+        gradient:
+            widget.gradient ??
             LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
@@ -307,7 +315,8 @@ class _AppButtonState extends State<AppButton>
         borderRadius: BorderRadius.circular(radius),
         border: Border.all(
           width: 2,
-          color: widget.borderColor ??
+          color:
+              widget.borderColor ??
               context.themeColors.buttonColor.withValues(alpha: 0.55),
         ),
       ),
@@ -344,7 +353,8 @@ class _AppButtonState extends State<AppButton>
       widget.text,
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
-      style: widget.textStyle ??
+      style:
+          widget.textStyle ??
           context.textTheme.titleSmall?.copyWith(
             color: widget.isOutlined
                 ? context.themeTextColors.descriptionColor
@@ -353,17 +363,17 @@ class _AppButtonState extends State<AppButton>
           ),
     );
 
-    // Show only icon
-    if (widget.icon != null && widget.showIconOnly) return widget.icon!;
+    // Show only icon (leading or trailing)
+    if (widget.showIconOnly) {
+      final iconOnly = widget.icon ?? widget.trailingIcon;
+      if (iconOnly != null) return iconOnly;
+    }
 
     // Login layout: [icon] ··· [label]  (wide spacing, left-aligned)
     if (widget.isLoginButton && widget.icon != null) {
       return Padding(
         padding: EdgeInsets.symmetric(horizontal: AppSize.w14),
-        child: Row(
-          spacing: AppSize.w35,
-          children: [widget.icon!, label],
-        ),
+        child: Row(spacing: AppSize.w35, children: [widget.icon!, label]),
       );
     }
 
@@ -373,7 +383,10 @@ class _AppButtonState extends State<AppButton>
         mainAxisAlignment: MainAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
         children: [
-          if (widget.icon != null) ...[widget.icon!, SizedBox(width: AppSize.w6)],
+          if (widget.icon != null) ...[
+            widget.icon!,
+            SizedBox(width: AppSize.w6),
+          ],
           label,
           if (widget.trailingIcon != null) ...[
             SizedBox(width: AppSize.w8),

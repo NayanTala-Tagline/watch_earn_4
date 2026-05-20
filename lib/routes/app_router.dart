@@ -6,6 +6,7 @@ import '../db/app_db.dart';
 import '../di/injector.dart';
 import '../features/home/home_screen.dart';
 import '../features/language_screen/language_screen.dart';
+import '../features/bottom_nav/bottom_nav_page.dart';
 import '../features/spin_wheel/spin_wheel_screen.dart';
 import '../features/login/login_screen.dart';
 import '../features/onboarding/onboarding1_screen.dart';
@@ -104,7 +105,7 @@ final appRouter = GoRouter(
       path: '/${AppRoutes.home}',
       name: AppRoutes.home,
       pageBuilder: (context, state) =>
-          MaterialPage(key: state.pageKey, child: const HomeScreen()),
+          MaterialPage(key: state.pageKey, child: const BottomNavPage()),
     ),
     GoRoute(
       path: '/${AppRoutes.spinWheel}',

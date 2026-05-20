@@ -14,6 +14,9 @@ class AppRoutes {
   static const String onboarding4 = 'Onboarding4Screen';
 
   static const String home = 'home';
+  static const String rank = 'rank';
+  static const String rewards = 'rewards';
+  static const String profile = 'profile';
   static const String tools = 'tools';
   static const String temperatureConvert = 'TemperatureConvertScreen';
   static const String massConvert = 'MassConvertScreen';

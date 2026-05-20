@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../db/app_db.dart';
 import '../di/injector.dart';
-import '../features/home/home_screen.dart';
 import '../features/language_screen/language_screen.dart';
 import '../features/bottom_nav/bottom_nav_page.dart';
 import '../features/spin_wheel/spin_wheel_screen.dart';

@@ -3,7 +3,6 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 
 import '../../db/app_db.dart';
 import '../../di/injector.dart';
@@ -108,10 +107,7 @@ class _SpinWheelScreenState extends State<SpinWheelScreen>
         label: _wonLabel,
         isLoss: isLoss,
         isXp: isXp,
-        onClaim: () {
-          sheetCtx.pop();
-          // TODO: wire coin/XP crediting to backend service
-        },
+        onClaim: () => Navigator.pop(sheetCtx),
       ),
     );
   }
@@ -228,11 +224,13 @@ class _WelcomeBody extends StatelessWidget {
         children: [
           SizedBox(height: AppSize.h8),
 
-          // "N Spins Left Today" badge
-          _SpinsLeftBadge(count: spinsRemaining)
-              .animate()
-              .fadeIn(duration: 400.ms)
-              .slideY(begin: -0.2, end: 0, duration: 400.ms, curve: Curves.easeOut),
+          // "N Spins Left Today" badge — centered
+          Center(
+            child: _SpinsLeftBadge(count: spinsRemaining)
+                .animate()
+                .fadeIn(duration: 400.ms)
+                .slideY(begin: -0.2, end: 0, duration: 400.ms, curve: Curves.easeOut),
+          ),
 
           SizedBox(height: AppSize.h20),
 
@@ -291,6 +289,7 @@ class _WelcomeBody extends StatelessWidget {
             shadowColor: context.themeColors.buttonBorderColor2,
             foregroundColor: Colors.white,
             borderRadius: 29.r,
+            trailingIcon: const Icon(Icons.arrow_forward_rounded, color: Colors.white, size: 20),
             onPressed: onGetStarted,
           )
               .animate()
@@ -329,14 +328,16 @@ class _SpinBody extends StatelessWidget {
         children: [
           SizedBox(height: AppSize.h8),
 
-          // Coin balance badge
-          StreamBuilder<dynamic>(
-            stream: Injector.instance<AppDB>().userListenable(),
-            builder: (context, _) {
-              final balance =
-                  Injector.instance<AppDB>().userModel?.coin.toInt() ?? 0;
-              return _CoinBadge(amount: balance);
-            },
+          // Coin balance badge — centered
+          Center(
+            child: StreamBuilder<dynamic>(
+              stream: Injector.instance<AppDB>().userListenable(),
+              builder: (context, _) {
+                final balance =
+                    Injector.instance<AppDB>().userModel?.coin.toInt() ?? 0;
+                return _CoinBadge(amount: balance);
+              },
+            ),
           ),
 
           SizedBox(height: AppSize.h16),
@@ -354,27 +355,29 @@ class _SpinBody extends StatelessWidget {
             ),
           ),
 
-          const Spacer(),
+          SizedBox(height: AppSize.h20),
 
-          // Wheel (animated when spinning)
-          AnimatedBuilder(
-            animation: rotation ?? const AlwaysStoppedAnimation(0),
-            builder: (_, _) => _WheelComposite(
-              angle: (isSpinning && rotation != null)
-                  ? rotation!.value
-                  : currentAngle,
+          // Wheel — Expanded so it fills available space (matches Figma large wheel)
+          Expanded(
+            child: AnimatedBuilder(
+              animation: rotation ?? const AlwaysStoppedAnimation(0),
+              builder: (_, _) => _WheelComposite(
+                angle: (isSpinning && rotation != null)
+                    ? rotation!.value
+                    : currentAngle,
+              ),
             ),
           ),
 
-          const Spacer(),
+          SizedBox(height: AppSize.h20),
 
-          // Spin / Spinning button
+          // Spin / Spinning button — stays pink while spinning (guard is in _onSpin)
           AppButton(
             text: isSpinning ? 'Spinning...' : 'Spin Now',
             buttonColor: context.themeColors.buttonColor2,
-            shadowColor: isSpinning ? null : context.themeColors.buttonBorderColor2,
+            shadowColor: spinsRemaining <= 0 ? null : context.themeColors.buttonBorderColor2,
             foregroundColor: Colors.white,
-            isDisabled: isSpinning || spinsRemaining <= 0,
+            isDisabled: spinsRemaining <= 0,
             borderRadius: 29.r,
             onPressed: onSpin,
           ),
@@ -386,7 +389,15 @@ class _SpinBody extends StatelessWidget {
   }
 }
 
-// ── Wheel composite (outer ring + segments + pointer) ────────────────────────
+// ── Wheel composite ───────────────────────────────────────────────────────────
+//
+// Ring layers (outside → in):
+//   1. Thin gradient STROKE ring  (strokeWidth ≈ 3.5 % of wheel size)
+//   2. Page-bg gap                (≈ 2 % — shows through between rings)
+//   3. Dark navy filled circle    (≈ 87 % of total size)
+//   4. White filled circle        (≈ 79 % — creates the thin white gap)
+//   5. Rotating segments          (≈ 78 %)
+//   6. Fixed pointer triangle     (sits just inside gradient ring at 12 o'clock)
 
 class _WheelComposite extends StatelessWidget {
   const _WheelComposite({required this.angle});
@@ -397,56 +408,63 @@ class _WheelComposite extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         final size = constraints.maxWidth.clamp(0.0, constraints.maxHeight);
+        final strokeW = size * 0.038;
 
-        return SizedBox(
-          width: size,
-          height: size,
-          child: Stack(
-            alignment: Alignment.center,
-            clipBehavior: Clip.none,
-            children: [
-              // 1. Outer gradient ring
-              SizedBox(
-                width: size,
-                height: size,
-                child: CustomPaint(painter: const GradientRingPainter()),
-              ),
-
-              // 2. Dark navy ring (inset)
-              Container(
-                width: size * 0.87,
-                height: size * 0.87,
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Color(0xFF1C2359),
+        // Center keeps the square wheel centred when Expanded gives a taller box,
+        // preventing the pointer from drifting above the ring area.
+        return Center(
+          child: SizedBox(
+            width: size,
+            height: size,
+            child: Stack(
+              alignment: Alignment.center,
+              clipBehavior: Clip.none,
+              children: [
+                // 1. Thin gradient stroke ring
+                SizedBox(
+                  width: size,
+                  height: size,
+                  child: CustomPaint(
+                    painter: GradientRingPainter(strokeWidth: strokeW),
+                  ),
                 ),
-              ),
 
-              // 3. White gap ring
-              Container(
-                width: size * 0.83,
-                height: size * 0.83,
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.white,
+                // 2. Navy filled circle — creates the dark ring band
+                Container(
+                  width: size * 0.87,
+                  height: size * 0.87,
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Color(0xFF1C2359),
+                  ),
                 ),
-              ),
 
-              // 4. Rotating segments
-              SpinWheelWidget(
-                angle: angle,
-                size: size * 0.82,
-              ),
-
-              // 5. Fixed pointer triangle at top
-              Positioned(
-                top: size * 0.065,
-                child: CustomPaint(
-                  size: Size(20.r, 24.r),
-                  painter: const PointerTrianglePainter(),
+                // 3. White fill — thin white gap inside the navy ring
+                Container(
+                  width: size * 0.79,
+                  height: size * 0.79,
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.white,
+                  ),
                 ),
-              ),
-            ],
+
+                // 4. Rotating segments
+                SpinWheelWidget(
+                  angle: angle,
+                  size: size * 0.78,
+                ),
+
+                // 5. Fixed pointer — top of the square SizedBox = top of the ring
+                Positioned(
+                  top: size * 0.03,
+                  child: CustomPaint(
+                    size: Size(22.r, 26.r),
+                    painter: const PointerTrianglePainter(),
+                  ),
+                ),
+              ],
+            ),
           ),
         );
       },
@@ -463,26 +481,27 @@ class _SpinsLeftBadge extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: AppSize.w16, vertical: AppSize.h8),
+      padding: EdgeInsets.symmetric(horizontal: AppSize.w16, vertical: AppSize.h9),
       decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          colors: [Color(0xFFFFE0E8), Color(0xFFFFC8D8)],
-        ),
+        color: const Color(0xFFFFE0E8),
         borderRadius: BorderRadius.circular(AppSize.r100),
-        border: Border.all(color: const Color(0xFFE0006E).withValues(alpha: 0.4)),
-        boxShadow: [
+        border: Border.all(
+          color: const Color(0xFFE0006E).withValues(alpha: 0.35),
+          width: 1.5,
+        ),
+        boxShadow: const [
           BoxShadow(
-            color: const Color(0xFFE0006E).withValues(alpha: 0.15),
-            blurRadius: 10,
-            offset: const Offset(0, 3),
+            color: Color(0xFFE0006E),
+            blurRadius: 0,
+            offset: Offset(0, 4),
           ),
         ],
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
-        spacing: AppSize.w6,
         children: [
           Text('🔥', style: TextStyle(fontSize: AppSize.sp16)),
+          SizedBox(width: AppSize.w6),
           Text(
             '$count Spins Left Today',
             style: TextStyle(
@@ -507,25 +526,23 @@ class _CoinBadge extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: AppSize.w16, vertical: AppSize.h8),
+      padding: EdgeInsets.symmetric(horizontal: AppSize.w14, vertical: AppSize.h8),
       decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          colors: [Color(0xFFFFD84D), Color(0xFFFFC020)],
-        ),
+        color: const Color(0xFFFFD84D),
         borderRadius: BorderRadius.circular(AppSize.r100),
-        boxShadow: [
+        boxShadow: const [
           BoxShadow(
-            color: const Color(0xFFFFD84D).withValues(alpha: 0.35),
-            blurRadius: 12,
-            offset: const Offset(0, 4),
+            color: Color(0xFFC97A00),
+            blurRadius: 0,
+            offset: Offset(0, 4),
           ),
         ],
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
-        spacing: AppSize.w6,
         children: [
           Assets.icons.icCoin.svg(width: 20.r, height: 20.r),
+          SizedBox(width: AppSize.w6),
           Text(
             '$amount',
             style: TextStyle(
@@ -593,6 +610,17 @@ class _InfoCard extends StatelessWidget {
 }
 
 // ── Result bottom sheet ───────────────────────────────────────────────────────
+//
+// Figma floating-trophy layout:
+//   ┌─────────────────────────────────┐  ← transparent spacer (= trophy half-height)
+//   │   [modal barrier shows through] │    trophy's upper half is here
+//   ├──────────┬──────────────────────┤  ← white sheet top edge
+//   │          │  ○ trophy (floats)   │
+//   │  handle  │                      │
+//   │  title   │                      │
+//   │  subtitle│                      │
+//   │ [Claim]  │                      │
+//   └──────────┴──────────────────────┘
 
 class _ResultSheet extends StatelessWidget {
   const _ResultSheet({
@@ -609,6 +637,9 @@ class _ResultSheet extends StatelessWidget {
   final bool isXp;
   final VoidCallback onClaim;
 
+  // Trophy circle diameter; half used for the spacer / negative top offset.
+  static const double _trophyD = 104.0;
+
   String get _title => isLoss ? 'Oops!' : 'Congratulations..!';
 
   String get _subtitle {
@@ -619,118 +650,121 @@ class _ResultSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      clipBehavior: Clip.none,
-      alignment: Alignment.topCenter,
+    final half = (_trophyD / 2).r;
+
+    return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
-        // Sheet body
-        Container(
-          width: double.infinity,
-          margin: EdgeInsets.only(top: AppSize.h48),
-          padding: EdgeInsets.fromLTRB(
-            AppSize.w24,
-            AppSize.h60,
-            AppSize.w24,
-            AppSize.h32,
-          ),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.vertical(top: Radius.circular(AppSize.r28)),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withValues(alpha: 0.08),
-                blurRadius: 24,
-                offset: const Offset(0, -4),
+        // Transparent gap — modal barrier shows here so the trophy looks
+        // like it's floating above the white sheet edge.
+        SizedBox(height: half),
+
+        Stack(
+          clipBehavior: Clip.none,
+          alignment: Alignment.topCenter,
+          children: [
+            // ── White card ──────────────────────────────────────────────
+            Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.vertical(
+                  top: Radius.circular(AppSize.r28),
+                ),
               ),
-            ],
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              // Handle bar
-              Container(
-                width: AppSize.w40,
-                height: AppSize.h4,
+              padding: EdgeInsets.fromLTRB(
+                AppSize.w24,
+                half + AppSize.h16, // clears trophy lower half
+                AppSize.w24,
+                AppSize.h32,
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  // Handle bar
+                  Container(
+                    width: AppSize.w40,
+                    height: AppSize.h4,
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFDDE2F0),
+                      borderRadius: BorderRadius.circular(AppSize.r100),
+                    ),
+                  ),
+
+                  SizedBox(height: AppSize.h20),
+
+                  // Title
+                  Text(
+                    _title,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontFamily: FontFamily.kommonGrotesk,
+                      fontSize: AppSize.sp26,
+                      fontWeight: FontWeight.w800,
+                      color: const Color(0xFF1C2359),
+                    ),
+                  ),
+
+                  SizedBox(height: AppSize.h8),
+
+                  // Subtitle
+                  Text(
+                    _subtitle,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontFamily: FontFamily.kommonGrotesk,
+                      fontSize: AppSize.sp16,
+                      fontWeight: FontWeight.w500,
+                      color: const Color(0xFF4A4E6B),
+                    ),
+                  ),
+
+                  SizedBox(height: AppSize.h28),
+
+                  // Claim / Try Again button
+                  AppButton(
+                    text: isLoss ? 'Try Again' : 'Claim Now',
+                    buttonColor: const Color(0xFF1A1AE8),
+                    shadowColor: const Color(0xFF0E0F66),
+                    foregroundColor: Colors.white,
+                    borderRadius: 29.r,
+                    onPressed: onClaim,
+                  ),
+                ],
+              ),
+            ),
+
+            // ── Floating trophy — straddles the sheet's top edge ────────
+            Positioned(
+              top: -half,
+              child: Container(
+                width: _trophyD.r,
+                height: _trophyD.r,
                 decoration: BoxDecoration(
-                  color: const Color(0xFFE0E4F0),
-                  borderRadius: BorderRadius.circular(AppSize.r100),
+                  shape: BoxShape.circle,
+                  color: const Color(0xFFEEF1FF),
+                  border: Border.all(color: Colors.white, width: 3),
+                  boxShadow: [
+                    BoxShadow(
+                      color: const Color(0xFF1A1AE8).withValues(alpha: 0.15),
+                      blurRadius: 20,
+                      offset: const Offset(0, 6),
+                    ),
+                  ],
                 ),
-              ),
-              SizedBox(height: AppSize.h20),
-
-              // Title
-              Text(
-                _title,
-                style: TextStyle(
-                  fontFamily: FontFamily.kommonGrotesk,
-                  fontSize: AppSize.sp26,
-                  fontWeight: FontWeight.w800,
-                  color: const Color(0xFF1C2359),
-                ),
-              ),
-
-              SizedBox(height: AppSize.h8),
-
-              // Subtitle
-              Text(
-                _subtitle,
-                style: TextStyle(
-                  fontFamily: FontFamily.kommonGrotesk,
-                  fontSize: AppSize.sp16,
-                  fontWeight: FontWeight.w500,
-                  color: const Color(0xFF4A4E6B),
-                ),
-              ),
-
-              SizedBox(height: AppSize.h28),
-
-              // Claim / Try Again button
-              AppButton(
-                text: isLoss ? 'Try Again' : 'Claim Now',
-                buttonColor: const Color(0xFF1A1AE8),
-                shadowColor: const Color(0xFF0E0F66),
-                foregroundColor: Colors.white,
-                borderRadius: 29.r,
-                onPressed: onClaim,
-              ),
-            ],
-          ),
-        ),
-
-        // Floating trophy image
-        Positioned(
-          top: 0,
-          child: Container(
-            width: 96.r,
-            height: 96.r,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: const Color(0xFFF0F3FF),
-              border: Border.all(color: Colors.white, width: 4),
-              boxShadow: [
-                BoxShadow(
-                  color: const Color(0xFF1A1AE8).withValues(alpha: 0.12),
-                  blurRadius: 16,
-                  offset: const Offset(0, 4),
-                ),
-              ],
-            ),
-            child: ClipOval(
-              child: Assets.images.trophy.image(
-                width: 70.r,
-                height: 70.r,
-                fit: BoxFit.contain,
-              ),
-            ),
-          )
-              .animate()
-              .scale(
-                begin: const Offset(0.6, 0.6),
-                end: const Offset(1, 1),
-                duration: 500.ms,
-                curve: Curves.easeOutBack,
+                padding: EdgeInsets.all(AppSize.w14),
+                child: Assets.images.trophy.image(fit: BoxFit.contain),
               )
-              .fadeIn(duration: 400.ms),
+                  .animate()
+                  .scale(
+                    begin: const Offset(0.55, 0.55),
+                    end: const Offset(1, 1),
+                    duration: 500.ms,
+                    curve: Curves.easeOutBack,
+                  )
+                  .fadeIn(duration: 350.ms),
+            ),
+          ],
         ),
       ],
     );

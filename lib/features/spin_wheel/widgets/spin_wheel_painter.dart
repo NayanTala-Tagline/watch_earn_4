@@ -22,20 +22,20 @@ class SpinSegment {
   bool get isXp => label == '+XP';
 }
 
-// ── Default 8-segment layout matching the Figma design ───────────────────────
+// ── Default 8-segment layout matching Figma ──────────────────────────────────
 
 const List<SpinSegment> defaultSegments = [
-  SpinSegment(coins: 50, label: 'JKP', color: Color(0xFFFFB3C8)),   // pink
-  SpinSegment(coins: 2, label: '2¢', color: Color(0xFFFFD84D)),     // gold
-  SpinSegment(coins: 5, label: '5¢', color: Color(0xFFFFB3C8)),     // pink
-  SpinSegment(coins: 0, label: '+XP', color: Color(0xFFDCE8FF)),    // lavender
-  SpinSegment(coins: 20, label: '20¢', color: Color(0xFFFFD84D)),   // gold
-  SpinSegment(coins: 0, label: 'TRY', color: Color(0xFFFFB3C8)),    // pink
-  SpinSegment(coins: 10, label: '10¢', color: Color(0xFFDCE8FF)),   // lavender
-  SpinSegment(coins: 1, label: '1¢', color: Color(0xFFFFD84D)),     // gold
+  SpinSegment(coins: 50, label: 'JKP', color: Color(0xFFFFB3C8)),  // pink
+  SpinSegment(coins: 2, label: '2¢', color: Color(0xFFFFD84D)),    // gold
+  SpinSegment(coins: 5, label: '5¢', color: Color(0xFFFFB3C8)),    // pink
+  SpinSegment(coins: 0, label: '+XP', color: Color(0xFFDCE8FF)),   // lavender
+  SpinSegment(coins: 20, label: '20¢', color: Color(0xFFFFD84D)),  // gold
+  SpinSegment(coins: 0, label: 'TRY', color: Color(0xFFFFB3C8)),   // pink
+  SpinSegment(coins: 10, label: '10¢', color: Color(0xFFDCE8FF)),  // lavender
+  SpinSegment(coins: 1, label: '1¢', color: Color(0xFFFFD84D)),    // gold
 ];
 
-// ── CustomPainter ────────────────────────────────────────────────────────────
+// ── Segment painter ───────────────────────────────────────────────────────────
 
 class SpinWheelPainter extends CustomPainter {
   const SpinWheelPainter(this.segments);
@@ -71,27 +71,27 @@ class SpinWheelPainter extends CustomPainter {
           center.dy + radius * sin(startAngle),
         ),
         Paint()
-          ..color = Colors.white.withValues(alpha: 0.85)
+          ..color = Colors.white.withValues(alpha: 0.9)
           ..style = PaintingStyle.stroke
-          ..strokeWidth = 2,
+          ..strokeWidth = 2.5,
       );
 
-      // Text label
+      // Text label — tangential orientation (reads along the arc)
       _drawLabel(canvas, center, radius, midAngle, segment.label);
     }
 
-    // Center hub: white disc → navy ring → pink dot
+    // Centre hub: white disc → navy stroke ring → pink dot
     canvas
-      ..drawCircle(center, radius * 0.16, Paint()..color = Colors.white)
+      ..drawCircle(center, radius * 0.17, Paint()..color = Colors.white)
       ..drawCircle(
         center,
-        radius * 0.16,
+        radius * 0.17,
         Paint()
           ..color = const Color(0xFF1C2359)
           ..style = PaintingStyle.stroke
           ..strokeWidth = 2.5,
       )
-      ..drawCircle(center, radius * 0.07, Paint()..color = const Color(0xFFE0006E));
+      ..drawCircle(center, radius * 0.08, Paint()..color = const Color(0xFFE0006E));
   }
 
   void _drawLabel(
@@ -118,6 +118,7 @@ class SpinWheelPainter extends CustomPainter {
     final x = center.dx + radius * 0.62 * cos(midAngle);
     final y = center.dy + radius * 0.62 * sin(midAngle);
 
+    // midAngle + pi/2 → tangential: text reads along the arc (matches Figma)
     canvas
       ..save()
       ..translate(x, y)
@@ -157,10 +158,14 @@ class SpinWheelWidget extends StatelessWidget {
   }
 }
 
-// ── Outer gradient ring ───────────────────────────────────────────────────────
+// ── Outer gradient ring — THIN STROKE only ────────────────────────────────────
+// Draws a single-colour-per-stop sweep gradient as a stroke ring.
+// strokeWidth is passed in so _WheelComposite can scale it with the wheel size.
 
 class GradientRingPainter extends CustomPainter {
-  const GradientRingPainter();
+  const GradientRingPainter({this.strokeWidth = 8.0});
+
+  final double strokeWidth;
 
   static const _colors = [
     Color(0xFFFF6B00), // orange
@@ -168,19 +173,21 @@ class GradientRingPainter extends CustomPainter {
     Color(0xFF4A90E2), // sky-blue
     Color(0xFF7B52D9), // purple
     Color(0xFFE0006E), // magenta
-    Color(0xFFFF6B00), // back to orange
+    Color(0xFFFF6B00), // back to orange — closes the gradient loop
   ];
 
   @override
   void paint(Canvas canvas, Size size) {
     final center = Offset(size.width / 2, size.height / 2);
-    final radius = size.width / 2;
+    // Inset the radius by half the stroke so the stroke stays fully inside canvas
+    final radius = (size.width - strokeWidth) / 2;
 
     canvas.drawCircle(
       center,
       radius,
       Paint()
-        ..style = PaintingStyle.fill
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = strokeWidth
         ..shader = SweepGradient(colors: _colors).createShader(
           Rect.fromCircle(center: center, radius: radius),
         ),
@@ -188,10 +195,11 @@ class GradientRingPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(covariant CustomPainter _) => false;
+  bool shouldRepaint(covariant GradientRingPainter old) =>
+      old.strokeWidth != strokeWidth;
 }
 
-// ── Downward pointer triangle ─────────────────────────────────────────────────
+// ── Downward-pointing pointer triangle ───────────────────────────────────────
 
 class PointerTrianglePainter extends CustomPainter {
   const PointerTrianglePainter();
@@ -209,7 +217,7 @@ class PointerTrianglePainter extends CustomPainter {
       ..drawPath(
         path,
         Paint()
-          ..color = Colors.white.withValues(alpha: 0.4)
+          ..color = Colors.white.withValues(alpha: 0.35)
           ..style = PaintingStyle.stroke
           ..strokeWidth = 1.5,
       );

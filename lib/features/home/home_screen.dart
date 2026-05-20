@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:watch_earn_4/gen/assets.gen.dart';
 import 'package:watch_earn_4/gen/fonts.gen.dart';
+import 'package:watch_earn_4/routes/app_router.dart';
 import 'package:watch_earn_4/utils/app_size.dart';
 import 'package:watch_earn_4/widgets/app_button.dart';
 
@@ -568,6 +570,7 @@ class _EarnGrid extends StatelessWidget {
         subtitle: 'Spin and Win',
         reward: '+25',
         illustration: _EarnIllustration.spin,
+        routeName: AppRoutes.spinWheel,
       ),
       _EarnItem(
         title: 'Scratch Card',
@@ -618,12 +621,14 @@ class _EarnItem {
     required this.subtitle,
     required this.reward,
     required this.illustration,
+    this.routeName,
   });
 
   final String title;
   final String subtitle;
   final String reward;
   final _EarnIllustration illustration;
+  final String? routeName;
 }
 
 class _EarnTile extends StatelessWidget {
@@ -632,7 +637,9 @@ class _EarnTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return GestureDetector(
+      onTap: item.routeName != null ? () => context.pushNamed(item.routeName!) : null,
+      child: Container(
       padding: EdgeInsets.symmetric(vertical:AppSize.w12),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -711,6 +718,7 @@ class _EarnTile extends StatelessWidget {
             ),)
 
         ],
+      ),
       ),
     );
   }

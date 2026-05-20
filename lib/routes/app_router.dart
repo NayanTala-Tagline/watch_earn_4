@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../features/home/home_screen.dart';
 import '../features/language_screen/language_screen.dart';
+import '../features/bottom_nav/bottom_nav_page.dart';
 import '../features/login/login_screen.dart';
 import '../features/onboarding/onboarding1_screen.dart';
 import '../features/onboarding/onboarding2_screen.dart';
@@ -20,7 +21,6 @@ final GlobalKey<NavigatorState> rootNavKey = GlobalKey<NavigatorState>(
 /// Scaffold navigation key
 final GlobalKey<ScaffoldMessengerState> sfMessengerKey =
     GlobalKey<ScaffoldMessengerState>(debugLabel: 'appScaffold');
-
 
 /// current route
 String? currentRoute;
@@ -83,7 +83,7 @@ final appRouter = GoRouter(
       path: '/${AppRoutes.home}',
       name: AppRoutes.home,
       pageBuilder: (context, state) =>
-          MaterialPage(key: state.pageKey, child: const HomeScreen()),
+          MaterialPage(key: state.pageKey, child: const BottomNavPage()),
     ),
 
     // Loan-finder flow — shared LoanFinderProvider (form) +

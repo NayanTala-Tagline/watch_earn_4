@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../features/home/home_screen.dart';
+import '../features/language_screen/language_screen.dart';
 import '../features/login/login_screen.dart';
 import '../features/onboarding/onboarding1_screen.dart';
 import '../features/onboarding/onboarding2_screen.dart';
@@ -65,6 +66,12 @@ final appRouter = GoRouter(
       name: AppRoutes.onboarding3,
       pageBuilder: (context, state) =>
           MaterialPage(key: state.pageKey, child: const Onboarding3Screen()),
+    ),
+    GoRoute(
+      path: '/${AppRoutes.language}',
+      name: AppRoutes.language,
+      pageBuilder: (context, state) =>
+          MaterialPage(key: state.pageKey, child: const LanguageScreen()),
     ),
     GoRoute(
       path: '/${AppRoutes.login}',

@@ -15,8 +15,8 @@ class Onboarding3Screen extends StatelessWidget {
       subtitle:
           'See your achievements and Track it with other user through Leatherboard',
       buttonText: 'Start Earning',
-      onNext: () => context.goNamed('LoginScreen'),
-      onSkip: () => context.goNamed('LoginScreen'),
+      onNext: () => context.goNamed('language'),
+      onSkip: () => context.goNamed('language'),
     );
   }
 }

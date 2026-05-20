@@ -169,11 +169,6 @@ class OnboardingShell extends StatelessWidget {
 
             SizedBox(height: AppSize.h16),
 
-            // ── Ad slot ───────────────────────────────────────────────────────
-            // Replace SizedBox.shrink() with your banner ad widget.
-            // The Expanded illustration above will give up space automatically.
-            const SizedBox.shrink(),
-
             SizedBox(height: AppSize.h24),
           ],
         ),

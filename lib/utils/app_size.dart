@@ -17,6 +17,7 @@ class AppSize {
   static final double h4 = disableSizeUtils ? 4 : 4.h;
   static final double h5 = disableSizeUtils ? 5 : 5.h;
   static final double h6 = disableSizeUtils ? 6 : 6.h;
+  static final double h7 = disableSizeUtils ? 7 : 7.h;
   static final double h8 = disableSizeUtils ? 8 : 8.h;
   static final double h9 = disableSizeUtils ? 9 : 9.h;
   static final double h10 = disableSizeUtils ? 10 : 10.h;
@@ -120,8 +121,10 @@ class AppSize {
   static final double w10 = disableSizeUtils ? 10 : 10.w;
   static final double w12 = disableSizeUtils ? 12 : 12.w;
   static final double w14 = disableSizeUtils ? 14 : 14.w;
+  static final double w15 = disableSizeUtils ? 15 : 15.w;
   static final double w16 = disableSizeUtils ? 16 : 16.w;
   static final double w18 = disableSizeUtils ? 18 : 18.w;
+  static final double w19 = disableSizeUtils ? 19 : 19.w;
   static final double w20 = disableSizeUtils ? 20 : 20.w;
   static final double w22 = disableSizeUtils ? 22 : 22.w;
   static final double w24 = disableSizeUtils ? 24 : 24.w;
@@ -176,6 +179,7 @@ class AppSize {
   static final double w186 = disableSizeUtils ? 186 : 186.w;
   static final double w190 = disableSizeUtils ? 190 : 190.w;
   static final double w200 = disableSizeUtils ? 200 : 200.w;
+  static final double w210 = disableSizeUtils ? 210 : 210.w;
   static final double w240 = disableSizeUtils ? 240 : 240.w;
   static final double w250 = disableSizeUtils ? 250 : 250.w;
   static final double w280 = disableSizeUtils ? 280 : 280.w;
@@ -269,6 +273,7 @@ class AppSize {
   static final double r25 = disableSizeUtils ? 25 : 25.r;
   static final double r26 = disableSizeUtils ? 26 : 26.r;
   static final double r28 = disableSizeUtils ? 28 : 28.r;
+  static final double r29 = disableSizeUtils ? 29 : 29.r;
   static final double r30 = disableSizeUtils ? 30 : 30.r;
   static final double r31 = disableSizeUtils ? 31 : 31.r;
   static final double r32 = disableSizeUtils ? 32 : 32.r;

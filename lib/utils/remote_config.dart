@@ -12,7 +12,7 @@ class RemoteConfigService {
 
   final FirebaseRemoteConfig _remoteConfig = FirebaseRemoteConfig.instance;
   Map<String, dynamic> _appData = {};
-  Map<String, dynamic> _btcCloudManager = {};
+  Map<String, dynamic> _visitWebsites = {};
 
   RemoteConfigService._internal();
 
@@ -34,21 +34,25 @@ class RemoteConfigService {
       return;
     }
 
-    final jsonString = _remoteConfig.getString('android');
-    // final jsonString1 = _remoteConfig.getString('btc_cloud_manager');
+    final jsonString = _remoteConfig.getString('app_data');
+    final jsonString1 = _remoteConfig.getString('visit_websites_games');
 
     if (jsonString.isEmpty) {
-      '⚠️ android key is empty in Remote Config'.logD;
+      '⚠️ app_data key is empty in Remote Config'.logD;
+      return;
+    }
+    if (jsonString1.isEmpty) {
+      '⚠️ visit_websites key is empty in Remote Config'.logD;
       return;
     }
 
     try {
       _appData = jsonDecode(jsonString) as Map<String, dynamic>;
-      // _btcCloudManager = jsonDecode(jsonString1) as Map<String, dynamic>;
+      _visitWebsites = jsonDecode(jsonString1) as Map<String, dynamic>;
       '✅ Remote config loaded successfully'.logD;
     } catch (e) {
       _appData = {};
-      _btcCloudManager = {};
+      _visitWebsites = {};
       '❌ Failed to decode remote config JSON: $e'.logD;
     }
   }
@@ -69,19 +73,14 @@ class RemoteConfigService {
       final Map<String, dynamic> data = {
         'ad_id': raw['ad_id'] ?? '',
         'enabled': raw['enabled'] ?? false,
-
-        // ✅ NEW FIELD
-        'ad_type': raw['ad_type'] ?? 'native',
-
-        // ✅ TEMPLATE TYPE
         'template_type': raw['template_type'] ?? 'small',
+        'is_custom_ad': raw['is_custom_ad'] ?? false,
 
-        // 🔥 SAFE DOUBLE CONVERSION
-        'height': (raw['height'] is num)
-            ? (raw['height'] as num).toDouble()
+        // 🔥 INT → DOUBLE FIX
+        'custom_ad_height': (raw['custom_ad_height'] is num)
+            ? (raw['custom_ad_height'] as num).toDouble()
             : 0.0,
 
-        // ✅ CUSTOM ADS
         'custom_ad_view_url': raw['custom_ad_view_url'] ?? '',
         'custom_ad_url': raw['custom_ad_url'] ?? '',
       };
@@ -97,127 +96,149 @@ class RemoteConfigService {
   Map<String, dynamic> _emptyAd() => {
     'ad_id': '',
     'enabled': false,
-    'ad_type': 'native',
     'template_type': 'small',
-    'height': 0.0,
+    'is_custom_ad': false,
+    'custom_ad_height': 0.0,
     'custom_ad_view_url': '',
     'custom_ad_url': '',
   };
-
 
   dynamic _get(String key, [dynamic defaultValue]) {
     return _appData[key] ?? defaultValue;
   }
 
-  dynamic _getBtc(String key, [dynamic defaultValue]) {
-    return _btcCloudManager[key] ?? defaultValue;
+  dynamic _getWebsites(String key, [dynamic defaultValue]) {
+    return _visitWebsites[key] ?? defaultValue;
   }
 
   // ---------------------------------------------------------------------------
   // ADS
   // ---------------------------------------------------------------------------
 
+  AdData get applicationAppOpen => _getAdData('application_app_open');
 
-  AdData get languageNative1 => _getAdData('language_native_1');
+  AdData get languageNative => _getAdData('language_native');
+  AdData get languageNative2 => _getAdData('language_native2');
 
-  AdData get languageNative2 => _getAdData('language_native_2');
+  AdData get onboardingNative1 => _getAdData('onboarding_native_1');
 
-  AdData get onboardingNative1 => _getAdData('onboarding_screen1');
+  AdData get onboardingNative2 => _getAdData('onboarding_native_2');
 
-  AdData get onboardingNative2 => _getAdData('onboarding_screen2');
+  AdData get onboardingNative3 => _getAdData('onboarding_native_3');
 
-  AdData get onboardingNative3 => _getAdData('onboarding_screen3');
+  AdData get onboardingInter1 => _getAdData('onboarding_inter_1');
 
-  AdData get onboardingNative4 => _getAdData('onboarding_screen4');
+  AdData get onboardingInter2 => _getAdData('onboarding_inter_2');
 
-  AdData get onboardingInter1 => _getAdData('onboarding_inter1');
-
-  AdData get onboardingInter2 => _getAdData('onboarding_inter2');
-
-  AdData get onboardingInter3 => _getAdData('onboarding_inter3');
-
-  AdData get onboardingInter4 => _getAdData('onboarding_inter4');
-
-  AdData get bottomNavBanner1 => _getAdData('bottom_nav_banner_1');
-
-  AdData get bottomNavBanner2 => _getAdData('bottom_nav_banner_2');
-
-  AdData get bottomNavBanner3 => _getAdData('bottom_nav_banner_3');
-
-  AdData get bottomNavBanner4 => _getAdData('bottom_nav_banner_4');
+  AdData get onboardingInter3 => _getAdData('onboarding_inter_3');
 
   AdData get appNative => _getAdData('app_native');
 
   AdData get appInter => _getAdData('app_inter');
 
-  AdData get appOpen => _getAdData('app_open');
+  // AdData get homeNative => _getAdData('home_native');
 
-  AdData get splashBanner => _getAdData('splash_banner');
+  // AdData get settingNative => _getAdData('setting_native');
 
-  AdData get splashAppOpen => _getAdData('splash_app_open');
+  AdData get websiteReward => _getAdData('website_reward');
 
-  AdData get step1Native => _getAdData('step1_native');
+  AdData get dailyClaimReward => _getAdData('daily_claim_reward');
 
-  AdData get step2Native => _getAdData('step2_native');
+  AdData get mathQuizClaimReward => _getAdData('math_quiz_claim_reward');
 
-  AdData get step3Native => _getAdData('step3_native');
+  AdData get scratchCardClaimReward => _getAdData('scratch_card_claim_reward');
 
-  AdData get step4Native => _getAdData('step4_native');
+  AdData get spinWheelClaimReward => _getAdData('spin_wheel_claim_reward');
 
-  AdData get step5Native => _getAdData('step5_native');
+  AdData get playGameReward => _getAdData('play_game_reward');
 
-  AdData get step6Native => _getAdData('step6_native');
-
-  AdData get step7Native => _getAdData('step7_native'); 
-  
-  AdData get step1Inter => _getAdData('step1_inter');
-
-  AdData get step2Inter => _getAdData('step2_inter');
-
-  AdData get step3Inter => _getAdData('step3_inter');
-
-  AdData get step4Inter => _getAdData('step4_inter');
-
-  AdData get step5Inter => _getAdData('step5_inter');
-
-  AdData get step6Inter => _getAdData('step6_inter');
-
-  AdData get step7Inter => _getAdData('step7_inter');
-
-  AdData get recommendationNative => _getAdData('recommendation_native');
-
-  AdData get loanNative => _getAdData('loan_native');
-
-  AdData get fixedDepositNative => _getAdData('fixed_deposit_native');
-
-  AdData get recurringDepositNative => _getAdData('recurring_deposit_native');
-
-  AdData get documentsNative => _getAdData('documents_native');
-
-  AdData get tipsNative => _getAdData('tips_native');
-
-  AdData get temperatureNative => _getAdData('temperature_native');
-
-  AdData get massNative => _getAdData('mass_native');
-
-  AdData get speedNative => _getAdData('speed_native');
-
-  AdData get lengthNative => _getAdData('length_native');
-
-  AdData get languageNative => _getAdData('language_native');
-
-  AdData get contactNative => _getAdData('contact_native');
-
-  AdData get appReward => _getAdData('app_reward');
-
-  int get appClickCounter => _get('app_click_counter', 10);
+  int get appClickCounter => _get('app_click_counter', 15);
 
   String get privacyPolicyUrl => _get('privacy_policy_url', '');
 
   String get termsAndConditions => _get('terms_and_conditions', '');
 
-  bool get showMultipleOnboarding => _get('show_multiple_onboarding', false);
+  // ---------------------------------------------------------------------------
+  // OTHER CONFIG
+  // ---------------------------------------------------------------------------
+  /// ---------------- WEB VISITS ----------------
 
-  bool get skipOnBoarding => _get('skip_onboarding', false);
+  String get webVisit1Title =>
+      _getWebsites('web_visit_1_title', 'Tech News Daily');
+  String get webVisit1 => _getWebsites('web_visit_1');
 
+  String get webVisit2Title =>
+      _getWebsites('web_visit_2_title', 'Viral Gadgets');
+  String get webVisit2 => _getWebsites('web_visit_2');
+
+  String get webVisit3Title =>
+      _getWebsites('web_visit_3_title', 'Lifestyle Blog');
+  String get webVisit3 => _getWebsites('web_visit_3');
+
+  String get webVisit4Title =>
+      _getWebsites('web_visit_4_title', 'Travel Diaries');
+  String get webVisit4 => _getWebsites('web_visit_4');
+
+  String get webVisit5Title =>
+      _getWebsites('web_visit_5_title', 'Finance Tips');
+  String get webVisit5 => _getWebsites('web_visit_5');
+
+  int get webVisitTimeSeconds => _getWebsites('web_visit_time_seconds', 50);
+  int get webVisitAgainLockTimeMinutes =>
+      _getWebsites('web_visit_again_lock_time_minutes', 5);
+  int get webVisitRewardCoins => _getWebsites('web_visit_reward_coins', 30);
+
+  /// ---------------- GAME VISITS ----------------
+
+  String get gameVisit1Title =>
+      _getWebsites('game_visit_1_title', 'Bubble Shooter');
+  String get gameVisit1 => _getWebsites('game_visit_1');
+
+  String get gameVisit2Title =>
+      _getWebsites('game_visit_2_title', 'Word Search');
+  String get gameVisit2 => _getWebsites('game_visit_2');
+
+  String get gameVisit3Title =>
+      _getWebsites('game_visit_3_title', 'Puzzle Match');
+  String get gameVisit3 => _getWebsites('game_visit_3');
+
+  String get gameVisit4Title =>
+      _getWebsites('game_visit_4_title', 'Memory Game');
+  String get gameVisit4 => _getWebsites('game_visit_4');
+
+  String get gameVisit5Title =>
+      _getWebsites('game_visit_5_title', 'Speed Match');
+  String get gameVisit5 => _getWebsites('game_visit_5');
+
+  int get gameVisitTimeSeconds => _getWebsites('game_visit_time_seconds', 50);
+  int get gameVisitAgainLockTimeMinutes =>
+      _getWebsites('game_visit_again_lock_time_minutes', 5);
+  int get gameVisitRewardCoins => _getWebsites('game_visit_reward_coins', 30);
+
+  /// ---------------- WEB VIEW ----------------
+
+  bool get inAppWebView => _getWebsites('in_app_web_view', true);
+  int get minWithdrawAmount => _getWebsites('min_withdraw_amount', 10000);
+  int get referralRewardAmount => _getWebsites('referral_reward_amount', 1000);
+
+  int get coinToDollarDivider => _getWebsites('coin_to_dollar_divider', 1000);
+  int get quizPerQuestionReward => _getWebsites('quiz_per_question_reward', 5);
+  int get scrachMinReward => _getWebsites('scrach_min_reward', 20);
+  int get scrachMaxReward => _getWebsites('scrach_max_reward', 30);
+  List<int> get spinBoardRewardValues => List<int>.from(
+    _getWebsites('spin_board_reward_values', [
+      10,
+      12,
+      15,
+      17,
+      18,
+      20,
+      22,
+      24,
+      26,
+      27,
+      29,
+      30,
+    ]),
+  );
 }

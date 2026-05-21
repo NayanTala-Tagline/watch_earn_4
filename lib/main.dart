@@ -8,6 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hive_ce_flutter/adapters.dart';
 import 'package:provider/provider.dart';
+import 'package:watch_earn_4/features/home/provider/home_provider.dart';
 import 'package:watch_earn_4/features/language_screen/provider/locale_provider.dart';
 
 import 'db/app_db.dart';
@@ -42,9 +43,13 @@ void main() async {
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
   runApp(
-    ChangeNotifierProvider(create: (_) => LocaleProvider(),
-      child: MyApp(),
-    )
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => LocaleProvider()),
+        ChangeNotifierProvider(create: (_) => HomeProvider()),
+      ],
+      child: const MyApp(),
+    ),
   );
 }
 

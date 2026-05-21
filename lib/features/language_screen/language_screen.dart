@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
-import '../../gen/fonts.gen.dart';
+import '../../extension/ext_context.dart';
 import '../../routes/app_router.dart';
 import '../../utils/app_size.dart';
 import '../../widgets/app_button.dart';
@@ -69,10 +69,8 @@ class _LanguageScreenState extends State<LanguageScreen> {
               padding: EdgeInsets.symmetric(horizontal: AppSize.w24),
               child: Text(
                 'Set Default Language',
-                style: TextStyle(
-                  fontFamily: FontFamily.kommonGrotesk,
+                style: context.textTheme.titleLarge?.copyWith(
                   fontSize: AppSize.sp28,
-                  fontWeight: FontWeight.w700,
                   color: const Color(0xFF1C2359),
                   height: 1.2,
                 ),
@@ -89,10 +87,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
               padding: EdgeInsets.symmetric(horizontal: AppSize.w24),
               child: Text(
                 'Selected language will use as default language for this app which you can change later if you want to.',
-                style: TextStyle(
-                  fontFamily: FontFamily.kommonGrotesk,
-                  fontSize: AppSize.sp14,
-                  fontWeight: FontWeight.w400,
+                style: context.textTheme.bodyMedium?.copyWith(
                   color: const Color(0xFF4A4E6B),
                   height: 1.5,
                 ),
@@ -136,7 +131,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
                   color: Colors.white,
                   size: 20,
                 ),
-                borderRadius: 29.r,
+                borderRadius: AppSize.r29,
                 onPressed: _onGetStarted,
               )
                   .animate()
@@ -228,11 +223,11 @@ class _LanguageTileState extends State<_LanguageTile>
             offset: Offset(0, shiftY),
             child: AnimatedContainer(
               duration: const Duration(milliseconds: 200),
-              height: 56.h,
+              height: AppSize.h56,
               padding: EdgeInsets.symmetric(horizontal: AppSize.w20),
               decoration: BoxDecoration(
                 color: surfaceColor,
-                borderRadius: BorderRadius.circular(29.r),
+                borderRadius: BorderRadius.circular(AppSize.r29),
                 border: Border.all(color: borderColor, width: 1.5),
                 boxShadow: [
                   BoxShadow(
@@ -256,10 +251,8 @@ class _LanguageTileState extends State<_LanguageTile>
             Expanded(
               child: AnimatedDefaultTextStyle(
                 duration: const Duration(milliseconds: 200),
-                style: TextStyle(
-                  fontFamily: FontFamily.kommonGrotesk,
+                style: (context.textTheme.titleSmall ?? const TextStyle()).copyWith(
                   fontSize: AppSize.sp16,
-                  fontWeight: FontWeight.w600,
                   color: widget.isSelected ? Colors.white : const Color(0xFF1C2359),
                 ),
                 child: Text(widget.language.name),
@@ -268,8 +261,8 @@ class _LanguageTileState extends State<_LanguageTile>
             // Check / empty circle
             AnimatedContainer(
               duration: const Duration(milliseconds: 200),
-              width: 26.r,
-              height: 26.r,
+              width: AppSize.r26,
+              height: AppSize.r26,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: widget.isSelected ? Colors.white : Colors.transparent,
@@ -283,7 +276,7 @@ class _LanguageTileState extends State<_LanguageTile>
               child: widget.isSelected
                   ? Icon(
                       Icons.check_rounded,
-                      size: 16.r,
+                      size: AppSize.r16,
                       color: const Color(0xFF1A1AE8),
                     )
                   : null,

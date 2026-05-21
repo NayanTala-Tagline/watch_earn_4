@@ -280,8 +280,8 @@ class _AppButtonState extends State<AppButton>
       );
     }
 
-    // ── 3-D filled ────────────────────────────────────────────────────────
-    if (widget._is3D) {
+    // ── 3-D filled — also used for any disabled fill button ───────────────
+    if (widget._is3D || widget.isDisabled) {
       return AnimatedBuilder(
         animation: _pressAnim,
         builder: (_, child) {
@@ -298,14 +298,14 @@ class _AppButtonState extends State<AppButton>
               alignment: Alignment.center,
               decoration: BoxDecoration(
                 color: widget.isDisabled
-                    ? Colors.grey.shade400
+                    ? const Color(0xFFCDD0DE)
                     : widget.buttonColor,
                 borderRadius: BorderRadius.circular(radius),
                 boxShadow: [
                   BoxShadow(
                     color: widget.isDisabled
-                        ? Colors.grey.shade600
-                        : widget.shadowColor!,
+                        ? const Color(0xFFA4ABC6)
+                        : (widget.shadowColor ?? Colors.transparent),
                     offset: Offset(0, widget.wallOffset ?? wallH),
                     blurRadius: 0,
                   ),
@@ -335,8 +335,7 @@ class _AppButtonState extends State<AppButton>
           ),
           ?slide,
         ],
-        gradient:
-            widget.gradient ??
+        gradient: widget.gradient ??
             LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
@@ -348,8 +347,7 @@ class _AppButtonState extends State<AppButton>
         borderRadius: BorderRadius.circular(radius),
         border: Border.all(
           width: 2,
-          color:
-              widget.borderColor ??
+          color: widget.borderColor ??
               context.themeColors.buttonColor.withValues(alpha: 0.55),
         ),
       ),

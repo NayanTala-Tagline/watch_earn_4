@@ -4,9 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../db/app_db.dart';
 import '../di/injector.dart';
-import '../features/home/home_screen.dart';
 import '../features/language_screen/language_screen.dart';
 import '../features/bottom_nav/bottom_nav_page.dart';
+import '../features/quiz_master/quiz_master_screen.dart';
+import '../features/scratch_card/scratch_card_screen.dart';
+import '../features/web_visits/web_visits_screen.dart';
+import '../features/game_zone/game_zone_screen.dart';
+import '../widgets/in_app_webview_page.dart';
+import 'package:ad_manager/models/ad_data.dart';
 import '../features/refer_and_earn/refer_and_earn_screen.dart';
 import '../features/spin_wheel/spin_wheel_screen.dart';
 import '../features/withdraw/withdraw_screen.dart';
@@ -126,6 +131,48 @@ final appRouter = GoRouter(
       name: AppRoutes.withdraw,
       pageBuilder: (context, state) =>
           MaterialPage(key: state.pageKey, child: const WithdrawScreen()),
+    ),
+    GoRoute(
+      path: '/${AppRoutes.quiz}',
+      name: AppRoutes.quiz,
+      pageBuilder: (context, state) =>
+          MaterialPage(key: state.pageKey, child: const QuizMasterScreen()),
+    ),
+    GoRoute(
+      path: '/${AppRoutes.scratchCard}',
+      name: AppRoutes.scratchCard,
+      pageBuilder: (context, state) =>
+          MaterialPage(key: state.pageKey, child: const ScratchCardScreen()),
+    ),
+    GoRoute(
+      path: '/${AppRoutes.webVisits}',
+      name: AppRoutes.webVisits,
+      pageBuilder: (context, state) =>
+          MaterialPage(key: state.pageKey, child: const WebVisitsScreen()),
+    ),
+    GoRoute(
+      path: '/${AppRoutes.gameZone}',
+      name: AppRoutes.gameZone,
+      pageBuilder: (context, state) =>
+          MaterialPage(key: state.pageKey, child: const GameZoneScreen()),
+    ),
+    GoRoute(
+      path: '/${AppRoutes.inAppWebView}',
+      name: AppRoutes.inAppWebView,
+      pageBuilder: (context, state) {
+        final extra = state.extra as Map<String, dynamic>;
+        return MaterialPage(
+          key: state.pageKey,
+          child: InAppWebViewPage(
+            url: extra['url'] as String,
+            title: extra['title'] as String,
+            durationSeconds: extra['durationSeconds'] as int,
+            coins: extra['coins'] as int,
+            adData: extra['adData'] as AdData,
+            onRewardClaimed: extra['onRewardClaimed'] as VoidCallback?,
+          ),
+        );
+      },
     ),
 
     // Loan-finder flow — shared LoanFinderProvider (form) +

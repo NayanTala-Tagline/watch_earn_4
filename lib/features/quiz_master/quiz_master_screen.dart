@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../extension/ext_context.dart';
 import '../../gen/assets.gen.dart';
-import '../../gen/fonts.gen.dart';
 import '../../utils/app_size.dart';
 import '../../utils/navigation_helper.dart';
 import '../../utils/remote_config.dart';
@@ -397,7 +397,7 @@ class _QuizMasterScreenState extends State<QuizMasterScreen> {
 
                       // AD placeholder
                       Container(
-                        height: 90.h,
+                        height: AppSize.h90,
                         decoration: BoxDecoration(
                           color: const Color(0xFFFFF0F0),
                           borderRadius: BorderRadius.circular(AppSize.r16),
@@ -409,10 +409,7 @@ class _QuizMasterScreenState extends State<QuizMasterScreen> {
                         alignment: Alignment.center,
                         child: Text(
                           'AD',
-                          style: TextStyle(
-                            fontFamily: FontFamily.kommonGrotesk,
-                            fontSize: AppSize.sp14,
-                            fontWeight: FontWeight.w600,
+                          style: context.textTheme.titleSmall?.copyWith(
                             color: const Color(0xFFD060A0),
                             letterSpacing: 1.2,
                           ),
@@ -451,8 +448,8 @@ class _QuizAppBar extends StatelessWidget {
             child: GestureDetector(
               onTap: onBack,
               child: Container(
-                width: 40.r,
-                height: 40.r,
+                width: AppSize.r40,
+                height: AppSize.r40,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   shape: BoxShape.circle,
@@ -467,17 +464,15 @@ class _QuizAppBar extends StatelessWidget {
                 child: Icon(
                   Icons.arrow_back_rounded,
                   color: const Color(0xFF1C2359),
-                  size: 20.r,
+                  size: AppSize.r20,
                 ),
               ),
             ),
           ),
           Text(
             'Quiz Master',
-            style: TextStyle(
-              fontFamily: FontFamily.kommonGrotesk,
+            style: context.textTheme.titleLarge?.copyWith(
               fontSize: AppSize.sp18,
-              fontWeight: FontWeight.w700,
               color: const Color(0xFF1C2359),
             ),
           ),
@@ -508,10 +503,7 @@ class _ProgressHeader extends StatelessWidget {
           children: [
             Text(
               '$current of $total',
-              style: TextStyle(
-                fontFamily: FontFamily.kommonGrotesk,
-                fontSize: AppSize.sp16,
-                fontWeight: FontWeight.w700,
+              style: context.textTheme.titleLarge?.copyWith(
                 color: const Color(0xFF1C2359),
               ),
             ),
@@ -534,14 +526,12 @@ class _ProgressHeader extends StatelessWidget {
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Assets.icons.icCoin.svg(width: 16.r, height: 16.r),
+                  Assets.icons.icCoin.svg(width: AppSize.r16, height: AppSize.r16),
                   SizedBox(width: AppSize.w4),
                   Text(
                     '+$coinsPerCorrect per correct',
-                    style: TextStyle(
-                      fontFamily: FontFamily.kommonGrotesk,
+                    style: context.textTheme.titleMedium?.copyWith(
                       fontSize: AppSize.sp12,
-                      fontWeight: FontWeight.w700,
                       color: const Color(0xFFC97A00),
                     ),
                   ),
@@ -555,7 +545,7 @@ class _ProgressHeader extends StatelessWidget {
           borderRadius: BorderRadius.circular(AppSize.r100),
           child: LinearProgressIndicator(
             value: current / total,
-            minHeight: 7.h,
+            minHeight: AppSize.h7,
             backgroundColor: const Color(0xFFDDE2F0),
             valueColor:
                 const AlwaysStoppedAnimation<Color>(Color(0xFF1A1AE8)),
@@ -608,8 +598,7 @@ class _QuestionCard extends StatelessWidget {
         children: [
           Text(
             question,
-            style: TextStyle(
-              fontFamily: FontFamily.kommonGrotesk,
+            style: context.textTheme.titleLarge?.copyWith(
               fontSize: AppSize.sp18,
               fontWeight: FontWeight.w800,
               color: const Color(0xFF1C2359),
@@ -622,15 +611,12 @@ class _QuestionCard extends StatelessWidget {
               Icon(
                 Icons.timer_outlined,
                 color: _timerColor,
-                size: 18.r,
+                size: AppSize.r18,
               ),
               SizedBox(width: AppSize.w6),
               Text(
                 timerText,
-                style: TextStyle(
-                  fontFamily: FontFamily.kommonGrotesk,
-                  fontSize: AppSize.sp14,
-                  fontWeight: FontWeight.w500,
+                style: context.textTheme.bodyLarge?.copyWith(
                   color: _timerColor,
                 ),
               ),
@@ -745,15 +731,15 @@ class _QuizOptionTileState extends State<_QuizOptionTile>
 
   Widget? get _radioContent {
     if (widget._isCorrect) {
-      return Icon(Icons.check_rounded, size: 15.r,
+      return Icon(Icons.check_rounded, size: AppSize.r15,
           color: const Color(0xFF22C55E));
     }
     if (widget._isWrong) {
-      return Icon(Icons.close_rounded, size: 15.r,
+      return Icon(Icons.close_rounded, size: AppSize.r15,
           color: const Color(0xFFEF4444));
     }
     if (widget._isSelected) {
-      return Icon(Icons.check_rounded, size: 15.r,
+      return Icon(Icons.check_rounded, size: AppSize.r15,
           color: const Color(0xFF1A1AE8));
     }
     return null;
@@ -776,11 +762,11 @@ class _QuizOptionTileState extends State<_QuizOptionTile>
             offset: Offset(0, shift),
             child: AnimatedContainer(
               duration: const Duration(milliseconds: 250),
-              height: 56.h,
+              height: AppSize.h56,
               padding: EdgeInsets.symmetric(horizontal: AppSize.w16),
               decoration: BoxDecoration(
                 color: _surface,
-                borderRadius: BorderRadius.circular(29.r),
+                borderRadius: BorderRadius.circular(AppSize.r29),
                 border: Border.all(
                   color: widget._isAnswered
                       ? _surface
@@ -804,21 +790,19 @@ class _QuizOptionTileState extends State<_QuizOptionTile>
             // Letter badge
             AnimatedContainer(
               duration: const Duration(milliseconds: 250),
-              width: 32.r,
-              height: 32.r,
+              width: AppSize.r32,
+              height: AppSize.r32,
               decoration: BoxDecoration(
                 color: _badgeColor,
-                borderRadius: BorderRadius.circular(8.r),
+                borderRadius: BorderRadius.circular(AppSize.r8),
               ),
               child: Center(
                 child: AnimatedDefaultTextStyle(
                   duration: const Duration(milliseconds: 250),
-                  style: TextStyle(
-                    fontFamily: FontFamily.kommonGrotesk,
-                    fontSize: AppSize.sp14,
-                    fontWeight: FontWeight.w700,
-                    color: _badgeTextColor,
-                  ),
+                  style: context.textTheme.titleMedium?.copyWith(
+                        color: _badgeTextColor,
+                      ) ??
+                      const TextStyle(),
                   child: Text(_kLetters[widget.index]),
                 ),
               ),
@@ -830,12 +814,11 @@ class _QuizOptionTileState extends State<_QuizOptionTile>
             Expanded(
               child: AnimatedDefaultTextStyle(
                 duration: const Duration(milliseconds: 250),
-                style: TextStyle(
-                  fontFamily: FontFamily.kommonGrotesk,
-                  fontSize: AppSize.sp15,
-                  fontWeight: FontWeight.w600,
-                  color: _textColor,
-                ),
+                style: context.textTheme.titleSmall?.copyWith(
+                      fontSize: AppSize.sp15,
+                      color: _textColor,
+                    ) ??
+                    const TextStyle(),
                 child: Text(widget.text),
               ),
             ),
@@ -843,8 +826,8 @@ class _QuizOptionTileState extends State<_QuizOptionTile>
             // Radio circle
             AnimatedContainer(
               duration: const Duration(milliseconds: 250),
-              width: 26.r,
-              height: 26.r,
+              width: AppSize.r26,
+              height: AppSize.r26,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: (widget._isSelected || widget._isCorrect || widget._isWrong)
@@ -896,8 +879,8 @@ class _StreakRow extends StatelessWidget {
           return Padding(
             padding: EdgeInsets.only(right: AppSize.w6),
             child: Container(
-              width: 30.r,
-              height: 30.r,
+              width: AppSize.r30,
+              height: AppSize.r30,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: isCorrect
@@ -916,7 +899,7 @@ class _StreakRow extends StatelessWidget {
               child: hasAnswer
                   ? Icon(
                       isCorrect ? Icons.check_rounded : Icons.close_rounded,
-                      size: 16.r,
+                      size: AppSize.r16,
                       color: isCorrect ? Colors.white : const Color(0xFF9AA0B5),
                     )
                   : null,
@@ -936,10 +919,8 @@ class _StreakRow extends StatelessWidget {
 
         Text(
           '$streak in a row',
-          style: TextStyle(
-            fontFamily: FontFamily.kommonGrotesk,
+          style: context.textTheme.titleSmall?.copyWith(
             fontSize: AppSize.sp13,
-            fontWeight: FontWeight.w600,
             color: const Color(0xFF9AA0B5),
           ),
         ),
@@ -1019,8 +1000,7 @@ class _ResultSheet extends StatelessWidget {
                     Text(
                       _isLoss ? 'Oops!' : 'Congratulations..!',
                       textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontFamily: FontFamily.kommonGrotesk,
+                      style: context.textTheme.titleLarge?.copyWith(
                         fontSize: AppSize.sp26,
                         fontWeight: FontWeight.w800,
                         color: const Color(0xFF1C2359),
@@ -1034,10 +1014,8 @@ class _ResultSheet extends StatelessWidget {
                           ? 'Better luck next time!'
                           : 'You scored $correctCount/$totalQuestions',
                       textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontFamily: FontFamily.kommonGrotesk,
+                      style: context.textTheme.bodyLarge?.copyWith(
                         fontSize: AppSize.sp16,
-                        fontWeight: FontWeight.w500,
                         color: const Color(0xFF4A4E6B),
                       ),
                     ),
@@ -1047,10 +1025,8 @@ class _ResultSheet extends StatelessWidget {
                       Text(
                         'You won $totalCoins Coins',
                         textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontFamily: FontFamily.kommonGrotesk,
+                        style: context.textTheme.titleSmall?.copyWith(
                           fontSize: AppSize.sp15,
-                          fontWeight: FontWeight.w600,
                           color: const Color(0xFFFFB300),
                         ),
                       ),
@@ -1063,7 +1039,7 @@ class _ResultSheet extends StatelessWidget {
                       buttonColor: const Color(0xFF1A1AE8),
                       shadowColor: const Color(0xFF0E0F66),
                       foregroundColor: Colors.white,
-                      borderRadius: 29.r,
+                      borderRadius: AppSize.r29,
                       onPressed: onClaim,
                     ),
                   ],

@@ -8,7 +8,6 @@ import '../../db/app_db.dart';
 import '../../di/injector.dart';
 import '../../extension/ext_context.dart';
 import '../../gen/assets.gen.dart';
-import '../../gen/fonts.gen.dart';
 import '../../utils/app_size.dart';
 import '../../utils/navigation_helper.dart';
 import '../../widgets/app_button.dart';
@@ -168,8 +167,8 @@ class _AppBar extends StatelessWidget {
             child: GestureDetector(
               onTap: onBack,
               child: Container(
-                width: 40.r,
-                height: 40.r,
+                width: AppSize.r40,
+                height: AppSize.r40,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   shape: BoxShape.circle,
@@ -184,17 +183,15 @@ class _AppBar extends StatelessWidget {
                 child: Icon(
                   Icons.arrow_back_rounded,
                   color: const Color(0xFF1C2359),
-                  size: 20.r,
+                  size: AppSize.r20,
                 ),
               ),
             ),
           ),
           Text(
             'Spin & Win',
-            style: TextStyle(
-              fontFamily: FontFamily.kommonGrotesk,
+            style: context.textTheme.titleLarge?.copyWith(
               fontSize: AppSize.sp18,
-              fontWeight: FontWeight.w700,
               color: const Color(0xFF1C2359),
             ),
           ),
@@ -239,8 +236,7 @@ class _WelcomeBody extends StatelessWidget {
           Text(
             'Take a spin.\nStack the coins.',
             textAlign: TextAlign.center,
-            style: TextStyle(
-              fontFamily: FontFamily.kommonGrotesk,
+            style: context.textTheme.titleLarge?.copyWith(
               fontSize: AppSize.sp28,
               fontWeight: FontWeight.w800,
               color: const Color(0xFF1C2359),
@@ -289,7 +285,7 @@ class _WelcomeBody extends StatelessWidget {
             buttonColor: context.themeColors.buttonColor2,
             shadowColor: context.themeColors.buttonBorderColor2,
             foregroundColor: Colors.white,
-            borderRadius: 29.r,
+            borderRadius: AppSize.r29,
             trailingIcon: const Icon(Icons.arrow_forward_rounded, color: Colors.white, size: 20),
             onPressed: onGetStarted,
           )
@@ -347,8 +343,7 @@ class _SpinBody extends StatelessWidget {
           Text(
             'Earn Coins Easily by\nSpinning Wheel',
             textAlign: TextAlign.center,
-            style: TextStyle(
-              fontFamily: FontFamily.kommonGrotesk,
+            style: context.textTheme.titleLarge?.copyWith(
               fontSize: AppSize.sp22,
               fontWeight: FontWeight.w800,
               color: const Color(0xFF1C2359),
@@ -379,7 +374,7 @@ class _SpinBody extends StatelessWidget {
             shadowColor: spinsRemaining <= 0 ? null : context.themeColors.buttonBorderColor2,
             foregroundColor: Colors.white,
             isDisabled: spinsRemaining <= 0,
-            borderRadius: 29.r,
+            borderRadius: AppSize.r29,
             onPressed: onSpin,
           ),
 
@@ -460,7 +455,7 @@ class _WheelComposite extends StatelessWidget {
                 Positioned(
                   top: size * 0.03,
                   child: CustomPaint(
-                    size: Size(22.r, 26.r),
+                    size: Size(AppSize.r22, AppSize.r26),
                     painter: const PointerTrianglePainter(),
                   ),
                 ),
@@ -505,10 +500,7 @@ class _SpinsLeftBadge extends StatelessWidget {
           SizedBox(width: AppSize.w6),
           Text(
             '$count Spins Left Today',
-            style: TextStyle(
-              fontFamily: FontFamily.kommonGrotesk,
-              fontSize: AppSize.sp14,
-              fontWeight: FontWeight.w700,
+            style: context.textTheme.titleMedium?.copyWith(
               color: const Color(0xFFE0006E),
             ),
           ),
@@ -542,14 +534,12 @@ class _CoinBadge extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Assets.icons.icCoin.svg(width: 20.r, height: 20.r),
+          Assets.icons.icCoin.svg(width: AppSize.r20, height: AppSize.r20),
           SizedBox(width: AppSize.w6),
           Text(
             '$amount',
-            style: TextStyle(
-              fontFamily: FontFamily.kommonGrotesk,
+            style: context.textTheme.titleMedium?.copyWith(
               fontSize: AppSize.sp15,
-              fontWeight: FontWeight.w700,
               color: const Color(0xFF7A4800),
             ),
           ),
@@ -587,18 +577,15 @@ class _InfoCard extends StatelessWidget {
         children: [
           Text(
             label,
-            style: TextStyle(
-              fontFamily: FontFamily.kommonGrotesk,
+            style: context.textTheme.bodyMedium?.copyWith(
               fontSize: AppSize.sp12,
-              fontWeight: FontWeight.w400,
               color: const Color(0xFF7B8099),
             ),
           ),
           SizedBox(height: AppSize.h4),
           Text(
             value,
-            style: TextStyle(
-              fontFamily: FontFamily.kommonGrotesk,
+            style: context.textTheme.titleLarge?.copyWith(
               fontSize: AppSize.sp20,
               fontWeight: FontWeight.w800,
               color: const Color(0xFF1C2359),
@@ -706,8 +693,7 @@ class _ResultSheet extends StatelessWidget {
                   Text(
                     _title,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontFamily: FontFamily.kommonGrotesk,
+                    style: context.textTheme.titleLarge?.copyWith(
                       fontSize: AppSize.sp26,
                       fontWeight: FontWeight.w800,
                       color: const Color(0xFF1C2359),
@@ -720,10 +706,8 @@ class _ResultSheet extends StatelessWidget {
                   Text(
                     _subtitle,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontFamily: FontFamily.kommonGrotesk,
+                    style: context.textTheme.bodyLarge?.copyWith(
                       fontSize: AppSize.sp16,
-                      fontWeight: FontWeight.w500,
                       color: const Color(0xFF4A4E6B),
                     ),
                   ),
@@ -736,7 +720,7 @@ class _ResultSheet extends StatelessWidget {
                     buttonColor: const Color(0xFF1A1AE8),
                     shadowColor: const Color(0xFF0E0F66),
                     foregroundColor: Colors.white,
-                    borderRadius: 29.r,
+                    borderRadius: AppSize.r29,
                     onPressed: onClaim,
                   ),
                 ],

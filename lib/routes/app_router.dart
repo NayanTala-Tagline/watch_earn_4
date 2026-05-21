@@ -8,6 +8,10 @@ import '../features/language_screen/language_screen.dart';
 import '../features/bottom_nav/bottom_nav_page.dart';
 import '../features/quiz_master/quiz_master_screen.dart';
 import '../features/scratch_card/scratch_card_screen.dart';
+import '../features/web_visits/web_visits_screen.dart';
+import '../features/game_zone/game_zone_screen.dart';
+import '../widgets/in_app_webview_page.dart';
+import 'package:ad_manager/models/ad_data.dart';
 import '../features/spin_wheel/spin_wheel_screen.dart';
 import '../features/login/login_screen.dart';
 import '../features/onboarding/onboarding1_screen.dart';
@@ -125,6 +129,36 @@ final appRouter = GoRouter(
       name: AppRoutes.scratchCard,
       pageBuilder: (context, state) =>
           MaterialPage(key: state.pageKey, child: const ScratchCardScreen()),
+    ),
+    GoRoute(
+      path: '/${AppRoutes.webVisits}',
+      name: AppRoutes.webVisits,
+      pageBuilder: (context, state) =>
+          MaterialPage(key: state.pageKey, child: const WebVisitsScreen()),
+    ),
+    GoRoute(
+      path: '/${AppRoutes.gameZone}',
+      name: AppRoutes.gameZone,
+      pageBuilder: (context, state) =>
+          MaterialPage(key: state.pageKey, child: const GameZoneScreen()),
+    ),
+    GoRoute(
+      path: '/${AppRoutes.inAppWebView}',
+      name: AppRoutes.inAppWebView,
+      pageBuilder: (context, state) {
+        final extra = state.extra as Map<String, dynamic>;
+        return MaterialPage(
+          key: state.pageKey,
+          child: InAppWebViewPage(
+            url: extra['url'] as String,
+            title: extra['title'] as String,
+            durationSeconds: extra['durationSeconds'] as int,
+            coins: extra['coins'] as int,
+            adData: extra['adData'] as AdData,
+            onRewardClaimed: extra['onRewardClaimed'] as VoidCallback?,
+          ),
+        );
+      },
     ),
 
     // Loan-finder flow — shared LoanFinderProvider (form) +

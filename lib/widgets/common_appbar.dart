@@ -79,9 +79,9 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
       },
       child: Padding(
         padding:   EdgeInsets.symmetric(vertical: AppSize.h6),
-        // child: Center(
-        //   child:  Assets.icons.icBack.svg()
-        // ),
+        child: Center(
+          child: Icon(Icons.arrow_back),
+        ),
       ),
     );
 

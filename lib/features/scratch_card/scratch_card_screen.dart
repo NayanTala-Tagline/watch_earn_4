@@ -6,8 +6,8 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:scratcher/widgets.dart';
 
+import '../../extension/ext_context.dart';
 import '../../gen/assets.gen.dart';
-import '../../gen/fonts.gen.dart';
 import '../../utils/app_size.dart';
 import '../../utils/navigation_helper.dart';
 import '../../utils/remote_config.dart';
@@ -167,8 +167,7 @@ class _ScratchCardScreenState extends State<ScratchCardScreen>
                           Text(
                             'Scratch to reveal\nyour reward.',
                             textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontFamily: FontFamily.kommonGrotesk,
+                            style: context.textTheme.titleLarge?.copyWith(
                               fontSize: AppSize.sp28,
                               fontWeight: FontWeight.w800,
                               color: const Color(0xFF1C2359),
@@ -194,7 +193,7 @@ class _ScratchCardScreenState extends State<ScratchCardScreen>
 
                           // AD placeholder
                           Container(
-                            height: 90.h,
+                            height: AppSize.h90,
                             decoration: BoxDecoration(
                               color: const Color(0xFFFFF0F0),
                               borderRadius:
@@ -205,10 +204,7 @@ class _ScratchCardScreenState extends State<ScratchCardScreen>
                             alignment: Alignment.center,
                             child: Text(
                               'AD',
-                              style: TextStyle(
-                                fontFamily: FontFamily.kommonGrotesk,
-                                fontSize: AppSize.sp14,
-                                fontWeight: FontWeight.w600,
+                              style: context.textTheme.titleSmall?.copyWith(
                                 color: const Color(0xFFD060A0),
                                 letterSpacing: 1.2,
                               ),
@@ -265,8 +261,8 @@ class _ScratchAppBar extends StatelessWidget {
             child: GestureDetector(
               onTap: onBack,
               child: Container(
-                width: 40.r,
-                height: 40.r,
+                width: AppSize.r40,
+                height: AppSize.r40,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   shape: BoxShape.circle,
@@ -280,16 +276,14 @@ class _ScratchAppBar extends StatelessWidget {
                   ],
                 ),
                 child: Icon(Icons.arrow_back_rounded,
-                    color: const Color(0xFF1C2359), size: 20.r),
+                    color: const Color(0xFF1C2359), size: AppSize.r20),
               ),
             ),
           ),
           Text(
             'Scratch Card',
-            style: TextStyle(
-              fontFamily: FontFamily.kommonGrotesk,
+            style: context.textTheme.titleLarge?.copyWith(
               fontSize: AppSize.sp18,
-              fontWeight: FontWeight.w700,
               color: const Color(0xFF1C2359),
             ),
           ),
@@ -324,10 +318,7 @@ class _LuckyBadge extends StatelessWidget {
       ),
       child: Text(
         'Lucky #$number',
-        style: TextStyle(
-          fontFamily: FontFamily.kommonGrotesk,
-          fontSize: AppSize.sp14,
-          fontWeight: FontWeight.w700,
+        style: context.textTheme.titleMedium?.copyWith(
           color: const Color(0xFFE0006E),
         ),
       ),
@@ -380,7 +371,7 @@ class _ScratchArea extends StatelessWidget {
               onChange: (_) {},
               onThreshold: onThreshold,
               child: Container(
-                height: 360.h,
+                height: AppSize.h360,
                 width: double.infinity,
                 decoration: const BoxDecoration(
                   gradient: LinearGradient(
@@ -429,10 +420,7 @@ class _ScratchArea extends StatelessWidget {
                 child: IgnorePointer(
                   child: Text(
                     'MYSTERY',
-                    style: TextStyle(
-                      fontFamily: FontFamily.kommonGrotesk,
-                      fontSize: AppSize.sp14,
-                      fontWeight: FontWeight.w700,
+                    style: context.textTheme.titleMedium?.copyWith(
                       color: Colors.white.withValues(alpha: 0.7),
                       letterSpacing: 2,
                     ),
@@ -450,8 +438,7 @@ class _ScratchArea extends StatelessWidget {
                   child: Text(
                     'Drag to scratch',
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontFamily: FontFamily.kommonGrotesk,
+                    style: context.textTheme.titleLarge?.copyWith(
                       fontSize: AppSize.sp24,
                       fontWeight: FontWeight.w800,
                       color: Colors.white,
@@ -479,15 +466,13 @@ class _RevealedReward extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Icon(Icons.sentiment_dissatisfied_rounded,
-              size: 60.r, color: const Color(0xFFFF5183)),
+              size: AppSize.r60, color: const Color(0xFFFF5183)),
           SizedBox(height: AppSize.h8),
           Text(
             'Better Luck\nNext Time',
             textAlign: TextAlign.center,
-            style: TextStyle(
-              fontFamily: FontFamily.kommonGrotesk,
+            style: context.textTheme.titleLarge?.copyWith(
               fontSize: AppSize.sp22,
-              fontWeight: FontWeight.w700,
               color: const Color(0xFFFF5183),
               height: 1.3,
             ),
@@ -499,12 +484,11 @@ class _RevealedReward extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Assets.icons.icCoin.svg(width: 56.r, height: 56.r),
+        Assets.icons.icCoin.svg(width: AppSize.r56, height: AppSize.r56),
         SizedBox(height: AppSize.h8),
         Text(
           '+$reward',
-          style: TextStyle(
-            fontFamily: FontFamily.kommonGrotesk,
+          style: context.textTheme.titleLarge?.copyWith(
             fontSize: AppSize.sp48,
             fontWeight: FontWeight.w900,
             color: const Color(0xFFFFD84D),
@@ -514,8 +498,7 @@ class _RevealedReward extends StatelessWidget {
         SizedBox(height: AppSize.h4),
         Text(
           'Coins',
-          style: TextStyle(
-            fontFamily: FontFamily.kommonGrotesk,
+          style: context.textTheme.titleLarge?.copyWith(
             fontSize: AppSize.sp18,
             fontWeight: FontWeight.w600,
             color: Colors.white.withValues(alpha: 0.85),
@@ -590,8 +573,7 @@ class _ResultSheet extends StatelessWidget {
                     Text(
                       isLoss ? 'Oops!' : 'Congratulations..!',
                       textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontFamily: FontFamily.kommonGrotesk,
+                      style: context.textTheme.titleLarge?.copyWith(
                         fontSize: AppSize.sp26,
                         fontWeight: FontWeight.w800,
                         color: const Color(0xFF1C2359),
@@ -603,10 +585,8 @@ class _ResultSheet extends StatelessWidget {
                           ? 'Better luck next time!'
                           : 'You won $coins Coins',
                       textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontFamily: FontFamily.kommonGrotesk,
+                      style: context.textTheme.bodyLarge?.copyWith(
                         fontSize: AppSize.sp16,
-                        fontWeight: FontWeight.w500,
                         color: const Color(0xFF4A4E6B),
                       ),
                     ),
@@ -616,7 +596,7 @@ class _ResultSheet extends StatelessWidget {
                       buttonColor: const Color(0xFF1A1AE8),
                       shadowColor: const Color(0xFF0E0F66),
                       foregroundColor: Colors.white,
-                      borderRadius: 29.r,
+                      borderRadius: AppSize.r29,
                       onPressed: onClaim,
                     ),
                   ],

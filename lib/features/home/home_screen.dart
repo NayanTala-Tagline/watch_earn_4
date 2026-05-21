@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:watch_earn_4/extension/ext_context.dart';
 import 'package:watch_earn_4/gen/assets.gen.dart';
-import 'package:watch_earn_4/gen/fonts.gen.dart';
 import 'package:watch_earn_4/routes/app_router.dart';
 import 'package:watch_earn_4/utils/app_size.dart';
 import 'package:watch_earn_4/widgets/app_button.dart';
@@ -78,7 +78,7 @@ class HomeScreen extends StatelessWidget {
                     SizedBox(height: AppSize.h12),
                     const _StatsRow(),
                     SizedBox(height: AppSize.h16),
-                    _sectionTitle('Earn Money'),
+                    _sectionTitle(context, 'Earn Money'),
                     SizedBox(height: AppSize.h14),
                     const _EarnGrid(),
                     SizedBox(height: AppSize.h16),
@@ -119,10 +119,9 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _sectionTitle(String text) => Text(
+  Widget _sectionTitle(BuildContext context, String text) => Text(
     text,
-    style: TextStyle(
-      fontFamily: FontFamily.kommonGrotesk,
+    style: context.textTheme.titleLarge?.copyWith(
       fontSize: AppSize.sp18,
       fontWeight: FontWeight.w900,
       color: _dailyRewardTitleColor,
@@ -146,13 +145,12 @@ class _CoinsPill extends StatelessWidget {
       verticalPad: AppSize.w7,
       borderRadius: AppSize.r24,
       wallOffset: 4,
-      textStyle: TextStyle(
-        fontFamily: FontFamily.kommonGrotesk,
+      textStyle: context.textTheme.titleLarge?.copyWith(
         fontSize: AppSize.sp13,
         fontWeight: FontWeight.w900,
         color: HomeScreen._coinPillShadow,
       ),
-      icon: Assets.icons.icCoin.svg(width: 19.w, height: 19.w),
+      icon: Assets.icons.icCoin.svg(width: AppSize.w19, height: AppSize.w19),
       onPressed: () {},
     );
   }
@@ -172,13 +170,12 @@ class _DaysPill extends StatelessWidget {
       horizontalPad: AppSize.w12,
       verticalPad: AppSize.w7,
       wallOffset: 4,
-      textStyle: TextStyle(
-        fontFamily: FontFamily.kommonGrotesk,
+      textStyle: context.textTheme.titleLarge?.copyWith(
         fontSize: AppSize.sp13,
         fontWeight: FontWeight.w900,
         color: HomeScreen._daysPillText,
       ),
-      trailingIcon:  Assets.icons.icFire.svg(width: 19.w, height: 19.w),
+      trailingIcon:  Assets.icons.icFire.svg(width: AppSize.w19, height: AppSize.w19),
       onPressed: () {},
     );
   }
@@ -203,18 +200,15 @@ class _BalanceCard extends StatelessWidget {
         children: [
           Text(
             'Total Balance',
-            style: TextStyle(
-              fontFamily: FontFamily.kommonGrotesk,
+            style: context.textTheme.bodyLarge?.copyWith(
               fontSize: AppSize.sp13,
-              fontWeight: FontWeight.w500,
               color: HomeScreen._totalBalanceTxtColor,
             ),
           ),
           SizedBox(height: AppSize.h15),
           RichText(
             text: TextSpan(
-              style: TextStyle(
-                fontFamily: FontFamily.kommonGrotesk,
+              style: context.textTheme.titleLarge?.copyWith(
                 fontSize: AppSize.sp40,
                 fontWeight: FontWeight.w900,
                 color: Colors.black,
@@ -257,8 +251,7 @@ class _BalanceCard extends StatelessWidget {
                     SizedBox(width: AppSize.w4),
                     Text(
                       'LV 5 - 412 XP',
-                      style: TextStyle(
-                        fontFamily: FontFamily.kommonGrotesk,
+                      style: context.textTheme.titleLarge?.copyWith(
                         fontSize: AppSize.sp12,
                         fontWeight: FontWeight.w900,
                         color: HomeScreen._xpTextColor,
@@ -282,10 +275,8 @@ class _BalanceCard extends StatelessWidget {
                     foregroundColor: Colors.white,
                     wallOffset: 4,
                     borderRadius: AppSize.r28,
-                    textStyle: TextStyle(
-                      fontFamily: FontFamily.kommonGrotesk,
+                    textStyle: context.textTheme.titleMedium?.copyWith(
                       fontSize: AppSize.sp15,
-                      fontWeight: FontWeight.w700,
                       color: Colors.white,
                     ),
                     onPressed: () {},
@@ -302,10 +293,8 @@ class _BalanceCard extends StatelessWidget {
                     borderRadius: AppSize.r28,
                     borderColor: HomeScreen._cardBorder,
                     borderWidth: 1.4,
-                    textStyle: TextStyle(
-                      fontFamily: FontFamily.kommonGrotesk,
+                    textStyle: context.textTheme.titleMedium?.copyWith(
                       fontSize: AppSize.sp15,
-                      fontWeight: FontWeight.w700,
                       color: HomeScreen._titleColor,
                     ),
                     onPressed: () {},
@@ -340,12 +329,11 @@ class _CoinPill extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Assets.icons.icCoin.svg(width: 19.w, height: 19.w),
+          Assets.icons.icCoin.svg(width: AppSize.w19, height: AppSize.w19),
           SizedBox(width: AppSize.w6),
           Text(
             label,
-            style: TextStyle(
-              fontFamily: FontFamily.kommonGrotesk,
+            style: context.textTheme.titleLarge?.copyWith(
               fontSize: AppSize.sp12,
               fontWeight: FontWeight.w900,
               color: HomeScreen._coinPillShadow,
@@ -388,7 +376,7 @@ class _DailyRewardCard extends StatelessWidget {
             verticalPad: AppSize.h8,
             borderRadius: AppSize.r14,
             wallOffset: 4,
-            icon: Assets.icons.icGift.svg(width: 30.w, height: 30.w),
+            icon: Assets.icons.icGift.svg(width: AppSize.w30, height: AppSize.w30),
             onPressed: () {},
           ),
           SizedBox(width: AppSize.w10),
@@ -401,9 +389,7 @@ class _DailyRewardCard extends StatelessWidget {
                   'Daily Reward - Day 18',
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    fontFamily: FontFamily.kommonGrotesk,
-                    fontSize: AppSize.sp14,
+                  style: context.textTheme.titleMedium?.copyWith(
                     fontWeight: FontWeight.w900,
                     color: HomeScreen._dailyRewardTitleColor,
                   ),
@@ -413,10 +399,8 @@ class _DailyRewardCard extends StatelessWidget {
                   'Collect +10 coins, Reset in 14h',
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    fontFamily: FontFamily.kommonGrotesk,
+                  style: context.textTheme.titleSmall?.copyWith(
                     fontSize: AppSize.sp12,
-                    fontWeight: FontWeight.w600,
                     color: HomeScreen._bodyColor,
                   ),
                 ),
@@ -434,8 +418,7 @@ class _DailyRewardCard extends StatelessWidget {
             verticalPad: AppSize.h8,
             borderRadius: AppSize.r22,
             wallOffset: 4,
-            textStyle: TextStyle(
-              fontFamily: FontFamily.kommonGrotesk,
+            textStyle: context.textTheme.titleLarge?.copyWith(
               fontSize: AppSize.sp13,
               fontWeight: FontWeight.w900,
               color: Colors.white,
@@ -458,7 +441,7 @@ class _StatsRow extends StatelessWidget {
       children: [
         Expanded(
           child: _StatCard(
-            icon: Assets.icons.icCoin.svg(width: 20.w, height: 20.w),
+            icon: Assets.icons.icCoin.svg(width: AppSize.w20, height: AppSize.w20),
             label: 'Today',
             value: '\$1.20',
           ),
@@ -466,7 +449,7 @@ class _StatsRow extends StatelessWidget {
         SizedBox(width: AppSize.w10),
         Expanded(
           child: _StatCard(
-            icon: Assets.icons.icXp.svg(width: 15.w, height: 15.w),
+            icon: Assets.icons.icXp.svg(width: AppSize.w15, height: AppSize.w15),
             label: 'XP',
             value: '+45',
           ),
@@ -474,7 +457,7 @@ class _StatsRow extends StatelessWidget {
         SizedBox(width: AppSize.w10),
         Expanded(
           child: _StatCard(
-            icon: Assets.icons.icRank.svg(width: 15.w, height: 15.w),
+            icon: Assets.icons.icRank.svg(width: AppSize.w15, height: AppSize.w15),
             label: 'Rank',
             value: '#214',
           ),
@@ -521,10 +504,8 @@ class _StatCard extends StatelessWidget {
                   label,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    fontFamily: FontFamily.kommonGrotesk,
+                  style: context.textTheme.titleSmall?.copyWith(
                     fontSize: AppSize.sp12,
-                    fontWeight: FontWeight.w600,
                     color: HomeScreen._bodyColor,
                   ),
                 ),
@@ -536,8 +517,7 @@ class _StatCard extends StatelessWidget {
             value,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: TextStyle(
-              fontFamily: FontFamily.kommonGrotesk,
+            style: context.textTheme.titleLarge?.copyWith(
               fontSize: AppSize.sp18,
               fontWeight: FontWeight.w900,
               color: HomeScreen._titleColor,
@@ -585,12 +565,14 @@ class _EarnGrid extends StatelessWidget {
         subtitle: 'Visit & Earn',
         reward: '+32',
         illustration: _EarnIllustration.web,
+        routeName: AppRoutes.webVisits,
       ),
       _EarnItem(
         title: 'Game Zone',
         subtitle: 'Play Games',
         reward: '+40',
         illustration: _EarnIllustration.game,
+        routeName: AppRoutes.gameZone,
       ),
       _EarnItem(
         title: 'Refer & Earn',
@@ -660,8 +642,7 @@ class _EarnTile extends StatelessWidget {
               children: [
                 Text(
                 item.title,
-                style: TextStyle(
-                  fontFamily: FontFamily.kommonGrotesk,
+                style: context.textTheme.titleLarge?.copyWith(
                   fontSize: AppSize.sp15,
                   fontWeight: FontWeight(950),
                   color: HomeScreen._earnGridTitleColor,
@@ -670,10 +651,8 @@ class _EarnTile extends StatelessWidget {
                 SizedBox(height: AppSize.h2),
                 Text(
                   item.subtitle,
-                  style: TextStyle(
-                    fontFamily: FontFamily.kommonGrotesk,
+                  style: context.textTheme.titleSmall?.copyWith(
                     fontSize: AppSize.sp11,
-                    fontWeight: FontWeight.w600,
                     color: HomeScreen._bodyColor,
                   ),
                 ),
@@ -694,13 +673,12 @@ class _EarnTile extends StatelessWidget {
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Assets.icons.icCoin.svg(width: 20.w, height: 20.w),
+                          Assets.icons.icCoin.svg(width: AppSize.w20, height: AppSize.w20),
                           // _CoinIcon(size: AppSize.w18),
                           SizedBox(width: AppSize.w4),
                           Text(
                             item.reward,
-                            style: TextStyle(
-                              fontFamily: FontFamily.kommonGrotesk,
+                            style: context.textTheme.titleLarge?.copyWith(
                               fontSize: AppSize.sp12,
                               fontWeight: FontWeight.w900,
                               color: HomeScreen._coinPillShadow,
@@ -793,8 +771,7 @@ class _HowItWorksCard extends StatelessWidget {
               children: [
                 Text(
                   'How It Works',
-                  style: TextStyle(
-                    fontFamily: FontFamily.kommonGrotesk,
+                  style: context.textTheme.titleLarge?.copyWith(
                     fontSize: AppSize.sp15,
                     fontWeight: FontWeight.w900,
                     color: HomeScreen._titleColor,
@@ -803,10 +780,8 @@ class _HowItWorksCard extends StatelessWidget {
                 SizedBox(height: AppSize.h4),
                 Text(
                   'Lern Step-by-Step how to\nearn money',
-                  style: TextStyle(
-                    fontFamily: FontFamily.kommonGrotesk,
+                  style: context.textTheme.titleSmall?.copyWith(
                     fontSize: AppSize.sp12,
-                    fontWeight: FontWeight.w600,
                     color: HomeScreen._bodyColor,
                     height: 1.3,
                   ),
@@ -825,8 +800,7 @@ class _HowItWorksCard extends StatelessWidget {
             verticalPad: AppSize.h8,
             borderRadius: AppSize.r22,
             wallOffset: 4,
-            textStyle: TextStyle(
-              fontFamily: FontFamily.kommonGrotesk,
+            textStyle: context.textTheme.titleLarge?.copyWith(
               fontSize: AppSize.sp13,
               fontWeight: FontWeight.w800,
               color: Colors.white,
@@ -899,10 +873,8 @@ class _ShortcutCard extends StatelessWidget {
             children: [
               Text(
                 topLabel,
-                style: TextStyle(
-                  fontFamily: FontFamily.kommonGrotesk,
+                style: context.textTheme.titleSmall?.copyWith(
                   fontSize: AppSize.sp12,
-                  fontWeight: FontWeight.w600,
                   color: HomeScreen._bodyColor,
                 ),
               ),
@@ -923,9 +895,7 @@ class _ShortcutCard extends StatelessWidget {
                 child: Text(
                   title,
                   overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    fontFamily: FontFamily.kommonGrotesk,
-                    fontSize: AppSize.sp14,
+                  style: context.textTheme.titleMedium?.copyWith(
                     fontWeight: FontWeight.w900,
                     color: HomeScreen._dailyRewardTitleColor,
                   ),

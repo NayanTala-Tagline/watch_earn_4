@@ -44,4 +44,7 @@ class AppRoutes {
   static const String spinWheel = 'SpinWheelScreen';
   static const String quiz = 'QuizMasterScreen';
   static const String scratchCard = 'ScratchCardScreen';
+  static const String webVisits = 'WebVisitsScreen';
+  static const String gameZone = 'GameZoneScreen';
+  static const String inAppWebView = 'InAppWebViewPage';
 }

@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../gen/assets.gen.dart';
-import '../../gen/fonts.gen.dart';
+import '../../extension/ext_context.dart';
 import '../../db/app_db.dart';
 import '../../di/injector.dart';
 import '../../routes/app_router.dart';
@@ -52,7 +52,7 @@ class _SplashScreenState extends State<SplashScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Assets.images.splash.splashLogo
-                  .image(width: 210.w, height: 210.w)
+                  .image(width: AppSize.w210, height: AppSize.w210)
                   .animate()
                   .fadeIn(duration: 700.ms, curve: Curves.easeOut)
                   .scale(
@@ -67,10 +67,8 @@ class _SplashScreenState extends State<SplashScreen> {
               SizedBox(height: AppSize.h16),
               Text(
                 'Rewardo',
-                style: TextStyle(
-                  fontFamily: FontFamily.kommonGrotesk,
+                style: context.textTheme.titleLarge?.copyWith(
                   fontSize: AppSize.sp32,
-                  fontWeight: FontWeight.w700,
                   color: const Color(0xFF1C2359),
                 ),
               )

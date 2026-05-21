@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../gen/fonts.gen.dart';
+import '../../../extension/ext_context.dart';
 import '../../../utils/app_size.dart';
 
 const _primaryBlue = Color(0xFF1A1AE8);
@@ -46,8 +46,7 @@ class ActiveNavTab extends StatelessWidget {
             SizedBox(height: AppSize.h2),
             Text(
               label,
-              style: TextStyle(
-                fontFamily: FontFamily.kommonGrotesk,
+              style: context.textTheme.titleLarge?.copyWith(
                 fontSize: AppSize.sp12,
                 fontWeight: FontWeight.w800,
                 color: Colors.white,

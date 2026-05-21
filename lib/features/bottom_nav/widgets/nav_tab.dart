@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../gen/fonts.gen.dart';
+import '../../../extension/ext_context.dart';
 import '../../../utils/app_size.dart';
 
 const _bodyColor = Color(0xFF8A8FA8);
@@ -34,10 +34,8 @@ class NavTab extends StatelessWidget {
             SizedBox(height: AppSize.h4),
             Text(
               label,
-              style: TextStyle(
-                fontFamily: FontFamily.kommonGrotesk,
+              style: context.textTheme.titleSmall?.copyWith(
                 fontSize: AppSize.sp12,
-                fontWeight: FontWeight.w600,
                 color: _bodyColor,
                 height: 1,
               ),

@@ -7,7 +7,6 @@ import 'package:provider/provider.dart';
 import 'package:watch_earn_4/extension/ext_context.dart';
 
 import '../../gen/assets.gen.dart';
-import '../../gen/fonts.gen.dart';
 import '../../routes/app_router.dart';
 import '../../utils/app_size.dart';
 import '../../widgets/app_button.dart';
@@ -41,11 +40,11 @@ class _LoginBody extends StatelessWidget {
               children: [
                 _buildLogo(),
                 SizedBox(height: AppSize.h30),
-                _buildHeadline(),
+                _buildHeadline(context),
                 const Spacer(),
                 _buildButtons(context),
                 SizedBox(height: AppSize.h16),
-                _buildTerms(),
+                _buildTerms(context),
                 SizedBox(height: AppSize.h28),
               ],
             ),
@@ -61,7 +60,7 @@ class _LoginBody extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(left: AppSize.w20, top: AppSize.h16),
       child: Assets.images.splash.splashLogo
-          .image(width: 130.w, height: 130.w)
+          .image(width: AppSize.w130, height: AppSize.w130)
           .animate()
           .fadeIn(duration: 600.ms, curve: Curves.easeOut)
           .scale(
@@ -75,7 +74,7 @@ class _LoginBody extends StatelessWidget {
 
   // ── Headline ─────────────────────────────────────────────────────────────
 
-  Widget _buildHeadline() {
+  Widget _buildHeadline(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: AppSize.w24),
       child: Column(
@@ -83,10 +82,8 @@ class _LoginBody extends StatelessWidget {
         children: [
           Text(
             'Start Earning\nRewards',
-            style: TextStyle(
-              fontFamily: FontFamily.kommonGrotesk,
+            style: context.textTheme.titleLarge?.copyWith(
               fontSize: AppSize.sp38,
-              fontWeight: FontWeight.w700,
               color: const Color(0xFF1C2359),
               height: 1.15,
             ),
@@ -103,10 +100,8 @@ class _LoginBody extends StatelessWidget {
           SizedBox(height: AppSize.h14),
           Text(
             'Complete tasks, play games, and earn coins that convert to real money!',
-            style: TextStyle(
-              fontFamily: FontFamily.kommonGrotesk,
+            style: context.textTheme.bodyMedium?.copyWith(
               fontSize: AppSize.sp16,
-              fontWeight: FontWeight.w400,
               color: const Color(0xFF3D4778),
               height: 1.5,
             ),
@@ -136,14 +131,14 @@ class _LoginBody extends StatelessWidget {
           Consumer<AuthProvider>(
             builder: (context, auth, _) => AppButton(
               text: 'Continue with Google',
-              icon: Assets.icons.icGoogle.svg(width: 26.w, height: 26.w),
+              icon: Assets.icons.icGoogle.svg(width: AppSize.w26, height: AppSize.w26),
               isLoginButton: true,
               isLoading: auth.isGoogleLoading,
               isDisabled: auth.isGuestLoading,
               buttonColor: Colors.white,
               shadowColor: context.themeColors.borderColor,
               foregroundColor: const Color(0xFF1C2359),
-              borderRadius: 29.r,
+              borderRadius: AppSize.r29,
               onPressed: () => _handleGoogle(context, auth),
             ),
           )
@@ -168,7 +163,7 @@ class _LoginBody extends StatelessWidget {
               buttonColor: Colors.white,
               shadowColor: context.themeColors.borderColor,
               foregroundColor: const Color(0xFF1C2359),
-              borderRadius: 29.r,
+              borderRadius: AppSize.r29,
               onPressed: () => _handleGuest(context, auth),
             ),
           )
@@ -191,8 +186,7 @@ class _LoginBody extends StatelessWidget {
                 child: Text(
                   auth.errorMessage!,
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontFamily: FontFamily.kommonGrotesk,
+                  style: context.textTheme.bodyMedium?.copyWith(
                     fontSize: AppSize.sp13,
                     color: Colors.redAccent,
                   ),
@@ -207,7 +201,7 @@ class _LoginBody extends StatelessWidget {
 
   // ── Terms ─────────────────────────────────────────────────────────────────
 
-  Widget _buildTerms() {
+  Widget _buildTerms(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: AppSize.w24),
       child: Text.rich(
@@ -215,42 +209,34 @@ class _LoginBody extends StatelessWidget {
           children: [
             TextSpan(
               text: 'By continuing, you agree to our ',
-              style: TextStyle(
-                fontFamily: FontFamily.kommonGrotesk,
+              style: context.textTheme.bodyMedium?.copyWith(
                 fontSize: AppSize.sp13,
                 color: const Color(0xFF6B7280),
-                fontWeight: FontWeight.w400,
               ),
             ),
             TextSpan(
               text: 'Terms of Service',
               recognizer: TapGestureRecognizer()..onTap = () {},
-              style: TextStyle(
-                fontFamily: FontFamily.kommonGrotesk,
+              style: context.textTheme.bodyLarge?.copyWith(
                 fontSize: AppSize.sp13,
                 color: const Color(0xFF4A6CF7),
-                fontWeight: FontWeight.w500,
                 decoration: TextDecoration.underline,
                 decorationColor: const Color(0xFF4A6CF7),
               ),
             ),
             TextSpan(
               text: ' and ',
-              style: TextStyle(
-                fontFamily: FontFamily.kommonGrotesk,
+              style: context.textTheme.bodyMedium?.copyWith(
                 fontSize: AppSize.sp13,
                 color: const Color(0xFF6B7280),
-                fontWeight: FontWeight.w400,
               ),
             ),
             TextSpan(
               text: 'Privacy Policy',
               recognizer: TapGestureRecognizer()..onTap = () {},
-              style: TextStyle(
-                fontFamily: FontFamily.kommonGrotesk,
+              style: context.textTheme.bodyLarge?.copyWith(
                 fontSize: AppSize.sp13,
                 color: const Color(0xFF4A6CF7),
-                fontWeight: FontWeight.w500,
                 decoration: TextDecoration.underline,
                 decorationColor: const Color(0xFF4A6CF7),
               ),

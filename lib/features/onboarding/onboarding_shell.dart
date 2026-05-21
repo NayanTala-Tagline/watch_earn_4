@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:watch_earn_4/extension/ext_context.dart';
 
 import '../../gen/assets.gen.dart';
-import '../../gen/fonts.gen.dart';
 import '../../utils/app_size.dart';
 import '../../widgets/app_button.dart';
 
@@ -53,10 +52,8 @@ class OnboardingShell extends StatelessWidget {
                   ),
                   child: Text(
                     'Skip',
-                    style: TextStyle(
-                      fontFamily: FontFamily.kommonGrotesk,
+                    style: context.textTheme.bodyLarge?.copyWith(
                       fontSize: AppSize.sp16,
-                      fontWeight: FontWeight.w500,
                       color: const Color(0xFF1C2359),
                     ),
                   ),
@@ -93,10 +90,8 @@ class OnboardingShell extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: AppSize.w24),
               child: Text(
                 title,
-                style: TextStyle(
-                  fontFamily: FontFamily.kommonGrotesk,
+                style: context.textTheme.titleLarge?.copyWith(
                   fontSize: AppSize.sp28,
-                  fontWeight: FontWeight.w700,
                   color: const Color(0xFF1C2359),
                   height: 1.2,
                 ),
@@ -119,10 +114,8 @@ class OnboardingShell extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: AppSize.w24),
               child: Text(
                 subtitle,
-                style: TextStyle(
-                  fontFamily: FontFamily.kommonGrotesk,
+                style: context.textTheme.bodyMedium?.copyWith(
                   fontSize: AppSize.sp15,
-                  fontWeight: FontWeight.w400,
                   color: const Color(0xFF4A4E6B),
                   height: 1.55,
                 ),
@@ -153,7 +146,7 @@ class OnboardingShell extends StatelessWidget {
                   color: Colors.white,
                   size: 20,
                 ),
-                borderRadius: 29.r,
+                borderRadius: AppSize.r29,
                 onPressed: onNext,
               )
                   .animate()

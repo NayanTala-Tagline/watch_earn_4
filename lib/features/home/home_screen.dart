@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:watch_earn_4/gen/assets.gen.dart';
 import 'package:watch_earn_4/gen/fonts.gen.dart';
+import 'package:watch_earn_4/routes/app_router.dart';
 import 'package:watch_earn_4/utils/app_size.dart';
 import 'package:watch_earn_4/widgets/app_button.dart';
+import 'package:watch_earn_4/widgets/balance_card.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -12,7 +15,6 @@ class HomeScreen extends StatelessWidget {
   static const _titleColor = Color(0xFF0E0F66);
   static const _dailyRewardTitleColor = Color(0xFF0B0E2C);
   static const _earnGridTitleColor = Color(0xFF0F172A);
-  static const _totalBalanceTxtColor = Color(0xFF6B7393);
   static const _bodyColor = Color(0xFF8A8FA8);
   static const _cardBorder = Color(0xFFEDEFF5);
   static const _primaryBlue = Color(0xFF1A1AE8);
@@ -188,132 +190,47 @@ class _BalanceCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(AppSize.w16),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(AppSize.r25),
-        border: Border.all(color: HomeScreen._cardBorder),
-        boxShadow: HomeScreen._cardShadow,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+    return BalanceCard(
+      amountWhole: '\$24',
+      amountFraction: '.86',
+      body: Row(
         children: [
-          Text(
-            'Total Balance',
-            style: TextStyle(
-              fontFamily: FontFamily.kommonGrotesk,
-              fontSize: AppSize.sp13,
-              fontWeight: FontWeight.w500,
-              color: HomeScreen._totalBalanceTxtColor,
+          const _CoinPill(label: '2,486 Coins'),
+          SizedBox(width: AppSize.w10),
+          Container(
+            padding: EdgeInsets.symmetric(
+              horizontal: AppSize.w10,
+              vertical: AppSize.h6,
             ),
-          ),
-          SizedBox(height: AppSize.h15),
-          RichText(
-            text: TextSpan(
-              style: TextStyle(
-                fontFamily: FontFamily.kommonGrotesk,
-                fontSize: AppSize.sp40,
-                fontWeight: FontWeight.w900,
-                color: Colors.black,
-                letterSpacing: -1,
-                height: 1.05,
-              ),
+            decoration: BoxDecoration(
+              color: HomeScreen._xpBgColor,
+              borderRadius: BorderRadius.circular(AppSize.r16),
+            ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
               children: [
-                const TextSpan(text: '\$24'),
-                TextSpan(
-                  text: '.86',
+                Icon(
+                  Icons.bolt_rounded,
+                  size: AppSize.sp16,
+                  color: HomeScreen._xpTextColor,
+                ),
+                SizedBox(width: AppSize.w4),
+                Text(
+                  'LV 5 - 412 XP',
                   style: TextStyle(
-                    color: const Color(0xFF9AA0B5),
+                    fontFamily: FontFamily.kommonGrotesk,
+                    fontSize: AppSize.sp12,
+                    fontWeight: FontWeight.w900,
+                    color: HomeScreen._xpTextColor,
                   ),
                 ),
               ],
             ),
           ),
-          SizedBox(height: AppSize.h12),
-          Row(
-            children: [
-              const _CoinPill(label: '2,486 Coins'),
-              SizedBox(width: AppSize.w10),
-              Container(
-                padding: EdgeInsets.symmetric(
-                  horizontal: AppSize.w10,
-                  vertical: AppSize.h6,
-                ),
-                decoration: BoxDecoration(
-                  color: HomeScreen._xpBgColor,
-                  borderRadius: BorderRadius.circular(AppSize.r16),
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(
-                      Icons.bolt_rounded,
-                      size: AppSize.sp16,
-                      color: HomeScreen._xpTextColor,
-                    ),
-                    SizedBox(width: AppSize.w4),
-                    Text(
-                      'LV 5 - 412 XP',
-                      style: TextStyle(
-                        fontFamily: FontFamily.kommonGrotesk,
-                        fontSize: AppSize.sp12,
-                        fontWeight: FontWeight.w900,
-                        color: HomeScreen._xpTextColor,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-          SizedBox(height: AppSize.h12),
-          Row(
-            children: [
-              Expanded(
-                child: SizedBox(
-                  height: 55,
-                  child: AppButton(
-                    text: 'Withdraw',
-                    buttonColor: HomeScreen._primaryBlue,
-                    shadowColor: HomeScreen._primaryBlueShadow,
-                    foregroundColor: Colors.white,
-                    wallOffset: 4,
-                    borderRadius: AppSize.r28,
-                    textStyle: TextStyle(
-                      fontFamily: FontFamily.kommonGrotesk,
-                      fontSize: AppSize.sp15,
-                      fontWeight: FontWeight.w700,
-                      color: Colors.white,
-                    ),
-                    onPressed: () {},
-                  ),
-                ),
-              ),
-              SizedBox(width: AppSize.w5),
-              Expanded(
-                child: SizedBox(
-                  height: 56,
-                  child: AppButton(
-                    text: 'Rewards',
-                    isFillButton: false,
-                    borderRadius: AppSize.r28,
-                    borderColor: HomeScreen._cardBorder,
-                    borderWidth: 1.4,
-                    textStyle: TextStyle(
-                      fontFamily: FontFamily.kommonGrotesk,
-                      fontSize: AppSize.sp15,
-                      fontWeight: FontWeight.w700,
-                      color: HomeScreen._titleColor,
-                    ),
-                    onPressed: () {},
-                  ),
-                ),
-              ),
-            ],
-          ),
         ],
       ),
+      onWithdraw: () => context.pushNamed(AppRoutes.withdraw),
+      onRewards: () {},
     );
   }
 }
@@ -630,9 +547,28 @@ class _EarnTile extends StatelessWidget {
   const _EarnTile({required this.item});
   final _EarnItem item;
 
+  void _onTap(BuildContext context) {
+    switch (item.illustration) {
+      case _EarnIllustration.refer:
+        context.pushNamed(AppRoutes.referAndEarn);
+        break;
+      case _EarnIllustration.spin:
+        context.pushNamed(AppRoutes.spinWheel);
+        break;
+      case _EarnIllustration.quiz:
+      case _EarnIllustration.scratch:
+      case _EarnIllustration.web:
+      case _EarnIllustration.game:
+        break;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onTap: () => _onTap(context),
+      child: Container(
       padding: EdgeInsets.symmetric(vertical:AppSize.w12),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -711,6 +647,7 @@ class _EarnTile extends StatelessWidget {
             ),)
 
         ],
+      ),
       ),
     );
   }

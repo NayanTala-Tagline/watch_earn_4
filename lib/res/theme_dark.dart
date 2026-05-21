@@ -39,7 +39,7 @@ const _themeTextColors = ThemeTextColors(
   hintTextColor: Color(0xFF757575),
   descriptionColor: Color(0xFFBCC4C8),
   pastalYellow: Color(0xF3DCC1CC),
-  primaryTextColor: Color(0xFF34C759),
+  primaryTextColor: Color(0xFF0B0E2C),
   secondaryTextColor: Color(0xFF5BF2DA)
 );
 

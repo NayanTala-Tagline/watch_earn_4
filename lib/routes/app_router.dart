@@ -7,7 +7,9 @@ import '../di/injector.dart';
 import '../features/home/home_screen.dart';
 import '../features/language_screen/language_screen.dart';
 import '../features/bottom_nav/bottom_nav_page.dart';
+import '../features/refer_and_earn/refer_and_earn_screen.dart';
 import '../features/spin_wheel/spin_wheel_screen.dart';
+import '../features/withdraw/withdraw_screen.dart';
 import '../features/login/login_screen.dart';
 import '../features/onboarding/onboarding1_screen.dart';
 import '../features/onboarding/onboarding2_screen.dart';
@@ -112,6 +114,18 @@ final appRouter = GoRouter(
       name: AppRoutes.spinWheel,
       pageBuilder: (context, state) =>
           MaterialPage(key: state.pageKey, child: const SpinWheelScreen()),
+    ),
+    GoRoute(
+      path: '/${AppRoutes.referAndEarn}',
+      name: AppRoutes.referAndEarn,
+      pageBuilder: (context, state) =>
+          MaterialPage(key: state.pageKey, child: const ReferAndEarnScreen()),
+    ),
+    GoRoute(
+      path: '/${AppRoutes.withdraw}',
+      name: AppRoutes.withdraw,
+      pageBuilder: (context, state) =>
+          MaterialPage(key: state.pageKey, child: const WithdrawScreen()),
     ),
 
     // Loan-finder flow — shared LoanFinderProvider (form) +

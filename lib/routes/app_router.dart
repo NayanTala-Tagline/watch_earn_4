@@ -6,6 +6,8 @@ import '../db/app_db.dart';
 import '../di/injector.dart';
 import '../features/language_screen/language_screen.dart';
 import '../features/bottom_nav/bottom_nav_page.dart';
+import '../features/quiz_master/quiz_master_screen.dart';
+import '../features/scratch_card/scratch_card_screen.dart';
 import '../features/spin_wheel/spin_wheel_screen.dart';
 import '../features/login/login_screen.dart';
 import '../features/onboarding/onboarding1_screen.dart';
@@ -111,6 +113,18 @@ final appRouter = GoRouter(
       name: AppRoutes.spinWheel,
       pageBuilder: (context, state) =>
           MaterialPage(key: state.pageKey, child: const SpinWheelScreen()),
+    ),
+    GoRoute(
+      path: '/${AppRoutes.quiz}',
+      name: AppRoutes.quiz,
+      pageBuilder: (context, state) =>
+          MaterialPage(key: state.pageKey, child: const QuizMasterScreen()),
+    ),
+    GoRoute(
+      path: '/${AppRoutes.scratchCard}',
+      name: AppRoutes.scratchCard,
+      pageBuilder: (context, state) =>
+          MaterialPage(key: state.pageKey, child: const ScratchCardScreen()),
     ),
 
     // Loan-finder flow — shared LoanFinderProvider (form) +

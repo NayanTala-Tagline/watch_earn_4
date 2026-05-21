@@ -564,6 +564,7 @@ class _EarnGrid extends StatelessWidget {
         subtitle: 'Answer & Earn',
         reward: '+50',
         illustration: _EarnIllustration.quiz,
+        routeName: AppRoutes.quiz,
       ),
       _EarnItem(
         title: 'Spin Wheel',
@@ -577,6 +578,7 @@ class _EarnGrid extends StatelessWidget {
         subtitle: 'Scratch and Reveal',
         reward: '+15',
         illustration: _EarnIllustration.scratch,
+        routeName: AppRoutes.scratchCard,
       ),
       _EarnItem(
         title: 'Web Visits',

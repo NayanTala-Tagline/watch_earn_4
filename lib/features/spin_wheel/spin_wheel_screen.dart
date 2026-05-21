@@ -102,6 +102,7 @@ class _SpinWheelScreenState extends State<SpinWheelScreen>
       backgroundColor: Colors.transparent,
       isDismissible: false,
       enableDrag: false,
+      isScrollControlled: true,
       builder: (sheetCtx) => _ResultSheet(
         coins: _wonCoins,
         label: _wonLabel,
@@ -528,7 +529,7 @@ class _CoinBadge extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: AppSize.w14, vertical: AppSize.h8),
       decoration: BoxDecoration(
-        color: const Color(0xFFFFD84D),
+        color: const Color(0xFFFFF1D6),
         borderRadius: BorderRadius.circular(AppSize.r100),
         boxShadow: const [
           BoxShadow(
@@ -651,33 +652,41 @@ class _ResultSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final half = (_trophyD / 2).r;
+    final bottomPad = MediaQuery.of(context).padding.bottom;
 
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        // Transparent gap — modal barrier shows here so the trophy looks
-        // like it's floating above the white sheet edge.
-        SizedBox(height: half),
+    // Outer Padding gives left / right / bottom margins so the card floats
+    // above the screen edges — matching the Figma inset card look.
+    return Padding(
+      padding: EdgeInsets.fromLTRB(
+        AppSize.w16,
+        0,
+        AppSize.w16,
+        (bottomPad > 0 ? bottomPad : AppSize.h16),
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          // Transparent gap — modal barrier shows here so the trophy looks
+          // like it's floating above the white card edge.
+          SizedBox(height: half),
 
-        Stack(
-          clipBehavior: Clip.none,
-          alignment: Alignment.topCenter,
-          children: [
-            // ── White card ──────────────────────────────────────────────
-            Container(
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.vertical(
-                  top: Radius.circular(AppSize.r28),
+          Stack(
+            clipBehavior: Clip.none,
+            alignment: Alignment.topCenter,
+            children: [
+              // ── White card — fully rounded on all corners ───────────
+              Container(
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(AppSize.r28),
                 ),
-              ),
-              padding: EdgeInsets.fromLTRB(
-                AppSize.w24,
-                half + AppSize.h16, // clears trophy lower half
-                AppSize.w24,
-                AppSize.h32,
-              ),
+                padding: EdgeInsets.fromLTRB(
+                  AppSize.w24,
+                  half + AppSize.h16, // clears trophy lower half
+                  AppSize.w24,
+                  AppSize.h28,
+                ),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -767,6 +776,7 @@ class _ResultSheet extends StatelessWidget {
           ],
         ),
       ],
-    );
+    ),   // Column
+    );   // Padding
   }
 }

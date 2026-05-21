@@ -42,4 +42,6 @@ class AppRoutes {
   static const String documentRequired = 'DocumentRequiredScreen';
   static const String tipsAdvice = 'TipsAdviceScreen';
   static const String spinWheel = 'SpinWheelScreen';
+  static const String quiz = 'QuizMasterScreen';
+  static const String scratchCard = 'ScratchCardScreen';
 }

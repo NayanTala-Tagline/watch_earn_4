@@ -103,4 +103,39 @@ class AppDB {
 
   String get currencySymbol => getValue('currencySymbol', defaultValue: r'$');
   set currencySymbol(String value) => setValue('currencySymbol', value);
+
+  // ── Spin wheel ────────────────────────────────────────────────────────────
+
+  /// Number of spins used on [lastSpinDate].
+  int get spinCountToday => getValue('spinCountToday', defaultValue: 0);
+  set spinCountToday(int value) => setValue('spinCountToday', value);
+
+  /// Date (yyyy-MM-dd) of the last spin session — used to reset daily count.
+  String get lastSpinDate => getValue('lastSpinDate', defaultValue: '');
+  set lastSpinDate(String value) => setValue('lastSpinDate', value);
+
+  /// Returns remaining spins today, resetting the count if the date changed.
+  int getRemainingSpins(int maxPerDay) {
+    final today = _todayStr();
+    if (lastSpinDate != today) {
+      spinCountToday = 0;
+      lastSpinDate = today;
+    }
+    return (maxPerDay - spinCountToday).clamp(0, maxPerDay);
+  }
+
+  /// Records one spin used.
+  void recordSpin() {
+    final today = _todayStr();
+    if (lastSpinDate != today) {
+      spinCountToday = 0;
+      lastSpinDate = today;
+    }
+    spinCountToday = spinCountToday + 1;
+  }
+
+  static String _todayStr() {
+    final n = DateTime.now();
+    return '${n.year}-${n.month.toString().padLeft(2, '0')}-${n.day.toString().padLeft(2, '0')}';
+  }
 }

@@ -1,9 +1,13 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import '../db/app_db.dart';
+import '../di/injector.dart';
 import '../features/home/home_screen.dart';
 import '../features/language_screen/language_screen.dart';
 import '../features/bottom_nav/bottom_nav_page.dart';
+import '../features/spin_wheel/spin_wheel_screen.dart';
 import '../features/login/login_screen.dart';
 import '../features/onboarding/onboarding1_screen.dart';
 import '../features/onboarding/onboarding2_screen.dart';
@@ -22,6 +26,24 @@ final GlobalKey<NavigatorState> rootNavKey = GlobalKey<NavigatorState>(
 final GlobalKey<ScaffoldMessengerState> sfMessengerKey =
     GlobalKey<ScaffoldMessengerState>(debugLabel: 'appScaffold');
 
+final AppDB _db = Injector.instance<AppDB>();
+final FirebaseAuth _auth = FirebaseAuth.instance;
+
+/// Onboarding completed AND logged in → straight to home.
+bool get _isNavigateStart =>
+    _db.isOnboardingCompleted == true && _auth.currentUser != null;
+
+/// Onboarding completed but NOT logged in → straight to login.
+bool get _isNavigateAuth =>
+    _db.isOnboardingCompleted == true && _auth.currentUser == null;
+
+String _initialLocation() {
+  if (_isNavigateStart) return '/${AppRoutes.home}';
+  if (_isNavigateAuth) return '/${AppRoutes.login}';
+  // Fresh install or onboarding not yet finished → show splash → onboarding.
+  return '/${AppRoutes.splash}';
+}
+
 /// current route
 String? currentRoute;
 
@@ -29,7 +51,7 @@ String? currentRoute;
 final appRouter = GoRouter(
   navigatorKey: rootNavKey,
   debugLogDiagnostics: kDebugMode,
-  //  observers: [AdNavigationObserver()],
+  initialLocation: _initialLocation(),
   redirect: (context, state) {
     switch (state.fullPath) {
       case '/':
@@ -84,6 +106,12 @@ final appRouter = GoRouter(
       name: AppRoutes.home,
       pageBuilder: (context, state) =>
           MaterialPage(key: state.pageKey, child: const BottomNavPage()),
+    ),
+    GoRoute(
+      path: '/${AppRoutes.spinWheel}',
+      name: AppRoutes.spinWheel,
+      pageBuilder: (context, state) =>
+          MaterialPage(key: state.pageKey, child: const SpinWheelScreen()),
     ),
 
     // Loan-finder flow — shared LoanFinderProvider (form) +

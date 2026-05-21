@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -27,9 +28,14 @@ class _SplashScreenState extends State<SplashScreen> {
   Future<void> _navigate() async {
     await Future.delayed(const Duration(milliseconds: 3000));
     if (!mounted) return;
-    final isLoggedIn = Injector.instance<AppDB>().userModel != null;
+
+    final db = Injector.instance<AppDB>();
+    final isLoggedIn = FirebaseAuth.instance.currentUser != null || db.userModel != null;
+
     if (isLoggedIn) {
       context.goNamed(AppRoutes.home);
+    } else if (db.isOnboardingCompleted == true) {
+      context.goNamed(AppRoutes.login);
     } else {
       context.goNamed(AppRoutes.onboarding1);
     }

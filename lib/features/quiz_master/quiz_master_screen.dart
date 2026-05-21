@@ -7,6 +7,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../extension/ext_context.dart';
 import '../../gen/assets.gen.dart';
+import '../../routes/app_router.dart';
+import '../../services/coin_service.dart';
+import '../../services/reward_ad_service.dart';
 import '../../utils/app_size.dart';
 import '../../utils/navigation_helper.dart';
 import '../../utils/remote_config.dart';
@@ -303,6 +306,7 @@ class _QuizMasterScreenState extends State<QuizMasterScreen> {
 
   void _showResultSheet() {
     final totalCoins = _correctCount * _coinsPerCorrect;
+    final isLoss = totalCoins == 0;
     showModalBottomSheet<void>(
       context: context,
       backgroundColor: Colors.transparent,
@@ -313,8 +317,17 @@ class _QuizMasterScreenState extends State<QuizMasterScreen> {
         correctCount: _correctCount,
         totalQuestions: _questions.length,
         totalCoins: totalCoins,
-        onClaim: () {
+        onClaim: () async {
           Navigator.pop(sheetCtx);
+          if (!isLoss) {
+            final navCtx = rootNavKey.currentContext!;
+            final earned = await RewardAdService.showMathQuiz(
+              navCtx,
+              defaultCoins: totalCoins,
+            );
+            if (earned != null) await CoinService.addCoins(earned);
+          }
+          if (!mounted) return;
           NavigationHelper().handleBackPress(context);
         },
       ),

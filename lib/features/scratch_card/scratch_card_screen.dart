@@ -8,6 +8,9 @@ import 'package:scratcher/widgets.dart';
 
 import '../../extension/ext_context.dart';
 import '../../gen/assets.gen.dart';
+import '../../routes/app_router.dart';
+import '../../services/coin_service.dart';
+import '../../services/reward_ad_service.dart';
 import '../../utils/app_size.dart';
 import '../../utils/navigation_helper.dart';
 import '../../utils/remote_config.dart';
@@ -116,8 +119,17 @@ class _ScratchCardScreenState extends State<ScratchCardScreen>
       builder: (sheetCtx) => _ResultSheet(
         coins: reward,
         isLoss: isLoss,
-        onClaim: () {
+        onClaim: () async {
           Navigator.pop(sheetCtx);
+          if (!isLoss) {
+            final navCtx = rootNavKey.currentContext!;
+            final earned = await RewardAdService.showScratchCard(
+              navCtx,
+              defaultCoins: reward,
+            );
+            if (earned != null) await CoinService.addCoins(earned);
+          }
+          if (!mounted) return;
           NavigationHelper().handleBackPress(context);
         },
       ),

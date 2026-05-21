@@ -8,6 +8,9 @@ import '../../db/app_db.dart';
 import '../../di/injector.dart';
 import '../../extension/ext_context.dart';
 import '../../gen/assets.gen.dart';
+import '../../routes/app_router.dart';
+import '../../services/coin_service.dart';
+import '../../services/reward_ad_service.dart';
 import '../../utils/app_size.dart';
 import '../../utils/navigation_helper.dart';
 import '../../widgets/app_button.dart';
@@ -93,8 +96,10 @@ class _SpinWheelScreenState extends State<SpinWheelScreen>
     db.recordSpin();
     setState(() => _spinsRemaining = db.getRemainingSpins(_kMaxSpinsPerDay));
 
-    final isLoss = defaultSegments.firstWhere((s) => s.label == _wonLabel).isLoss;
-    final isXp = defaultSegments.firstWhere((s) => s.label == _wonLabel).isXp;
+    final seg = defaultSegments.firstWhere((s) => s.label == _wonLabel);
+    final isLoss = seg.isLoss;
+    final isXp = seg.isXp;
+    final wonCoins = _wonCoins;
 
     showModalBottomSheet<void>(
       context: context,
@@ -103,11 +108,21 @@ class _SpinWheelScreenState extends State<SpinWheelScreen>
       enableDrag: false,
       isScrollControlled: true,
       builder: (sheetCtx) => _ResultSheet(
-        coins: _wonCoins,
+        coins: wonCoins,
         label: _wonLabel,
         isLoss: isLoss,
         isXp: isXp,
-        onClaim: () => Navigator.pop(sheetCtx),
+        onClaim: () async {
+          Navigator.pop(sheetCtx);
+          if (!isLoss && !isXp) {
+            final navCtx = rootNavKey.currentContext!;
+            final earned = await RewardAdService.showSpinWheel(
+              navCtx,
+              defaultCoins: wonCoins,
+            );
+            if (earned != null) await CoinService.addCoins(earned);
+          }
+        },
       ),
     );
   }

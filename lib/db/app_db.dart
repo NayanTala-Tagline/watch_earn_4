@@ -46,10 +46,26 @@ class AppDB {
   ///to set refresh token
   set refreshToken(String update) => setValue('refreshToken', update);
 
-  ///Removes all user data except
+  /// Removes user session data on logout.
+  /// Preserves device-level keys (visit-website locks, game locks,
+  /// leaderboard timer, internet status, language) across logout/login cycles.
   Future<void> logoutUser() async {
     try {
-      await _box.clear();
+      const preserved = {
+        'leaderboardTimerExpiry',
+        'internetStatus',
+        'languageCode',
+      };
+      final keysToDelete = _box.keys
+          .where((k) {
+            final key = k.toString();
+            if (preserved.contains(key)) return false;
+            if (key.startsWith('vw_lock_')) return false;
+            if (key.startsWith('gz_lock_')) return false;
+            return true;
+          })
+          .toList();
+      await _box.deleteAll(keysToDelete);
     } catch (e) {
       e.logFatal;
     }
@@ -104,6 +120,12 @@ class AppDB {
   String get currencySymbol => getValue('currencySymbol', defaultValue: r'$');
   set currencySymbol(String value) => setValue('currencySymbol', value);
 
+  // ── Leaderboard ──────────────────────────────────────────────────────────
+
+  int? get leaderboardTimerExpiry => getValue<int?>('leaderboardTimerExpiry');
+  set leaderboardTimerExpiry(int? value) =>
+      setValue('leaderboardTimerExpiry', value);
+
   // ── Spin wheel ────────────────────────────────────────────────────────────
 
   /// Number of spins used on [lastSpinDate].
@@ -138,4 +160,12 @@ class AppDB {
     final n = DateTime.now();
     return '${n.year}-${n.month.toString().padLeft(2, '0')}-${n.day.toString().padLeft(2, '0')}';
   }
+
+  // ── Profile settings ──────────────────────────────────────────────────────
+
+  bool get soundEffects => getValue('soundEffects', defaultValue: true);
+  set soundEffects(bool value) => setValue('soundEffects', value);
+
+  bool get hapticFeedback => getValue('hapticFeedback', defaultValue: true);
+  set hapticFeedback(bool value) => setValue('hapticFeedback', value);
 }

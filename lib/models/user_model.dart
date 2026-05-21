@@ -12,6 +12,10 @@ class UserModel {
   final DateTime createdAt;
   final bool isGuest;
   final String? referredBy;
+  final bool hasRated;
+  final int checkInStreak;
+  final DateTime? lastCheckInDate;
+  final int totalClaimDays;
 
   const UserModel({
     required this.userId,
@@ -25,6 +29,10 @@ class UserModel {
     this.email,
     this.photoUrl,
     this.referredBy,
+    this.hasRated = false,
+    this.checkInStreak = 0,
+    this.lastCheckInDate,
+    this.totalClaimDays = 0,
   });
 
   /// Firestore map — uses Timestamp for dates.
@@ -41,6 +49,11 @@ class UserModel {
       'created_at': Timestamp.fromDate(createdAt),
       'is_guest': isGuest,
       'referred_by': referredBy,
+      'has_rated': hasRated,
+      'check_in_streak': checkInStreak,
+      'last_check_in_date':
+          lastCheckInDate != null ? Timestamp.fromDate(lastCheckInDate!) : null,
+      'total_claim_days': totalClaimDays,
     };
   }
 
@@ -59,6 +72,14 @@ class UserModel {
           : DateTime.parse(map['created_at'] as String),
       isGuest: map['is_guest'] as bool? ?? false,
       referredBy: map['referred_by'] as String?,
+      hasRated: map['has_rated'] as bool? ?? false,
+      checkInStreak: (map['check_in_streak'] as int?) ?? 0,
+      lastCheckInDate: map['last_check_in_date'] is Timestamp
+          ? (map['last_check_in_date'] as Timestamp).toDate()
+          : map['last_check_in_date'] != null
+              ? DateTime.parse(map['last_check_in_date'] as String)
+              : null,
+      totalClaimDays: (map['total_claim_days'] as int?) ?? 0,
     );
   }
 
@@ -76,6 +97,10 @@ class UserModel {
       'created_at': createdAt.toIso8601String(),
       'is_guest': isGuest,
       'referred_by': referredBy,
+      'has_rated': hasRated,
+      'check_in_streak': checkInStreak,
+      'last_check_in_date': lastCheckInDate?.toIso8601String(),
+      'total_claim_days': totalClaimDays,
     };
   }
 
@@ -92,6 +117,12 @@ class UserModel {
       createdAt: DateTime.parse(map['created_at'] as String),
       isGuest: map['is_guest'] as bool? ?? false,
       referredBy: map['referred_by'] as String?,
+      hasRated: map['has_rated'] as bool? ?? false,
+      checkInStreak: (map['check_in_streak'] as int?) ?? 0,
+      lastCheckInDate: map['last_check_in_date'] != null
+          ? DateTime.parse(map['last_check_in_date'] as String)
+          : null,
+      totalClaimDays: (map['total_claim_days'] as int?) ?? 0,
     );
   }
 
@@ -107,6 +138,11 @@ class UserModel {
     DateTime? createdAt,
     bool? isGuest,
     String? referredBy,
+    bool? hasRated,
+    int? checkInStreak,
+    DateTime? lastCheckInDate,
+    bool clearLastCheckInDate = false,
+    int? totalClaimDays,
   }) {
     return UserModel(
       userId: userId ?? this.userId,
@@ -120,6 +156,11 @@ class UserModel {
       createdAt: createdAt ?? this.createdAt,
       isGuest: isGuest ?? this.isGuest,
       referredBy: referredBy ?? this.referredBy,
+      hasRated: hasRated ?? this.hasRated,
+      checkInStreak: checkInStreak ?? this.checkInStreak,
+      lastCheckInDate:
+          clearLastCheckInDate ? null : (lastCheckInDate ?? this.lastCheckInDate),
+      totalClaimDays: totalClaimDays ?? this.totalClaimDays,
     );
   }
 }

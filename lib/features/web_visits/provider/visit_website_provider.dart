@@ -6,8 +6,8 @@ import '../../../db/app_db.dart';
 import '../../../di/injector.dart';
 import '../../../routes/app_router.dart';
 import '../../../services/coin_service.dart';
+import '../../../services/reward_ad_service.dart';
 import '../../../utils/remote_config.dart';
-import '../../../utils/reward_ad_helper.dart';
 
 class VisitWebsiteProvider extends ChangeNotifier {
   static int get lockMinutes =>
@@ -51,16 +51,13 @@ class VisitWebsiteProvider extends ChangeNotifier {
     final navCtx = rootNavKey.currentContext;
     if (navCtx == null) return false;
 
-    bool rewarded = false;
-    await RewardAdHelper.showRewardAdWithBottomSheet(
-      context: navCtx,
-      adData: RemoteConfigService.instance.websiteReward,
-      onAdCompleted: () => rewarded = true,
-      onAdCancelled: () => rewarded = false,
+    final earned = await RewardAdService.showWebsiteReward(
+      navCtx,
+      defaultCoins: rewardCoins,
     );
-    if (!rewarded) return false;
+    if (earned == null) return false;
 
-    await CoinService.addCoins(rewardCoins);
+    await CoinService.addCoins(earned);
 
     final expiry = DateTime.now()
         .add(Duration(minutes: lockMinutes))

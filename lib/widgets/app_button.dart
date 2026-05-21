@@ -47,6 +47,10 @@ class AppButton extends StatefulWidget {
     this.buttonStyle,
     this.visualDensity,
     this.wallOffset,
+    this.slideShadowColor,
+    this.slideShadowOffset,
+    this.slideShadowBlur,
+    this.slideShadowSpread,
   });
 
   final String text;
@@ -93,7 +97,31 @@ class AppButton extends StatefulWidget {
   /// from 6→0 on press. When provided, the wall stays fixed at this value.
   final double? wallOffset;
 
+  /// Optional drop "slide" shadow rendered behind the button.
+  /// When non-null, a soft BoxShadow in this colour is added to the
+  /// button decoration.
+  final Color? slideShadowColor;
+
+  /// Offset of the slide shadow relative to the button. Defaults to
+  /// Offset(0, 6) (a downward drop shadow).
+  final Offset? slideShadowOffset;
+
+  /// Blur radius for the slide shadow. Defaults to 12.
+  final double? slideShadowBlur;
+
+  /// Spread radius for the slide shadow. Defaults to 0.
+  final double? slideShadowSpread;
+
   bool get _is3D => isFillButton && !isOutlined && shadowColor != null;
+
+  BoxShadow? get slideBoxShadow => slideShadowColor == null
+      ? null
+      : BoxShadow(
+          color: slideShadowColor!,
+          offset: slideShadowOffset ?? const Offset(0, 6),
+          blurRadius: slideShadowBlur ?? 12,
+          spreadRadius: slideShadowSpread ?? 0,
+        );
 
   @override
   State<AppButton> createState() => _AppButtonState();
@@ -230,6 +258,8 @@ class _AppButtonState extends State<AppButton>
     required EdgeInsetsGeometry padding,
     required Widget inner,
   }) {
+    final slide = widget.slideBoxShadow;
+
     // ── Outlined ─────────────────────────────────────────────────────────
     if (widget.isOutlined || !widget.isFillButton) {
       return Container(
@@ -244,6 +274,7 @@ class _AppButtonState extends State<AppButton>
             width: widget.borderWidth ?? 1.3,
             color: widget.borderColor ?? const Color(0xFF686767),
           ),
+          boxShadow: [?slide],
         ),
         child: inner,
       );
@@ -278,6 +309,7 @@ class _AppButtonState extends State<AppButton>
                     offset: Offset(0, widget.wallOffset ?? wallH),
                     blurRadius: 0,
                   ),
+                  ?slide,
                 ],
               ),
               child: child,
@@ -301,6 +333,7 @@ class _AppButtonState extends State<AppButton>
             blurRadius: AppSize.r16,
             spreadRadius: AppSize.sp2,
           ),
+          ?slide,
         ],
         gradient: widget.gradient ??
             LinearGradient(

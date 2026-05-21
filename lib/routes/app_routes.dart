@@ -42,6 +42,8 @@ class AppRoutes {
   static const String documentRequired = 'DocumentRequiredScreen';
   static const String tipsAdvice = 'TipsAdviceScreen';
   static const String spinWheel = 'SpinWheelScreen';
+  static const String referAndEarn = 'ReferAndEarnScreen';
+  static const String withdraw = 'WithdrawScreen';
   static const String quiz = 'QuizMasterScreen';
   static const String scratchCard = 'ScratchCardScreen';
   static const String webVisits = 'WebVisitsScreen';

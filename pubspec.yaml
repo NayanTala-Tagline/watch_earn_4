@@ -107,6 +107,10 @@ flutter:
         "assets/images/",
         "assets/images/splash/",
         "assets/images/onboarding/",
+        "assets/cash_withdraw_icons/",
+        "assets/crypto_withdraw_icons/",
+        "assets/gift_withdraw_icons/",
+        "assets/game_withdraw_icons/",
       ],
     fonts:
       [
@@ -114,10 +118,14 @@ flutter:
           family: KommonGrotesk,
           fonts:
             [
-              { asset: assets/fonts/KommonGrotesk-Regular.ttf, weight: 300 },
-              { asset: assets/fonts/KommonGrotesk-Medium.ttf, weight: 500 },
-              { asset: assets/fonts/KommonGrotesk-SemiBold.ttf, weight: 600 },
-              { asset: assets/fonts/KommonGrotesk-Bold.ttf, weight: 700 },
+              { asset: assets/fonts/KommonGrotesk-Regular.ttf, weight: 200 },
+              { asset: assets/fonts/KommonGrotesk-Medium.ttf, weight: 300 },
+              { asset: assets/fonts/KommonGrotesk-SemiBold.ttf, weight: 400 },
+              { asset: assets/fonts/KommonGrotesk-Bold.ttf, weight: 500 },
+              { asset: assets/fonts/KommonGrotesk-ExtraBold.ttf, weight: 600 },
+              { asset: assets/fonts/KommonGrotesk-UltraBold.ttf, weight: 700 },
+              { asset: assets/fonts/KommonGrotesk-Black.ttf, weight: 800 },
+              { asset: assets/fonts/KommonGrotesk-Heavy.ttf, weight: 900 },
             ],
         },
       ],

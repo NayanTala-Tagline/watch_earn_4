@@ -12,7 +12,9 @@ import '../features/web_visits/web_visits_screen.dart';
 import '../features/game_zone/game_zone_screen.dart';
 import '../widgets/in_app_webview_page.dart';
 import 'package:ad_manager/models/ad_data.dart';
+import '../features/refer_and_earn/refer_and_earn_screen.dart';
 import '../features/spin_wheel/spin_wheel_screen.dart';
+import '../features/withdraw/withdraw_screen.dart';
 import '../features/login/login_screen.dart';
 import '../features/onboarding/onboarding1_screen.dart';
 import '../features/onboarding/onboarding2_screen.dart';
@@ -117,6 +119,18 @@ final appRouter = GoRouter(
       name: AppRoutes.spinWheel,
       pageBuilder: (context, state) =>
           MaterialPage(key: state.pageKey, child: const SpinWheelScreen()),
+    ),
+    GoRoute(
+      path: '/${AppRoutes.referAndEarn}',
+      name: AppRoutes.referAndEarn,
+      pageBuilder: (context, state) =>
+          MaterialPage(key: state.pageKey, child: const ReferAndEarnScreen()),
+    ),
+    GoRoute(
+      path: '/${AppRoutes.withdraw}',
+      name: AppRoutes.withdraw,
+      pageBuilder: (context, state) =>
+          MaterialPage(key: state.pageKey, child: const WithdrawScreen()),
     ),
     GoRoute(
       path: '/${AppRoutes.quiz}',

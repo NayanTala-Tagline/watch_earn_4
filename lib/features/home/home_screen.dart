@@ -314,7 +314,7 @@ class _BalanceCard extends StatelessWidget {
                       fontSize: AppSize.sp15,
                       color: Colors.white,
                     ),
-                    onPressed: () => context.pushNamed(AppRoutes.rewards),
+                    onPressed: () => context.pushNamed(AppRoutes.withdraw),
                   ),
                 ),
               ),
@@ -644,7 +644,7 @@ class _EarnGrid extends StatelessWidget {
         subtitle: 'Invite Friends',
         reward: '+${rc.referralRewardAmount}',
         illustration: _EarnIllustration.refer,
-        routeName: AppRoutes.rewards,
+        routeName: AppRoutes.referAndEarn,
       ),
     ];
 
@@ -688,6 +688,7 @@ class _EarnTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      behavior: HitTestBehavior.opaque,
       onTap: item.routeName != null
           ? () => context.pushNamed(item.routeName!)
           : null,

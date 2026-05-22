@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
@@ -57,7 +56,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFECEEFA),
+      backgroundColor: context.themeColors.backgroundColor,
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -71,7 +70,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
                 'Set Default Language',
                 style: context.textTheme.titleLarge?.copyWith(
                   fontSize: AppSize.sp28,
-                  color: const Color(0xFF1C2359),
+                  color: context.themeColors.navyColor,
                   height: 1.2,
                 ),
               )
@@ -88,7 +87,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
               child: Text(
                 'Selected language will use as default language for this app which you can change later if you want to.',
                 style: context.textTheme.bodyMedium?.copyWith(
-                  color: const Color(0xFF4A4E6B),
+                  color: context.themeTextColors.subtitleColor,
                   height: 1.5,
                 ),
               )
@@ -123,12 +122,12 @@ class _LanguageScreenState extends State<LanguageScreen> {
               padding: EdgeInsets.symmetric(horizontal: AppSize.w24),
               child: AppButton(
                 text: 'Get Started',
-                buttonColor: const Color(0xFF1A1AE8),
-                shadowColor: const Color(0xFF0E0F66),
-                foregroundColor: Colors.white,
-                trailingIcon: const Icon(
+                buttonColor: context.themeColors.buttonColor,
+                shadowColor: context.themeColors.buttonBorderColor,
+                foregroundColor: context.themeColors.whiteColor,
+                trailingIcon: Icon(
                   Icons.arrow_forward_rounded,
-                  color: Colors.white,
+                  color: context.themeColors.whiteColor,
                   size: 20,
                 ),
                 borderRadius: AppSize.r29,
@@ -203,11 +202,11 @@ class _LanguageTileState extends State<_LanguageTile>
   Widget build(BuildContext context) {
     final isSelected = widget.isSelected;
 
-    final surfaceColor = isSelected ? const Color(0xFF1A1AE8) : Colors.white;
+    final surfaceColor = isSelected ? context.themeColors.buttonColor : context.themeColors.whiteColor;
     final wallColor =
-        isSelected ? const Color(0xFF0E0F66) : const Color(0xFFA4ABC6);
+        isSelected ? context.themeColors.buttonBorderColor : context.themeColors.borderColor;
     final borderColor =
-        isSelected ? const Color(0xFF1A1AE8) : const Color(0xFFCDD0DE);
+        isSelected ? context.themeColors.buttonColor : context.themeColors.dragHandleColor;
     return GestureDetector(
       onTapDown: _onTapDown,
       onTapUp: _onTapUp,
@@ -253,7 +252,7 @@ class _LanguageTileState extends State<_LanguageTile>
                 duration: const Duration(milliseconds: 200),
                 style: (context.textTheme.titleSmall ?? const TextStyle()).copyWith(
                   fontSize: AppSize.sp16,
-                  color: widget.isSelected ? Colors.white : const Color(0xFF1C2359),
+                  color: widget.isSelected ? context.themeColors.whiteColor : context.themeColors.navyColor,
                 ),
                 child: Text(widget.language.name),
               ),
@@ -265,11 +264,11 @@ class _LanguageTileState extends State<_LanguageTile>
               height: AppSize.r26,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: widget.isSelected ? Colors.white : Colors.transparent,
+                color: widget.isSelected ? context.themeColors.whiteColor : Colors.transparent,
                 border: Border.all(
                   color: widget.isSelected
-                      ? Colors.white
-                      : const Color(0xFFCDD0DE),
+                      ? context.themeColors.whiteColor
+                      : context.themeColors.dragHandleColor,
                   width: 2,
                 ),
               ),
@@ -277,7 +276,7 @@ class _LanguageTileState extends State<_LanguageTile>
                   ? Icon(
                       Icons.check_rounded,
                       size: AppSize.r16,
-                      color: const Color(0xFF1A1AE8),
+                      color: context.themeColors.buttonColor,
                     )
                   : null,
             ),

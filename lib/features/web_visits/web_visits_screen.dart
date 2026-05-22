@@ -1,6 +1,5 @@
 import 'package:ad_manager/ad_manager.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -62,7 +61,6 @@ class _WebVisitsContentState extends State<_WebVisitsContent>
   bool _waitingForReturn = false;
   int? _activeItemIndex;
 
-  static const _bg = Color(0xFFECEEFA);
 
   @override
   void initState() {
@@ -226,7 +224,7 @@ class _WebVisitsContentState extends State<_WebVisitsContent>
         NavigationHelper().handleBackPress(context);
       },
       child: Scaffold(
-        backgroundColor: _bg,
+        backgroundColor: context.themeColors.backgroundColor,
         appBar: CommonAppBar(
           titleText: 'Web Visits',
           leading: _BackButton(
@@ -276,18 +274,18 @@ class _BackButton extends StatelessWidget {
         width: AppSize.r40,
         height: AppSize.r40,
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: context.themeColors.whiteColor,
           shape: BoxShape.circle,
           boxShadow: [
             BoxShadow(
-              color: const Color(0xFFA4ABC6).withValues(alpha: 0.25),
+              color: context.themeColors.borderColor.withValues(alpha: 0.25),
               blurRadius: 8,
               offset: const Offset(0, 2),
             ),
           ],
         ),
         child: Icon(Icons.arrow_back_rounded,
-            color: const Color(0xFF1C2359), size: AppSize.r20),
+            color: context.themeColors.navyColor, size: AppSize.r20),
       ),
     );
   }
@@ -315,16 +313,16 @@ class _VisitTile extends StatelessWidget {
       child: Container(
         // Outer "wall" — shows 4px at the bottom as the 3D border
         decoration: BoxDecoration(
-          color: const Color(0xFFA4ABC6),
+          color: context.themeColors.borderColor,
           borderRadius: BorderRadius.circular(AppSize.r20),
         ),
         child: Container(
           // Inner white card sits 4px above the bottom
           margin: const EdgeInsets.only(bottom: 4),
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: context.themeColors.whiteColor,
             borderRadius: BorderRadius.circular(AppSize.r20),
-            border: Border.all(color: const Color(0xFFA4ABC6), width: 1),
+            border: Border.all(color: context.themeColors.borderColor, width: 1),
           ),
           padding: EdgeInsets.symmetric(
             horizontal: AppSize.w16,
@@ -405,7 +403,7 @@ class _VisitTile extends StatelessWidget {
                 child: Icon(
                   Icons.arrow_forward_rounded,
                   size: AppSize.r18,
-                  color: const Color(0xFF1C2359),
+                  color: context.themeColors.navyColor,
                 ),
               ),
           ],
@@ -460,7 +458,7 @@ class _SheetShell extends StatelessWidget {
             height: AppSize.h4,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(AppSize.r100),
-              color: const Color(0xFFCDD2E0),
+              color: context.themeColors.dragHandleColor,
             ),
           ),
           SizedBox(height: AppSize.h20),
@@ -558,7 +556,7 @@ class _CongratsSheet extends StatelessWidget {
             style: context.textTheme.titleLarge?.copyWith(
               fontSize: AppSize.sp24,
               fontWeight: FontWeight.w800,
-              color: const Color(0xFFFFD84D),
+              color: context.themeColors.coinGoldColor,
             ),
           ),
           SizedBox(height: AppSize.h8),

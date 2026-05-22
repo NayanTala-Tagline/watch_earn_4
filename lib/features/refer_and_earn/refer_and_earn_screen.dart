@@ -8,6 +8,14 @@ import 'package:watch_earn_4/utils/app_size.dart';
 import 'package:watch_earn_4/widgets/app_button.dart';
 import 'package:watch_earn_4/widgets/common_header.dart';
 
+List<BoxShadow> _kCardShadow(BuildContext context) => [
+  BoxShadow(
+    color: context.themeColors.cardShadowColor,
+    offset: const Offset(0, 6),
+    blurRadius: 16,
+  ),
+];
+
 class ReferAndEarnScreen extends StatefulWidget {
   const ReferAndEarnScreen({super.key});
 
@@ -16,33 +24,15 @@ class ReferAndEarnScreen extends StatefulWidget {
 }
 
 class _ReferAndEarnScreenState extends State<ReferAndEarnScreen> {
-  static const primaryTxtColor = Color(0xFF0B0E2C);
-  static const secondaryTxtColor = Color(0xFF2B2F4A);
-  static const _pageBg = Color(0xFFEAEFFC);
-  static const _titleColor = Color(0xFF0E0F66);
-  static const _bodyColor = Color(0xFF6B7393);
-  static const _mutedTextColor = Color(0xFF8A8FA8);
-  static const _cardBorder = Color(0xFFEDEFF5);
-  static const _primaryBlue = Color(0xFF1A1AE8);
-  static const _primaryBlueShadow = Color(0xFF0E0F66);
-  static const _codePillBg = Color(0xFFF4F6FE);
-  static const _codePillShadow = Color(0xFF6B7393);
-  static const _pinkSurface = Color(0xFFFF1F7A);
-  static const _pinkShadow = Color(0xFF880343);
-  static const _howBgStart = Color(0xFFFFE5C8);
-  static const _howBgEnd = Color(0xFFFFD8E2);
-  static const _howIconBg = Color(0xFFFFC56C);
   static const _referralCode = '83URK8';
 
-  static const _cardShadow = [
-    BoxShadow(
-      color: Color(0x140E0F66),
-      offset: Offset(0, 6),
-      blurRadius: 16,
-    ),
-  ];
-
   final TextEditingController _promoController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _promoController.addListener(() => setState(() {}));
+  }
 
   @override
   void dispose() {
@@ -53,7 +43,7 @@ class _ReferAndEarnScreenState extends State<ReferAndEarnScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: _pageBg,
+      backgroundColor: context.themeColors.backgroundColor,
       body: Column(
         children: [
           const CommonHeader(title: 'Refer & Earn'),
@@ -68,15 +58,15 @@ class _ReferAndEarnScreenState extends State<ReferAndEarnScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  _buildIntro(),
+                  _buildIntro(context),
                   SizedBox(height: AppSize.h20),
-                  _buildReferralCard(),
+                  _buildReferralCard(context),
                   SizedBox(height: AppSize.h14),
-                  _buildPromoCard(),
+                  _buildPromoCard(context),
                   SizedBox(height: AppSize.h14),
-                  _buildHowItWorksCard(),
+                  _buildHowItWorksCard(context),
                   SizedBox(height: AppSize.h14),
-                  _buildStatsRow(),
+                  _buildStatsRow(context),
                 ],
               ),
             ),
@@ -86,65 +76,65 @@ class _ReferAndEarnScreenState extends State<ReferAndEarnScreen> {
     );
   }
 
-  Widget _buildIntro() {
-    return
-      Column(
-        children: [
+  Widget _buildIntro(BuildContext context) {
+    return Column(
+      children: [
         Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Assets.images.gifts.image(
-            width: AppSize.w105,
-            height: AppSize.w105,
-            fit: BoxFit.contain,
-          ),
-          SizedBox(width: AppSize.w12),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(width: AppSize.w170,
-                child:  Text(
-                  'Invite Friends,\nGet 1000 Coins!',
-                  style: TextStyle(
-                    fontFamily: FontFamily.kommonGrotesk,
-                    fontSize: AppSize.sp24,
-                    fontWeight: FontWeight.w900,
-                    color: primaryTxtColor,
-                    letterSpacing: 0,
-                    height: 1.15,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Assets.images.gifts.image(
+              width: AppSize.w105,
+              height: AppSize.w105,
+              fit: BoxFit.contain,
+            ),
+            SizedBox(width: AppSize.w12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: AppSize.w170,
+                    child: Text(
+                      'Invite Friends,\nGet 1000 Coins!',
+                      style: TextStyle(
+                        fontFamily: FontFamily.kommonGrotesk,
+                        fontSize: AppSize.sp24,
+                        fontWeight: FontWeight.w900,
+                        color: context.themeTextColors.darkTitleColor,
+                        letterSpacing: 0,
+                        height: 1.15,
+                      ),
+                    ),
                   ),
-                ),)
-              ],
+                ],
+              ),
             ),
+          ],
+        ),
+        SizedBox(height: AppSize.h8),
+        Text(
+          'Share your code. When they sign up or enter '
+              'it, you both get 1000 coins!',
+          style: TextStyle(
+            fontFamily: FontFamily.kommonGrotesk,
+            fontSize: AppSize.sp14,
+            fontWeight: FontWeight.w200,
+            color: context.themeColors.navyColor,
+            height: 1.35,
           ),
-        ],
-      ),
-          SizedBox(height: AppSize.h8),
-          Text(
-            'Share your code. When they sign up or enter '
-                'it, you both get 1000 coins!',
-            style: TextStyle(
-              fontFamily: FontFamily.kommonGrotesk,
-              fontSize: AppSize.sp14,
-              fontWeight: FontWeight.w200,
-              color: secondaryTxtColor,
-              height: 1.35,
-            ),
-          ),
-        ],
-      );
-
+        ),
+      ],
+    );
   }
 
-  Widget _buildReferralCard() {
+  Widget _buildReferralCard(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(AppSize.w16),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: context.themeColors.whiteColor,
         borderRadius: BorderRadius.circular(AppSize.r20),
-        border: Border.all(color: _cardBorder),
-        boxShadow: _cardShadow,
+        border: Border.all(color: context.themeColors.borderColor2),
+        boxShadow: _kCardShadow(context),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -155,30 +145,30 @@ class _ReferAndEarnScreenState extends State<ReferAndEarnScreen> {
               fontFamily: FontFamily.kommonGrotesk,
               fontSize: AppSize.sp15,
               fontWeight: FontWeight.w700,
-              color: primaryTxtColor,
+              color: context.themeTextColors.darkTitleColor,
             ),
           ),
           SizedBox(height: AppSize.h12),
           AppButton(
             text: _referralCode,
-            buttonColor: _codePillBg,
-            shadowColor: _codePillShadow,
-            slideShadowColor: Color(0x501A1AE8),        // any color
-            slideShadowOffset: const Offset(0, 10), // optional
+            buttonColor: context.themeColors.fieldBgColor,
+            shadowColor: context.themeColors.codePillShadowColor,
+            slideShadowColor: context.themeColors.buttonColor.withValues(alpha: 0.31),
+            slideShadowOffset: const Offset(0, 10),
             slideShadowBlur: 16,
-            foregroundColor: Colors.white,
+            foregroundColor: context.themeColors.whiteColor,
             wallOffset: 4,
             borderRadius: AppSize.r28,
             trailingIcon: Icon(
               Icons.copy_rounded,
               size: AppSize.sp30,
-              color: _primaryBlue,
+              color: context.themeColors.buttonColor,
             ),
             textStyle: TextStyle(
               fontFamily: FontFamily.kommonGrotesk,
               fontSize: AppSize.sp22,
               fontWeight: FontWeight.w900,
-              color: _primaryBlue,
+              color: context.themeColors.buttonColor,
               letterSpacing: 1,
             ),
             onPressed: _shareLink,
@@ -188,16 +178,16 @@ class _ReferAndEarnScreenState extends State<ReferAndEarnScreen> {
             height: AppSize.h56,
             child: AppButton(
               text: 'Share Link',
-              buttonColor: _primaryBlue,
-              shadowColor: _primaryBlueShadow,
-              foregroundColor: Colors.white,
+              buttonColor: context.themeColors.buttonColor,
+              shadowColor: context.themeColors.buttonBorderColor,
+              foregroundColor: context.themeColors.whiteColor,
               wallOffset: 4,
               borderRadius: AppSize.r28,
               trailingIcon: Assets.icons.icShareLink.svg(
                 width: 18.w,
                 height: 18.w,
-                colorFilter: const ColorFilter.mode(
-                  Colors.white,
+                colorFilter: ColorFilter.mode(
+                  context.themeColors.whiteColor,
                   BlendMode.srcIn,
                 ),
               ),
@@ -205,7 +195,7 @@ class _ReferAndEarnScreenState extends State<ReferAndEarnScreen> {
                 fontFamily: FontFamily.kommonGrotesk,
                 fontSize: AppSize.sp15,
                 fontWeight: FontWeight.w800,
-                color: Colors.white,
+                color: context.themeColors.whiteColor,
               ),
               onPressed: _shareLink,
             ),
@@ -215,14 +205,14 @@ class _ReferAndEarnScreenState extends State<ReferAndEarnScreen> {
     );
   }
 
-  Widget _buildPromoCard() {
+  Widget _buildPromoCard(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(AppSize.w16),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: context.themeColors.whiteColor,
         borderRadius: BorderRadius.circular(AppSize.r20),
-        border: Border.all(color: _cardBorder),
-        boxShadow: _cardShadow,
+        border: Border.all(color: context.themeColors.borderColor2),
+        boxShadow: _kCardShadow(context),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -233,7 +223,7 @@ class _ReferAndEarnScreenState extends State<ReferAndEarnScreen> {
               fontFamily: FontFamily.kommonGrotesk,
               fontSize: AppSize.sp13,
               fontWeight: FontWeight.w700,
-              color: primaryTxtColor,
+              color: context.themeTextColors.darkTitleColor,
             ),
           ),
           SizedBox(height: AppSize.h12),
@@ -244,9 +234,12 @@ class _ReferAndEarnScreenState extends State<ReferAndEarnScreen> {
                   height: AppSize.h50,
                   padding: EdgeInsets.symmetric(horizontal: AppSize.w16),
                   decoration: BoxDecoration(
-                    color: _codePillBg,
+                    color: context.themeColors.fieldBgColor,
                     borderRadius: BorderRadius.circular(AppSize.r28),
-                    border: Border.all(color: Color(0xFFECEEF6),width: 2)
+                    border: Border.all(
+                      color: context.themeColors.borderColor2,
+                      width: 2,
+                    ),
                   ),
                   child: Center(
                     child: TextField(
@@ -256,9 +249,9 @@ class _ReferAndEarnScreenState extends State<ReferAndEarnScreen> {
                         fontFamily: FontFamily.kommonGrotesk,
                         fontSize: AppSize.sp14,
                         fontWeight: FontWeight.w700,
-                        color: _titleColor,
+                        color: context.themeColors.buttonBorderColor,
                       ),
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         isCollapsed: true,
                         border: InputBorder.none,
                         hintText: '',
@@ -272,12 +265,13 @@ class _ReferAndEarnScreenState extends State<ReferAndEarnScreen> {
               AppButton(
                 text: 'Apply',
                 isAdjust: true,
-                buttonColor: _pinkSurface,
-                shadowColor: _pinkShadow,
-                slideShadowColor: Color(0x50FF1F7A),        // any color
-                slideShadowOffset: const Offset(0, 10), // optional
+                buttonColor: context.themeColors.buttonColor2,
+                shadowColor: context.themeColors.buttonBorderColor2,
+                slideShadowColor: context.themeColors.buttonColor2.withValues(alpha: 0.31),
+                slideShadowOffset: const Offset(0, 10),
                 slideShadowBlur: 16,
-                foregroundColor: Colors.white,
+                foregroundColor: context.themeColors.whiteColor,
+                isDisabled: _promoController.text.trim().isEmpty,
                 horizontalPad: AppSize.w22,
                 verticalPad: AppSize.h14,
                 borderRadius: AppSize.r28,
@@ -286,7 +280,7 @@ class _ReferAndEarnScreenState extends State<ReferAndEarnScreen> {
                   fontFamily: FontFamily.kommonGrotesk,
                   fontSize: AppSize.sp14,
                   fontWeight: FontWeight.w900,
-                  color: Colors.white,
+                  color: context.themeColors.whiteColor,
                 ),
                 onPressed: _applyPromo,
               ),
@@ -297,14 +291,17 @@ class _ReferAndEarnScreenState extends State<ReferAndEarnScreen> {
     );
   }
 
-  Widget _buildHowItWorksCard() {
+  Widget _buildHowItWorksCard(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(AppSize.w14),
       decoration: BoxDecoration(
-        gradient: const LinearGradient(
+        gradient: LinearGradient(
           begin: Alignment.centerLeft,
           end: Alignment.centerRight,
-          colors: [_howBgStart, _howBgEnd],
+          colors: [
+            context.themeColors.howCardBgEnd,
+            context.themeColors.howCardBgStart,
+          ],
         ),
         borderRadius: BorderRadius.circular(AppSize.r18),
       ),
@@ -314,15 +311,15 @@ class _ReferAndEarnScreenState extends State<ReferAndEarnScreen> {
             width: AppSize.w42,
             height: AppSize.w42,
             decoration: BoxDecoration(
-              color: _howIconBg,
+              color: context.themeColors.howCardIconBg,
               borderRadius: BorderRadius.circular(AppSize.r12),
             ),
             child: Center(
               child: Assets.icons.icInfo.svg(
                 width: AppSize.w22,
                 height: AppSize.w22,
-                colorFilter: const ColorFilter.mode(
-                  Colors.white,
+                colorFilter: ColorFilter.mode(
+                  context.themeColors.whiteColor,
                   BlendMode.srcIn,
                 ),
               ),
@@ -340,7 +337,7 @@ class _ReferAndEarnScreenState extends State<ReferAndEarnScreen> {
                     fontFamily: FontFamily.kommonGrotesk,
                     fontSize: AppSize.sp14,
                     fontWeight: FontWeight.w900,
-                    color: _titleColor,
+                    color: context.themeColors.buttonBorderColor,
                   ),
                 ),
                 SizedBox(height: AppSize.h2),
@@ -350,7 +347,7 @@ class _ReferAndEarnScreenState extends State<ReferAndEarnScreen> {
                     fontFamily: FontFamily.kommonGrotesk,
                     fontSize: AppSize.sp12,
                     fontWeight: FontWeight.w600,
-                    color: _mutedTextColor,
+                    color: context.themeTextColors.bodyTextColor,
                   ),
                 ),
               ],
@@ -361,7 +358,7 @@ class _ReferAndEarnScreenState extends State<ReferAndEarnScreen> {
     );
   }
 
-  Widget _buildStatsRow() {
+  Widget _buildStatsRow(BuildContext context) {
     return Row(
       children: [
         Expanded(
@@ -369,7 +366,7 @@ class _ReferAndEarnScreenState extends State<ReferAndEarnScreen> {
             icon: Icon(
               Icons.person_outline_rounded,
               size: AppSize.sp20,
-              color: _primaryBlue,
+              color: context.themeColors.buttonColor,
             ),
             label: 'Friends Invited',
             value: '0',
@@ -421,10 +418,10 @@ class _StatCard extends StatelessWidget {
         vertical: AppSize.h14,
       ),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: context.themeColors.whiteColor,
         borderRadius: BorderRadius.circular(AppSize.r18),
-        border: Border.all(color: _ReferAndEarnScreenState._cardBorder),
-        boxShadow: _ReferAndEarnScreenState._cardShadow,
+        border: Border.all(color: context.themeColors.borderColor2),
+        boxShadow: _kCardShadow(context),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -436,7 +433,7 @@ class _StatCard extends StatelessWidget {
               fontFamily: FontFamily.kommonGrotesk,
               fontSize: AppSize.sp12,
               fontWeight: FontWeight.w600,
-              color: _ReferAndEarnScreenState._mutedTextColor,
+              color: context.themeTextColors.bodyTextColor,
             ),
           ),
           SizedBox(height: AppSize.h8),
@@ -450,7 +447,7 @@ class _StatCard extends StatelessWidget {
                   fontFamily: FontFamily.kommonGrotesk,
                   fontSize: AppSize.sp18,
                   fontWeight: FontWeight.w900,
-                  color: _ReferAndEarnScreenState._titleColor,
+                  color: context.themeColors.buttonBorderColor,
                 ),
               ),
             ],

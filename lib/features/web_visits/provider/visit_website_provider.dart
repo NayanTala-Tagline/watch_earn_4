@@ -58,6 +58,7 @@ class VisitWebsiteProvider extends ChangeNotifier {
     if (earned == null) return false;
 
     await CoinService.addCoins(earned);
+    _db.recordWebVisit();
 
     final expiry = DateTime.now()
         .add(Duration(minutes: lockMinutes))
@@ -69,6 +70,7 @@ class VisitWebsiteProvider extends ChangeNotifier {
 
   /// Sets the lock only — used by InAppWebViewPage which handles ad + coins.
   Future<void> setLock(int index) async {
+    _db.recordWebVisit();
     final expiry = DateTime.now()
         .add(Duration(minutes: lockMinutes))
         .millisecondsSinceEpoch;

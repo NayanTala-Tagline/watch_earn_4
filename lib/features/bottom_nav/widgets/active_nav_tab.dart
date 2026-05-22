@@ -3,9 +3,6 @@ import 'package:flutter/material.dart';
 import '../../../extension/ext_context.dart';
 import '../../../utils/app_size.dart';
 
-const _primaryBlue = Color(0xFF1A1AE8);
-const _primaryBlueShadow = Color(0xFF0E0F66);
-
 class ActiveNavTab extends StatelessWidget {
   const ActiveNavTab({
     required this.icon,
@@ -29,12 +26,12 @@ class ActiveNavTab extends StatelessWidget {
           vertical: AppSize.h8,
         ),
         decoration: BoxDecoration(
-          color: _primaryBlue,
+          color: context.themeColors.buttonColor,
           borderRadius: BorderRadius.circular(AppSize.r20),
-          boxShadow: const [
+          boxShadow: [
             BoxShadow(
-              color: _primaryBlueShadow,
-              offset: Offset(0, 4),
+              color: context.themeColors.buttonBorderColor,
+              offset: const Offset(0, 4),
               blurRadius: 0,
             ),
           ],
@@ -42,14 +39,14 @@ class ActiveNavTab extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(icon, color: Colors.white, size: AppSize.sp22),
+            Icon(icon, color: context.themeColors.whiteColor, size: AppSize.sp22),
             SizedBox(height: AppSize.h2),
             Text(
               label,
               style: context.textTheme.titleLarge?.copyWith(
                 fontSize: AppSize.sp12,
                 fontWeight: FontWeight.w800,
-                color: Colors.white,
+                color: context.themeColors.whiteColor,
                 height: 1,
               ),
             ),

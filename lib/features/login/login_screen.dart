@@ -84,7 +84,7 @@ class _LoginBody extends StatelessWidget {
             'Start Earning\nRewards',
             style: context.textTheme.titleLarge?.copyWith(
               fontSize: AppSize.sp38,
-              color: const Color(0xFF1C2359),
+              color: context.themeColors.navyColor,
               height: 1.15,
             ),
           )
@@ -102,7 +102,7 @@ class _LoginBody extends StatelessWidget {
             'Complete tasks, play games, and earn coins that convert to real money!',
             style: context.textTheme.bodyMedium?.copyWith(
               fontSize: AppSize.sp16,
-              color: const Color(0xFF3D4778),
+              color: context.themeTextColors.subtitleColor,
               height: 1.5,
             ),
           )
@@ -135,9 +135,9 @@ class _LoginBody extends StatelessWidget {
               isLoginButton: true,
               isLoading: auth.isGoogleLoading,
               isDisabled: auth.isGuestLoading,
-              buttonColor: Colors.white,
+              buttonColor: context.themeColors.whiteColor,
               shadowColor: context.themeColors.borderColor,
-              foregroundColor: const Color(0xFF1C2359),
+              foregroundColor: context.themeColors.navyColor,
               borderRadius: AppSize.r29,
               onPressed: () => _handleGoogle(context, auth),
             ),
@@ -160,9 +160,9 @@ class _LoginBody extends StatelessWidget {
               text: 'Continue as Guest',
               isLoading: auth.isGuestLoading,
               isDisabled: auth.isGoogleLoading,
-              buttonColor: Colors.white,
+              buttonColor: context.themeColors.whiteColor,
               shadowColor: context.themeColors.borderColor,
-              foregroundColor: const Color(0xFF1C2359),
+              foregroundColor: context.themeColors.navyColor,
               borderRadius: AppSize.r29,
               onPressed: () => _handleGuest(context, auth),
             ),
@@ -188,7 +188,7 @@ class _LoginBody extends StatelessWidget {
                   textAlign: TextAlign.center,
                   style: context.textTheme.bodyMedium?.copyWith(
                     fontSize: AppSize.sp13,
-                    color: Colors.redAccent,
+                    color: context.themeColors.redColor,
                   ),
                 ),
               );
@@ -211,7 +211,7 @@ class _LoginBody extends StatelessWidget {
               text: 'By continuing, you agree to our ',
               style: context.textTheme.bodyMedium?.copyWith(
                 fontSize: AppSize.sp13,
-                color: const Color(0xFF6B7280),
+                color: context.themeTextColors.bodyTextColor,
               ),
             ),
             TextSpan(
@@ -219,16 +219,16 @@ class _LoginBody extends StatelessWidget {
               recognizer: TapGestureRecognizer()..onTap = () {},
               style: context.textTheme.bodyLarge?.copyWith(
                 fontSize: AppSize.sp13,
-                color: const Color(0xFF4A6CF7),
+                color: context.themeColors.linkColor,
                 decoration: TextDecoration.underline,
-                decorationColor: const Color(0xFF4A6CF7),
+                decorationColor: context.themeColors.linkColor,
               ),
             ),
             TextSpan(
               text: ' and ',
               style: context.textTheme.bodyMedium?.copyWith(
                 fontSize: AppSize.sp13,
-                color: const Color(0xFF6B7280),
+                color: context.themeTextColors.bodyTextColor,
               ),
             ),
             TextSpan(
@@ -236,9 +236,9 @@ class _LoginBody extends StatelessWidget {
               recognizer: TapGestureRecognizer()..onTap = () {},
               style: context.textTheme.bodyLarge?.copyWith(
                 fontSize: AppSize.sp13,
-                color: const Color(0xFF4A6CF7),
+                color: context.themeColors.linkColor,
                 decoration: TextDecoration.underline,
-                decorationColor: const Color(0xFF4A6CF7),
+                decorationColor: context.themeColors.linkColor,
               ),
             ),
           ],

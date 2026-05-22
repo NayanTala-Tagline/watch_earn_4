@@ -168,11 +168,11 @@ class _ProfileBody extends StatelessWidget {
   ) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: context.themeColors.whiteColor,
         borderRadius: BorderRadius.circular(AppSize.r20),
         boxShadow: [
           BoxShadow(
-            color: const Color(0xFF000000).withValues(alpha: 0.06),
+            color: context.themeColors.cardShadowColor,
             blurRadius: 16,
             offset: const Offset(0, 4),
           ),
@@ -183,14 +183,14 @@ class _ProfileBody extends StatelessWidget {
           _SettingsTile(
             icon: Icons.volume_up_rounded,
             label: 'Sound Effects',
-            trailing: _buildSwitch(provider.soundEffects, provider.toggleSoundEffects),
+            trailing: _buildSwitch(context, provider.soundEffects, provider.toggleSoundEffects),
             textColors: textColors,
           ),
           // _divider(),
           _SettingsTile(
             icon: Icons.vibration_rounded,
             label: 'Haptic Feedback',
-            trailing: _buildSwitch(provider.hapticFeedback, provider.toggleHapticFeedback),
+            trailing: _buildSwitch(context, provider.hapticFeedback, provider.toggleHapticFeedback),
             textColors: textColors,
           ),
           // _divider(),
@@ -198,7 +198,7 @@ class _ProfileBody extends StatelessWidget {
             icon: Icons.translate_rounded,
             label: 'Language',
             onTap: () => context.pushNamed(AppRoutes.language),
-            trailing: _buildChevron(),
+            trailing: _buildChevron(context),
             textColors: textColors,
           ),
           // _divider(),
@@ -206,7 +206,7 @@ class _ProfileBody extends StatelessWidget {
             icon: Icons.headset_mic_rounded,
             label: 'Support',
             onTap: () {},
-            trailing: _buildChevron(),
+            trailing: _buildChevron(context),
             textColors: textColors,
           ),
           // _divider(),
@@ -214,7 +214,7 @@ class _ProfileBody extends StatelessWidget {
             icon: Icons.lock_outline_rounded,
             label: 'Privacy Policy',
             onTap: () {},
-            trailing: _buildChevron(),
+            trailing: _buildChevron(context),
             textColors: textColors,
           ),
           // _divider(),
@@ -222,7 +222,7 @@ class _ProfileBody extends StatelessWidget {
             icon: Icons.description_outlined,
             label: 'Terms & Condition',
             onTap: () {},
-            trailing: _buildChevron(),
+            trailing: _buildChevron(context),
             textColors: textColors,
             isLast: true,
           ),
@@ -231,24 +231,24 @@ class _ProfileBody extends StatelessWidget {
     );
   }
 
-  Widget _buildSwitch(bool value, ValueChanged<bool> onChanged) {
+  Widget _buildSwitch(BuildContext context, bool value, ValueChanged<bool> onChanged) {
     return Transform.scale(
       scale: 0.85,
       child: Switch.adaptive(
         value: value,
         onChanged: onChanged,
-        activeThumbColor: Colors.white,
-        activeTrackColor: const Color(0xFF4CD964),
-        inactiveThumbColor: Colors.white,
-        inactiveTrackColor: const Color(0xFFB8BDD4),
+        activeThumbColor: context.themeColors.whiteColor,
+        activeTrackColor: context.themeColors.toggleActiveColor,
+        inactiveThumbColor: context.themeColors.whiteColor,
+        inactiveTrackColor: context.themeColors.toggleInactiveColor,
       ),
     );
   }
 
-  Widget _buildChevron() {
+  Widget _buildChevron(BuildContext context) {
     return Icon(
       Icons.chevron_right_rounded,
-      color: const Color(0xFF8A90B0),
+      color: context.themeTextColors.bodyTextColor,
       size: AppSize.sp22,
     );
   }
@@ -267,7 +267,7 @@ class _ProfileBody extends StatelessWidget {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
-        backgroundColor: Colors.white,
+        backgroundColor: ctx.themeColors.whiteColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(AppSize.r16),
         ),
@@ -335,7 +335,7 @@ class _Avatar extends StatelessWidget {
         ),
         boxShadow: [
           BoxShadow(
-            color: const Color(0xFF1A1AE8).withValues(alpha: 0.28),
+            color: context.themeColors.buttonColor.withValues(alpha: 0.28),
             blurRadius: 20,
             offset: const Offset(0, 8),
           ),
@@ -347,7 +347,7 @@ class _Avatar extends StatelessWidget {
         textAlign: TextAlign.center,
         style: context.textTheme.titleMedium?.copyWith(
           fontSize: AppSize.sp40,
-          color: Colors.white
+          color: context.themeColors.whiteColor,
         )
       ),
     );
@@ -372,22 +372,22 @@ class _LevelBadge extends StatelessWidget {
         vertical: AppSize.h8,
       ),
       decoration: BoxDecoration(
-        color: const Color(0xFFFFF1D6),
+        color: context.themeColors.coinSurfaceColor,
         borderRadius: BorderRadius.circular(AppSize.r20),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Icon(
+          Icon(
             Icons.star_rounded,
-            color: Color(0xffC97A00),
+            color: context.themeColors.coinAmberColor,
             size: 16,
           ),
           SizedBox(width: AppSize.w6),
           Text(
             'Lv. ${level.toInt()} · $levelName',
             style: context.textTheme.titleMedium?.copyWith(
-              color: const Color(0xffC97A00),
+              color: context.themeColors.coinAmberColor,
               fontSize: AppSize.sp12,
             ),
           ),
@@ -422,11 +422,11 @@ class _LevelProgressCard extends StatelessWidget {
       width: double.infinity,
       padding: EdgeInsets.all(AppSize.h16),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: context.themeColors.whiteColor,
         borderRadius: BorderRadius.circular(AppSize.r20),
         boxShadow: [
           BoxShadow(
-            color: const Color(0xFF000000).withValues(alpha: 0.06),
+            color: context.themeColors.cardShadowColor,
             blurRadius: 16,
             offset: const Offset(0, 4),
           ),
@@ -463,7 +463,7 @@ class _LevelProgressCard extends StatelessWidget {
             child: LinearProgressIndicator(
               value: progress.clamp(0.0, 1.0),
               minHeight: AppSize.h8,
-              backgroundColor: const Color(0xFFECEEF6),
+              backgroundColor: context.themeColors.borderColor2,
               valueColor: AlwaysStoppedAnimation<Color>(colors.buttonColor),
             ),
           ),
@@ -532,7 +532,7 @@ class _SettingsTile extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: AppSize.w20),
           child: Row(
             children: [
-              Icon(icon, color: const Color(0xFF8A90B0), size: AppSize.sp22),
+              Icon(icon, color: context.themeTextColors.bodyTextColor, size: AppSize.sp22),
               SizedBox(width: AppSize.w14),
               Expanded(
                 child: Text(

@@ -136,7 +136,7 @@ class _SpinWheelScreenState extends State<SpinWheelScreen>
         NavigationHelper().handleBackPress(context);
       },
       child: Scaffold(
-        backgroundColor: const Color(0xFFECEEFA),
+        backgroundColor: context.themeColors.backgroundColor,
         body: SafeArea(
           child: Column(
             children: [
@@ -185,11 +185,11 @@ class _AppBar extends StatelessWidget {
                 width: AppSize.r40,
                 height: AppSize.r40,
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: context.themeColors.whiteColor,
                   shape: BoxShape.circle,
                   boxShadow: [
                     BoxShadow(
-                      color: const Color(0xFFA4ABC6).withValues(alpha: 0.25),
+                      color: context.themeColors.borderColor.withValues(alpha: 0.25),
                       blurRadius: 8,
                       offset: const Offset(0, 2),
                     ),
@@ -197,7 +197,7 @@ class _AppBar extends StatelessWidget {
                 ),
                 child: Icon(
                   Icons.arrow_back_rounded,
-                  color: const Color(0xFF1C2359),
+                  color: context.themeColors.navyColor,
                   size: AppSize.r20,
                 ),
               ),
@@ -207,7 +207,7 @@ class _AppBar extends StatelessWidget {
             'Spin & Win',
             style: context.textTheme.titleLarge?.copyWith(
               fontSize: AppSize.sp18,
-              color: const Color(0xFF1C2359),
+              color: context.themeColors.navyColor,
             ),
           ),
         ],
@@ -254,7 +254,7 @@ class _WelcomeBody extends StatelessWidget {
             style: context.textTheme.titleLarge?.copyWith(
               fontSize: AppSize.sp28,
               fontWeight: FontWeight.w800,
-              color: const Color(0xFF1C2359),
+              color: context.themeColors.navyColor,
               height: 1.2,
             ),
           )
@@ -299,9 +299,9 @@ class _WelcomeBody extends StatelessWidget {
             text: 'Get Started',
             buttonColor: context.themeColors.buttonColor2,
             shadowColor: context.themeColors.buttonBorderColor2,
-            foregroundColor: Colors.white,
+            foregroundColor: context.themeColors.whiteColor,
             borderRadius: AppSize.r29,
-            trailingIcon: const Icon(Icons.arrow_forward_rounded, color: Colors.white, size: 20),
+            trailingIcon: Icon(Icons.arrow_forward_rounded, color: context.themeColors.whiteColor, size: 20),
             onPressed: onGetStarted,
           )
               .animate()
@@ -361,7 +361,7 @@ class _SpinBody extends StatelessWidget {
             style: context.textTheme.titleLarge?.copyWith(
               fontSize: AppSize.sp22,
               fontWeight: FontWeight.w800,
-              color: const Color(0xFF1C2359),
+              color: context.themeColors.navyColor,
               height: 1.3,
             ),
           ),
@@ -382,13 +382,12 @@ class _SpinBody extends StatelessWidget {
 
           SizedBox(height: AppSize.h20),
 
-          // Spin / Spinning button — stays pink while spinning (guard is in _onSpin)
           AppButton(
             text: isSpinning ? 'Spinning...' : 'Spin Now',
             buttonColor: context.themeColors.buttonColor2,
-            shadowColor: spinsRemaining <= 0 ? null : context.themeColors.buttonBorderColor2,
-            foregroundColor: Colors.white,
-            isDisabled: spinsRemaining <= 0,
+            shadowColor: context.themeColors.buttonBorderColor2,
+            foregroundColor: context.themeColors.whiteColor,
+            isDisabled: isSpinning || spinsRemaining <= 0,
             borderRadius: AppSize.r29,
             onPressed: onSpin,
           ),
@@ -444,9 +443,9 @@ class _WheelComposite extends StatelessWidget {
                 Container(
                   width: size * 0.87,
                   height: size * 0.87,
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: Color(0xFF1C2359),
+                    color: context.themeColors.navyColor,
                   ),
                 ),
 
@@ -454,9 +453,9 @@ class _WheelComposite extends StatelessWidget {
                 Container(
                   width: size * 0.79,
                   height: size * 0.79,
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: Colors.white,
+                    color: context.themeColors.whiteColor,
                   ),
                 ),
 
@@ -497,12 +496,12 @@ class _SpinsLeftBadge extends StatelessWidget {
         color: const Color(0xFFFFE0E8),
         borderRadius: BorderRadius.circular(AppSize.r100),
         border: Border.all(
-          color: const Color(0xFFE0006E).withValues(alpha: 0.35),
+          color: context.themeColors.buttonColor2.withValues(alpha: 0.35),
           width: 1.5,
         ),
-        boxShadow: const [
+        boxShadow: [
           BoxShadow(
-            color: Color(0xFFE0006E),
+            color: context.themeColors.buttonColor2,
             blurRadius: 0,
             offset: Offset(0, 4),
           ),
@@ -516,7 +515,7 @@ class _SpinsLeftBadge extends StatelessWidget {
           Text(
             '$count Spins Left Today',
             style: context.textTheme.titleMedium?.copyWith(
-              color: const Color(0xFFE0006E),
+              color: context.themeColors.buttonColor2,
             ),
           ),
         ],
@@ -536,13 +535,13 @@ class _CoinBadge extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: AppSize.w14, vertical: AppSize.h8),
       decoration: BoxDecoration(
-        color: const Color(0xFFFFF1D6),
+        color: context.themeColors.coinSurfaceColor,
         borderRadius: BorderRadius.circular(AppSize.r100),
-        boxShadow: const [
+        boxShadow: [
           BoxShadow(
-            color: Color(0xFFC97A00),
+            color: context.themeColors.coinAmberColor,
             blurRadius: 0,
-            offset: Offset(0, 4),
+            offset: const Offset(0, 4),
           ),
         ],
       ),
@@ -555,7 +554,7 @@ class _CoinBadge extends StatelessWidget {
             '$amount',
             style: context.textTheme.titleMedium?.copyWith(
               fontSize: AppSize.sp15,
-              color: const Color(0xFF7A4800),
+              color: context.themeColors.coinTextColor,
             ),
           ),
         ],
@@ -577,13 +576,13 @@ class _InfoCard extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: AppSize.w16, vertical: AppSize.h14),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: context.themeColors.whiteColor,
         borderRadius: BorderRadius.circular(AppSize.r16),
-        boxShadow: const [
+        boxShadow: [
           BoxShadow(
-            color: Color(0xFFA4ABC6),
+            color: context.themeColors.borderColor,
             blurRadius: 0,
-            offset: Offset(0, 5),
+            offset: const Offset(0, 5),
           ),
         ],
       ),
@@ -594,7 +593,7 @@ class _InfoCard extends StatelessWidget {
             label,
             style: context.textTheme.bodyMedium?.copyWith(
               fontSize: AppSize.sp12,
-              color: const Color(0xFF7B8099),
+              color: context.themeTextColors.bodyTextColor,
             ),
           ),
           SizedBox(height: AppSize.h4),
@@ -603,7 +602,7 @@ class _InfoCard extends StatelessWidget {
             style: context.textTheme.titleLarge?.copyWith(
               fontSize: AppSize.sp20,
               fontWeight: FontWeight.w800,
-              color: const Color(0xFF1C2359),
+              color: context.themeColors.navyColor,
             ),
           ),
         ],
@@ -680,7 +679,7 @@ class _ResultSheet extends StatelessWidget {
               Container(
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: context.themeColors.whiteColor,
                   borderRadius: BorderRadius.circular(AppSize.r28),
                 ),
                 padding: EdgeInsets.fromLTRB(
@@ -697,7 +696,7 @@ class _ResultSheet extends StatelessWidget {
                     width: AppSize.w40,
                     height: AppSize.h4,
                     decoration: BoxDecoration(
-                      color: const Color(0xFFDDE2F0),
+                      color: context.themeColors.borderColor2,
                       borderRadius: BorderRadius.circular(AppSize.r100),
                     ),
                   ),
@@ -711,7 +710,7 @@ class _ResultSheet extends StatelessWidget {
                     style: context.textTheme.titleLarge?.copyWith(
                       fontSize: AppSize.sp26,
                       fontWeight: FontWeight.w800,
-                      color: const Color(0xFF1C2359),
+                      color: context.themeColors.navyColor,
                     ),
                   ),
 
@@ -723,7 +722,7 @@ class _ResultSheet extends StatelessWidget {
                     textAlign: TextAlign.center,
                     style: context.textTheme.bodyLarge?.copyWith(
                       fontSize: AppSize.sp16,
-                      color: const Color(0xFF4A4E6B),
+                      color: context.themeTextColors.subtitleColor,
                     ),
                   ),
 
@@ -732,9 +731,9 @@ class _ResultSheet extends StatelessWidget {
                   // Claim / Try Again button
                   AppButton(
                     text: isLoss ? 'Try Again' : 'Claim Now',
-                    buttonColor: const Color(0xFF1A1AE8),
-                    shadowColor: const Color(0xFF0E0F66),
-                    foregroundColor: Colors.white,
+                    buttonColor: context.themeColors.buttonColor,
+                    shadowColor: context.themeColors.buttonBorderColor,
+                    foregroundColor: context.themeColors.whiteColor,
                     borderRadius: AppSize.r29,
                     onPressed: onClaim,
                   ),
@@ -750,11 +749,11 @@ class _ResultSheet extends StatelessWidget {
                 height: _trophyD.r,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: const Color(0xFFEEF1FF),
-                  border: Border.all(color: Colors.white, width: 3),
+                  color: context.themeColors.xpBadgeColor,
+                  border: Border.all(color: context.themeColors.whiteColor, width: 3),
                   boxShadow: [
                     BoxShadow(
-                      color: const Color(0xFF1A1AE8).withValues(alpha: 0.15),
+                      color: context.themeColors.buttonColor.withValues(alpha: 0.15),
                       blurRadius: 20,
                       offset: const Offset(0, 6),
                     ),

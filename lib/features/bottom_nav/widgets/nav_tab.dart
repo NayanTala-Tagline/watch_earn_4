@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import '../../../extension/ext_context.dart';
 import '../../../utils/app_size.dart';
 
-const _bodyColor = Color(0xFF8A8FA8);
-
 class NavTab extends StatelessWidget {
   const NavTab({
     required this.icon,
@@ -30,13 +28,13 @@ class NavTab extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(icon, color: _bodyColor, size: AppSize.sp22),
+            Icon(icon, color: context.themeTextColors.bodyTextColor, size: AppSize.sp22),
             SizedBox(height: AppSize.h4),
             Text(
               label,
               style: context.textTheme.titleSmall?.copyWith(
                 fontSize: AppSize.sp12,
-                color: _bodyColor,
+                color: context.themeTextColors.bodyTextColor,
                 height: 1,
               ),
             ),

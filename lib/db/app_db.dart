@@ -146,7 +146,7 @@ class AppDB {
     return (maxPerDay - spinCountToday).clamp(0, maxPerDay);
   }
 
-  /// Records one spin used.
+  /// Records one spin used (daily quota + lifetime total).
   void recordSpin() {
     final today = _todayStr();
     if (lastSpinDate != today) {
@@ -154,6 +154,7 @@ class AppDB {
       lastSpinDate = today;
     }
     spinCountToday = spinCountToday + 1;
+    totalSpinCount = totalSpinCount + 1;
   }
 
   static String _todayStr() {
@@ -168,4 +169,25 @@ class AppDB {
 
   bool get hapticFeedback => getValue('hapticFeedback', defaultValue: true);
   set hapticFeedback(bool value) => setValue('hapticFeedback', value);
+
+  // ── Achievement tracking ───────────────────────────────────────────────────
+
+  /// Lifetime quiz completions (incremented once per successful reward claim).
+  int get totalQuizCount => getValue('totalQuizCount', defaultValue: 0);
+  set totalQuizCount(int value) => setValue('totalQuizCount', value);
+  void recordQuizCompletion() => setValue('totalQuizCount', totalQuizCount + 1);
+
+  /// Lifetime spin-wheel spins (also bumped inside [recordSpin]).
+  int get totalSpinCount => getValue('totalSpinCount', defaultValue: 0);
+  set totalSpinCount(int value) => setValue('totalSpinCount', value);
+
+  /// Lifetime scratch-card completions.
+  int get totalScratchCount => getValue('totalScratchCount', defaultValue: 0);
+  set totalScratchCount(int value) => setValue('totalScratchCount', value);
+  void recordScratchCard() => setValue('totalScratchCount', totalScratchCount + 1);
+
+  /// Lifetime successful web-visit completions.
+  int get totalWebVisitCount => getValue('totalWebVisitCount', defaultValue: 0);
+  set totalWebVisitCount(int value) => setValue('totalWebVisitCount', value);
+  void recordWebVisit() => setValue('totalWebVisitCount', totalWebVisitCount + 1);
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:watch_earn_4/extension/ext_context.dart';
 import 'package:watch_earn_4/extension/ext_string_alert.dart';
 import 'package:watch_earn_4/features/withdraw/model/withdraw_models.dart';
 import 'package:watch_earn_4/features/withdraw/provider/withdraw_provider.dart';
@@ -11,14 +12,6 @@ class WithdrawBottomSheet extends StatelessWidget {
   const WithdrawBottomSheet({super.key, required this.item});
 
   final WithdrawItem item;
-
-  static const _pageBg = Color(0xFFEAEFFC);
-  static const _titleColor = Color(0xFF0E0F66);
-  static const _bodyColor = Color(0xFF8A8FA8);
-  static const _cardBorder = Color(0xFFEDEFF5);
-  static const _primaryBlue = Color(0xFF1A1AE8);
-  static const _fieldBg = Color(0xFFF6F7FB);
-  static const _errorColor = Color(0xFFE53935);
 
   @override
   Widget build(BuildContext context) {
@@ -33,9 +26,9 @@ class WithdrawBottomSheet extends StatelessWidget {
             constraints: BoxConstraints(
               maxHeight: MediaQuery.of(context).size.height * 0.90,
             ),
-            decoration: const BoxDecoration(
-              color: _pageBg,
-              borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+            decoration: BoxDecoration(
+              color: context.themeColors.backgroundColor,
+              borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
             ),
             padding: EdgeInsets.fromLTRB(
               AppSize.w20,
@@ -56,7 +49,7 @@ class WithdrawBottomSheet extends StatelessWidget {
                         width: AppSize.w40,
                         height: AppSize.h4,
                         decoration: BoxDecoration(
-                          color: _cardBorder,
+                          color: context.themeColors.borderColor2,
                           borderRadius: BorderRadius.circular(AppSize.r4),
                         ),
                       ),
@@ -80,11 +73,12 @@ class WithdrawBottomSheet extends StatelessWidget {
                         fontFamily: FontFamily.kommonGrotesk,
                         fontSize: AppSize.sp20,
                         fontWeight: FontWeight.w900,
-                        color: _titleColor,
+                        color: context.themeColors.buttonBorderColor,
                       ),
                     ),
                     SizedBox(height: AppSize.h20),
                     _buildField(
+                      context: context,
                       controller: provider.btcWalletAddressController,
                       label: item.formData.title,
                       prefixIcon: item.formData.icon,
@@ -100,6 +94,7 @@ class WithdrawBottomSheet extends StatelessWidget {
                     ),
                     SizedBox(height: AppSize.h14),
                     _buildField(
+                      context: context,
                       controller: provider.amountController,
                       label: 'Amount (Coins)',
                       prefixIcon: Icon(
@@ -136,10 +131,10 @@ class WithdrawBottomSheet extends StatelessWidget {
                           horizontal: AppSize.w12,
                         ),
                         decoration: BoxDecoration(
-                          color: _errorColor.withValues(alpha: 0.06),
+                          color: context.themeColors.redColor.withValues(alpha: 0.06),
                           borderRadius: BorderRadius.circular(AppSize.r10),
                           border: Border.all(
-                            color: _errorColor.withValues(alpha: 0.4),
+                            color: context.themeColors.redColor.withValues(alpha: 0.4),
                             width: 0.6,
                           ),
                         ),
@@ -149,16 +144,20 @@ class WithdrawBottomSheet extends StatelessWidget {
                             fontFamily: FontFamily.kommonGrotesk,
                             fontSize: AppSize.sp13,
                             fontWeight: FontWeight.w600,
-                            color: _errorColor,
+                            color: context.themeColors.redColor,
                           ),
                         ),
                       ),
                     ],
                     SizedBox(height: AppSize.h14),
                     _buildField(
+                      context: context,
                       controller: provider.noteController,
                       label: 'Additional note (optional)',
-                      prefixIcon: const Icon(Icons.note, color: _bodyColor),
+                      prefixIcon: Icon(
+                        Icons.note,
+                        color: context.themeTextColors.bodyTextColor,
+                      ),
                     ),
                     SizedBox(height: AppSize.h24),
                     SizedBox(
@@ -197,7 +196,7 @@ class WithdrawBottomSheet extends StatelessWidget {
                                 width: AppSize.w20,
                                 child: CircularProgressIndicator(
                                   strokeWidth: 2,
-                                  color: _confirmTextColor(item.color),
+                                  color: _confirmTextColor(context, item.color),
                                 ),
                               )
                             : Text(
@@ -206,7 +205,7 @@ class WithdrawBottomSheet extends StatelessWidget {
                                   fontFamily: FontFamily.kommonGrotesk,
                                   fontSize: AppSize.sp16,
                                   fontWeight: FontWeight.w900,
-                                  color: _confirmTextColor(item.color),
+                                  color: _confirmTextColor(context, item.color),
                                 ),
                               ),
                       ),
@@ -221,13 +220,14 @@ class WithdrawBottomSheet extends StatelessWidget {
     );
   }
 
-  Color _confirmTextColor(Color bg) {
-    // Use black text on near-white brand colors so it stays readable
-    // (mirrors daily_cash's isWhite check).
-    return bg.toARGB32() == 0xFFFFFFFF ? Colors.black : Colors.white;
+  Color _confirmTextColor(BuildContext context, Color bg) {
+    return bg.toARGB32() == 0xFFFFFFFF
+        ? context.themeTextColors.textColor
+        : context.themeColors.whiteColor;
   }
 
   Widget _buildField({
+    required BuildContext context,
     required TextEditingController controller,
     required String label,
     required Widget prefixIcon,
@@ -244,12 +244,12 @@ class WithdrawBottomSheet extends StatelessWidget {
       onChanged: onChanged,
       validator: validator,
       autovalidateMode: AutovalidateMode.onUserInteraction,
-      cursorColor: _primaryBlue,
+      cursorColor: context.themeColors.buttonColor,
       style: TextStyle(
         fontFamily: FontFamily.kommonGrotesk,
         fontSize: AppSize.sp15,
         fontWeight: FontWeight.w700,
-        color: _titleColor,
+        color: context.themeColors.buttonBorderColor,
       ),
       decoration: InputDecoration(
         labelText: label,
@@ -257,13 +257,13 @@ class WithdrawBottomSheet extends StatelessWidget {
           fontFamily: FontFamily.kommonGrotesk,
           fontSize: AppSize.sp14,
           fontWeight: FontWeight.w600,
-          color: _bodyColor,
+          color: context.themeTextColors.bodyTextColor,
         ),
         floatingLabelStyle: TextStyle(
           fontFamily: FontFamily.kommonGrotesk,
           fontSize: AppSize.sp14,
           fontWeight: FontWeight.w800,
-          color: _primaryBlue,
+          color: context.themeColors.buttonColor,
         ),
         prefixIcon: Padding(
           padding: EdgeInsets.symmetric(horizontal: AppSize.w12),
@@ -275,31 +275,31 @@ class WithdrawBottomSheet extends StatelessWidget {
           fontFamily: FontFamily.kommonGrotesk,
           fontSize: AppSize.sp13,
           fontWeight: FontWeight.w700,
-          color: _bodyColor,
+          color: context.themeTextColors.bodyTextColor,
         ),
         filled: true,
-        fillColor: _fieldBg,
+        fillColor: context.themeColors.fieldBgColor,
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppSize.r14),
-          borderSide: const BorderSide(color: _cardBorder),
+          borderSide: BorderSide(color: context.themeColors.borderColor2),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppSize.r14),
-          borderSide: const BorderSide(color: _primaryBlue, width: 1.4),
+          borderSide: BorderSide(color: context.themeColors.buttonColor, width: 1.4),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppSize.r14),
-          borderSide: const BorderSide(color: _errorColor, width: 1.2),
+          borderSide: BorderSide(color: context.themeColors.redColor, width: 1.2),
         ),
         focusedErrorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppSize.r14),
-          borderSide: const BorderSide(color: _errorColor, width: 1.6),
+          borderSide: BorderSide(color: context.themeColors.redColor, width: 1.6),
         ),
         errorStyle: TextStyle(
           fontFamily: FontFamily.kommonGrotesk,
           fontSize: AppSize.sp12,
           fontWeight: FontWeight.w700,
-          color: _errorColor,
+          color: context.themeColors.redColor,
         ),
       ),
     );

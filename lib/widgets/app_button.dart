@@ -272,7 +272,7 @@ class _AppButtonState extends State<AppButton>
           borderRadius: BorderRadius.circular(radius),
           border: Border.all(
             width: widget.borderWidth ?? 1.3,
-            color: widget.borderColor ?? const Color(0xFF686767),
+            color: widget.borderColor ?? context.themeColors.borderColor,
           ),
           boxShadow: [?slide],
         ),
@@ -280,14 +280,23 @@ class _AppButtonState extends State<AppButton>
       );
     }
 
-    // ── 3-D filled — also used for any disabled fill button ───────────────
+    // ── 3-D filled ────────────────────────────────────────────────────────
     if (widget._is3D || widget.isDisabled) {
-      return AnimatedBuilder(
+      final baseWall = widget.wallOffset ?? 6.0;
+
+      // When disabled, the shadow wall is slightly faded because it sits
+      // outside the ClipRRect overlay and would otherwise look too prominent
+      // against the lighter-looking (overlaid) button surface.
+      final shadowC = widget.isDisabled
+          ? (widget.shadowColor ?? Colors.transparent).withValues(alpha: 0.5)
+          : (widget.shadowColor ?? Colors.transparent);
+
+      final button = AnimatedBuilder(
         animation: _pressAnim,
         builder: (_, child) {
           final p = _pressAnim.value;
-          final wallH = (1 - p) * 6.0;
-          final shiftY = p * 5.0;
+          final wallH = (1 - p) * baseWall;
+          final shiftY = p * baseWall;
 
           return Transform.translate(
             offset: Offset(0, shiftY),
@@ -297,16 +306,12 @@ class _AppButtonState extends State<AppButton>
               padding: padding,
               alignment: Alignment.center,
               decoration: BoxDecoration(
-                color: widget.isDisabled
-                    ? const Color(0xFFCDD0DE)
-                    : widget.buttonColor,
+                color: widget.buttonColor,
                 borderRadius: BorderRadius.circular(radius),
                 boxShadow: [
                   BoxShadow(
-                    color: widget.isDisabled
-                        ? const Color(0xFFA4ABC6)
-                        : (widget.shadowColor ?? Colors.transparent),
-                    offset: Offset(0, widget.wallOffset ?? wallH),
+                    color: shadowC,
+                    offset: Offset(0, wallH),
                     blurRadius: 0,
                   ),
                   ?slide,
@@ -318,6 +323,27 @@ class _AppButtonState extends State<AppButton>
         },
         child: inner,
       );
+
+      // Disabled: stack a semi-transparent white overlay on the full-colour
+      // button. White on white text keeps text readable; surface becomes
+      // visually lighter — matches the Figma 50 % opacity treatment.
+      if (widget.isDisabled) {
+        return ClipRRect(
+          borderRadius: BorderRadius.circular(radius),
+          child: Stack(
+            children: [
+              button,
+              Positioned.fill(
+                child: Container(
+                  color: context.themeColors.whiteColor.withValues(alpha: 0.45),
+                ),
+              ),
+            ],
+          ),
+        );
+      }
+
+      return button;
     }
 
     // ── Flat gradient filled (default) ─────────────────────────────────────
@@ -329,7 +355,7 @@ class _AppButtonState extends State<AppButton>
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(
-            color: const Color(0xffF9D2C5),
+            color: context.themeColors.secondary2,
             blurRadius: AppSize.r16,
             spreadRadius: AppSize.sp2,
           ),
@@ -376,9 +402,10 @@ class _AppButtonState extends State<AppButton>
   }
 
   Widget _content(BuildContext context) {
-    final textColor = widget.isDisabled
-        ? context.themeTextColors.descriptionColor
-        : (widget.foregroundColor ?? context.themeTextColors.textColor);
+    // Text colour is never faded directly — the white overlay in _shell
+    // provides the disabled appearance without changing the text colour.
+    final textColor =
+        widget.foregroundColor ?? context.themeTextColors.textColor;
 
     final label = Text(
       widget.text,
@@ -386,11 +413,10 @@ class _AppButtonState extends State<AppButton>
       overflow: TextOverflow.ellipsis,
       style:
           widget.textStyle ??
-          context.textTheme.titleSmall?.copyWith(
+          context.textTheme.titleLarge?.copyWith(
             color: widget.isOutlined
                 ? context.themeTextColors.descriptionColor
                 : textColor,
-            fontSize: AppSize.sp17,
           ),
     );
 

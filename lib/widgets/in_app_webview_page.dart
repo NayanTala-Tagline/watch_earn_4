@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
+import '../extension/ext_context.dart';
 import '../routes/app_router.dart';
 import '../services/coin_service.dart';
 import '../utils/app_size.dart';
@@ -137,11 +138,11 @@ class _TimerBadge extends StatelessWidget {
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
-            const Color(0xFF0E3E4F),
-            const Color(0xFF0E3E4F).withValues(alpha: 0.5),
+            context.themeColors.webviewNavColor,
+            context.themeColors.webviewNavColor.withValues(alpha: 0.5),
           ],
         ),
-        border: Border.all(color: const Color(0xFF0E3E4F)),
+        border: Border.all(color: context.themeColors.webviewNavColor),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -152,7 +153,7 @@ class _TimerBadge extends StatelessWidget {
             style: TextStyle(
               fontSize: AppSize.sp14,
               fontWeight: FontWeight.w700,
-              color: Colors.white,
+              color: context.themeColors.whiteColor,
             ),
           ),
           SizedBox(
@@ -160,7 +161,7 @@ class _TimerBadge extends StatelessWidget {
             width: AppSize.sp18,
             child: CircularProgressIndicator(
               strokeWidth: 2.5,
-              color: Colors.white,
+              color: context.themeColors.whiteColor,
             ),
           ),
         ],
@@ -194,14 +195,14 @@ class _ClaimButton extends StatelessWidget {
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               colors: [
-                const Color(0xFF0E3E4F),
-                const Color(0xFF0E3E4F).withValues(alpha: 0.5),
+                context.themeColors.webviewNavColor,
+                context.themeColors.webviewNavColor.withValues(alpha: 0.5),
               ],
             ),
-            border: Border.all(color: const Color(0xFF0E3E4F)),
+            border: Border.all(color: context.themeColors.webviewNavColor),
             boxShadow: [
               BoxShadow(
-                color: const Color(0xFF0E3E4F).withValues(alpha: 0.4),
+                color: context.themeColors.webviewNavColor.withValues(alpha: 0.4),
                 blurRadius: AppSize.r20,
                 offset: Offset(0, AppSize.h6),
               ),
@@ -213,7 +214,7 @@ class _ClaimButton extends StatelessWidget {
             style: TextStyle(
               fontSize: AppSize.sp16,
               fontWeight: FontWeight.w700,
-              color: Colors.white,
+              color: context.themeColors.whiteColor,
             ),
           ),
         ),

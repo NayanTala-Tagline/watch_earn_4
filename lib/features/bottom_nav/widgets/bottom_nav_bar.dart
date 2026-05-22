@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../extension/ext_context.dart';
 import '../../../utils/app_size.dart';
 import 'active_nav_tab.dart';
 import 'nav_tab.dart';
@@ -42,11 +43,11 @@ class BottomNavBar extends StatelessWidget {
           vertical: AppSize.h10,
         ),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: context.themeColors.whiteColor,
           borderRadius: BorderRadius.circular(AppSize.r32),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withValues(alpha: 0.06),
+              color: context.themeTextColors.textColor.withValues(alpha: 0.06),
               blurRadius: 18,
               offset: const Offset(0, 6),
             ),

@@ -77,7 +77,7 @@ class LoadingOverlay {
                   builder: (context, snapshot) {
                     return LoadingIndicator(
                       progress: snapshot.data,
-                      color: Colors.white,
+                      color: context.themeColors.whiteColor,
                     );
                   },
                 ),
@@ -88,7 +88,7 @@ class LoadingOverlay {
                     return Text(
                       snapshot.hasData ? snapshot.requireData : '',
                       style: context.textTheme.bodyMedium?.copyWith(
-                        color: Colors.white,
+                        color: context.themeColors.whiteColor,
                       ),
                     );
                   },

@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../db/app_db.dart';
+import '../../di/injector.dart';
 import '../../extension/ext_context.dart';
 import '../../gen/assets.gen.dart';
 import '../../routes/app_router.dart';
@@ -325,7 +327,10 @@ class _QuizMasterScreenState extends State<QuizMasterScreen> {
               navCtx,
               defaultCoins: totalCoins,
             );
-            if (earned != null) await CoinService.addCoins(earned);
+            if (earned != null) {
+              await CoinService.addCoins(earned);
+              Injector.instance<AppDB>().recordQuizCompletion();
+            }
           }
           if (!mounted) return;
           NavigationHelper().handleBackPress(context);
@@ -349,7 +354,7 @@ class _QuizMasterScreenState extends State<QuizMasterScreen> {
         NavigationHelper().handleBackPress(context);
       },
       child: Scaffold(
-        backgroundColor: const Color(0xFFECEEFA),
+        backgroundColor: context.themeColors.backgroundColor,
         body: SafeArea(
           child: Column(
             children: [
@@ -464,11 +469,11 @@ class _QuizAppBar extends StatelessWidget {
                 width: AppSize.r40,
                 height: AppSize.r40,
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: context.themeColors.whiteColor,
                   shape: BoxShape.circle,
                   boxShadow: [
                     BoxShadow(
-                      color: const Color(0xFFA4ABC6).withValues(alpha: 0.25),
+                      color: context.themeColors.borderColor.withValues(alpha: 0.25),
                       blurRadius: 8,
                       offset: const Offset(0, 2),
                     ),
@@ -476,7 +481,7 @@ class _QuizAppBar extends StatelessWidget {
                 ),
                 child: Icon(
                   Icons.arrow_back_rounded,
-                  color: const Color(0xFF1C2359),
+                  color: context.themeColors.navyColor,
                   size: AppSize.r20,
                 ),
               ),
@@ -486,7 +491,7 @@ class _QuizAppBar extends StatelessWidget {
             'Quiz Master',
             style: context.textTheme.titleLarge?.copyWith(
               fontSize: AppSize.sp18,
-              color: const Color(0xFF1C2359),
+              color: context.themeColors.navyColor,
             ),
           ),
         ],
@@ -517,7 +522,7 @@ class _ProgressHeader extends StatelessWidget {
             Text(
               '$current of $total',
               style: context.textTheme.titleLarge?.copyWith(
-                color: const Color(0xFF1C2359),
+                color: context.themeColors.navyColor,
               ),
             ),
             const Spacer(),
@@ -526,13 +531,13 @@ class _ProgressHeader extends StatelessWidget {
               padding: EdgeInsets.symmetric(
                   horizontal: AppSize.w12, vertical: AppSize.h8),
               decoration: BoxDecoration(
-                color: const Color(0xFFFFF1D6),
+                color: context.themeColors.coinSurfaceColor,
                 borderRadius: BorderRadius.circular(AppSize.r100),
-                boxShadow: const [
+                boxShadow: [
                   BoxShadow(
-                    color: Color(0xFFC97A00),
+                    color: context.themeColors.coinAmberColor,
                     blurRadius: 0,
-                    offset: Offset(0, 4),
+                    offset: const Offset(0, 4),
                   ),
                 ],
               ),
@@ -545,7 +550,7 @@ class _ProgressHeader extends StatelessWidget {
                     '+$coinsPerCorrect per correct',
                     style: context.textTheme.titleMedium?.copyWith(
                       fontSize: AppSize.sp12,
-                      color: const Color(0xFFC97A00),
+                      color: context.themeColors.coinAmberColor,
                     ),
                   ),
                 ],
@@ -559,9 +564,9 @@ class _ProgressHeader extends StatelessWidget {
           child: LinearProgressIndicator(
             value: current / total,
             minHeight: AppSize.h7,
-            backgroundColor: const Color(0xFFDDE2F0),
+            backgroundColor: context.themeColors.dragHandleColor,
             valueColor:
-                const AlwaysStoppedAnimation<Color>(Color(0xFF1A1AE8)),
+                AlwaysStoppedAnimation<Color>(context.themeColors.buttonColor),
           ),
         ),
       ],
@@ -584,25 +589,26 @@ class _QuestionCard extends StatelessWidget {
   final int secondsLeft;
   final int totalSeconds;
 
-  Color get _timerColor {
-    if (secondsLeft <= 10) return const Color(0xFFEF4444);
-    if (secondsLeft <= 20) return const Color(0xFFFFB300);
-    return const Color(0xFF9AA0B5);
+  Color _timerColor(BuildContext context) {
+    if (secondsLeft <= 10) return context.themeColors.redColor;
+    if (secondsLeft <= 20) return context.themeColors.coinGoldColor;
+    return context.themeTextColors.mutedTextColor;
   }
 
   @override
   Widget build(BuildContext context) {
+    final timerColor = _timerColor(context);
     return Container(
       width: double.infinity,
       padding: EdgeInsets.all(AppSize.w20),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: context.themeColors.whiteColor,
         borderRadius: BorderRadius.circular(AppSize.r20),
-        boxShadow: const [
+        boxShadow: [
           BoxShadow(
-            color: Color(0x140E0F66),
+            color: context.themeColors.cardShadowColor,
             blurRadius: 16,
-            offset: Offset(0, 6),
+            offset: const Offset(0, 6),
           ),
         ],
       ),
@@ -614,7 +620,7 @@ class _QuestionCard extends StatelessWidget {
             style: context.textTheme.titleLarge?.copyWith(
               fontSize: AppSize.sp18,
               fontWeight: FontWeight.w800,
-              color: const Color(0xFF1C2359),
+              color: context.themeColors.navyColor,
               height: 1.4,
             ),
           ),
@@ -623,14 +629,14 @@ class _QuestionCard extends StatelessWidget {
             children: [
               Icon(
                 Icons.timer_outlined,
-                color: _timerColor,
+                color: timerColor,
                 size: AppSize.r18,
               ),
               SizedBox(width: AppSize.w6),
               Text(
                 timerText,
                 style: context.textTheme.bodyLarge?.copyWith(
-                  color: _timerColor,
+                  color: timerColor,
                 ),
               ),
             ],
@@ -707,59 +713,67 @@ class _QuizOptionTileState extends State<_QuizOptionTile>
 
   // ── Color helpers ─────────────────────────────────────────────────────────
 
-  Color get _surface {
-    if (widget._isCorrect) return const Color(0xFF22C55E);
-    if (widget._isWrong) return const Color(0xFFEF4444);
-    if (widget._isSelected) return const Color(0xFF1A1AE8);
-    return Colors.white;
+  Color _surface(BuildContext context) {
+    if (widget._isCorrect) return context.themeColors.successColor;
+    if (widget._isWrong) return context.themeColors.redColor;
+    if (widget._isSelected) return context.themeColors.buttonColor;
+    return context.themeColors.whiteColor;
   }
 
-  Color get _wall {
-    if (widget._isCorrect) return const Color(0xFF166534);
-    if (widget._isWrong) return const Color(0xFF991B1B);
-    if (widget._isSelected) return const Color(0xFF0E0F66);
-    return const Color(0xFFA4ABC6);
+  Color _wall(BuildContext context) {
+    if (widget._isCorrect) return context.themeColors.successShadowColor;
+    if (widget._isWrong) return context.themeColors.redColor;
+    if (widget._isSelected) return context.themeColors.buttonBorderColor;
+    return context.themeColors.borderColor;
   }
 
-  Color get _badgeColor {
-    if (widget._isCorrect) return const Color(0xFF166534);
-    if (widget._isWrong) return const Color(0xFF991B1B);
-    if (widget._isSelected) return const Color(0xFF0E0F66);
-    return const Color(0xFFDDE2F0);
+  Color _badgeColor(BuildContext context) {
+    if (widget._isCorrect) return context.themeColors.successShadowColor;
+    if (widget._isWrong) return context.themeColors.redColor;
+    if (widget._isSelected) return context.themeColors.buttonBorderColor;
+    return context.themeColors.dragHandleColor;
   }
 
-  Color get _badgeTextColor {
+  Color _badgeTextColor(BuildContext context) {
     if (widget._isSelected || widget._isCorrect || widget._isWrong) {
-      return Colors.white;
+      return context.themeColors.whiteColor;
     }
-    return const Color(0xFF4A4E6B);
+    return context.themeTextColors.subtitleColor;
   }
 
-  Color get _textColor {
+  Color _textColor(BuildContext context) {
     if (widget._isSelected || widget._isCorrect || widget._isWrong) {
-      return Colors.white;
+      return context.themeColors.whiteColor;
     }
-    return const Color(0xFF1C2359);
+    return context.themeColors.navyColor;
   }
 
-  Widget? get _radioContent {
+  Widget? _radioContent(BuildContext context) {
     if (widget._isCorrect) {
       return Icon(Icons.check_rounded, size: AppSize.r15,
-          color: const Color(0xFF22C55E));
+          color: context.themeColors.successColor);
     }
     if (widget._isWrong) {
       return Icon(Icons.close_rounded, size: AppSize.r15,
-          color: const Color(0xFFEF4444));
+          color: context.themeColors.redColor);
     }
     if (widget._isSelected) {
       return Icon(Icons.check_rounded, size: AppSize.r15,
-          color: const Color(0xFF1A1AE8));
+          color: context.themeColors.buttonColor);
     }
     return null;
   }
 
   @override
   Widget build(BuildContext context) {
+    final surfaceColor = _surface(context);
+    final wallColor = _wall(context);
+    final badgeColor = _badgeColor(context);
+    final badgeTextColor = _badgeTextColor(context);
+    final textColor = _textColor(context);
+    final radioContentWidget = _radioContent(context);
+    final whiteColor = context.themeColors.whiteColor;
+
     return GestureDetector(
       onTapDown: _onTapDown,
       onTapUp: _onTapUp,
@@ -768,7 +782,7 @@ class _QuizOptionTileState extends State<_QuizOptionTile>
         animation: _anim,
         builder: (_, child) {
           final p = widget._isAnswered ? 0.0 : _anim.value;
-          final wall = (1 - p) * _wallH;
+          final wallOffset = (1 - p) * _wallH;
           final shift = p * _wallH;
 
           return Transform.translate(
@@ -778,19 +792,19 @@ class _QuizOptionTileState extends State<_QuizOptionTile>
               height: AppSize.h56,
               padding: EdgeInsets.symmetric(horizontal: AppSize.w16),
               decoration: BoxDecoration(
-                color: _surface,
+                color: surfaceColor,
                 borderRadius: BorderRadius.circular(AppSize.r29),
                 border: Border.all(
                   color: widget._isAnswered
-                      ? _surface
-                      : const Color(0xFFCDD0DE),
+                      ? surfaceColor
+                      : context.themeColors.dragHandleColor,
                   width: 1.5,
                 ),
                 boxShadow: [
                   BoxShadow(
-                    color: _wall,
+                    color: wallColor,
                     blurRadius: 0,
-                    offset: Offset(0, wall),
+                    offset: Offset(0, wallOffset),
                   ),
                 ],
               ),
@@ -806,14 +820,14 @@ class _QuizOptionTileState extends State<_QuizOptionTile>
               width: AppSize.r32,
               height: AppSize.r32,
               decoration: BoxDecoration(
-                color: _badgeColor,
+                color: badgeColor,
                 borderRadius: BorderRadius.circular(AppSize.r8),
               ),
               child: Center(
                 child: AnimatedDefaultTextStyle(
                   duration: const Duration(milliseconds: 250),
                   style: context.textTheme.titleMedium?.copyWith(
-                        color: _badgeTextColor,
+                        color: badgeTextColor,
                       ) ??
                       const TextStyle(),
                   child: Text(_kLetters[widget.index]),
@@ -829,7 +843,7 @@ class _QuizOptionTileState extends State<_QuizOptionTile>
                 duration: const Duration(milliseconds: 250),
                 style: context.textTheme.titleSmall?.copyWith(
                       fontSize: AppSize.sp15,
-                      color: _textColor,
+                      color: textColor,
                     ) ??
                     const TextStyle(),
                 child: Text(widget.text),
@@ -844,16 +858,16 @@ class _QuizOptionTileState extends State<_QuizOptionTile>
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: (widget._isSelected || widget._isCorrect || widget._isWrong)
-                    ? Colors.white
+                    ? whiteColor
                     : Colors.transparent,
                 border: Border.all(
                   color: (widget._isSelected || widget._isCorrect || widget._isWrong)
-                      ? Colors.white
-                      : const Color(0xFFCDD0DE),
+                      ? whiteColor
+                      : context.themeColors.dragHandleColor,
                   width: 2,
                 ),
               ),
-              child: _radioContent,
+              child: radioContentWidget,
             ),
           ],
         ),
@@ -897,14 +911,14 @@ class _StreakRow extends StatelessWidget {
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: isCorrect
-                    ? const Color(0xFFFFB300)
-                    : const Color(0xFFE8EAF0),
+                    ? context.themeColors.coinGoldColor
+                    : context.themeColors.progressBgColor,
                 boxShadow: isCorrect
-                    ? const [
+                    ? [
                         BoxShadow(
-                          color: Color(0xFFC97A00),
+                          color: context.themeColors.coinAmberColor,
                           blurRadius: 0,
-                          offset: Offset(0, 3),
+                          offset: const Offset(0, 3),
                         ),
                       ]
                     : null,
@@ -913,7 +927,7 @@ class _StreakRow extends StatelessWidget {
                   ? Icon(
                       isCorrect ? Icons.check_rounded : Icons.close_rounded,
                       size: AppSize.r16,
-                      color: isCorrect ? Colors.white : const Color(0xFF9AA0B5),
+                      color: isCorrect ? context.themeColors.whiteColor : context.themeTextColors.mutedTextColor,
                     )
                   : null,
             )
@@ -934,7 +948,7 @@ class _StreakRow extends StatelessWidget {
           '$streak in a row',
           style: context.textTheme.titleSmall?.copyWith(
             fontSize: AppSize.sp13,
-            color: const Color(0xFF9AA0B5),
+            color: context.themeTextColors.mutedTextColor,
           ),
         ),
       ],
@@ -985,7 +999,7 @@ class _ResultSheet extends StatelessWidget {
               Container(
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: context.themeColors.whiteColor,
                   borderRadius: BorderRadius.circular(AppSize.r28),
                 ),
                 padding: EdgeInsets.fromLTRB(
@@ -1002,7 +1016,7 @@ class _ResultSheet extends StatelessWidget {
                       width: AppSize.w40,
                       height: AppSize.h4,
                       decoration: BoxDecoration(
-                        color: const Color(0xFFDDE2F0),
+                        color: context.themeColors.dragHandleColor,
                         borderRadius: BorderRadius.circular(AppSize.r100),
                       ),
                     ),
@@ -1016,7 +1030,7 @@ class _ResultSheet extends StatelessWidget {
                       style: context.textTheme.titleLarge?.copyWith(
                         fontSize: AppSize.sp26,
                         fontWeight: FontWeight.w800,
-                        color: const Color(0xFF1C2359),
+                        color: context.themeColors.navyColor,
                       ),
                     ),
 
@@ -1029,7 +1043,7 @@ class _ResultSheet extends StatelessWidget {
                       textAlign: TextAlign.center,
                       style: context.textTheme.bodyLarge?.copyWith(
                         fontSize: AppSize.sp16,
-                        color: const Color(0xFF4A4E6B),
+                        color: context.themeTextColors.subtitleColor,
                       ),
                     ),
 
@@ -1040,7 +1054,7 @@ class _ResultSheet extends StatelessWidget {
                         textAlign: TextAlign.center,
                         style: context.textTheme.titleSmall?.copyWith(
                           fontSize: AppSize.sp15,
-                          color: const Color(0xFFFFB300),
+                          color: context.themeColors.coinGoldColor,
                         ),
                       ),
                     ],
@@ -1049,9 +1063,9 @@ class _ResultSheet extends StatelessWidget {
 
                     AppButton(
                       text: _isLoss ? 'Try Again' : 'Claim Now',
-                      buttonColor: const Color(0xFF1A1AE8),
-                      shadowColor: const Color(0xFF0E0F66),
-                      foregroundColor: Colors.white,
+                      buttonColor: context.themeColors.buttonColor,
+                      shadowColor: context.themeColors.buttonBorderColor,
+                      foregroundColor: context.themeColors.whiteColor,
                       borderRadius: AppSize.r29,
                       onPressed: onClaim,
                     ),
@@ -1067,11 +1081,11 @@ class _ResultSheet extends StatelessWidget {
                   height: _trophyD.r,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: const Color(0xFFEEF1FF),
-                    border: Border.all(color: Colors.white, width: 3),
+                    color: context.themeColors.xpBadgeColor,
+                    border: Border.all(color: context.themeColors.whiteColor, width: 3),
                     boxShadow: [
                       BoxShadow(
-                        color: const Color(0xFF1A1AE8).withValues(alpha: 0.15),
+                        color: context.themeColors.buttonColor.withValues(alpha: 0.15),
                         blurRadius: 20,
                         offset: const Offset(0, 6),
                       ),

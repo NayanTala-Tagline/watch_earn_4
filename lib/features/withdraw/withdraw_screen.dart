@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:watch_earn_4/extension/ext_context.dart';
 import 'package:watch_earn_4/features/withdraw/model/withdraw_models.dart';
 import 'package:watch_earn_4/features/withdraw/provider/withdraw_provider.dart';
 import 'package:watch_earn_4/features/withdraw/withdraw_bottom_sheet.dart';
@@ -10,20 +11,9 @@ import 'package:watch_earn_4/widgets/app_button.dart';
 import 'package:watch_earn_4/widgets/balance_card.dart';
 import 'package:watch_earn_4/widgets/common_header.dart';
 
-class _WithdrawColors {
-  static const pageBg = Color(0xFFEAEFFC);
-  static const titleColor = Color(0xFF0E0F66);
-  static const bodyColor = Color(0xFF8A8FA8);
-  static const cardBorder = Color(0xFFEDEFF5);
-  static const primaryBlue = Color(0xFF1A1AE8);
-  static const primaryBlueShadow = Color(0xFF0E0F66);
-  static const fractionColor = Color(0xFF9AA0B5);
-  static const coinPillSurface = Color(0xFFFFF1D6);
-  static const coinPillText = Color(0xFF7A4A00);
-  static const minPillSurface = Color(0xFFE6E7FF);
-  static const minPillText = Color(0xFF0E0F66);
-  static const currencyBorder = Color(0xFFE3E6F2);
-}
+// feature-specific colours not covered by the mapping
+const _coinPillText = Color(0xFF7A4A00);
+const _currencyBorder = Color(0xFFE3E6F2);
 
 class WithdrawScreen extends StatelessWidget {
   const WithdrawScreen({super.key});
@@ -70,16 +60,16 @@ class _WithdrawViewState extends State<_WithdrawView> {
     final selectedMethodIndex = currentCategory.items.indexOf(selectedItem);
 
     return Scaffold(
-      backgroundColor: _WithdrawColors.pageBg,
+      backgroundColor: context.themeColors.backgroundColor,
       body: Column(
         children: [
           CommonHeader(
             title: 'Withdraw',
-            backgroundColor: _WithdrawColors.pageBg,
+            backgroundColor: context.themeColors.backgroundColor,
             trailingIcon: Icon(
               Icons.refresh_rounded,
               size: AppSize.sp20,
-              color: _WithdrawColors.titleColor,
+              color: context.themeColors.buttonBorderColor,
             ),
             onTrailingTap: () {},
           ),
@@ -119,7 +109,6 @@ class _WithdrawViewState extends State<_WithdrawView> {
                     },
                   ),
                   if (canExpand) ...[
-                    // SizedBox(height: AppSize.h16),
                     Center(
                       child: GestureDetector(
                         onTap: () => setState(
@@ -131,7 +120,7 @@ class _WithdrawViewState extends State<_WithdrawView> {
                             fontFamily: FontFamily.kommonGrotesk,
                             fontSize: AppSize.sp15,
                             fontWeight: FontWeight.w900,
-                            color: _WithdrawColors.primaryBlue,
+                            color: context.themeColors.buttonColor,
                           ),
                         ),
                       ),
@@ -155,7 +144,7 @@ class _WithdrawViewState extends State<_WithdrawView> {
                         fontFamily: FontFamily.kommonGrotesk,
                         fontSize: AppSize.sp12,
                         fontWeight: FontWeight.w600,
-                        color: _WithdrawColors.bodyColor,
+                        color: context.themeTextColors.bodyTextColor,
                       ),
                     ),
                   ),
@@ -196,7 +185,7 @@ class _BalanceBody extends StatelessWidget {
           runSpacing: AppSize.h8,
           children: [
             _pill(
-              surface: _WithdrawColors.coinPillSurface,
+              surface: context.themeColors.coinSurfaceColor,
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -208,21 +197,21 @@ class _BalanceBody extends StatelessWidget {
                       fontFamily: FontFamily.kommonGrotesk,
                       fontSize: AppSize.sp12,
                       fontWeight: FontWeight.w900,
-                      color: _WithdrawColors.coinPillText,
+                      color: _coinPillText,
                     ),
                   ),
                 ],
               ),
             ),
             _pill(
-              surface: _WithdrawColors.minPillSurface,
+              surface: context.themeColors.xpBadgeColor,
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Icon(
                     Icons.bolt_rounded,
                     size: AppSize.sp16,
-                    color: _WithdrawColors.minPillText,
+                    color: context.themeColors.buttonBorderColor,
                   ),
                   SizedBox(width: AppSize.w4),
                   Text(
@@ -231,7 +220,7 @@ class _BalanceBody extends StatelessWidget {
                       fontFamily: FontFamily.kommonGrotesk,
                       fontSize: AppSize.sp12,
                       fontWeight: FontWeight.w900,
-                      color: _WithdrawColors.minPillText,
+                      color: context.themeColors.buttonBorderColor,
                     ),
                   ),
                 ],
@@ -240,10 +229,10 @@ class _BalanceBody extends StatelessWidget {
           ],
         ),
         SizedBox(height: AppSize.h12),
-        Wrap(
-          spacing: AppSize.w8,
-          runSpacing: AppSize.h8,
-          children: const [
+        const Wrap(
+          spacing: 8,
+          runSpacing: 8,
+          children: [
             _CurrencyChip(label: 'INR 0.14'),
             _CurrencyChip(label: 'PKR 0.45'),
             _CurrencyChip(label: 'BDT 0.18'),
@@ -281,16 +270,16 @@ class _WithdrawCta extends StatelessWidget {
       height: 56,
       child: AppButton(
         text: 'Withdraw \$ ${amount.toStringAsFixed(2)}',
-        buttonColor: _WithdrawColors.primaryBlue,
-        shadowColor: _WithdrawColors.primaryBlueShadow,
-        foregroundColor: Colors.white,
+        buttonColor: context.themeColors.buttonColor,
+        shadowColor: context.themeColors.buttonBorderColor,
+        foregroundColor: context.themeColors.whiteColor,
         borderRadius: AppSize.r30,
         wallOffset: 4,
         textStyle: TextStyle(
           fontFamily: FontFamily.kommonGrotesk,
           fontSize: AppSize.sp16,
           fontWeight: FontWeight.w900,
-          color: Colors.white,
+          color: context.themeColors.whiteColor,
         ),
         onPressed: onPressed,
       ),
@@ -311,9 +300,9 @@ class _CurrencyChip extends StatelessWidget {
         vertical: AppSize.h8,
       ),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: context.themeColors.whiteColor,
         borderRadius: BorderRadius.circular(AppSize.r20),
-        border: Border.all(color: _WithdrawColors.currencyBorder),
+        border: Border.all(color: _currencyBorder),
       ),
       child: Text(
         label,
@@ -321,7 +310,7 @@ class _CurrencyChip extends StatelessWidget {
           fontFamily: FontFamily.kommonGrotesk,
           fontSize: AppSize.sp13,
           fontWeight: FontWeight.w900,
-          color: _WithdrawColors.titleColor,
+          color: context.themeColors.buttonBorderColor,
         ),
       ),
     );
@@ -368,13 +357,13 @@ class _CategoryTabs extends StatelessWidget {
                 ),
                 decoration: BoxDecoration(
                   color: isSelected
-                      ? _WithdrawColors.primaryBlue
-                      : Colors.white,
+                      ? context.themeColors.buttonColor
+                      : context.themeColors.whiteColor,
                   borderRadius: BorderRadius.circular(AppSize.r28),
                   boxShadow: isSelected
                       ? [
                           BoxShadow(
-                            color: _WithdrawColors.primaryBlueShadow,
+                            color: context.themeColors.buttonBorderColor,
                             offset: const Offset(0, _wallOffset),
                             blurRadius: 0,
                           ),
@@ -389,8 +378,8 @@ class _CategoryTabs extends StatelessWidget {
                     fontSize: AppSize.sp14,
                     fontWeight: FontWeight.w900,
                     color: isSelected
-                        ? Colors.white
-                        : _WithdrawColors.titleColor,
+                        ? context.themeColors.whiteColor
+                        : context.themeColors.buttonBorderColor,
                   ),
                 ),
               ),
@@ -463,19 +452,19 @@ class _MethodTile extends StatelessWidget {
           curve: Curves.easeOut,
           decoration: BoxDecoration(
             color: isSelected
-                ? _WithdrawColors.primaryBlue
-                : Colors.white,
+                ? context.themeColors.buttonColor
+                : context.themeColors.whiteColor,
             borderRadius: BorderRadius.circular(_radius),
             border: Border.all(
               color: isSelected
-                  ? _WithdrawColors.primaryBlue
-                  : _WithdrawColors.cardBorder,
+                  ? context.themeColors.buttonColor
+                  : context.themeColors.borderColor2,
               width: 1,
             ),
             boxShadow: isSelected
                 ? [
                     BoxShadow(
-                      color: _WithdrawColors.primaryBlueShadow,
+                      color: context.themeColors.buttonBorderColor,
                       offset: const Offset(0, _wallOffset),
                       blurRadius: 0,
                     ),
@@ -495,7 +484,7 @@ class _MethodTile extends StatelessWidget {
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
                   color: isSelected
-                      ? Colors.white.withValues(alpha: 0.16)
+                      ? context.themeColors.whiteColor.withValues(alpha: 0.16)
                       : item.color.withValues(alpha: 0.08),
                   borderRadius: BorderRadius.circular(AppSize.r12),
                 ),
@@ -512,8 +501,8 @@ class _MethodTile extends StatelessWidget {
                   fontSize: AppSize.sp12,
                   fontWeight: FontWeight.w800,
                   color: isSelected
-                      ? Colors.white
-                      : _WithdrawColors.titleColor,
+                      ? context.themeColors.whiteColor
+                      : context.themeColors.buttonBorderColor,
                 ),
               ),
             ],
@@ -538,9 +527,9 @@ class _AmountCard extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(AppSize.w16),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: context.themeColors.whiteColor,
         borderRadius: BorderRadius.circular(AppSize.r24),
-        border: Border.all(color: _WithdrawColors.cardBorder),
+        border: Border.all(color: context.themeColors.borderColor2),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -553,7 +542,7 @@ class _AmountCard extends StatelessWidget {
                   fontFamily: FontFamily.kommonGrotesk,
                   fontSize: AppSize.sp13,
                   fontWeight: FontWeight.w600,
-                  color: _WithdrawColors.bodyColor,
+                  color: context.themeTextColors.bodyTextColor,
                 ),
               ),
               const Spacer(),
@@ -565,7 +554,7 @@ class _AmountCard extends StatelessWidget {
                     fontFamily: FontFamily.kommonGrotesk,
                     fontSize: AppSize.sp13,
                     fontWeight: FontWeight.w900,
-                    color: _WithdrawColors.primaryBlue,
+                    color: context.themeColors.buttonColor,
                   ),
                 ),
               ),
@@ -577,7 +566,7 @@ class _AmountCard extends StatelessWidget {
               style: TextStyle(
                 fontFamily: FontFamily.kommonGrotesk,
                 fontWeight: FontWeight.w900,
-                color: Colors.black,
+                color: context.themeTextColors.textColor,
                 letterSpacing: -1,
               ),
               children: [
@@ -585,7 +574,7 @@ class _AmountCard extends StatelessWidget {
                   text: '\$ ',
                   style: TextStyle(
                     fontSize: AppSize.sp26,
-                    color: _WithdrawColors.fractionColor,
+                    color: context.themeTextColors.mutedTextColor,
                   ),
                 ),
                 TextSpan(
@@ -596,7 +585,7 @@ class _AmountCard extends StatelessWidget {
                   text: '.${amount.toStringAsFixed(2).split('.').last}',
                   style: TextStyle(
                     fontSize: AppSize.sp40,
-                    color: _WithdrawColors.fractionColor,
+                    color: context.themeTextColors.mutedTextColor,
                   ),
                 ),
               ],
@@ -643,10 +632,10 @@ class _QuickAmount extends StatelessWidget {
         alignment: Alignment.center,
         decoration: BoxDecoration(
           color: isSelected
-              ? _WithdrawColors.primaryBlue.withValues(alpha: 0.08)
-              : Colors.white,
+              ? context.themeColors.buttonColor.withValues(alpha: 0.08)
+              : context.themeColors.whiteColor,
           borderRadius: BorderRadius.circular(AppSize.r24),
-          border: Border.all(color: _WithdrawColors.cardBorder),
+          border: Border.all(color: context.themeColors.borderColor2),
         ),
         child: Text(
           '\$ ${value.toStringAsFixed(0)}',
@@ -654,7 +643,7 @@ class _QuickAmount extends StatelessWidget {
             fontFamily: FontFamily.kommonGrotesk,
             fontSize: AppSize.sp14,
             fontWeight: FontWeight.w900,
-            color: _WithdrawColors.titleColor,
+            color: context.themeColors.buttonBorderColor,
           ),
         ),
       ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:watch_earn_4/extension/ext_context.dart';
 import 'package:watch_earn_4/gen/fonts.gen.dart';
 import 'package:watch_earn_4/utils/app_size.dart';
 import 'package:watch_earn_4/utils/navigation_helper.dart';
@@ -7,21 +8,6 @@ import 'package:watch_earn_4/utils/navigation_helper.dart';
 /// Common page header with a circular back button on the left, a centered
 /// title, and an optional circular action button on the right.
 class CommonHeader extends StatelessWidget implements PreferredSizeWidget {
-  final String title;
-  final VoidCallback? onBackPressed;
-  final Widget? trailingIcon;
-  final VoidCallback? onTrailingTap;
-  final bool showLeading;
-  final Color backgroundColor;
-  final Color titleColor;
-  final Color buttonColor;
-  final Color iconColor;
-  final double horizontalPadding;
-  final double verticalPadding;
-
-  static const _defaultBackground = Color(0xFFEAEFFC);
-  static const _defaultTitleColor = Color(0xFF0B0E2C);
-
   const CommonHeader({
     super.key,
     required this.title,
@@ -29,21 +15,47 @@ class CommonHeader extends StatelessWidget implements PreferredSizeWidget {
     this.trailingIcon,
     this.onTrailingTap,
     this.showLeading = true,
-    this.backgroundColor = _defaultBackground,
-    this.titleColor = _defaultTitleColor,
-    this.buttonColor = Colors.white,
-    this.iconColor = _defaultTitleColor,
+    this.backgroundColor,
+    this.titleColor,
+    this.buttonColor,
+    this.iconColor,
     this.horizontalPadding = 16,
     this.verticalPadding = 12,
   });
+
+  final String title;
+  final VoidCallback? onBackPressed;
+  final Widget? trailingIcon;
+  final VoidCallback? onTrailingTap;
+  final bool showLeading;
+
+  /// Defaults to [ThemeColors.backgroundColor] when null.
+  final Color? backgroundColor;
+
+  /// Defaults to [ThemeTextColors.darkTitleColor] when null.
+  final Color? titleColor;
+
+  /// Defaults to [ThemeColors.whiteColor] when null.
+  final Color? buttonColor;
+
+  /// Defaults to [ThemeTextColors.darkTitleColor] when null.
+  final Color? iconColor;
+
+  final double horizontalPadding;
+  final double verticalPadding;
 
   @override
   Size get preferredSize => Size.fromHeight(kToolbarHeight + 16);
 
   @override
   Widget build(BuildContext context) {
+    final resolvedBg    = backgroundColor ?? context.themeColors.backgroundColor;
+    final resolvedTitle = titleColor      ?? context.themeTextColors.darkTitleColor;
+    final resolvedBtn   = buttonColor     ?? context.themeColors.whiteColor;
+    final resolvedIcon  = iconColor       ?? context.themeTextColors.darkTitleColor;
+
     return Container(
-      color: backgroundColor,
+      color: resolvedBg,
       child: SafeArea(
         bottom: false,
         child: Padding(
@@ -58,8 +70,8 @@ class CommonHeader extends StatelessWidget implements PreferredSizeWidget {
                 height: AppSize.w40,
                 child: showLeading
                     ? _CircleButton(
-                        color: buttonColor,
-                        iconColor: iconColor,
+                        color: resolvedBtn,
+                        iconColor: resolvedIcon,
                         icon: Icons.arrow_back,
                         onTap: onBackPressed ??
                             () => NavigationHelper().handleBackPress(context),
@@ -76,7 +88,7 @@ class CommonHeader extends StatelessWidget implements PreferredSizeWidget {
                     fontFamily: FontFamily.kommonGrotesk,
                     fontSize: AppSize.sp18,
                     fontWeight: FontWeight.w900,
-                    color: titleColor,
+                    color: resolvedTitle,
                   ),
                 ),
               ),
@@ -85,8 +97,8 @@ class CommonHeader extends StatelessWidget implements PreferredSizeWidget {
                 height: AppSize.w42,
                 child: trailingIcon != null
                     ? _CircleButton(
-                        color: buttonColor,
-                        iconColor: iconColor,
+                        color: resolvedBtn,
+                        iconColor: resolvedIcon,
                         customChild: trailingIcon,
                         onTap: onTrailingTap,
                       )
@@ -126,11 +138,7 @@ class _CircleButton extends StatelessWidget {
         onTap: onTap,
         child: Center(
           child: customChild ??
-              Icon(
-                icon,
-                size: AppSize.sp20,
-                color: iconColor,
-              ),
+              Icon(icon, size: AppSize.sp20, color: iconColor),
         ),
       ),
     );

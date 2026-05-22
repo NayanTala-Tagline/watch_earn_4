@@ -11,6 +11,14 @@ import 'package:watch_earn_4/utils/app_size.dart';
 import 'package:watch_earn_4/utils/remote_config.dart';
 import 'package:watch_earn_4/widgets/app_button.dart';
 
+List<BoxShadow> _kCardShadow(BuildContext context) => [
+  BoxShadow(
+    color: context.themeColors.cardShadowColor,
+    offset: const Offset(0, 6),
+    blurRadius: 16,
+  ),
+];
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -20,8 +28,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final _db = Injector.instance<AppDB>();
-
-  static const _pageBg = Color(0xFFEEF0F8);
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
         final totalClaimDays = user?.totalClaimDays ?? 0;
 
         return Scaffold(
-          backgroundColor: _pageBg,
+          backgroundColor: context.themeColors.backgroundColor,
           body: SafeArea(
             bottom: false,
             child: Column(
@@ -106,7 +112,7 @@ class _HomeScreenState extends State<HomeScreen> {
     style: context.textTheme.titleLarge?.copyWith(
       fontSize: AppSize.sp18,
       fontWeight: FontWeight.w900,
-      color: _HomeScreenColors.dailyRewardTitleColor,
+      color: context.themeTextColors.darkTitleColor,
     ),
   );
 }
@@ -114,7 +120,6 @@ class _HomeScreenState extends State<HomeScreen> {
 // ── Top pills ──────────────────────────────────────────────────────────────
 class _CoinsPill extends StatelessWidget {
   const _CoinsPill({required this.coins});
-
   final int coins;
 
   @override
@@ -122,9 +127,9 @@ class _CoinsPill extends StatelessWidget {
     return AppButton(
       text: '$coins',
       isAdjust: true,
-      buttonColor: _HomeScreenColors.coinPillSurface,
-      shadowColor: _HomeScreenColors.coinPillShadow,
-      foregroundColor: _HomeScreenColors.coinPillText,
+      buttonColor: context.themeColors.coinSurfaceColor,
+      shadowColor: context.themeColors.coinAmberColor,
+      foregroundColor: context.themeColors.coinTextColor,
       horizontalPad: AppSize.w12,
       verticalPad: AppSize.w7,
       borderRadius: AppSize.r24,
@@ -132,7 +137,7 @@ class _CoinsPill extends StatelessWidget {
       textStyle: context.textTheme.titleLarge?.copyWith(
         fontSize: AppSize.sp13,
         fontWeight: FontWeight.w900,
-        color: _HomeScreenColors.coinPillShadow,
+        color: context.themeColors.coinAmberColor,
       ),
       icon: Assets.icons.icCoin.svg(width: AppSize.w19, height: AppSize.w19),
       onPressed: () {},
@@ -142,7 +147,6 @@ class _CoinsPill extends StatelessWidget {
 
 class _DaysPill extends StatelessWidget {
   const _DaysPill({required this.days});
-
   final int days;
 
   @override
@@ -150,16 +154,16 @@ class _DaysPill extends StatelessWidget {
     return AppButton(
       text: '$days Days',
       isAdjust: true,
-      buttonColor: _HomeScreenColors.daysPillSurface,
-      shadowColor: _HomeScreenColors.daysPillShadow,
-      foregroundColor: _HomeScreenColors.daysPillText,
+      buttonColor: context.themeColors.daysPillSurfaceColor,
+      shadowColor: context.themeColors.buttonColor2,
+      foregroundColor: context.themeColors.buttonColor2,
       horizontalPad: AppSize.w12,
       verticalPad: AppSize.w7,
       wallOffset: 4,
       textStyle: context.textTheme.titleLarge?.copyWith(
         fontSize: AppSize.sp13,
         fontWeight: FontWeight.w900,
-        color: _HomeScreenColors.daysPillText,
+        color: context.themeColors.buttonColor2,
       ),
       trailingIcon: Assets.icons.icFire.svg(
         width: AppSize.w19,
@@ -168,33 +172,6 @@ class _DaysPill extends StatelessWidget {
       onPressed: () {},
     );
   }
-}
-
-// ── Color constants (shared across sub-widgets) ────────────────────────────
-class _HomeScreenColors {
-  static const coinPillSurface = Color(0xFFFFF1D6);
-  static const coinPillShadow = Color(0xFFC97A00);
-  static const coinPillText = Color(0xFF7A4A00);
-  static const daysPillSurface = Color(0xFFFFE3EE);
-  static const daysPillShadow = Color(0xFFE0006E);
-  static const daysPillText = Color(0xFFE0006E);
-  static const cardBorder = Color(0xFFEDEFF5);
-  static const primaryBlue = Color(0xFF1A1AE8);
-  static const primaryBlueShadow = Color(0xFF0E0F66);
-  static const xpBgColor = Color(0xFFE6E7FF);
-  static const xpTextColor = Color(0xFF0E0F66);
-  static const titleColor = Color(0xFF0E0F66);
-  static const dailyRewardTitleColor = Color(0xFF0B0E2C);
-  static const bodyColor = Color(0xFF8A8FA8);
-  static const coinGradient2 = Color(0xFFFFB620);
-  static const claimShadow = Color(0xFF880343);
-  static const cardShadow = [
-    BoxShadow(
-      color: Color(0x140E0F66),
-      offset: Offset(0, 6),
-      blurRadius: 16,
-    ),
-  ];
 }
 
 // ── Total Balance card ─────────────────────────────────────────────────────
@@ -227,10 +204,10 @@ class _BalanceCard extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(AppSize.w16),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: context.themeColors.whiteColor,
         borderRadius: BorderRadius.circular(AppSize.r25),
-        border: Border.all(color: _HomeScreenColors.cardBorder),
-        boxShadow: _HomeScreenColors.cardShadow,
+        border: Border.all(color: context.themeColors.borderColor2),
+        boxShadow: _kCardShadow(context),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -239,7 +216,7 @@ class _BalanceCard extends StatelessWidget {
             'Total Balance',
             style: context.textTheme.bodyLarge?.copyWith(
               fontSize: AppSize.sp13,
-              color: const Color(0xFF6B7393),
+              color: context.themeTextColors.bodyTextColor,
             ),
           ),
           SizedBox(height: AppSize.h15),
@@ -248,7 +225,7 @@ class _BalanceCard extends StatelessWidget {
               style: context.textTheme.titleLarge?.copyWith(
                 fontSize: AppSize.sp40,
                 fontWeight: FontWeight.w900,
-                color: Colors.black,
+                color: context.themeTextColors.textColor,
                 letterSpacing: -1,
                 height: 1.05,
               ),
@@ -256,7 +233,9 @@ class _BalanceCard extends StatelessWidget {
                 TextSpan(text: intStr),
                 TextSpan(
                   text: decStr,
-                  style: const TextStyle(color: Color(0xFF9AA0B5)),
+                  style: TextStyle(
+                    color: context.themeTextColors.mutedTextColor,
+                  ),
                 ),
               ],
             ),
@@ -272,7 +251,7 @@ class _BalanceCard extends StatelessWidget {
                   vertical: AppSize.h6,
                 ),
                 decoration: BoxDecoration(
-                  color: _HomeScreenColors.xpBgColor,
+                  color: context.themeColors.xpBadgeColor,
                   borderRadius: BorderRadius.circular(AppSize.r16),
                 ),
                 child: Row(
@@ -281,7 +260,7 @@ class _BalanceCard extends StatelessWidget {
                     Icon(
                       Icons.bolt_rounded,
                       size: AppSize.sp16,
-                      color: _HomeScreenColors.xpTextColor,
+                      color: context.themeColors.buttonBorderColor,
                     ),
                     SizedBox(width: AppSize.w4),
                     Text(
@@ -289,7 +268,7 @@ class _BalanceCard extends StatelessWidget {
                       style: context.textTheme.titleLarge?.copyWith(
                         fontSize: AppSize.sp12,
                         fontWeight: FontWeight.w900,
-                        color: _HomeScreenColors.xpTextColor,
+                        color: context.themeColors.buttonBorderColor,
                       ),
                     ),
                   ],
@@ -305,14 +284,14 @@ class _BalanceCard extends StatelessWidget {
                   height: 55,
                   child: AppButton(
                     text: 'Withdraw',
-                    buttonColor: _HomeScreenColors.primaryBlue,
-                    shadowColor: _HomeScreenColors.primaryBlueShadow,
-                    foregroundColor: Colors.white,
+                    buttonColor: context.themeColors.buttonColor,
+                    shadowColor: context.themeColors.buttonBorderColor,
+                    foregroundColor: context.themeColors.whiteColor,
                     wallOffset: 4,
                     borderRadius: AppSize.r28,
                     textStyle: context.textTheme.titleMedium?.copyWith(
                       fontSize: AppSize.sp15,
-                      color: Colors.white,
+                      color: context.themeColors.whiteColor,
                     ),
                     onPressed: () => context.pushNamed(AppRoutes.withdraw),
                   ),
@@ -326,11 +305,11 @@ class _BalanceCard extends StatelessWidget {
                     text: 'Rewards',
                     isFillButton: false,
                     borderRadius: AppSize.r28,
-                    borderColor: _HomeScreenColors.cardBorder,
+                    borderColor: context.themeColors.borderColor2,
                     borderWidth: 1.4,
                     textStyle: context.textTheme.titleMedium?.copyWith(
                       fontSize: AppSize.sp15,
-                      color: _HomeScreenColors.titleColor,
+                      color: context.themeColors.buttonBorderColor,
                     ),
                     onPressed: () => context.pushNamed(AppRoutes.rewards),
                   ),
@@ -358,7 +337,7 @@ class _CoinPill extends StatelessWidget {
         AppSize.h6,
       ),
       decoration: BoxDecoration(
-        color: const Color(0xFFFFF3D1),
+        color: context.themeColors.coinSurfaceColor,
         borderRadius: BorderRadius.circular(AppSize.r16),
       ),
       child: Row(
@@ -371,7 +350,7 @@ class _CoinPill extends StatelessWidget {
             style: context.textTheme.titleLarge?.copyWith(
               fontSize: AppSize.sp12,
               fontWeight: FontWeight.w900,
-              color: _HomeScreenColors.coinPillShadow,
+              color: context.themeColors.coinAmberColor,
             ),
           ),
         ],
@@ -383,7 +362,6 @@ class _CoinPill extends StatelessWidget {
 // ── Daily Reward card ──────────────────────────────────────────────────────
 class _DailyRewardCard extends StatelessWidget {
   const _DailyRewardCard({required this.coins});
-
   final int coins;
 
   @override
@@ -399,10 +377,13 @@ class _DailyRewardCard extends StatelessWidget {
         vertical: AppSize.h22,
       ),
       decoration: BoxDecoration(
-        gradient: const LinearGradient(
+        gradient: LinearGradient(
           begin: Alignment.centerLeft,
           end: Alignment.centerRight,
-          colors: [Color(0xFFFFF1E0), Color(0xFFFFE0C9)],
+          colors: [
+            context.themeColors.dailyRewardGradientStart,
+            context.themeColors.dailyRewardGradientEnd,
+          ],
         ),
         borderRadius: BorderRadius.circular(AppSize.r20),
       ),
@@ -412,9 +393,9 @@ class _DailyRewardCard extends StatelessWidget {
             text: '',
             isAdjust: true,
             showIconOnly: true,
-            buttonColor: _HomeScreenColors.coinGradient2,
-            shadowColor: _HomeScreenColors.coinPillShadow,
-            foregroundColor: _HomeScreenColors.daysPillText,
+            buttonColor: context.themeColors.coinGoldColor,
+            shadowColor: context.themeColors.coinAmberColor,
+            foregroundColor: context.themeColors.buttonColor2,
             horizontalPad: AppSize.w10,
             verticalPad: AppSize.h8,
             borderRadius: AppSize.r14,
@@ -437,7 +418,7 @@ class _DailyRewardCard extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   style: context.textTheme.titleMedium?.copyWith(
                     fontWeight: FontWeight.w900,
-                    color: _HomeScreenColors.dailyRewardTitleColor,
+                    color: context.themeTextColors.darkTitleColor,
                   ),
                 ),
                 SizedBox(height: AppSize.h2),
@@ -449,7 +430,7 @@ class _DailyRewardCard extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   style: context.textTheme.titleSmall?.copyWith(
                     fontSize: AppSize.sp12,
-                    color: _HomeScreenColors.bodyColor,
+                    color: context.themeTextColors.bodyTextColor,
                   ),
                 ),
               ],
@@ -459,15 +440,10 @@ class _DailyRewardCard extends StatelessWidget {
           AppButton(
             text: isClaimed ? 'Claimed' : 'Claim',
             isAdjust: true,
-            buttonColor: isClaimed
-                ? _HomeScreenColors.daysPillShadow.withValues(alpha: 0.45)
-                : _HomeScreenColors.daysPillShadow,
-            shadowColor: isClaimed
-                ? _HomeScreenColors.claimShadow.withValues(alpha: 0.4)
-                : _HomeScreenColors.claimShadow,
-            foregroundColor: Colors.white.withValues(
-              alpha: isClaimed ? 0.65 : 1.0,
-            ),
+            buttonColor: context.themeColors.buttonColor2,
+            shadowColor: context.themeColors.buttonBorderColor2,
+            foregroundColor: context.themeColors.whiteColor,
+            isDisabled: isClaimed,
             horizontalPad: AppSize.w14,
             verticalPad: AppSize.h8,
             borderRadius: AppSize.r22,
@@ -475,7 +451,7 @@ class _DailyRewardCard extends StatelessWidget {
             textStyle: context.textTheme.titleLarge?.copyWith(
               fontSize: AppSize.sp13,
               fontWeight: FontWeight.w900,
-              color: Colors.white.withValues(alpha: isClaimed ? 0.65 : 1.0),
+              color: context.themeColors.whiteColor,
             ),
             onPressed: isClaimed ? () {} : () => provider.claimDailyReward(context),
           ),
@@ -488,7 +464,6 @@ class _DailyRewardCard extends StatelessWidget {
 // ── Stats row ──────────────────────────────────────────────────────────────
 class _StatsRow extends StatelessWidget {
   const _StatsRow({required this.xp, required this.level});
-
   final int xp;
   final int level;
 
@@ -498,10 +473,7 @@ class _StatsRow extends StatelessWidget {
       children: [
         Expanded(
           child: _StatCard(
-            icon: Assets.icons.icCoin.svg(
-              width: AppSize.w20,
-              height: AppSize.w20,
-            ),
+            icon: Assets.icons.icCoin.svg(width: AppSize.w20, height: AppSize.w20),
             label: 'Level',
             value: 'LV $level',
           ),
@@ -509,10 +481,7 @@ class _StatsRow extends StatelessWidget {
         SizedBox(width: AppSize.w10),
         Expanded(
           child: _StatCard(
-            icon: Assets.icons.icXp.svg(
-              width: AppSize.w15,
-              height: AppSize.w15,
-            ),
+            icon: Assets.icons.icXp.svg(width: AppSize.w15, height: AppSize.w15),
             label: 'XP',
             value: '$xp',
           ),
@@ -520,10 +489,7 @@ class _StatsRow extends StatelessWidget {
         SizedBox(width: AppSize.w10),
         Expanded(
           child: _StatCard(
-            icon: Assets.icons.icRank.svg(
-              width: AppSize.w15,
-              height: AppSize.w15,
-            ),
+            icon: Assets.icons.icRank.svg(width: AppSize.w15, height: AppSize.w15),
             label: 'Rank',
             value: 'Top',
           ),
@@ -552,10 +518,10 @@ class _StatCard extends StatelessWidget {
         vertical: AppSize.h18,
       ),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: context.themeColors.whiteColor,
         borderRadius: BorderRadius.circular(AppSize.r16),
-        border: Border.all(color: _HomeScreenColors.cardBorder),
-        boxShadow: _HomeScreenColors.cardShadow,
+        border: Border.all(color: context.themeColors.borderColor2),
+        boxShadow: _kCardShadow(context),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -572,7 +538,7 @@ class _StatCard extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   style: context.textTheme.titleSmall?.copyWith(
                     fontSize: AppSize.sp12,
-                    color: _HomeScreenColors.bodyColor,
+                    color: context.themeTextColors.bodyTextColor,
                   ),
                 ),
               ),
@@ -586,7 +552,7 @@ class _StatCard extends StatelessWidget {
             style: context.textTheme.titleLarge?.copyWith(
               fontSize: AppSize.sp18,
               fontWeight: FontWeight.w900,
-              color: _HomeScreenColors.titleColor,
+              color: context.themeColors.buttonBorderColor,
               height: 1.1,
             ),
           ),
@@ -695,84 +661,80 @@ class _EarnTile extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.symmetric(vertical: AppSize.w12),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: context.themeColors.whiteColor,
           borderRadius: BorderRadius.circular(AppSize.r20),
-          border: Border.all(color: _HomeScreenColors.cardBorder),
-          boxShadow: _HomeScreenColors.cardShadow,
+          border: Border.all(color: context.themeColors.borderColor2),
+          boxShadow: _kCardShadow(context),
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _EarnArt(kind: item.illustration),
-            Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: AppSize.w12,
-                vertical: AppSize.w12,
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: AppSize.w12,
+            vertical: AppSize.w6,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _EarnArt(kind: item.illustration),
+              SizedBox(height: AppSize.h8),
+              Text(
+                item.title,
+                style: context.textTheme.titleLarge?.copyWith(
+                  fontSize: AppSize.sp15,
+                  fontWeight: FontWeight(950),
+                  color: context.themeColors.buttonBorderColor,
+                ),
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              SizedBox(height: AppSize.h2),
+              Text(
+                item.subtitle,
+                style: context.textTheme.titleSmall?.copyWith(
+                  fontSize: AppSize.sp11,
+                  color: context.themeTextColors.bodyTextColor,
+                ),
+              ),
+              SizedBox(height: AppSize.h10),
+              Row(
                 children: [
-                  Text(
-                    item.title,
-                    style: context.textTheme.titleLarge?.copyWith(
-                      fontSize: AppSize.sp15,
-                      fontWeight: FontWeight(950),
-                      color: _HomeScreenColors.titleColor,
+                  Container(
+                    padding: EdgeInsets.fromLTRB(
+                      AppSize.w6,
+                      AppSize.h6,
+                      AppSize.w10,
+                      AppSize.h6,
+                    ),
+                    decoration: BoxDecoration(
+                      color: context.themeColors.coinSurfaceColor,
+                      borderRadius: BorderRadius.circular(AppSize.r14),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Assets.icons.icCoin.svg(
+                          width: AppSize.w20,
+                          height: AppSize.w20,
+                        ),
+                        SizedBox(width: AppSize.w4),
+                        Text(
+                          item.reward,
+                          style: context.textTheme.titleLarge?.copyWith(
+                            fontSize: AppSize.sp12,
+                            fontWeight: FontWeight.w900,
+                            color: context.themeColors.coinAmberColor,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  SizedBox(height: AppSize.h2),
-                  Text(
-                    item.subtitle,
-                    style: context.textTheme.titleSmall?.copyWith(
-                      fontSize: AppSize.sp11,
-                      color: _HomeScreenColors.bodyColor,
-                    ),
-                  ),
-                  SizedBox(height: AppSize.h10),
-                  Row(
-                    children: [
-                      Container(
-                        padding: EdgeInsets.fromLTRB(
-                          AppSize.w6,
-                          AppSize.h6,
-                          AppSize.w10,
-                          AppSize.h6,
-                        ),
-                        decoration: BoxDecoration(
-                          color: const Color(0xFFFFF3D1),
-                          borderRadius: BorderRadius.circular(AppSize.r14),
-                        ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Assets.icons.icCoin.svg(
-                              width: AppSize.w20,
-                              height: AppSize.w20,
-                            ),
-                            SizedBox(width: AppSize.w4),
-                            Text(
-                              item.reward,
-                              style: context.textTheme.titleLarge?.copyWith(
-                                fontSize: AppSize.sp12,
-                                fontWeight: FontWeight.w900,
-                                color: _HomeScreenColors.coinPillShadow,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const Spacer(),
-                      Icon(
-                        Icons.chevron_right_rounded,
-                        color: _HomeScreenColors.bodyColor,
-                        size: AppSize.sp22,
-                      ),
-                    ],
+                  const Spacer(),
+                  Icon(
+                    Icons.chevron_right_rounded,
+                    color: context.themeTextColors.bodyTextColor,
+                    size: AppSize.sp22,
                   ),
                 ],
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -786,18 +748,17 @@ class _EarnArt extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final asset = switch (kind) {
-      _EarnIllustration.quiz => Assets.images.quizMaster,
-      _EarnIllustration.spin => Assets.images.spinWheel,
+      _EarnIllustration.quiz    => Assets.images.quizMaster,
+      _EarnIllustration.spin    => Assets.images.spinWheel,
       _EarnIllustration.scratch => Assets.images.scratchCard,
-      _EarnIllustration.web => Assets.images.webVisits,
-      _EarnIllustration.game => Assets.images.gameZone2,
-      _EarnIllustration.refer => Assets.images.referAndEarn,
+      _EarnIllustration.web     => Assets.images.webVisits2,
+      _EarnIllustration.game    => Assets.images.gameZone2,
+      _EarnIllustration.refer   => Assets.images.referAndEarn,
     };
-
     return asset.image(
       width: AppSize.w86,
       height: AppSize.w60,
-      fit: BoxFit.cover,
+      fit: BoxFit.contain,
     );
   }
 }
@@ -816,10 +777,10 @@ class _HowItWorksCard extends StatelessWidget {
         AppSize.h18,
       ),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: context.themeColors.whiteColor,
         borderRadius: BorderRadius.circular(AppSize.r24),
-        border: Border.all(color: _HomeScreenColors.cardBorder),
-        boxShadow: _HomeScreenColors.cardShadow,
+        border: Border.all(color: context.themeColors.borderColor2),
+        boxShadow: _kCardShadow(context),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -828,9 +789,9 @@ class _HowItWorksCard extends StatelessWidget {
             text: '',
             isAdjust: true,
             showIconOnly: true,
-            buttonColor: _HomeScreenColors.daysPillShadow,
-            shadowColor: _HomeScreenColors.claimShadow,
-            foregroundColor: _HomeScreenColors.daysPillText,
+            buttonColor: context.themeColors.buttonColor2,
+            shadowColor: context.themeColors.buttonBorderColor2,
+            foregroundColor: context.themeColors.buttonColor2,
             horizontalPad: AppSize.w10,
             verticalPad: AppSize.h8,
             borderRadius: AppSize.r16,
@@ -849,7 +810,7 @@ class _HowItWorksCard extends StatelessWidget {
                   style: context.textTheme.titleLarge?.copyWith(
                     fontSize: AppSize.sp15,
                     fontWeight: FontWeight.w900,
-                    color: _HomeScreenColors.titleColor,
+                    color: context.themeColors.buttonBorderColor,
                   ),
                 ),
                 SizedBox(height: AppSize.h4),
@@ -857,7 +818,7 @@ class _HowItWorksCard extends StatelessWidget {
                   'Learn Step-by-Step how to\nearn money',
                   style: context.textTheme.titleSmall?.copyWith(
                     fontSize: AppSize.sp12,
-                    color: _HomeScreenColors.bodyColor,
+                    color: context.themeTextColors.bodyTextColor,
                     height: 1.3,
                   ),
                 ),
@@ -868,9 +829,9 @@ class _HowItWorksCard extends StatelessWidget {
           AppButton(
             text: 'Learn',
             isAdjust: true,
-            buttonColor: _HomeScreenColors.primaryBlue,
-            shadowColor: _HomeScreenColors.primaryBlueShadow,
-            foregroundColor: Colors.white,
+            buttonColor: context.themeColors.buttonColor,
+            shadowColor: context.themeColors.buttonBorderColor,
+            foregroundColor: context.themeColors.whiteColor,
             horizontalPad: AppSize.w18,
             verticalPad: AppSize.h8,
             borderRadius: AppSize.r22,
@@ -878,7 +839,7 @@ class _HowItWorksCard extends StatelessWidget {
             textStyle: context.textTheme.titleLarge?.copyWith(
               fontSize: AppSize.sp13,
               fontWeight: FontWeight.w800,
-              color: Colors.white,
+              color: context.themeColors.whiteColor,
             ),
             onPressed: () {},
           ),
@@ -900,19 +861,17 @@ class _BottomShortcuts extends StatelessWidget {
           child: _ShortcutCard(
             topLabel: 'See top earner',
             title: 'Leader board',
-            icon: Icons.leaderboard_rounded,
-            iconColor: const Color(0xFFFFB300),
+            icon: Assets.icons.icLeaderboard.svg(),
             onTap: () => context.pushNamed(AppRoutes.rank),
           ),
         ),
         SizedBox(width: AppSize.w12),
         Expanded(
           child: _ShortcutCard(
-            topLabel: 'Invite & Earn',
-            title: 'Refer & Earn',
-            icon: Icons.workspace_premium_rounded,
-            iconColor: const Color(0xFFE63F6E),
-            onTap: () => context.pushNamed(AppRoutes.rewards),
+            topLabel: 'XP',
+            title: 'Achievements',
+            icon: Assets.icons.icAchievements.svg(),
+            onTap: () => context.pushNamed(AppRoutes.achievements),
           ),
         ),
       ],
@@ -925,14 +884,12 @@ class _ShortcutCard extends StatelessWidget {
     required this.topLabel,
     required this.title,
     required this.icon,
-    required this.iconColor,
     this.onTap,
   });
 
   final String topLabel;
   final String title;
-  final IconData icon;
-  final Color iconColor;
+  final Widget icon;
   final VoidCallback? onTap;
 
   @override
@@ -942,10 +899,10 @@ class _ShortcutCard extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.all(AppSize.w12),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: context.themeColors.whiteColor,
           borderRadius: BorderRadius.circular(AppSize.r18),
-          border: Border.all(color: _HomeScreenColors.cardBorder),
-          boxShadow: _HomeScreenColors.cardShadow,
+          border: Border.all(color: context.themeColors.borderColor2),
+          boxShadow: _kCardShadow(context),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -956,13 +913,13 @@ class _ShortcutCard extends StatelessWidget {
                   topLabel,
                   style: context.textTheme.titleSmall?.copyWith(
                     fontSize: AppSize.sp12,
-                    color: _HomeScreenColors.bodyColor,
+                    color: context.themeTextColors.bodyTextColor,
                   ),
                 ),
                 const Spacer(),
                 Icon(
                   Icons.chevron_right_rounded,
-                  color: _HomeScreenColors.bodyColor,
+                  color: context.themeTextColors.bodyTextColor,
                   size: AppSize.sp18,
                 ),
               ],
@@ -970,7 +927,7 @@ class _ShortcutCard extends StatelessWidget {
             SizedBox(height: AppSize.h8),
             Row(
               children: [
-                Icon(icon, color: iconColor, size: AppSize.sp22),
+                icon,
                 SizedBox(width: AppSize.w6),
                 Flexible(
                   child: Text(
@@ -978,7 +935,7 @@ class _ShortcutCard extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                     style: context.textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.w900,
-                      color: _HomeScreenColors.dailyRewardTitleColor,
+                      color: context.themeTextColors.darkTitleColor,
                     ),
                   ),
                 ),

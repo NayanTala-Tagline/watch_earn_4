@@ -63,13 +63,13 @@ class _SplashScreenState extends State<SplashScreen> {
                   )
                   .blurXY(begin: 14, end: 0, duration: 700.ms, curve: Curves.easeOutCubic)
                   .then(delay: 200.ms)
-                  .shimmer(duration: 1400.ms, color: Colors.white.withValues(alpha: 0.6)),
+                  .shimmer(duration: 1400.ms, color: context.themeColors.whiteColor.withValues(alpha: 0.6)),
               SizedBox(height: AppSize.h16),
               Text(
                 'Rewardo',
                 style: context.textTheme.titleLarge?.copyWith(
                   fontSize: AppSize.sp32,
-                  color: const Color(0xFF1C2359),
+                  color: context.themeColors.navyColor,
                 ),
               )
                   .animate()

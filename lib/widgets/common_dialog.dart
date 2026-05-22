@@ -38,7 +38,7 @@ Future<void> showMiningPowerDialog(BuildContext context, String title, String su
               border: Border.all(color: context.themeColors.borderColor2.withValues(alpha: 0.6)),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.white.withValues(alpha: 0.1), // faint outer glow
+                  color: context.themeColors.whiteColor.withValues(alpha: 0.1),
                   spreadRadius: 1,
                   blurRadius: 6,
                   offset: const Offset(1, 1),

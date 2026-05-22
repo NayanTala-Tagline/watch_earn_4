@@ -2,7 +2,8 @@ import 'package:ad_manager/ad_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
-import '../../../utils/app_size.dart';
+import '../extension/ext_context.dart';
+import '../utils/app_size.dart';
 
 /// Renders an [InlineAdManager]'s widget with a shimmer placeholder while the
 /// ad is loading, and collapses to nothing on failure or when disabled.
@@ -90,7 +91,7 @@ class _ShimmerPlaceholder extends StatelessWidget {
             height: height,
             width: double.infinity,
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: context.themeColors.whiteColor,
               borderRadius: BorderRadius.circular(AppSize.r12),
             ),
           ),

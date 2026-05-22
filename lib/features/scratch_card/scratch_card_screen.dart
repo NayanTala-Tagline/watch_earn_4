@@ -6,6 +6,8 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:scratcher/widgets.dart';
 
+import '../../db/app_db.dart';
+import '../../di/injector.dart';
 import '../../extension/ext_context.dart';
 import '../../gen/assets.gen.dart';
 import '../../routes/app_router.dart';
@@ -127,7 +129,10 @@ class _ScratchCardScreenState extends State<ScratchCardScreen>
               navCtx,
               defaultCoins: reward,
             );
-            if (earned != null) await CoinService.addCoins(earned);
+            if (earned != null) {
+              await CoinService.addCoins(earned);
+              Injector.instance<AppDB>().recordScratchCard();
+            }
           }
           if (!mounted) return;
           NavigationHelper().handleBackPress(context);
@@ -145,7 +150,7 @@ class _ScratchCardScreenState extends State<ScratchCardScreen>
         NavigationHelper().handleBackPress(context);
       },
       child: Scaffold(
-        backgroundColor: const Color(0xFFECEEFA),
+        backgroundColor: context.themeColors.backgroundColor,
         body: Stack(
           children: [
             SafeArea(
@@ -182,7 +187,7 @@ class _ScratchCardScreenState extends State<ScratchCardScreen>
                             style: context.textTheme.titleLarge?.copyWith(
                               fontSize: AppSize.sp28,
                               fontWeight: FontWeight.w800,
-                              color: const Color(0xFF1C2359),
+                              color: context.themeColors.navyColor,
                               height: 1.25,
                             ),
                           )
@@ -276,11 +281,11 @@ class _ScratchAppBar extends StatelessWidget {
                 width: AppSize.r40,
                 height: AppSize.r40,
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: context.themeColors.whiteColor,
                   shape: BoxShape.circle,
                   boxShadow: [
                     BoxShadow(
-                      color: const Color(0xFFA4ABC6)
+                      color: context.themeColors.borderColor
                           .withValues(alpha: 0.25),
                       blurRadius: 8,
                       offset: const Offset(0, 2),
@@ -288,7 +293,7 @@ class _ScratchAppBar extends StatelessWidget {
                   ],
                 ),
                 child: Icon(Icons.arrow_back_rounded,
-                    color: const Color(0xFF1C2359), size: AppSize.r20),
+                    color: context.themeColors.navyColor, size: AppSize.r20),
               ),
             ),
           ),
@@ -296,7 +301,7 @@ class _ScratchAppBar extends StatelessWidget {
             'Scratch Card',
             style: context.textTheme.titleLarge?.copyWith(
               fontSize: AppSize.sp18,
-              color: const Color(0xFF1C2359),
+              color: context.themeColors.navyColor,
             ),
           ),
         ],
@@ -317,12 +322,12 @@ class _LuckyBadge extends StatelessWidget {
       padding: EdgeInsets.symmetric(
           horizontal: AppSize.w16, vertical: AppSize.h8),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: context.themeColors.whiteColor,
         borderRadius: BorderRadius.circular(AppSize.r100),
-        border: Border.all(color: const Color(0xFFE0006E), width: 1.5),
+        border: Border.all(color: context.themeColors.buttonColor2, width: 1.5),
         boxShadow: [
           BoxShadow(
-            color: const Color(0xFFE0006E).withValues(alpha: 0.18),
+            color: context.themeColors.buttonColor2.withValues(alpha: 0.18),
             blurRadius: 10,
             offset: const Offset(0, 3),
           ),
@@ -331,7 +336,7 @@ class _LuckyBadge extends StatelessWidget {
       child: Text(
         'Lucky #$number',
         style: context.textTheme.titleMedium?.copyWith(
-          color: const Color(0xFFE0006E),
+          color: context.themeColors.buttonColor2,
         ),
       ),
     );
@@ -362,7 +367,7 @@ class _ScratchArea extends StatelessWidget {
         borderRadius: BorderRadius.circular(AppSize.r20),
         boxShadow: [
           BoxShadow(
-            color: const Color(0xFF1A1AE8).withValues(alpha: 0.25),
+            color: context.themeColors.buttonColor.withValues(alpha: 0.25),
             blurRadius: AppSize.r24,
             offset: Offset(0, AppSize.h8),
           ),
@@ -385,16 +390,16 @@ class _ScratchArea extends StatelessWidget {
               child: Container(
                 height: AppSize.h360,
                 width: double.infinity,
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   gradient: LinearGradient(
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                     colors: [
-                      Color(0xFF1A1AE8),
-                      Color(0xFF1010C8),
-                      Color(0xFF0808A0),
+                      context.themeColors.buttonColor,
+                      const Color(0xFF1010C8),
+                      const Color(0xFF0808A0),
                     ],
-                    stops: [0.0, 0.5, 1.0],
+                    stops: const [0.0, 0.5, 1.0],
                   ),
                 ),
                 child: scratch.isGiftOpened
@@ -412,13 +417,13 @@ class _ScratchArea extends StatelessWidget {
                             child: Icon(
                               Icons.card_giftcard_rounded,
                               size: AppSize.sp100,
-                              color: const Color(0xFFFFD84D),
+                              color: context.themeColors.coinGoldColor,
                             ),
                           )
                         : Icon(
                             Icons.card_giftcard_rounded,
                             size: AppSize.sp100,
-                            color: Colors.white.withValues(alpha: 0.15),
+                            color: context.themeColors.whiteColor.withValues(alpha: 0.15),
                           ),
               ),
             ),
@@ -433,7 +438,7 @@ class _ScratchArea extends StatelessWidget {
                   child: Text(
                     'MYSTERY',
                     style: context.textTheme.titleMedium?.copyWith(
-                      color: Colors.white.withValues(alpha: 0.7),
+                      color: context.themeColors.whiteColor.withValues(alpha: 0.7),
                       letterSpacing: 2,
                     ),
                   ),
@@ -453,7 +458,7 @@ class _ScratchArea extends StatelessWidget {
                     style: context.textTheme.titleLarge?.copyWith(
                       fontSize: AppSize.sp24,
                       fontWeight: FontWeight.w800,
-                      color: Colors.white,
+                      color: context.themeColors.whiteColor,
                     ),
                   ),
                 ),
@@ -503,7 +508,7 @@ class _RevealedReward extends StatelessWidget {
           style: context.textTheme.titleLarge?.copyWith(
             fontSize: AppSize.sp48,
             fontWeight: FontWeight.w900,
-            color: const Color(0xFFFFD84D),
+            color: context.themeColors.coinGoldColor,
             height: 1,
           ),
         ),
@@ -513,7 +518,7 @@ class _RevealedReward extends StatelessWidget {
           style: context.textTheme.titleLarge?.copyWith(
             fontSize: AppSize.sp18,
             fontWeight: FontWeight.w600,
-            color: Colors.white.withValues(alpha: 0.85),
+            color: context.themeColors.whiteColor.withValues(alpha: 0.85),
           ),
         ),
       ],
@@ -560,7 +565,7 @@ class _ResultSheet extends StatelessWidget {
               Container(
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: context.themeColors.whiteColor,
                   borderRadius: BorderRadius.circular(AppSize.r28),
                 ),
                 padding: EdgeInsets.fromLTRB(
@@ -576,7 +581,7 @@ class _ResultSheet extends StatelessWidget {
                       width: AppSize.w40,
                       height: AppSize.h4,
                       decoration: BoxDecoration(
-                        color: const Color(0xFFDDE2F0),
+                        color: context.themeColors.dragHandleColor,
                         borderRadius:
                             BorderRadius.circular(AppSize.r100),
                       ),
@@ -588,7 +593,7 @@ class _ResultSheet extends StatelessWidget {
                       style: context.textTheme.titleLarge?.copyWith(
                         fontSize: AppSize.sp26,
                         fontWeight: FontWeight.w800,
-                        color: const Color(0xFF1C2359),
+                        color: context.themeColors.navyColor,
                       ),
                     ),
                     SizedBox(height: AppSize.h8),
@@ -599,15 +604,15 @@ class _ResultSheet extends StatelessWidget {
                       textAlign: TextAlign.center,
                       style: context.textTheme.bodyLarge?.copyWith(
                         fontSize: AppSize.sp16,
-                        color: const Color(0xFF4A4E6B),
+                        color: context.themeTextColors.subtitleColor,
                       ),
                     ),
                     SizedBox(height: AppSize.h28),
                     AppButton(
                       text: isLoss ? 'Try Again' : 'Claim Now',
-                      buttonColor: const Color(0xFF1A1AE8),
-                      shadowColor: const Color(0xFF0E0F66),
-                      foregroundColor: Colors.white,
+                      buttonColor: context.themeColors.buttonColor,
+                      shadowColor: context.themeColors.buttonBorderColor,
+                      foregroundColor: context.themeColors.whiteColor,
                       borderRadius: AppSize.r29,
                       onPressed: onClaim,
                     ),
@@ -623,11 +628,11 @@ class _ResultSheet extends StatelessWidget {
                   height: _trophyD.r,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: const Color(0xFFEEF1FF),
-                    border: Border.all(color: Colors.white, width: 3),
+                    color: context.themeColors.xpBadgeColor,
+                    border: Border.all(color: context.themeColors.whiteColor, width: 3),
                     boxShadow: [
                       BoxShadow(
-                        color: const Color(0xFF1A1AE8)
+                        color: context.themeColors.buttonColor
                             .withValues(alpha: 0.15),
                         blurRadius: 20,
                         offset: const Offset(0, 6),

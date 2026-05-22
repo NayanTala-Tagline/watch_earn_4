@@ -32,7 +32,7 @@ class OnboardingShell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFECEEFA),
+      backgroundColor: context.themeColors.backgroundColor,
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -54,7 +54,7 @@ class OnboardingShell extends StatelessWidget {
                     'Skip',
                     style: context.textTheme.bodyLarge?.copyWith(
                       fontSize: AppSize.sp16,
-                      color: const Color(0xFF1C2359),
+                      color: context.themeColors.navyColor,
                     ),
                   ),
                 ),
@@ -92,7 +92,7 @@ class OnboardingShell extends StatelessWidget {
                 title,
                 style: context.textTheme.titleLarge?.copyWith(
                   fontSize: AppSize.sp28,
-                  color: const Color(0xFF1C2359),
+                  color: context.themeColors.navyColor,
                   height: 1.2,
                 ),
               )
@@ -116,7 +116,7 @@ class OnboardingShell extends StatelessWidget {
                 subtitle,
                 style: context.textTheme.bodyMedium?.copyWith(
                   fontSize: AppSize.sp15,
-                  color: const Color(0xFF4A4E6B),
+                  color: context.themeTextColors.subtitleColor,
                   height: 1.55,
                 ),
               )
@@ -140,10 +140,10 @@ class OnboardingShell extends StatelessWidget {
                 text: buttonText,
                 buttonColor: context.themeColors.buttonColor,
                 shadowColor: context.themeColors.buttonBorderColor,
-                foregroundColor: Colors.white,
-                trailingIcon: const Icon(
+                foregroundColor: context.themeColors.whiteColor,
+                trailingIcon: Icon(
                   Icons.arrow_forward_rounded,
-                  color: Colors.white,
+                  color: context.themeColors.whiteColor,
                   size: 20,
                 ),
                 borderRadius: AppSize.r29,

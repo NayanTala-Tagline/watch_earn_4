@@ -1,4 +1,3 @@
-//
 // ignore_for_file: public_member_api_docs
 
 import 'package:flutter/material.dart';
@@ -24,7 +23,32 @@ class ThemeColors extends ThemeExtension<ThemeColors> {
     required this.gradientColor,
     required this.gradientColor2,
     required this.secondary2,
-
+    required this.navyColor,
+    required this.successColor,
+    required this.successShadowColor,
+    required this.coinGoldColor,
+    required this.coinAmberColor,
+    required this.coinSurfaceColor,
+    required this.coinTextColor,
+    required this.daysPillSurfaceColor,
+    required this.xpBadgeColor,
+    required this.dailyRewardGradientStart,
+    required this.dailyRewardGradientEnd,
+    required this.fieldBgColor,
+    required this.linkColor,
+    required this.progressBgColor,
+    required this.adPlaceholderBg,
+    required this.adPlaceholderBorder,
+    required this.adPlaceholderText,
+    required this.dragHandleColor,
+    required this.cardShadowColor,
+    required this.toggleActiveColor,
+    required this.toggleInactiveColor,
+    required this.howCardBgStart,
+    required this.howCardBgEnd,
+    required this.howCardIconBg,
+    required this.codePillShadowColor,
+    required this.webviewNavColor,
   });
 
   final Color backgroundColor;
@@ -45,7 +69,32 @@ class ThemeColors extends ThemeExtension<ThemeColors> {
   final Color gradientColor;
   final Color gradientColor2;
   final Color secondary2;
-
+  final Color navyColor;
+  final Color successColor;
+  final Color successShadowColor;
+  final Color coinGoldColor;
+  final Color coinAmberColor;
+  final Color coinSurfaceColor;
+  final Color coinTextColor;
+  final Color daysPillSurfaceColor;
+  final Color xpBadgeColor;
+  final Color dailyRewardGradientStart;
+  final Color dailyRewardGradientEnd;
+  final Color fieldBgColor;
+  final Color linkColor;
+  final Color progressBgColor;
+  final Color adPlaceholderBg;
+  final Color adPlaceholderBorder;
+  final Color adPlaceholderText;
+  final Color dragHandleColor;
+  final Color cardShadowColor;
+  final Color toggleActiveColor;
+  final Color toggleInactiveColor;
+  final Color howCardBgStart;
+  final Color howCardBgEnd;
+  final Color howCardIconBg;
+  final Color codePillShadowColor;
+  final Color webviewNavColor;
 
   @override
   ThemeColors copyWith({
@@ -66,22 +115,44 @@ class ThemeColors extends ThemeExtension<ThemeColors> {
     Color? buttonBorderColor2,
     Color? gradientColor,
     Color? gradientColor2,
-    Color? purpleGradientColor,
-    Color? purpleGradientColor2,
     Color? secondary2,
-
-
+    Color? navyColor,
+    Color? successColor,
+    Color? successShadowColor,
+    Color? coinGoldColor,
+    Color? coinAmberColor,
+    Color? coinSurfaceColor,
+    Color? coinTextColor,
+    Color? daysPillSurfaceColor,
+    Color? xpBadgeColor,
+    Color? dailyRewardGradientStart,
+    Color? dailyRewardGradientEnd,
+    Color? fieldBgColor,
+    Color? linkColor,
+    Color? progressBgColor,
+    Color? adPlaceholderBg,
+    Color? adPlaceholderBorder,
+    Color? adPlaceholderText,
+    Color? dragHandleColor,
+    Color? cardShadowColor,
+    Color? toggleActiveColor,
+    Color? toggleInactiveColor,
+    Color? howCardBgStart,
+    Color? howCardBgEnd,
+    Color? howCardIconBg,
+    Color? codePillShadowColor,
+    Color? webviewNavColor,
   }) {
     return ThemeColors(
-      borderColor: borderColor ?? this.borderColor,
-      primary: primary ?? this.primary,
-      secondary: secondary ?? this.secondary,
-      iconColor: iconColor ?? this.iconColor,
-      cardColor: cardColor ?? this.cardColor,
       backgroundColor: backgroundColor ?? this.backgroundColor,
       backgroundColor2: backgroundColor2 ?? this.backgroundColor2,
+      primary: primary ?? this.primary,
+      secondary: secondary ?? this.secondary,
       whiteColor: whiteColor ?? this.whiteColor,
-      borderColor2: borderColor ?? this.borderColor2,
+      borderColor: borderColor ?? this.borderColor,
+      iconColor: iconColor ?? this.iconColor,
+      cardColor: cardColor ?? this.cardColor,
+      borderColor2: borderColor2 ?? this.borderColor2,
       redColor: redColor ?? this.redColor,
       redColor2: redColor2 ?? this.redColor2,
       buttonColor: buttonColor ?? this.buttonColor,
@@ -91,7 +162,32 @@ class ThemeColors extends ThemeExtension<ThemeColors> {
       gradientColor: gradientColor ?? this.gradientColor,
       gradientColor2: gradientColor2 ?? this.gradientColor2,
       secondary2: secondary2 ?? this.secondary2,
-
+      navyColor: navyColor ?? this.navyColor,
+      successColor: successColor ?? this.successColor,
+      successShadowColor: successShadowColor ?? this.successShadowColor,
+      coinGoldColor: coinGoldColor ?? this.coinGoldColor,
+      coinAmberColor: coinAmberColor ?? this.coinAmberColor,
+      coinSurfaceColor: coinSurfaceColor ?? this.coinSurfaceColor,
+      coinTextColor: coinTextColor ?? this.coinTextColor,
+      daysPillSurfaceColor: daysPillSurfaceColor ?? this.daysPillSurfaceColor,
+      xpBadgeColor: xpBadgeColor ?? this.xpBadgeColor,
+      dailyRewardGradientStart: dailyRewardGradientStart ?? this.dailyRewardGradientStart,
+      dailyRewardGradientEnd: dailyRewardGradientEnd ?? this.dailyRewardGradientEnd,
+      fieldBgColor: fieldBgColor ?? this.fieldBgColor,
+      linkColor: linkColor ?? this.linkColor,
+      progressBgColor: progressBgColor ?? this.progressBgColor,
+      adPlaceholderBg: adPlaceholderBg ?? this.adPlaceholderBg,
+      adPlaceholderBorder: adPlaceholderBorder ?? this.adPlaceholderBorder,
+      adPlaceholderText: adPlaceholderText ?? this.adPlaceholderText,
+      dragHandleColor: dragHandleColor ?? this.dragHandleColor,
+      cardShadowColor: cardShadowColor ?? this.cardShadowColor,
+      toggleActiveColor: toggleActiveColor ?? this.toggleActiveColor,
+      toggleInactiveColor: toggleInactiveColor ?? this.toggleInactiveColor,
+      howCardBgStart: howCardBgStart ?? this.howCardBgStart,
+      howCardBgEnd: howCardBgEnd ?? this.howCardBgEnd,
+      howCardIconBg: howCardIconBg ?? this.howCardIconBg,
+      codePillShadowColor: codePillShadowColor ?? this.codePillShadowColor,
+      webviewNavColor: webviewNavColor ?? this.webviewNavColor,
     );
   }
 
@@ -120,7 +216,32 @@ class ThemeColors extends ThemeExtension<ThemeColors> {
       gradientColor: Color.lerp(gradientColor, other.gradientColor, t)!,
       gradientColor2: Color.lerp(gradientColor2, other.gradientColor2, t)!,
       secondary2: Color.lerp(secondary2, other.secondary2, t)!,
-
+      navyColor: Color.lerp(navyColor, other.navyColor, t)!,
+      successColor: Color.lerp(successColor, other.successColor, t)!,
+      successShadowColor: Color.lerp(successShadowColor, other.successShadowColor, t)!,
+      coinGoldColor: Color.lerp(coinGoldColor, other.coinGoldColor, t)!,
+      coinAmberColor: Color.lerp(coinAmberColor, other.coinAmberColor, t)!,
+      coinSurfaceColor: Color.lerp(coinSurfaceColor, other.coinSurfaceColor, t)!,
+      coinTextColor: Color.lerp(coinTextColor, other.coinTextColor, t)!,
+      daysPillSurfaceColor: Color.lerp(daysPillSurfaceColor, other.daysPillSurfaceColor, t)!,
+      xpBadgeColor: Color.lerp(xpBadgeColor, other.xpBadgeColor, t)!,
+      dailyRewardGradientStart: Color.lerp(dailyRewardGradientStart, other.dailyRewardGradientStart, t)!,
+      dailyRewardGradientEnd: Color.lerp(dailyRewardGradientEnd, other.dailyRewardGradientEnd, t)!,
+      fieldBgColor: Color.lerp(fieldBgColor, other.fieldBgColor, t)!,
+      linkColor: Color.lerp(linkColor, other.linkColor, t)!,
+      progressBgColor: Color.lerp(progressBgColor, other.progressBgColor, t)!,
+      adPlaceholderBg: Color.lerp(adPlaceholderBg, other.adPlaceholderBg, t)!,
+      adPlaceholderBorder: Color.lerp(adPlaceholderBorder, other.adPlaceholderBorder, t)!,
+      adPlaceholderText: Color.lerp(adPlaceholderText, other.adPlaceholderText, t)!,
+      dragHandleColor: Color.lerp(dragHandleColor, other.dragHandleColor, t)!,
+      cardShadowColor: Color.lerp(cardShadowColor, other.cardShadowColor, t)!,
+      toggleActiveColor: Color.lerp(toggleActiveColor, other.toggleActiveColor, t)!,
+      toggleInactiveColor: Color.lerp(toggleInactiveColor, other.toggleInactiveColor, t)!,
+      howCardBgStart: Color.lerp(howCardBgStart, other.howCardBgStart, t)!,
+      howCardBgEnd: Color.lerp(howCardBgEnd, other.howCardBgEnd, t)!,
+      howCardIconBg: Color.lerp(howCardIconBg, other.howCardIconBg, t)!,
+      codePillShadowColor: Color.lerp(codePillShadowColor, other.codePillShadowColor, t)!,
+      webviewNavColor: Color.lerp(webviewNavColor, other.webviewNavColor, t)!,
     );
   }
 }

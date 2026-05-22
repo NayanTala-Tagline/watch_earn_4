@@ -26,11 +26,35 @@ const _themeColors = ThemeColors(
   buttonBorderColor: Color(0xFF0E0F66),
   buttonBorderColor2: Color(0xFF9C004D),
   redColor: Color(0xFFFF3624),
-
   redColor2: Color(0xFFFF0040),
+  navyColor: Color(0xFF1C2359),
+  successColor: Color(0xFF4CAF50),
+  successShadowColor: Color(0xFF2E7D32),
+  coinGoldColor: Color(0xFFFFB800),
+  coinAmberColor: Color(0xFFC97A00),
+  coinSurfaceColor: Color(0xFFFFF1D6),
+  coinTextColor: Color(0xFF7A4A00),
+  daysPillSurfaceColor: Color(0xFFFFE3EE),
+  xpBadgeColor: Color(0xFFE6E7FF),
+  dailyRewardGradientStart: Color(0xFFFFF1E0),
+  dailyRewardGradientEnd: Color(0xFFFFE0C9),
   gradientColor: Color(0xFF013717),
   gradientColor2: Color(0xFF0D9191),
-
+  fieldBgColor: Color(0xFFF6F7FB),
+  linkColor: Color(0xFF4A6CF7),
+  progressBgColor: Color(0xFFE8EAF0),
+  adPlaceholderBg: Color(0xFFF5E8FF),
+  adPlaceholderBorder: Color(0xFFDEC6F5),
+  adPlaceholderText: Color(0xFFBB86CC),
+  dragHandleColor: Color(0xFFCDD2E0),
+  cardShadowColor: Color(0x140E0F66),
+  toggleActiveColor: Color(0xFF009A65),
+  toggleInactiveColor: Color(0xFFB8BDD4),
+  howCardBgStart: Color(0xFFFFE5C8),
+  howCardBgEnd: Color(0xFFFFD8E2),
+  howCardIconBg: Color(0xFFFFC56C),
+  codePillShadowColor: Color(0xFF6B7393),
+  webviewNavColor: Color(0xFF0E3E4F),
 );
 
 const _themeTextColors = ThemeTextColors(
@@ -40,7 +64,11 @@ const _themeTextColors = ThemeTextColors(
   descriptionColor: Color(0xFFBCC4C8),
   pastalYellow: Color(0xF3DCC1CC),
   primaryTextColor: Color(0xFF0B0E2C),
-  secondaryTextColor: Color(0xFF5BF2DA)
+  secondaryTextColor: Color(0xFF5BF2DA),
+  bodyTextColor: Color(0xFF8A8FA8),
+  darkTitleColor: Color(0xFF0B0E2C),
+  mutedTextColor: Color(0xFF9AA0B5),
+  subtitleColor: Color(0xFF3D4778),
 );
 
 final TextTheme _textTheme = _darkThemeData.textTheme.copyWith(

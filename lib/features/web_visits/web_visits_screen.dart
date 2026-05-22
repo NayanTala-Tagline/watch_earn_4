@@ -11,6 +11,8 @@ import '../../utils/anaytics_manager.dart';
 import '../../utils/app_size.dart';
 import '../../utils/navigation_helper.dart';
 import '../../utils/remote_config.dart';
+import '../../gen/fonts.gen.dart';
+import '../../widgets/app_button.dart';
 import '../../widgets/common_appbar.dart';
 import 'provider/visit_website_provider.dart';
 
@@ -152,22 +154,31 @@ class _WebVisitsContentState extends State<_WebVisitsContent>
     showModalBottomSheet<void>(
       context: context,
       backgroundColor: Colors.transparent,
-      builder: (sheetCtx) => _MissionBriefSheet(
-        durationSecs: _visitDurationSecs,
-        onStart: () {
-          AnalyticsManager.instance.logEvent(
-            name: 'web_visit_mission_start',
-            parameters: {'visit_title': item.title},
-          );
-          sheetCtx.pop();
-          _activeItemIndex = index;
-          if (_useInAppWebView) {
-            _launchVisitInApp(item);
-          } else {
-            _launchVisitExternal(item);
-          }
-        },
-        onCancel: () => sheetCtx.pop(),
+      isScrollControlled: true,
+      builder: (sheetCtx) => Padding(
+        padding: EdgeInsets.fromLTRB(
+          AppSize.w16,
+          AppSize.h0,
+          AppSize.w16,
+          AppSize.h16 + MediaQuery.viewPaddingOf(sheetCtx).bottom,
+        ),
+        child: _MissionBriefSheet(
+          durationSecs: _visitDurationSecs,
+          onStart: () {
+            AnalyticsManager.instance.logEvent(
+              name: 'web_visit_mission_start',
+              parameters: {'visit_title': item.title},
+            );
+            sheetCtx.pop();
+            _activeItemIndex = index;
+            if (_useInAppWebView) {
+              _launchVisitInApp(item);
+            } else {
+              _launchVisitExternal(item);
+            }
+          },
+          onCancel: () => sheetCtx.pop(),
+        ),
       ),
     );
   }
@@ -417,36 +428,39 @@ class _VisitTile extends StatelessWidget {
 // ── Shared bottom sheet shell ─────────────────────────────────────────────────
 
 class _SheetShell extends StatelessWidget {
-  const _SheetShell({required this.child});
+  const _SheetShell({required this.child, this.floating = false});
   final Widget child;
+  final bool floating;
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.themeColors;
+    final radius = floating
+        ? BorderRadius.circular(AppSize.r24)
+        : BorderRadius.vertical(top: Radius.circular(AppSize.r48), bottom: Radius.circular(AppSize.r48));
     return Container(
       width: double.infinity,
       padding: EdgeInsets.fromLTRB(
         AppSize.w24,
-        AppSize.h20,
+        AppSize.h12,
         AppSize.w24,
-        AppSize.h32 + MediaQuery.of(context).padding.bottom,
+        AppSize.h24,
       ),
       decoration: BoxDecoration(
-        color: context.themeColors.cardColor,
-        borderRadius:
-            BorderRadius.vertical(top: Radius.circular(AppSize.r24)),
-        border: Border(
-          top: BorderSide(
-              color: const Color(0xFF29B0E6).withValues(alpha: 0.4)),
-          left: BorderSide(
-              color: const Color(0xFF29B0E6).withValues(alpha: 0.4)),
-          right: BorderSide(
-              color: const Color(0xFF29B0E6).withValues(alpha: 0.4)),
-        ),
+        color: colors.whiteColor,
+        borderRadius: radius,
+        border: floating
+            ? Border.all(color: colors.borderColor2)
+            : Border(
+                top: BorderSide(color: colors.borderColor2),
+                left: BorderSide(color: colors.borderColor2),
+                right: BorderSide(color: colors.borderColor2),
+              ),
         boxShadow: [
           BoxShadow(
-            color: const Color(0xFF00B7FF).withValues(alpha: 0.2),
+            color: colors.cardShadowColor,
             blurRadius: AppSize.r24,
-            offset: Offset(0, -AppSize.h6),
+            offset: floating ? Offset.zero : Offset(0, -AppSize.h4),
           ),
         ],
       ),
@@ -458,10 +472,9 @@ class _SheetShell extends StatelessWidget {
             height: AppSize.h4,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(AppSize.r100),
-              color: context.themeColors.dragHandleColor,
+              color: colors.dragHandleColor,
             ),
           ),
-          SizedBox(height: AppSize.h20),
           child,
         ],
       ),
@@ -484,54 +497,97 @@ class _MissionBriefSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _SheetShell(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Assets.images.trophy.image(height: 90, width: 90, fit: BoxFit.contain),
-          SizedBox(height: AppSize.h16),
-          Text(
-            'Mission Brief',
-            style: context.textTheme.titleLarge?.copyWith(
-              fontSize: AppSize.sp22,
-              fontWeight: FontWeight.w800,
-              color: context.themeTextColors.textColor,
-            ),
-          ),
-          SizedBox(height: AppSize.h8),
-          Text.rich(
-            TextSpan(
+    final colors = context.themeColors;
+    final textColors = context.themeTextColors;
+    const iconSize = 130.0;
+    const iconRadius = iconSize / 2;
+
+    return Stack(
+      clipBehavior: Clip.none,
+      children: [
+        Padding(
+          padding: EdgeInsets.only(top: iconRadius),
+          child: _SheetShell(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
               children: [
-                TextSpan(
-                  text:
-                      'Stay on the page for $durationSecs secs. A countdown\ntimer will appear. Click "',
-                ),
-                TextSpan(
-                  text: 'Claim Coin',
-                  style: context.textTheme.titleLarge?.copyWith(
-                    fontWeight: FontWeight.w800,
-                    color: context.themeTextColors.textColor,
+                SizedBox(height: iconRadius + 5),
+
+                Text(
+                  'Mission Brief',
+                  style: TextStyle(
+                    fontFamily: FontFamily.kommonGrotesk,
+                    fontSize: AppSize.sp28,
+                    fontWeight: FontWeight.w900,
+                    color: textColors.darkTitleColor,
                   ),
                 ),
-                const TextSpan(text: '" when ready!'),
+                SizedBox(height: AppSize.h8),
+
+                Text.rich(
+                  TextSpan(
+                    style: TextStyle(
+                      fontFamily: FontFamily.kommonGrotesk,
+                      fontSize: AppSize.sp18,
+                      color: textColors.bodyTextColor,
+                    ),
+                    children: [
+                      TextSpan(
+                        text: 'Stay on the page for $durationSecs Secs., '
+                            'A countdown timer will appear. click ',
+                        style: context.textTheme.bodyLarge?.copyWith(
+                          fontSize: AppSize.sp18,
+                        ),
+                      ),
+                      TextSpan(
+                        text: '"CLAIM COIN"',
+                        style: context.textTheme.bodyLarge?.copyWith(
+                          fontSize: AppSize.sp18,
+                          fontWeight: FontWeight.w900
+                        )
+                      ),
+                      TextSpan(text: ' when ready!',
+                        style: context.textTheme.bodyLarge?.copyWith(
+                          fontSize: AppSize.sp18,
+                        ),
+                      ),
+                    ],
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(height: AppSize.h20),
+
+                Row(
+                  children: [
+                    Expanded(child: _OutlinePill(label: 'Cancel', onPressed: onCancel)),
+                    SizedBox(width: AppSize.w12),
+                    Expanded(child: _CyanPill(label: 'Start Now', onPressed: onStart)),
+                  ],
+                ),
               ],
             ),
-            textAlign: TextAlign.center,
-            style: context.textTheme.bodyMedium?.copyWith(
-              color: context.themeTextColors.descriptionColor,
-              height: 1.6,
+          ),
+        ),
+
+        Positioned(
+          top: 0,
+          left: 0,
+          right: 0,
+          child: Center(
+            child: Container(
+              width: iconSize,
+              height: iconSize,
+              decoration: BoxDecoration(
+                color: colors.xpBadgeColor,
+                shape: BoxShape.circle,
+                border: Border.all(color: Colors.white, width: 5),
+              ),
+              padding: EdgeInsets.all(AppSize.w20),
+              child: Assets.images.missionBrief.image(fit: BoxFit.contain),
             ),
           ),
-          SizedBox(height: AppSize.h24),
-          Row(
-            children: [
-              Expanded(child: _OutlinePill(label: 'Cancel', onPressed: onCancel)),
-              SizedBox(width: AppSize.w12),
-              Expanded(child: _CyanPill(label: 'Start', onPressed: onStart)),
-            ],
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
@@ -634,42 +690,20 @@ class _CyanPill extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final radius = BorderRadius.circular(AppSize.r100);
-    return Material(
-      color: Colors.transparent,
-      borderRadius: radius,
-      child: InkWell(
-        borderRadius: radius,
-        onTap: onPressed,
-        child: Container(
-          height: AppSize.h48,
-          width: double.infinity,
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            borderRadius: radius,
-            gradient: const LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [Color(0xFF9AE0FA), Color(0xFF5CCBF7)],
-            ),
-            border: Border.all(color: const Color(0xFFB8ECFF)),
-            boxShadow: [
-              BoxShadow(
-                color: const Color(0xFF5CCBF7).withValues(alpha: 0.4),
-                blurRadius: AppSize.r16,
-                offset: Offset(0, AppSize.h4),
-              ),
-            ],
-          ),
-          child: Text(
-            label,
-            style: context.textTheme.titleLarge?.copyWith(
-              fontSize: AppSize.sp15,
-              color: const Color(0xFF003A52),
-            ),
-          ),
-        ),
+    return AppButton(
+      text: label,
+      buttonColor: context.themeColors.buttonColor,
+      shadowColor: context.themeColors.buttonBorderColor,
+      foregroundColor: context.themeColors.whiteColor,
+      wallOffset: 4,
+      borderRadius: AppSize.r28,
+      textStyle: TextStyle(
+        fontFamily: FontFamily.kommonGrotesk,
+        fontSize: AppSize.sp15,
+        fontWeight: FontWeight.w800,
+        color: context.themeColors.whiteColor,
       ),
+      onPressed: onPressed,
     );
   }
 }
@@ -681,7 +715,7 @@ class _OutlinePill extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final radius = BorderRadius.circular(AppSize.r100);
+    final radius = BorderRadius.circular(AppSize.r28);
     return Material(
       color: Colors.transparent,
       borderRadius: radius,
@@ -693,6 +727,7 @@ class _OutlinePill extends StatelessWidget {
           width: double.infinity,
           alignment: Alignment.center,
           decoration: BoxDecoration(
+            color: context.themeColors.fieldBgColor,
             borderRadius: radius,
             border: Border.all(
               color: context.themeColors.borderColor,
@@ -701,9 +736,11 @@ class _OutlinePill extends StatelessWidget {
           ),
           child: Text(
             label,
-            style: context.textTheme.titleSmall?.copyWith(
+            style: TextStyle(
+              fontFamily: FontFamily.kommonGrotesk,
               fontSize: AppSize.sp15,
-              color: context.themeTextColors.textColor,
+              fontWeight: FontWeight.w600,
+              color: context.themeTextColors.darkTitleColor,
             ),
           ),
         ),

@@ -7,6 +7,7 @@ import 'package:watch_earn_4/features/withdraw/model/withdraw_models.dart';
 import 'package:watch_earn_4/features/withdraw/provider/withdraw_provider.dart';
 import 'package:watch_earn_4/gen/fonts.gen.dart';
 import 'package:watch_earn_4/utils/app_size.dart';
+import 'package:watch_earn_4/utils/remote_config.dart';
 
 class WithdrawBottomSheet extends StatelessWidget {
   const WithdrawBottomSheet({super.key, required this.item});
@@ -102,7 +103,7 @@ class WithdrawBottomSheet extends StatelessWidget {
                         color: item.color,
                       ),
                       suffixText:
-                          'Min ${WithdrawProvider.minWithdrawAmount.toStringAsFixed(0)}',
+                          'Min ${RemoteConfigService.instance.minWithdrawAmount.toDouble().toStringAsFixed(0)}',
                       keyboardType: const TextInputType.numberWithOptions(
                         decimal: true,
                       ),
@@ -116,8 +117,8 @@ class WithdrawBottomSheet extends StatelessWidget {
                         }
                         final amount = double.tryParse(v.trim());
                         if (amount == null) return 'Enter a valid amount';
-                        if (amount < WithdrawProvider.minWithdrawAmount) {
-                          return 'Minimum withdraw is ${WithdrawProvider.minWithdrawAmount.toStringAsFixed(0)} coins';
+                        if (amount < RemoteConfigService.instance.minWithdrawAmount.toDouble()) {
+                          return 'Minimum withdraw is ${RemoteConfigService.instance.minWithdrawAmount.toDouble().toStringAsFixed(0)} coins';
                         }
                         return null;
                       },

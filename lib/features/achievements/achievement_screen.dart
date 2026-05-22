@@ -3,6 +3,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:provider/provider.dart';
 
 import '../../extension/ext_context.dart';
+import '../../extension/ext_string_alert.dart';
 import '../../gen/assets.gen.dart';
 import '../../models/achievement_model.dart';
 import '../../utils/anaytics_manager.dart';
@@ -136,16 +137,13 @@ class _AchievementBodyState extends State<_AchievementBody> {
     AchievementProvider prov,
     AchievementDef def,
   ) async {
-    final messenger = ScaffoldMessenger.of(context);
     final success = await prov.claimAchievement(def);
     if (!mounted) return;
 
     if (success) {
       _showClaimSuccess(def);
     } else {
-      messenger.showSnackBar(
-        const SnackBar(content: Text('Could not claim reward. Try again.')),
-      );
+      'Could not claim reward. Try again.'.showErrorAlert();
     }
   }
 

@@ -2,12 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:watch_earn_4/widgets/common_appbar.dart';
 
 import '../../extension/ext_context.dart';
+import '../../extension/ext_string_alert.dart';
 import '../../res/theme_colors.dart';
 import '../../res/theme_text_colors.dart';
 import '../../routes/app_router.dart';
 import '../../utils/app_size.dart';
+import '../../utils/remote_config.dart';
 import 'provider/profile_provider.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -42,23 +46,12 @@ class _ProfileBody extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: colors.backgroundColor,
+      appBar: CommonAppBar(titleText: 'Profile', showLeading: false),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: EdgeInsets.symmetric(horizontal: AppSize.w20),
           child: Column(
             children: [
-              SizedBox(height: AppSize.h20),
-
-              // Title
-              Text(
-                'Profile',
-                style: context.textTheme.titleLarge?.copyWith(
-                  fontSize: AppSize.sp20,
-                  fontWeight: FontWeight.w700,
-                  color: textColors.textBlackColor,
-                ),
-              ).animate().fadeIn(duration: 350.ms),
-
               SizedBox(height: AppSize.h28),
 
               // Avatar
@@ -197,7 +190,7 @@ class _ProfileBody extends StatelessWidget {
           _SettingsTile(
             icon: Icons.translate_rounded,
             label: 'Language',
-            onTap: () => context.pushNamed(AppRoutes.language),
+            onTap: () => context.pushNamed(AppRoutes.language, extra: true),
             trailing: _buildChevron(context),
             textColors: textColors,
           ),
@@ -205,7 +198,7 @@ class _ProfileBody extends StatelessWidget {
           _SettingsTile(
             icon: Icons.headset_mic_rounded,
             label: 'Support',
-            onTap: () {},
+            onTap: () => context.pushNamed(AppRoutes.contactUs),
             trailing: _buildChevron(context),
             textColors: textColors,
           ),
@@ -213,7 +206,10 @@ class _ProfileBody extends StatelessWidget {
           _SettingsTile(
             icon: Icons.lock_outline_rounded,
             label: 'Privacy Policy',
-            onTap: () {},
+            onTap: () => _launchUrl(
+              RemoteConfigService.instance.privacyPolicyUrl,
+              'Privacy Policy',
+            ),
             trailing: _buildChevron(context),
             textColors: textColors,
           ),
@@ -221,7 +217,10 @@ class _ProfileBody extends StatelessWidget {
           _SettingsTile(
             icon: Icons.description_outlined,
             label: 'Terms & Condition',
-            onTap: () {},
+            onTap: () => _launchUrl(
+              RemoteConfigService.instance.termsAndConditions,
+              'Terms & Conditions',
+            ),
             trailing: _buildChevron(context),
             textColors: textColors,
             isLast: true,
@@ -308,6 +307,17 @@ class _ProfileBody extends StatelessWidget {
     if (confirmed == true) {
       await provider.signOut();
       if (context.mounted) context.goNamed(AppRoutes.login);
+    }
+  }
+
+  Future<void> _launchUrl(String url, String label) async {
+    if (url.isEmpty) {
+      'No URL configured for $label.'.showInfoAlert();
+      return;
+    }
+    final uri = Uri.tryParse(url);
+    if (uri == null || !await launchUrl(uri, mode: LaunchMode.inAppWebView)) {
+      'Could not open $label.'.showErrorAlert();
     }
   }
 }

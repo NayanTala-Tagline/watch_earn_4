@@ -577,16 +577,7 @@ class _ResultSheet extends StatelessWidget {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Container(
-                      width: AppSize.w40,
-                      height: AppSize.h4,
-                      decoration: BoxDecoration(
-                        color: context.themeColors.dragHandleColor,
-                        borderRadius:
-                            BorderRadius.circular(AppSize.r100),
-                      ),
-                    ),
-                    SizedBox(height: AppSize.h20),
+                    SizedBox(height: AppSize.h16),
                     Text(
                       isLoss ? 'Oops!' : 'Congratulations..!',
                       textAlign: TextAlign.center,

@@ -103,7 +103,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
           title: title ??
               Text(
                 titleText ?? '',
-                style: context.textTheme.titleSmall?.copyWith(fontSize: AppSize.sp19),
+                style: context.textTheme.titleLarge?.copyWith(fontSize: AppSize.sp18, fontWeight: FontWeight.w900),
               ),
           centerTitle: true,
           actions: actions,

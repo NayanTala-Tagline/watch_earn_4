@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 import '../extension/ext_context.dart';
+import '../gen/assets.gen.dart';
 import '../utils/app_size.dart';
 import 'app_button.dart';
 
@@ -61,92 +63,88 @@ class _RewardAdBottomSheetState extends State<RewardAdBottomSheet> {
 
     return Container(
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [colors.backgroundColor2, colors.backgroundColor],
-        ),
-        borderRadius: BorderRadius.vertical(top: Radius.circular(AppSize.r24)),
-        border: Border.all(color: colors.borderColor, width: 1),
+        color: colors.backgroundColor2,
+        borderRadius: BorderRadius.vertical(top: Radius.circular(AppSize.r28)),
+        border: Border(top: BorderSide(color: colors.borderColor2, width: 1.5)),
+        boxShadow: [
+          BoxShadow(
+            color: colors.primary.withValues(alpha: 0.12),
+            blurRadius: 30,
+            offset: const Offset(0, -8),
+          ),
+        ],
       ),
       padding: EdgeInsets.fromLTRB(
-        AppSize.w20,
+        AppSize.w24,
         AppSize.h12,
-        AppSize.w20,
-        AppSize.h20 + MediaQuery.viewPaddingOf(context).bottom,
+        AppSize.w24,
+        AppSize.h24 + MediaQuery.viewPaddingOf(context).bottom,
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
+          // Drag handle
           Container(
             width: AppSize.w40,
             height: AppSize.h4,
             decoration: BoxDecoration(
-              color: colors.whiteColor.withValues(alpha: 0.25),
+              color: colors.dragHandleColor,
               borderRadius: BorderRadius.circular(AppSize.r2),
             ),
           ),
+          SizedBox(height: AppSize.h24),
+
+          // Coin icon with glow ring
+          _CoinBadge(colors: colors)
+              .animate()
+              .scale(
+                begin: const Offset(0.6, 0.6),
+                end: const Offset(1.0, 1.0),
+                duration: 500.ms,
+                curve: Curves.easeOutBack,
+              )
+              .fadeIn(duration: 400.ms),
+
           SizedBox(height: AppSize.h20),
 
-          Container(
-            width: AppSize.w80,
-            height: AppSize.w80,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: colors.primary.withValues(alpha: 0.18),
-              border: Border.all(
-                color: colors.borderColor2.withValues(alpha: 0.6),
-                width: 1.5,
-              ),
-              boxShadow: [
-                BoxShadow(
-                  color: colors.primary.withValues(alpha: 0.35),
-                  blurRadius: 18,
-                  spreadRadius: 1,
-                ),
-              ],
-            ),
-            padding: EdgeInsets.all(AppSize.w14),
-            child: Icon(Icons.gif_box),
-          ),
-          SizedBox(height: AppSize.h16),
-
+          // Title
           Text(
             'Earn a Reward',
             style: context.textTheme.titleLarge?.copyWith(
               fontSize: AppSize.sp22,
-              fontWeight: FontWeight.w700,
-              color: colors.whiteColor,
+              fontWeight: FontWeight.w800,
+              color: textColors.darkTitleColor,
             ),
           ),
           SizedBox(height: AppSize.h8),
 
+          // Description
           Text(
-            'Watch a short ad to claim your reward and keep mining at full speed.',
+            'Watch a short ad to claim your reward.\nYour support keeps the app free!',
             textAlign: TextAlign.center,
             style: context.textTheme.bodyMedium?.copyWith(
               fontSize: AppSize.sp14,
-              height: 1.4,
-              color: textColors.descriptionColor,
+              height: 1.5,
+              color: textColors.bodyTextColor,
             ),
           ),
-          SizedBox(height: AppSize.h18),
+          SizedBox(height: AppSize.h20),
 
+          // Auto-start countdown pill
           AnimatedSwitcher(
             duration: const Duration(milliseconds: 200),
             child: _remainingSeconds > 0
                 ? Container(
                     key: ValueKey(_remainingSeconds),
                     padding: EdgeInsets.symmetric(
-                      horizontal: AppSize.w14,
+                      horizontal: AppSize.w16,
                       vertical: AppSize.h8,
                     ),
                     decoration: BoxDecoration(
-                      color: colors.primary.withValues(alpha: 0.15),
+                      color: colors.coinSurfaceColor,
                       borderRadius: BorderRadius.circular(AppSize.r20),
                       border: Border.all(
-                        color: colors.borderColor2.withValues(alpha: 0.5),
-                        width: 1,
+                        color: colors.coinGoldColor.withValues(alpha: 0.4),
                       ),
                     ),
                     child: Row(
@@ -154,8 +152,8 @@ class _RewardAdBottomSheetState extends State<RewardAdBottomSheet> {
                       children: [
                         Icon(
                           Icons.timer_outlined,
-                          size: AppSize.sp16,
-                          color: colors.secondary,
+                          size: AppSize.sp15,
+                          color: colors.coinAmberColor,
                         ),
                         SizedBox(width: AppSize.w6),
                         Text(
@@ -163,16 +161,17 @@ class _RewardAdBottomSheetState extends State<RewardAdBottomSheet> {
                           style: context.textTheme.bodySmall?.copyWith(
                             fontSize: AppSize.sp13,
                             fontWeight: FontWeight.w600,
-                            color: colors.whiteColor,
+                            color: colors.coinTextColor,
                           ),
                         ),
                       ],
                     ),
                   )
-                : SizedBox(height: AppSize.h32),
+                : SizedBox(height: AppSize.h36),
           ),
-          SizedBox(height: AppSize.h20),
+          SizedBox(height: AppSize.h24),
 
+          // Action buttons
           Row(
             children: [
               Expanded(
@@ -189,10 +188,10 @@ class _RewardAdBottomSheetState extends State<RewardAdBottomSheet> {
                 flex: 2,
                 child: AppButton(
                   text: 'Get Reward',
-                  borderRadius: AppSize.r25,
+                  borderRadius: AppSize.r14,
                   icon: Icon(
                     Icons.play_circle_fill_rounded,
-                    color: colors.whiteColor,
+                    color: Colors.white,
                     size: AppSize.sp20,
                   ),
                   onPressed: () {
@@ -210,6 +209,64 @@ class _RewardAdBottomSheetState extends State<RewardAdBottomSheet> {
   }
 }
 
+// ── Coin badge icon ───────────────────────────────────────────────────────────
+
+class _CoinBadge extends StatelessWidget {
+  const _CoinBadge({required this.colors});
+
+  final dynamic colors;
+
+  @override
+  Widget build(BuildContext context) {
+    final c = context.themeColors;
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        // Outer glow ring
+        Container(
+          width: AppSize.w90,
+          height: AppSize.w90,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            gradient: RadialGradient(
+              colors: [
+                c.primary.withValues(alpha: 0.18),
+                c.primary.withValues(alpha: 0.0),
+              ],
+            ),
+          ),
+        ),
+        // Inner circle
+        Container(
+          width: AppSize.w72,
+          height: AppSize.w72,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [c.primary, c.secondary],
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: c.primary.withValues(alpha: 0.40),
+                blurRadius: 20,
+                offset: const Offset(0, 8),
+              ),
+            ],
+          ),
+          padding: EdgeInsets.all(AppSize.w18),
+          child: Assets.icons.icCoin.svg(
+            colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+// ── Cancel button ─────────────────────────────────────────────────────────────
+
 class _CancelButton extends StatelessWidget {
   final VoidCallback onTap;
 
@@ -220,24 +277,21 @@ class _CancelButton extends StatelessWidget {
     final colors = context.themeColors;
     return InkWell(
       onTap: onTap,
-      borderRadius: BorderRadius.circular(AppSize.r25),
+      borderRadius: BorderRadius.circular(AppSize.r14),
       child: Container(
-        height: AppSize.h48,
+        height: AppSize.h52,
         alignment: Alignment.center,
         decoration: BoxDecoration(
-          color: colors.cardColor.withValues(alpha: 0.4),
-          borderRadius: BorderRadius.circular(AppSize.r25),
-          border: Border.all(
-            color: colors.borderColor.withValues(alpha: 0.8),
-            width: 1.2,
-          ),
+          color: colors.fieldBgColor,
+          borderRadius: BorderRadius.circular(AppSize.r14),
+          border: Border.all(color: colors.borderColor, width: 1.2),
         ),
         child: Text(
           'Cancel',
           style: context.textTheme.bodyMedium?.copyWith(
-            fontSize: AppSize.sp16,
+            fontSize: AppSize.sp15,
             fontWeight: FontWeight.w600,
-            color: colors.whiteColor.withValues(alpha: 0.85),
+            color: context.themeTextColors.bodyTextColor,
           ),
         ),
       ),
@@ -245,7 +299,7 @@ class _CancelButton extends StatelessWidget {
   }
 }
 
-/// Helper function to show the reward ad bottom sheet
+/// Shows the reward ad bottom sheet.
 Future<void> showRewardAdBottomSheet({
   required BuildContext context,
   required VoidCallback onSupportUs,

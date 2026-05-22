@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:watch_earn_4/db/app_db.dart';
+import 'package:watch_earn_4/di/injector.dart';
 import 'package:watch_earn_4/extension/ext_context.dart';
 import 'package:watch_earn_4/features/withdraw/model/withdraw_models.dart';
 import 'package:watch_earn_4/features/withdraw/provider/withdraw_provider.dart';
@@ -7,13 +9,13 @@ import 'package:watch_earn_4/features/withdraw/withdraw_bottom_sheet.dart';
 import 'package:watch_earn_4/gen/assets.gen.dart';
 import 'package:watch_earn_4/gen/fonts.gen.dart';
 import 'package:watch_earn_4/utils/app_size.dart';
+import 'package:watch_earn_4/utils/remote_config.dart';
 import 'package:watch_earn_4/widgets/app_button.dart';
 import 'package:watch_earn_4/widgets/balance_card.dart';
 import 'package:watch_earn_4/widgets/common_header.dart';
 
 // feature-specific colours not covered by the mapping
 const _coinPillText = Color(0xFF7A4A00);
-const _currencyBorder = Color(0xFFE3E6F2);
 
 class WithdrawScreen extends StatelessWidget {
   const WithdrawScreen({super.key});
@@ -84,13 +86,10 @@ class _WithdrawViewState extends State<_WithdrawView> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  BalanceCard(
-                    title: 'Available Balance',
-                    amountWhole: '\$0',
-                    amountFraction: '.00015',
-                    body: const _BalanceBody(),
-                  ),
-                  SizedBox(height: AppSize.h16),
+                  const _LiveBalanceCard(),
+                  SizedBox(height: AppSize.h12),
+                  _PendingWithdrawBanner(provider: provider),
+                  SizedBox(height: AppSize.h4),
                   _CategoryTabs(
                     categories: categories,
                     selectedIndex: categoryIndex,
@@ -171,72 +170,90 @@ class _WithdrawViewState extends State<_WithdrawView> {
   }
 }
 
-// ── Balance body ────────────────────────────────────────────────────────────
-class _BalanceBody extends StatelessWidget {
-  const _BalanceBody();
+// ── Live balance card ────────────────────────────────────────────────────────
+class _LiveBalanceCard extends StatelessWidget {
+  const _LiveBalanceCard();
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    final db = Injector.instance<AppDB>();
+    return StreamBuilder(
+      stream: db.userListenable(),
+      builder: (context, _) {
+        final coins = db.userModel?.coin ?? 0;
+        final divider = RemoteConfigService.instance.coinToDollarDivider;
+        final minCoins = RemoteConfigService.instance.minWithdrawAmount;
+        final dollarValue = coins / divider;
+        final minDollar = minCoins / divider;
+
+        final whole = '\$${dollarValue.toStringAsFixed(2).split('.').first}';
+        final fraction = '.${dollarValue.toStringAsFixed(5).split('.').last}';
+
+        return BalanceCard(
+          title: 'Available Balance',
+          amountWhole: whole,
+          amountFraction: fraction,
+          body: _BalanceBody(coins: coins.toInt(), minDollar: minDollar),
+        );
+      },
+    );
+  }
+}
+
+// ── Balance body ─────────────────────────────────────────────────────────────
+class _BalanceBody extends StatelessWidget {
+  const _BalanceBody({required this.coins, required this.minDollar});
+
+  final int coins;
+  final double minDollar;
+
+  @override
+  Widget build(BuildContext context) {
+    return Wrap(
+      spacing: AppSize.w8,
+      runSpacing: AppSize.h8,
       children: [
-        Wrap(
-          spacing: AppSize.w8,
-          runSpacing: AppSize.h8,
-          children: [
-            _pill(
-              surface: context.themeColors.coinSurfaceColor,
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Assets.icons.icCoin.svg(width: 18, height: 18),
-                  SizedBox(width: AppSize.w6),
-                  Text(
-                    '15 Coins',
-                    style: TextStyle(
-                      fontFamily: FontFamily.kommonGrotesk,
-                      fontSize: AppSize.sp12,
-                      fontWeight: FontWeight.w900,
-                      color: _coinPillText,
-                    ),
-                  ),
-                ],
+        _pill(
+          surface: context.themeColors.coinSurfaceColor,
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Assets.icons.icCoin.svg(width: 18, height: 18),
+              SizedBox(width: AppSize.w6),
+              Text(
+                '$coins Coins',
+                style: TextStyle(
+                  fontFamily: FontFamily.kommonGrotesk,
+                  fontSize: AppSize.sp12,
+                  fontWeight: FontWeight.w900,
+                  color: _coinPillText,
+                ),
               ),
-            ),
-            _pill(
-              surface: context.themeColors.xpBadgeColor,
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(
-                    Icons.bolt_rounded,
-                    size: AppSize.sp16,
-                    color: context.themeColors.buttonBorderColor,
-                  ),
-                  SizedBox(width: AppSize.w4),
-                  Text(
-                    'Min. Withdrawal - \$ 1.00',
-                    style: TextStyle(
-                      fontFamily: FontFamily.kommonGrotesk,
-                      fontSize: AppSize.sp12,
-                      fontWeight: FontWeight.w900,
-                      color: context.themeColors.buttonBorderColor,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
-        SizedBox(height: AppSize.h12),
-        const Wrap(
-          spacing: 8,
-          runSpacing: 8,
-          children: [
-            _CurrencyChip(label: 'INR 0.14'),
-            _CurrencyChip(label: 'PKR 0.45'),
-            _CurrencyChip(label: 'BDT 0.18'),
-          ],
+        _pill(
+          surface: context.themeColors.xpBadgeColor,
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(
+                Icons.bolt_rounded,
+                size: AppSize.sp16,
+                color: context.themeColors.buttonBorderColor,
+              ),
+              SizedBox(width: AppSize.w4),
+              Text(
+                'Min. Withdrawal – \$${minDollar.toStringAsFixed(2)}',
+                style: TextStyle(
+                  fontFamily: FontFamily.kommonGrotesk,
+                  fontSize: AppSize.sp12,
+                  fontWeight: FontWeight.w900,
+                  color: context.themeColors.buttonBorderColor,
+                ),
+              ),
+            ],
+          ),
         ),
       ],
     );
@@ -253,6 +270,57 @@ class _BalanceBody extends StatelessWidget {
         borderRadius: BorderRadius.circular(AppSize.r20),
       ),
       child: child,
+    );
+  }
+}
+
+// ── Pending withdrawal banner ────────────────────────────────────────────────
+class _PendingWithdrawBanner extends StatelessWidget {
+  const _PendingWithdrawBanner({required this.provider});
+
+  final WithdrawProvider provider;
+
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder<bool>(
+      stream: provider.pendingWithdrawStream(),
+      builder: (context, snapshot) {
+        if (snapshot.data != true) return const SizedBox.shrink();
+        return Container(
+          width: double.infinity,
+          padding: EdgeInsets.symmetric(
+            horizontal: AppSize.w16,
+            vertical: AppSize.h12,
+          ),
+          decoration: BoxDecoration(
+            color: const Color(0xFFE6A817).withValues(alpha: 0.10),
+            borderRadius: BorderRadius.circular(AppSize.r12),
+            border: Border.all(
+              color: const Color(0xFFE6A817).withValues(alpha: 0.5),
+            ),
+          ),
+          child: Row(
+            children: [
+              Icon(
+                Icons.hourglass_top_rounded,
+                color: const Color(0xFFE6A817),
+                size: AppSize.sp20,
+              ),
+              SizedBox(width: AppSize.w10),
+              Expanded(
+                child: Text(
+                  'You have a pending withdrawal. New requests are disabled until it is approved.',
+                  style: context.textTheme.bodySmall?.copyWith(
+                    color: context.themeTextColors.darkTitleColor,
+                    fontSize: AppSize.sp13,
+                    height: 1.35,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }
@@ -282,36 +350,6 @@ class _WithdrawCta extends StatelessWidget {
           color: context.themeColors.whiteColor,
         ),
         onPressed: onPressed,
-      ),
-    );
-  }
-}
-
-// ── Currency chip ───────────────────────────────────────────────────────────
-class _CurrencyChip extends StatelessWidget {
-  const _CurrencyChip({required this.label});
-  final String label;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(
-        horizontal: AppSize.w14,
-        vertical: AppSize.h8,
-      ),
-      decoration: BoxDecoration(
-        color: context.themeColors.whiteColor,
-        borderRadius: BorderRadius.circular(AppSize.r20),
-        border: Border.all(color: _currencyBorder),
-      ),
-      child: Text(
-        label,
-        style: TextStyle(
-          fontFamily: FontFamily.kommonGrotesk,
-          fontSize: AppSize.sp13,
-          fontWeight: FontWeight.w900,
-          color: context.themeColors.buttonBorderColor,
-        ),
       ),
     );
   }

@@ -6,9 +6,11 @@ import 'package:watch_earn_4/features/withdraw/model/withdraw_models.dart';
 import 'package:watch_earn_4/gen/assets.gen.dart';
 import 'package:watch_earn_4/utils/app_size.dart';
 import 'package:watch_earn_4/utils/regex_helper.dart';
+import 'package:watch_earn_4/utils/remote_config.dart';
 
 class WithdrawProvider extends ChangeNotifier {
-  static const double minWithdrawAmount = 1000;
+  static double get minWithdrawAmount =>
+      RemoteConfigService.instance.minWithdrawAmount.toDouble();
 
   final _firestore = FirebaseFirestore.instance;
   final _db = Injector.instance<AppDB>();
@@ -1506,8 +1508,8 @@ class WithdrawProvider extends ChangeNotifier {
 
   void onAmountChanged(String value) {
     final amount = double.tryParse(value) ?? 0;
-    final result = amount / 1000;
-    convertedValue = result.toStringAsFixed(4);
+    final divider = RemoteConfigService.instance.coinToDollarDivider;
+    convertedValue = (amount / divider).toStringAsFixed(4);
     notifyListeners();
   }
 
@@ -1589,6 +1591,20 @@ class WithdrawProvider extends ChangeNotifier {
         return false;
       }
 
+      // Block new request while one is still pending.
+      final pendingSnap = await _firestore
+          .collection('withdraw')
+          .where('user_id', isEqualTo: user.userId)
+          .where('status', isEqualTo: 'pending')
+          .limit(1)
+          .get();
+      if (pendingSnap.docs.isNotEmpty) {
+        _error = 'You already have a pending withdrawal. Wait for it to be processed.';
+        _isLoading = false;
+        notifyListeners();
+        return false;
+      }
+
       final docRef = _firestore.collection('withdraw').doc();
       await docRef.set({
         'user_id': user.userId,
@@ -1620,5 +1636,18 @@ class WithdrawProvider extends ChangeNotifier {
         .where('user_id', isEqualTo: userId)
         .orderBy('created_at', descending: true)
         .snapshots();
+  }
+
+  /// Emits `true` whenever the user has at least one pending withdrawal.
+  Stream<bool> pendingWithdrawStream() {
+    final userId = _db.userModel?.userId;
+    if (userId == null) return Stream.value(false);
+    return _firestore
+        .collection('withdraw')
+        .where('user_id', isEqualTo: userId)
+        .where('status', isEqualTo: 'pending')
+        .limit(1)
+        .snapshots()
+        .map((snap) => snap.docs.isNotEmpty);
   }
 }

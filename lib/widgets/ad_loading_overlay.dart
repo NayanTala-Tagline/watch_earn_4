@@ -125,17 +125,19 @@ class _LoaderCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textColors = context.themeTextColors;
     return Container(
       padding: EdgeInsets.symmetric(
-        horizontal: AppSize.w28,
-        vertical: AppSize.h28,
+        horizontal: AppSize.w32,
+        vertical: AppSize.h32,
       ),
       decoration: BoxDecoration(
-        color: colors.whiteColor,
+        color: colors.backgroundColor2,
         borderRadius: BorderRadius.circular(AppSize.r24),
+        border: Border.all(color: colors.borderColor2, width: 1),
         boxShadow: [
           BoxShadow(
-            color: colors.primary.withValues(alpha: 0.25),
+            color: colors.primary.withValues(alpha: 0.20),
             blurRadius: 40,
             spreadRadius: 2,
             offset: const Offset(0, 12),
@@ -150,8 +152,8 @@ class _LoaderCard extends StatelessWidget {
           _AnimatedDotsLabel(
             text: message,
             style: context.textTheme.titleMedium?.copyWith(
-              color: context.themeTextColors.textColor,
-              fontWeight: FontWeight.w600,
+              color: textColors.darkTitleColor,
+              fontWeight: FontWeight.w700,
               fontSize: AppSize.sp16,
             ),
           ),
@@ -159,7 +161,7 @@ class _LoaderCard extends StatelessWidget {
           Text(
             subMessage,
             style: context.textTheme.bodySmall?.copyWith(
-              color: context.themeTextColors.hintTextColor,
+              color: textColors.bodyTextColor,
               fontSize: AppSize.sp12,
             ),
           ),
@@ -239,13 +241,14 @@ class _SpinnerWithBadge extends StatelessWidget {
                 ),
               ],
             ),
-            // child: Center(
-            //   child: Assets.splash.splashLogo.image(
-            //     width: size - 60,
-            //     height: size - 60,
-            //     fit: BoxFit.contain,
-            //   ),
-            // ),
+            padding: EdgeInsets.all(AppSize.w10),
+            child: Center(
+              child: Assets.images.splash.splashLogo.image(
+                width: size - 60,
+                height: size - 60,
+                fit: BoxFit.contain,
+              ),
+            ),
           )
               .animate(onPlay: (c) => c.repeat(reverse: true))
               .scaleXY(

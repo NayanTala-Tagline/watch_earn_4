@@ -11,6 +11,7 @@ import '../features/scratch_card/scratch_card_screen.dart';
 import '../features/web_visits/web_visits_screen.dart';
 import '../features/game_zone/game_zone_screen.dart';
 import '../features/achievements/achievement_screen.dart';
+import '../features/support/support_screen.dart';
 import '../widgets/in_app_webview_page.dart';
 import 'package:ad_manager/models/ad_data.dart';
 import '../features/refer_and_earn/refer_and_earn_screen.dart';
@@ -100,8 +101,13 @@ final appRouter = GoRouter(
     GoRoute(
       path: '/${AppRoutes.language}',
       name: AppRoutes.language,
-      pageBuilder: (context, state) =>
-          MaterialPage(key: state.pageKey, child: const LanguageScreen()),
+      pageBuilder: (context, state) {
+        final fromSettings = state.extra == true;
+        return MaterialPage(
+          key: state.pageKey,
+          child: LanguageScreen(fromSettings: fromSettings),
+        );
+      },
     ),
     GoRoute(
       path: '/${AppRoutes.login}',
@@ -162,6 +168,12 @@ final appRouter = GoRouter(
       name: AppRoutes.achievements,
       pageBuilder: (context, state) =>
           MaterialPage(key: state.pageKey, child: const AchievementScreen()),
+    ),
+    GoRoute(
+      path: '/${AppRoutes.contactUs}',
+      name: AppRoutes.contactUs,
+      pageBuilder: (context, state) =>
+          MaterialPage(key: state.pageKey, child: const SupportScreen()),
     ),
     GoRoute(
       path: '/${AppRoutes.inAppWebView}',

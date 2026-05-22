@@ -7,6 +7,7 @@ import '../../extension/ext_context.dart';
 import '../../routes/app_router.dart';
 import '../../utils/app_size.dart';
 import '../../widgets/app_button.dart';
+import '../../widgets/common_appbar.dart';
 import 'provider/locale_provider.dart';
 
 class _Language {
@@ -30,7 +31,11 @@ const _languages = [
 ];
 
 class LanguageScreen extends StatefulWidget {
-  const LanguageScreen({super.key});
+  /// [fromSettings] true  → navigated from profile/settings (show back, save & pop)
+  /// [fromSettings] false → navigated from onboarding (show Get Started, push to login)
+  const LanguageScreen({super.key, this.fromSettings = false});
+
+  final bool fromSettings;
 
   @override
   State<LanguageScreen> createState() => _LanguageScreenState();
@@ -48,54 +53,66 @@ class _LanguageScreenState extends State<LanguageScreen> {
 
   void _onSelect(String code) => setState(() => _selectedCode = code);
 
-  void _onGetStarted() {
+  void _onConfirm() {
     context.read<LocaleProvider>().setLocale(_selectedCode);
-    context.goNamed(AppRoutes.login);
+    if (widget.fromSettings) {
+      context.pop();
+    } else {
+      context.goNamed(AppRoutes.login);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+    final fromSettings = widget.fromSettings;
+
     return Scaffold(
       backgroundColor: context.themeColors.backgroundColor,
+      // Settings flow: standard app bar with back button.
+      // Onboarding flow: no app bar, full-bleed layout.
+      appBar: fromSettings
+          ? CommonAppBar(titleText: 'Language')
+          : null,
       body: SafeArea(
+        // Top safe-area padding is handled by CommonAppBar in settings mode.
+        top: !fromSettings,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: AppSize.h24),
-
-            // Title
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: AppSize.w24),
-              child: Text(
-                'Set Default Language',
-                style: context.textTheme.titleLarge?.copyWith(
-                  fontSize: AppSize.sp28,
-                  color: context.themeColors.navyColor,
-                  height: 1.2,
-                ),
-              )
-                  .animate()
-                  .fadeIn(duration: 400.ms, curve: Curves.easeOut)
-                  .slideX(begin: -0.08, end: 0, duration: 400.ms, curve: Curves.easeOut),
-            ),
-
-            SizedBox(height: AppSize.h10),
-
-            // Subtitle
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: AppSize.w24),
-              child: Text(
-                'Selected language will use as default language for this app which you can change later if you want to.',
-                style: context.textTheme.bodyMedium?.copyWith(
-                  color: context.themeTextColors.subtitleColor,
-                  height: 1.5,
-                ),
-              )
-                  .animate()
-                  .fadeIn(delay: 80.ms, duration: 400.ms, curve: Curves.easeOut),
-            ),
-
-            SizedBox(height: AppSize.h20),
+            if (!fromSettings) ...[
+              SizedBox(height: AppSize.h24),
+              // Title
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: AppSize.w24),
+                child: Text(
+                  'Set Default Language',
+                  style: context.textTheme.titleLarge?.copyWith(
+                    fontSize: AppSize.sp28,
+                    color: context.themeColors.navyColor,
+                    height: 1.2,
+                  ),
+                )
+                    .animate()
+                    .fadeIn(duration: 400.ms, curve: Curves.easeOut)
+                    .slideX(begin: -0.08, end: 0, duration: 400.ms, curve: Curves.easeOut),
+              ),
+              SizedBox(height: AppSize.h10),
+              // Subtitle
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: AppSize.w24),
+                child: Text(
+                  'Selected language will use as default language for this app which you can change later if you want to.',
+                  style: context.textTheme.bodyMedium?.copyWith(
+                    color: context.themeTextColors.subtitleColor,
+                    height: 1.5,
+                  ),
+                )
+                    .animate()
+                    .fadeIn(delay: 80.ms, duration: 400.ms, curve: Curves.easeOut),
+              ),
+              SizedBox(height: AppSize.h20),
+            ] else
+              SizedBox(height: AppSize.h8),
 
             // Language list
             Expanded(
@@ -117,21 +134,23 @@ class _LanguageScreenState extends State<LanguageScreen> {
 
             SizedBox(height: AppSize.h16),
 
-            // Get Started button
+            // Action button — label and behaviour differ by context
             Padding(
               padding: EdgeInsets.symmetric(horizontal: AppSize.w24),
               child: AppButton(
-                text: 'Get Started',
+                text: fromSettings ? 'Save' : 'Get Started',
                 buttonColor: context.themeColors.buttonColor,
                 shadowColor: context.themeColors.buttonBorderColor,
                 foregroundColor: context.themeColors.whiteColor,
                 trailingIcon: Icon(
-                  Icons.arrow_forward_rounded,
+                  fromSettings
+                      ? Icons.check_rounded
+                      : Icons.arrow_forward_rounded,
                   color: context.themeColors.whiteColor,
                   size: 20,
                 ),
                 borderRadius: AppSize.r29,
-                onPressed: _onGetStarted,
+                onPressed: _onConfirm,
               )
                   .animate()
                   .fadeIn(delay: 200.ms, duration: 400.ms, curve: Curves.easeOut)

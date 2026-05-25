@@ -63,7 +63,7 @@ class _RewardAdBottomSheetState extends State<RewardAdBottomSheet> {
 
     return Container(
       decoration: BoxDecoration(
-        color: colors.backgroundColor2,
+        color: colors.backgroundColor,
         borderRadius: BorderRadius.vertical(top: Radius.circular(AppSize.r28)),
         border: Border(top: BorderSide(color: colors.borderColor2, width: 1.5)),
         boxShadow: [
@@ -161,7 +161,7 @@ class _RewardAdBottomSheetState extends State<RewardAdBottomSheet> {
                           style: context.textTheme.bodySmall?.copyWith(
                             fontSize: AppSize.sp13,
                             fontWeight: FontWeight.w600,
-                            color: colors.coinTextColor,
+                            color: colors.coinAmberColor,
                           ),
                         ),
                       ],
@@ -175,8 +175,12 @@ class _RewardAdBottomSheetState extends State<RewardAdBottomSheet> {
           Row(
             children: [
               Expanded(
-                child: _CancelButton(
-                  onTap: () {
+                child: AppButton(
+                  text: 'Cancel',
+                  buttonColor: context.themeColors.whiteColor,
+                  shadowColor: context.themeColors.borderColor,
+                  foregroundColor: context.themeTextColors.textColor,
+                  onPressed: () {
                     _timer?.cancel();
                     Navigator.of(context).pop();
                     widget.onCancel();
@@ -188,12 +192,16 @@ class _RewardAdBottomSheetState extends State<RewardAdBottomSheet> {
                 flex: 2,
                 child: AppButton(
                   text: 'Get Reward',
-                  borderRadius: AppSize.r14,
+                  buttonColor: context.themeColors.buttonColor,
+                  shadowColor: context.themeColors.buttonBorderColor,
+                  foregroundColor: context.themeColors.whiteColor,
+                  wallOffset: 4,
+                  borderRadius: AppSize.r28,
                   icon: Icon(
-                    Icons.play_circle_fill_rounded,
-                    color: Colors.white,
-                    size: AppSize.sp20,
-                  ),
+                        Icons.play_circle_fill_rounded,
+                        color: Colors.white,
+                        size: AppSize.sp20,
+                      ),
                   onPressed: () {
                     _timer?.cancel();
                     Navigator.of(context).pop();

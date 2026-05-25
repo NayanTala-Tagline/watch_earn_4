@@ -16,7 +16,7 @@ const _themeColors = ThemeColors(
     backgroundColor: Color(0xffEEF1FB),
     backgroundColor2: Color(0xFFFFFAF9),
     primary: Color(0xFF1A1AE8),
-    secondary: Color(0xFFF07146),
+    secondary: Color(0xFFE0006E),
     secondary2: Color(0xFFFBD7B7),
     borderColor: Color(0xFFA4ABC6),
     borderColor2: Color(0xFFECEEF6),

@@ -13,6 +13,7 @@ import 'package:watch_earn_4/gen/assets.gen.dart';
 import 'package:watch_earn_4/gen/fonts.gen.dart';
 import 'package:watch_earn_4/utils/anaytics_manager.dart';
 import 'package:watch_earn_4/utils/app_size.dart';
+import 'package:watch_earn_4/utils/navigation_helper.dart';
 import 'package:watch_earn_4/utils/remote_config.dart';
 import 'package:watch_earn_4/widgets/app_button.dart';
 import 'package:watch_earn_4/widgets/common_header.dart';
@@ -98,7 +99,13 @@ class _ReferAndEarnBodyState extends State<_ReferAndEarnBody> {
   Widget build(BuildContext context) {
     final provider = context.watch<RewardsProvider>();
 
-    return Scaffold(
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (didPop, _) {
+        if (didPop) return;
+        NavigationHelper().handleBackPress(context);
+      },
+      child: Scaffold(
       backgroundColor: context.themeColors.backgroundColor,
       body: Column(
         children: [
@@ -133,6 +140,7 @@ class _ReferAndEarnBodyState extends State<_ReferAndEarnBody> {
             ),
           ),
         ],
+      ),
       ),
     );
   }

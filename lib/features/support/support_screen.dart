@@ -9,6 +9,7 @@ import '../../extension/ext_string_alert.dart';
 import '../../gen/fonts.gen.dart';
 import '../../utils/anaytics_manager.dart';
 import '../../utils/app_size.dart';
+import '../../utils/navigation_helper.dart';
 import '../../utils/logger.dart';
 import '../../widgets/app_button.dart';
 import '../../widgets/common_appbar.dart';
@@ -87,7 +88,13 @@ class _SupportScreenState extends State<SupportScreen> {
     final colors = context.themeColors;
     final textColors = context.themeTextColors;
 
-    return Scaffold(
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (didPop, _) {
+        if (didPop) return;
+        NavigationHelper().handleBackPress(context);
+      },
+      child: Scaffold(
       backgroundColor: colors.backgroundColor,
       appBar: CommonAppBar(titleText: 'Support'),
       body: GestureDetector(
@@ -189,6 +196,7 @@ class _SupportScreenState extends State<SupportScreen> {
             ),
           ),
         ),
+      ),
       ),
       ),
     );

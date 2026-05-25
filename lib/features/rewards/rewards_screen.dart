@@ -36,22 +36,8 @@ Future<String> _getPlayStoreUrl() async {
   }
 }
 
-class RewardsScreen extends StatefulWidget {
+class RewardsScreen extends StatelessWidget {
   const RewardsScreen({super.key});
-
-  @override
-  State<RewardsScreen> createState() => _RewardsScreenState();
-}
-
-class _RewardsScreenState extends State<RewardsScreen> {
-  @override
-  void initState() {
-    super.initState();
-    AnalyticsManager.instance.logScreenView(
-      screenName: 'rewards',
-      screenClass: 'RewardsScreen',
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -76,6 +62,15 @@ class _RewardsBodyState extends State<_RewardsBody> {
   bool get _isGuest => _db.userModel?.isGuest ?? true;
   bool get _alreadyReferred => (_db.userModel?.referredBy ?? '').isNotEmpty;
   int get _rewardAmount => RemoteConfigService.instance.referralRewardAmount;
+
+  @override
+  void initState() {
+    super.initState();
+    AnalyticsManager.instance.logScreenView(
+      screenName: 'rewards',
+      screenClass: 'RewardsScreen',
+    );
+  }
 
   Future<void> _copyCode() async {
     if (_referralCode.isEmpty) return;

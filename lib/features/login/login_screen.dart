@@ -13,22 +13,8 @@ import '../../utils/app_size.dart';
 import '../../widgets/app_button.dart';
 import 'provider/auth_provider.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
-
-  @override
-  State<LoginScreen> createState() => _LoginScreenState();
-}
-
-class _LoginScreenState extends State<LoginScreen> {
-  @override
-  void initState() {
-    super.initState();
-    AnalyticsManager.instance.logScreenView(
-      screenName: 'login',
-      screenClass: 'LoginScreen',
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,8 +25,22 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 }
 
-class _LoginBody extends StatelessWidget {
+class _LoginBody extends StatefulWidget {
   const _LoginBody();
+
+  @override
+  State<_LoginBody> createState() => _LoginBodyState();
+}
+
+class _LoginBodyState extends State<_LoginBody> {
+  @override
+  void initState() {
+    super.initState();
+    AnalyticsManager.instance.logScreenView(
+      screenName: 'login',
+      screenClass: 'LoginScreen',
+    );
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -10,6 +10,7 @@ import 'package:watch_earn_4/gen/assets.gen.dart';
 import 'package:watch_earn_4/gen/fonts.gen.dart';
 import 'package:watch_earn_4/utils/anaytics_manager.dart';
 import 'package:watch_earn_4/utils/app_size.dart';
+import 'package:watch_earn_4/utils/navigation_helper.dart';
 import 'package:watch_earn_4/utils/remote_config.dart';
 import 'package:watch_earn_4/widgets/app_button.dart';
 import 'package:watch_earn_4/widgets/balance_card.dart';
@@ -18,22 +19,8 @@ import 'package:watch_earn_4/widgets/common_header.dart';
 // feature-specific colours not covered by the mapping
 const _coinPillText = Color(0xFF7A4A00);
 
-class WithdrawScreen extends StatefulWidget {
+class WithdrawScreen extends StatelessWidget {
   const WithdrawScreen({super.key});
-
-  @override
-  State<WithdrawScreen> createState() => _WithdrawScreenState();
-}
-
-class _WithdrawScreenState extends State<WithdrawScreen> {
-  @override
-  void initState() {
-    super.initState();
-    AnalyticsManager.instance.logScreenView(
-      screenName: 'withdraw',
-      screenClass: 'WithdrawScreen',
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,6 +45,15 @@ class _WithdrawViewState extends State<_WithdrawView> {
   double _amount = 10;
 
   @override
+  void initState() {
+    super.initState();
+    AnalyticsManager.instance.logScreenView(
+      screenName: 'withdraw',
+      screenClass: 'WithdrawScreen',
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
     final provider = context.watch<WithdrawProvider>();
     final categories = provider.getWithdrawCategories(context);
@@ -76,7 +72,13 @@ class _WithdrawViewState extends State<_WithdrawView> {
     );
     final selectedMethodIndex = currentCategory.items.indexOf(selectedItem);
 
-    return Scaffold(
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (didPop, _) {
+        if (didPop) return;
+        NavigationHelper().handleBackPress(context);
+      },
+      child: Scaffold(
       backgroundColor: context.themeColors.backgroundColor,
       body: Column(
         children: [
@@ -167,6 +169,7 @@ class _WithdrawViewState extends State<_WithdrawView> {
             ),
           ),
         ],
+      ),
       ),
     );
   }

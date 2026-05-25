@@ -15,22 +15,8 @@ import 'provider/achievement_provider.dart';
 
 // ── Screen ────────────────────────────────────────────────────────────────────
 
-class AchievementScreen extends StatefulWidget {
+class AchievementScreen extends StatelessWidget {
   const AchievementScreen({super.key});
-
-  @override
-  State<AchievementScreen> createState() => _AchievementScreenState();
-}
-
-class _AchievementScreenState extends State<AchievementScreen> {
-  @override
-  void initState() {
-    super.initState();
-    AnalyticsManager.instance.logScreenView(
-      screenName: 'achievements',
-      screenClass: 'AchievementScreen',
-    );
-  }
 
   @override
   Widget build(BuildContext context) {

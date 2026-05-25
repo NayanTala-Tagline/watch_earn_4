@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import '../../extension/ext_context.dart';
 import '../../routes/app_router.dart';
 import '../../utils/anaytics_manager.dart';
+import '../../utils/navigation_helper.dart';
 import '../../utils/app_size.dart';
 import '../../widgets/app_button.dart';
 import '../../widgets/common_appbar.dart';
@@ -71,7 +72,13 @@ class _LanguageScreenState extends State<LanguageScreen> {
   Widget build(BuildContext context) {
     final fromSettings = widget.fromSettings;
 
-    return Scaffold(
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (didPop, _) {
+        if (didPop) return;
+        NavigationHelper().handleBackPress(context);
+      },
+      child: Scaffold(
       backgroundColor: context.themeColors.backgroundColor,
       // Settings flow: standard app bar with back button.
       // Onboarding flow: no app bar, full-bleed layout.
@@ -165,6 +172,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
             SizedBox(height: AppSize.h16),
           ],
         ),
+      ),
       ),
     );
   }

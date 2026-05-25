@@ -15,22 +15,8 @@ import '../../utils/app_size.dart';
 import '../../utils/remote_config.dart';
 import 'provider/profile_provider.dart';
 
-class ProfileScreen extends StatefulWidget {
+class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
-
-  @override
-  State<ProfileScreen> createState() => _ProfileScreenState();
-}
-
-class _ProfileScreenState extends State<ProfileScreen> {
-  @override
-  void initState() {
-    super.initState();
-    AnalyticsManager.instance.logScreenView(
-      screenName: 'profile',
-      screenClass: 'ProfileScreen',
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,8 +29,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-class _ProfileBody extends StatelessWidget {
+class _ProfileBody extends StatefulWidget {
   const _ProfileBody();
+
+  @override
+  State<_ProfileBody> createState() => _ProfileBodyState();
+}
+
+class _ProfileBodyState extends State<_ProfileBody> {
+  @override
+  void initState() {
+    super.initState();
+    AnalyticsManager.instance.logScreenView(
+      screenName: 'profile',
+      screenClass: 'ProfileScreen',
+    );
+  }
 
   @override
   Widget build(BuildContext context) {

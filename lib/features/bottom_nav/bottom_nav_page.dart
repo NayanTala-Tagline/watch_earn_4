@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../utils/navigation_helper.dart';
 import '../home/home_screen.dart';
 import '../profile/profile_screen.dart';
 import '../rank/rank_screen.dart';
@@ -29,7 +30,7 @@ class _BottomNavPageState extends State<BottomNavPage> {
       body: IndexedStack(index: _index, children: _screens),
       bottomNavigationBar: BottomNavBar(
         currentIndex: _index,
-        onChanged: (i) => setState(() => _index = i),
+        onChanged: (i) => NavigationHelper().navigateWithAdCheck(context, () => setState(() => _index = i)),
       ),
     );
   }

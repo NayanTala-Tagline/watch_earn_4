@@ -9,6 +9,7 @@ import '../../extension/ext_context.dart';
 import '../../db/app_db.dart';
 import '../../di/injector.dart';
 import '../../routes/app_router.dart';
+import '../../utils/anaytics_manager.dart';
 import '../../utils/app_size.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -22,6 +23,10 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
+    AnalyticsManager.instance.logScreenView(
+      screenName: 'splash',
+      screenClass: 'SplashScreen',
+    );
     _navigate();
   }
 

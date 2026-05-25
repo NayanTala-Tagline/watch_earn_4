@@ -11,6 +11,7 @@ import 'package:watch_earn_4/extension/ext_string_alert.dart';
 import 'package:watch_earn_4/features/rewards/provider/rewards_provider.dart';
 import 'package:watch_earn_4/gen/assets.gen.dart';
 import 'package:watch_earn_4/gen/fonts.gen.dart';
+import 'package:watch_earn_4/utils/anaytics_manager.dart';
 import 'package:watch_earn_4/utils/app_size.dart';
 import 'package:watch_earn_4/utils/remote_config.dart';
 import 'package:watch_earn_4/widgets/app_button.dart';
@@ -59,6 +60,15 @@ class _ReferAndEarnBodyState extends State<_ReferAndEarnBody> {
   bool get _isGuest => _db.userModel?.isGuest ?? true;
   bool get _alreadyReferred => (_db.userModel?.referredBy ?? '').isNotEmpty;
   int get _rewardAmount => RemoteConfigService.instance.referralRewardAmount;
+
+  @override
+  void initState() {
+    super.initState();
+    AnalyticsManager.instance.logScreenView(
+      screenName: 'refer_and_earn',
+      screenClass: 'ReferAndEarnScreen',
+    );
+  }
 
   Future<void> _copyCode() async {
     if (_referralCode.isEmpty) return;

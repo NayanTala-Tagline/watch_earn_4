@@ -9,15 +9,25 @@ import 'package:watch_earn_4/widgets/common_appbar.dart';
 import 'model/leaderboard_user_model.dart';
 import 'provider/rank_provider.dart';
 
-class RankScreen extends StatelessWidget {
+class RankScreen extends StatefulWidget {
   const RankScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  State<RankScreen> createState() => _RankScreenState();
+}
+
+class _RankScreenState extends State<RankScreen> {
+  @override
+  void initState() {
+    super.initState();
     AnalyticsManager.instance.logScreenView(
       screenName: 'leaderboard',
       screenClass: 'RankScreen',
     );
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (_) => RankProvider(),
       child: Consumer<RankProvider>(

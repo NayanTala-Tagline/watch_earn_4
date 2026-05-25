@@ -11,6 +11,7 @@ import '../../gen/assets.gen.dart';
 import '../../routes/app_router.dart';
 import '../../services/coin_service.dart';
 import '../../services/reward_ad_service.dart';
+import '../../utils/anaytics_manager.dart';
 import '../../utils/app_size.dart';
 import '../../utils/navigation_helper.dart';
 import '../../widgets/app_button.dart';
@@ -43,6 +44,10 @@ class _SpinWheelScreenState extends State<SpinWheelScreen>
   @override
   void initState() {
     super.initState();
+    AnalyticsManager.instance.logScreenView(
+      screenName: 'spin_wheel',
+      screenClass: 'SpinWheelScreen',
+    );
     _spinsRemaining = Injector.instance<AppDB>().getRemainingSpins(_kMaxSpinsPerDay);
     _ctrl = AnimationController(
       vsync: this,

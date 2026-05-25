@@ -8,6 +8,7 @@ import 'package:watch_earn_4/features/withdraw/provider/withdraw_provider.dart';
 import 'package:watch_earn_4/features/withdraw/withdraw_bottom_sheet.dart';
 import 'package:watch_earn_4/gen/assets.gen.dart';
 import 'package:watch_earn_4/gen/fonts.gen.dart';
+import 'package:watch_earn_4/utils/anaytics_manager.dart';
 import 'package:watch_earn_4/utils/app_size.dart';
 import 'package:watch_earn_4/utils/remote_config.dart';
 import 'package:watch_earn_4/widgets/app_button.dart';
@@ -17,8 +18,22 @@ import 'package:watch_earn_4/widgets/common_header.dart';
 // feature-specific colours not covered by the mapping
 const _coinPillText = Color(0xFF7A4A00);
 
-class WithdrawScreen extends StatelessWidget {
+class WithdrawScreen extends StatefulWidget {
   const WithdrawScreen({super.key});
+
+  @override
+  State<WithdrawScreen> createState() => _WithdrawScreenState();
+}
+
+class _WithdrawScreenState extends State<WithdrawScreen> {
+  @override
+  void initState() {
+    super.initState();
+    AnalyticsManager.instance.logScreenView(
+      screenName: 'withdraw',
+      screenClass: 'WithdrawScreen',
+    );
+  }
 
   @override
   Widget build(BuildContext context) {

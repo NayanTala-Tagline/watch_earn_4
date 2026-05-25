@@ -8,12 +8,27 @@ import 'package:watch_earn_4/extension/ext_context.dart';
 
 import '../../gen/assets.gen.dart';
 import '../../routes/app_router.dart';
+import '../../utils/anaytics_manager.dart';
 import '../../utils/app_size.dart';
 import '../../widgets/app_button.dart';
 import 'provider/auth_provider.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  @override
+  void initState() {
+    super.initState();
+    AnalyticsManager.instance.logScreenView(
+      screenName: 'login',
+      screenClass: 'LoginScreen',
+    );
+  }
 
   @override
   Widget build(BuildContext context) {

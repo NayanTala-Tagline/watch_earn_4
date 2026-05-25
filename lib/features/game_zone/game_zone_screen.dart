@@ -38,8 +38,22 @@ final _gameItems = <_GameItem>[
 
 // ── Screen ────────────────────────────────────────────────────────────────────
 
-class GameZoneScreen extends StatelessWidget {
+class GameZoneScreen extends StatefulWidget {
   const GameZoneScreen({super.key});
+
+  @override
+  State<GameZoneScreen> createState() => _GameZoneScreenState();
+}
+
+class _GameZoneScreenState extends State<GameZoneScreen> {
+  @override
+  void initState() {
+    super.initState();
+    AnalyticsManager.instance.logScreenView(
+      screenName: 'game_zone',
+      screenClass: 'GameZoneScreen',
+    );
+  }
 
   @override
   Widget build(BuildContext context) {

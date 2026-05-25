@@ -10,12 +10,27 @@ import '../../extension/ext_string_alert.dart';
 import '../../res/theme_colors.dart';
 import '../../res/theme_text_colors.dart';
 import '../../routes/app_router.dart';
+import '../../utils/anaytics_manager.dart';
 import '../../utils/app_size.dart';
 import '../../utils/remote_config.dart';
 import 'provider/profile_provider.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
+
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  @override
+  void initState() {
+    super.initState();
+    AnalyticsManager.instance.logScreenView(
+      screenName: 'profile',
+      screenClass: 'ProfileScreen',
+    );
+  }
 
   @override
   Widget build(BuildContext context) {

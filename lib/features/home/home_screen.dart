@@ -7,6 +7,7 @@ import 'package:watch_earn_4/extension/ext_context.dart';
 import 'package:watch_earn_4/features/home/provider/home_provider.dart';
 import 'package:watch_earn_4/gen/assets.gen.dart';
 import 'package:watch_earn_4/routes/app_router.dart';
+import 'package:watch_earn_4/utils/anaytics_manager.dart';
 import 'package:watch_earn_4/utils/app_size.dart';
 import 'package:watch_earn_4/utils/remote_config.dart';
 import 'package:watch_earn_4/widgets/app_button.dart';
@@ -28,6 +29,15 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final _db = Injector.instance<AppDB>();
+
+  @override
+  void initState() {
+    super.initState();
+    AnalyticsManager.instance.logScreenView(
+      screenName: 'home',
+      screenClass: 'HomeScreen',
+    );
+  }
 
   @override
   Widget build(BuildContext context) {

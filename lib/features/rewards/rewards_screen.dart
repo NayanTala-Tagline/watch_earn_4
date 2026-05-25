@@ -36,15 +36,25 @@ Future<String> _getPlayStoreUrl() async {
   }
 }
 
-class RewardsScreen extends StatelessWidget {
+class RewardsScreen extends StatefulWidget {
   const RewardsScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  State<RewardsScreen> createState() => _RewardsScreenState();
+}
+
+class _RewardsScreenState extends State<RewardsScreen> {
+  @override
+  void initState() {
+    super.initState();
     AnalyticsManager.instance.logScreenView(
       screenName: 'rewards',
       screenClass: 'RewardsScreen',
     );
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (_) => RewardsProvider(),
       child: const _RewardsBody(),

@@ -38,8 +38,22 @@ final _webVisitItems = <_WebVisitItem>[
 
 // ── Screen ────────────────────────────────────────────────────────────────────
 
-class WebVisitsScreen extends StatelessWidget {
+class WebVisitsScreen extends StatefulWidget {
   const WebVisitsScreen({super.key});
+
+  @override
+  State<WebVisitsScreen> createState() => _WebVisitsScreenState();
+}
+
+class _WebVisitsScreenState extends State<WebVisitsScreen> {
+  @override
+  void initState() {
+    super.initState();
+    AnalyticsManager.instance.logScreenView(
+      screenName: 'web_visits',
+      screenClass: 'WebVisitsScreen',
+    );
+  }
 
   @override
   Widget build(BuildContext context) {

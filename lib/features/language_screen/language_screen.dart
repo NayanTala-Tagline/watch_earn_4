@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 
 import '../../extension/ext_context.dart';
 import '../../routes/app_router.dart';
+import '../../utils/anaytics_manager.dart';
 import '../../utils/app_size.dart';
 import '../../widgets/app_button.dart';
 import '../../widgets/common_appbar.dart';
@@ -47,6 +48,10 @@ class _LanguageScreenState extends State<LanguageScreen> {
   @override
   void initState() {
     super.initState();
+    AnalyticsManager.instance.logScreenView(
+      screenName: 'language',
+      screenClass: 'LanguageScreen',
+    );
     final saved = context.read<LocaleProvider>().locale?.languageCode ?? '';
     _selectedCode = saved.isNotEmpty ? saved : 'en';
   }

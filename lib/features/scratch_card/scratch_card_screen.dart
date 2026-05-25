@@ -13,6 +13,7 @@ import '../../gen/assets.gen.dart';
 import '../../routes/app_router.dart';
 import '../../services/coin_service.dart';
 import '../../services/reward_ad_service.dart';
+import '../../utils/anaytics_manager.dart';
 import '../../utils/app_size.dart';
 import '../../utils/navigation_helper.dart';
 import '../../utils/remote_config.dart';
@@ -74,6 +75,10 @@ class _ScratchCardScreenState extends State<ScratchCardScreen>
   @override
   void initState() {
     super.initState();
+    AnalyticsManager.instance.logScreenView(
+      screenName: 'scratch_card',
+      screenClass: 'ScratchCardScreen',
+    );
     _scratch = _ScratchState();
     _luckyNumber = 100 + Random().nextInt(900);
     _shakeCtrl = AnimationController(

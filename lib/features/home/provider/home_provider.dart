@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import '../../../db/app_db.dart';
 import '../../../di/injector.dart';
 import '../../../routes/app_router.dart';
-import '../../../services/reward_ad_service.dart';
+import '../../../utils/anaytics_manager.dart';
+import '../../../utils/remote_config.dart';
+import '../../../utils/reward_ad_helper.dart';
 
 class HomeProvider extends ChangeNotifier {
   final _db = Injector.instance<AppDB>();
@@ -64,13 +66,18 @@ class HomeProvider extends ChangeNotifier {
   Future<void> claimDailyReward(BuildContext context) async {
     if (isRewardClaimed) return;
     final navCtx = rootNavKey.currentContext ?? context;
-    final earned = await RewardAdService.showDailyCheckin(
-      navCtx,
-      defaultCoins: dailyRewardCoins,
+    final coins = dailyRewardCoins;
+    await RewardAdHelper.showRewardAdWithBottomSheet(
+      context: navCtx,
+      adData: RemoteConfigService.instance.dailyClaimReward,
+      onAdCompleted: () async {
+        await _grantDailyReward(coins);
+        notifyListeners();
+      },
+      onAdCancelled: () {
+        AnalyticsManager.instance.logEvent(name: 'cancel_daily_claim');
+      },
     );
-    if (earned == null) return;
-    await _grantDailyReward(earned);
-    notifyListeners();
   }
 
   Future<void> _grantDailyReward(int coins) async {

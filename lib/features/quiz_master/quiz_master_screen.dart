@@ -11,11 +11,11 @@ import '../../extension/ext_context.dart';
 import '../../gen/assets.gen.dart';
 import '../../routes/app_router.dart';
 import '../../services/coin_service.dart';
-import '../../services/reward_ad_service.dart';
 import '../../utils/anaytics_manager.dart';
 import '../../utils/app_size.dart';
 import '../../utils/navigation_helper.dart';
 import '../../utils/remote_config.dart';
+import '../../utils/reward_ad_helper.dart';
 import '../../widgets/app_button.dart';
 
 // ── Constants ────────────────────────────────────────────────────────────────
@@ -328,14 +328,17 @@ class _QuizMasterScreenState extends State<QuizMasterScreen> {
           Navigator.pop(sheetCtx);
           if (!isLoss) {
             final navCtx = rootNavKey.currentContext!;
-            final earned = await RewardAdService.showMathQuiz(
-              navCtx,
-              defaultCoins: totalCoins,
+            await RewardAdHelper.showRewardAdWithBottomSheet(
+              context: navCtx,
+              adData: RemoteConfigService.instance.mathQuizClaimReward,
+              onAdCompleted: () async {
+                await CoinService.addCoins(totalCoins);
+                Injector.instance<AppDB>().recordQuizCompletion();
+              },
+              onAdCancelled: () {
+                AnalyticsManager.instance.logEvent(name: 'cancel_math_quiz_claim');
+              },
             );
-            if (earned != null) {
-              await CoinService.addCoins(earned);
-              Injector.instance<AppDB>().recordQuizCompletion();
-            }
           }
           if (!mounted) return;
           NavigationHelper().handleBackPress(context);

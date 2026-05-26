@@ -191,7 +191,8 @@ class _RewardAdBottomSheetState extends State<RewardAdBottomSheet> {
               Expanded(
                 flex: 2,
                 child: AppButton(
-                  text: 'Get Reward',
+                  text: 'Watch Ad',
+                  // text: 'Get Reward',
                   buttonColor: context.themeColors.buttonColor,
                   shadowColor: context.themeColors.buttonBorderColor,
                   foregroundColor: context.themeColors.whiteColor,

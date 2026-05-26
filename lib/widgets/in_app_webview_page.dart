@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:ad_manager/models/ad_data.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:watch_earn_4/widgets/app_button.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import '../extension/ext_context.dart';
@@ -106,10 +107,17 @@ class _InAppWebViewPageState extends State<InAppWebViewPage> {
             bottom: AppSize.h32,
             child: Center(
               child: _completed
-                  ? _ClaimButton(
-                      onPressed: _claimed ? null : _onClaimReward,
-                      claimed: _claimed,
-                    )
+                ? Padding(
+                  padding: EdgeInsets.symmetric(horizontal: AppSize.w20),
+                    child: AppButton(
+                      text: _claimed ? 'Claimed' : 'Claim Reward',
+                      buttonColor: context.themeColors.buttonColor,
+                      shadowColor: context.themeColors.buttonBorderColor,
+                      foregroundColor: context.themeColors.whiteColor,
+                      isDisabled: _claimed,
+                      onPressed: _claimed ? null : _onClaimReward
+                    ),
+                  )
                   : _TimerBadge(remaining: _remaining),
             ),
           ),

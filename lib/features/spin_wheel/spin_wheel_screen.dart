@@ -10,10 +10,11 @@ import '../../extension/ext_context.dart';
 import '../../gen/assets.gen.dart';
 import '../../routes/app_router.dart';
 import '../../services/coin_service.dart';
-import '../../services/reward_ad_service.dart';
 import '../../utils/anaytics_manager.dart';
 import '../../utils/app_size.dart';
 import '../../utils/navigation_helper.dart';
+import '../../utils/remote_config.dart';
+import '../../utils/reward_ad_helper.dart';
 import '../../widgets/app_button.dart';
 import 'widgets/spin_wheel_painter.dart';
 
@@ -121,11 +122,16 @@ class _SpinWheelScreenState extends State<SpinWheelScreen>
           Navigator.pop(sheetCtx);
           if (!isLoss && !isXp) {
             final navCtx = rootNavKey.currentContext!;
-            final earned = await RewardAdService.showSpinWheel(
-              navCtx,
-              defaultCoins: wonCoins,
+            await RewardAdHelper.showRewardAdWithBottomSheet(
+              context: navCtx,
+              adData: RemoteConfigService.instance.spinWheelClaimReward,
+              onAdCompleted: () async {
+                await CoinService.addCoins(wonCoins);
+              },
+              onAdCancelled: () {
+                AnalyticsManager.instance.logEvent(name: 'cancel_spin_wheel_claim');
+              },
             );
-            if (earned != null) await CoinService.addCoins(earned);
           }
         },
       ),

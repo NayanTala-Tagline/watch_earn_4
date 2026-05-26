@@ -6,8 +6,8 @@ import '../../../db/app_db.dart';
 import '../../../di/injector.dart';
 import '../../../routes/app_router.dart';
 import '../../../services/coin_service.dart';
-import '../../../services/reward_ad_service.dart';
 import '../../../utils/remote_config.dart';
+import '../../../utils/reward_ad_helper.dart';
 
 class VisitWebsiteProvider extends ChangeNotifier {
   static int get lockMinutes =>
@@ -51,21 +51,22 @@ class VisitWebsiteProvider extends ChangeNotifier {
     final navCtx = rootNavKey.currentContext;
     if (navCtx == null) return false;
 
-    final earned = await RewardAdService.showWebsiteReward(
-      navCtx,
-      defaultCoins: rewardCoins,
+    bool granted = false;
+    await RewardAdHelper.showRewardAdWithBottomSheet(
+      context: navCtx,
+      adData: RemoteConfigService.instance.websiteReward,
+      onAdCompleted: () async {
+        await CoinService.addCoins(rewardCoins);
+        _db.recordWebVisit();
+        final expiry = DateTime.now()
+            .add(Duration(minutes: lockMinutes))
+            .millisecondsSinceEpoch;
+        await _db.setValue(_lockKey(index), expiry);
+        granted = true;
+        notifyListeners();
+      },
     );
-    if (earned == null) return false;
-
-    await CoinService.addCoins(earned);
-    _db.recordWebVisit();
-
-    final expiry = DateTime.now()
-        .add(Duration(minutes: lockMinutes))
-        .millisecondsSinceEpoch;
-    await _db.setValue(_lockKey(index), expiry);
-    notifyListeners();
-    return true;
+    return granted;
   }
 
   /// Sets the lock only — used by InAppWebViewPage which handles ad + coins.

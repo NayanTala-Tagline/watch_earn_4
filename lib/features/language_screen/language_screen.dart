@@ -92,7 +92,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
     if (widget.fromSettings) {
       context.pop();
     } else {
-      context.goNamed(AppRoutes.login);
+      context.goNamed(AppRoutes.country);
     }
   }
 

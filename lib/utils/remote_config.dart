@@ -139,7 +139,23 @@ class RemoteConfigService {
 
   AdData get appInter => _getAdData('app_inter');
 
-  // AdData get homeNative => _getAdData('home_native');
+  AdData get homeNative1 => _getAdData('home_native_1');
+
+  AdData get homeNative2 => _getAdData('home_native_2');
+
+  AdData get quizMasterNative => _getAdData('quiz_master_native');
+
+  AdData get scratchCardNative => _getAdData('scratch_card_native');
+
+  AdData get webVisitsNative1 => _getAdData('web_visits_native_1');
+
+  AdData get webVisitsNative2 => _getAdData('web_visits_native_2');
+
+  AdData get gameZoneNative1 => _getAdData('game_zone_native_1');
+
+  AdData get gameZoneNative2 => _getAdData('game_zone_native_2');
+
+  AdData get withdrawNative => _getAdData('withdraw_native');
 
   // AdData get settingNative => _getAdData('setting_native');
 

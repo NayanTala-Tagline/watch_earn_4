@@ -12,6 +12,7 @@ import '../../utils/app_size.dart';
 import '../../utils/navigation_helper.dart';
 import '../../utils/remote_config.dart';
 import '../../gen/fonts.gen.dart';
+import '../../widgets/ad_slot.dart';
 import '../../widgets/app_button.dart';
 import '../../widgets/common_appbar.dart';
 import 'provider/game_zone_provider.dart';
@@ -242,27 +243,47 @@ class _GameZoneContentState extends State<_GameZoneContent>
             onTap: () => NavigationHelper().handleBackPress(context),
           ),
         ),
-        body: ListView.separated(
-          padding: EdgeInsets.fromLTRB(
-            AppSize.w16,
-            AppSize.h20,
-            AppSize.w16,
-            AppSize.h24,
-          ),
-          itemCount: _gameItems.length,
-          separatorBuilder: (_, _) => SizedBox(height: AppSize.h12),
-          itemBuilder: (context, index) {
-            final item = _gameItems[index];
-            if (item.url.isEmpty) return const SizedBox.shrink();
+        bottomNavigationBar: AdSlot(
+          ad: context.watch<GameZoneProvider>().nativeAd2,
+        ),
+        body: Builder(
+          builder: (context) {
             final prov = context.watch<GameZoneProvider>();
-            final locked = prov.isLocked(index);
-            final countdown = locked ? prov.lockCountdown(index) : null;
+            final adIndex = (_gameItems.length / 2).floor();
+            final totalCount = _gameItems.length + 1;
 
-            return _GameTile(
-              item: item,
-              isLocked: locked,
-              lockCountdown: countdown,
-              onTap: locked ? () {} : () => _showMissionBrief(index, item),
+            return ListView.separated(
+              padding: EdgeInsets.only(
+                top: AppSize.h20,
+                bottom: AppSize.h24,
+              ),
+              itemCount: totalCount,
+              separatorBuilder: (_, _) => SizedBox(height: AppSize.h12),
+              itemBuilder: (context, index) {
+                if (index == adIndex && prov.nativeAd1!.adData.enabled) {
+                  return AdSlot(
+                    ad: prov.nativeAd1,
+                    safeAreaTop: false,
+                  );
+                }
+                final itemIndex = index > adIndex ? index - 1 : index;
+                final item = _gameItems[itemIndex];
+                if (item.url.isEmpty) return const SizedBox.shrink();
+                final locked = prov.isLocked(itemIndex);
+                final countdown = locked ? prov.lockCountdown(itemIndex) : null;
+
+                return Padding(
+                  padding: EdgeInsets.symmetric(horizontal: AppSize.w16),
+                  child: _GameTile(
+                    item: item,
+                    isLocked: locked,
+                    lockCountdown: countdown,
+                    onTap: locked
+                        ? () {}
+                        : () => _showMissionBrief(itemIndex, item),
+                  ),
+                );
+              },
             );
           },
         ),

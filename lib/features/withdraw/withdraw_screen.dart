@@ -12,6 +12,7 @@ import 'package:watch_earn_4/utils/anaytics_manager.dart';
 import 'package:watch_earn_4/utils/app_size.dart';
 import 'package:watch_earn_4/utils/navigation_helper.dart';
 import 'package:watch_earn_4/utils/remote_config.dart';
+import 'package:watch_earn_4/widgets/ad_slot.dart';
 import 'package:watch_earn_4/widgets/app_button.dart';
 import 'package:watch_earn_4/widgets/balance_card.dart';
 import 'package:watch_earn_4/widgets/common_header.dart';
@@ -94,35 +95,45 @@ class _WithdrawViewState extends State<_WithdrawView> {
           ),
           Expanded(
             child: SingleChildScrollView(
-              padding: EdgeInsets.fromLTRB(
-                AppSize.w16,
-                AppSize.h8,
-                AppSize.w16,
-                AppSize.h20,
+              padding: EdgeInsets.only(
+                top: AppSize.h8,
+                bottom: AppSize.h20,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  const _LiveBalanceCard(),
-                  SizedBox(height: AppSize.h12),
-                  _PendingWithdrawBanner(provider: provider),
+                  _hPad(const _LiveBalanceCard()),
+                  if (provider.nativeAd?.adData.enabled ?? false) ...[
+                    AdSlot(
+                      ad: provider.nativeAd,
+                      safeAreaTop: false,
+                      safeAreaBottom: false,
+                    ),
+                    SizedBox(height: AppSize.h5),
+                  ] else
+                    SizedBox(height: AppSize.h12),
+                  _hPad(_PendingWithdrawBanner(provider: provider)),
                   SizedBox(height: AppSize.h4),
-                  _CategoryTabs(
-                    categories: categories,
-                    selectedIndex: categoryIndex,
-                    onChanged: (i) {
-                      provider.setSelectedIndex(i);
-                      provider.setWithdrawType(categories[i].dbTitle);
-                    },
+                  _hPad(
+                    _CategoryTabs(
+                      categories: categories,
+                      selectedIndex: categoryIndex,
+                      onChanged: (i) {
+                        provider.setSelectedIndex(i);
+                        provider.setWithdrawType(categories[i].dbTitle);
+                      },
+                    ),
                   ),
-                  _MethodsGrid(
-                    items: visibleItems,
-                    selectedIndex: selectedMethodIndex,
-                    onChanged: (i) {
-                      provider.setWithdrawSubType(
-                        currentCategory.items[i].dbTitle,
-                      );
-                    },
+                  _hPad(
+                    _MethodsGrid(
+                      items: visibleItems,
+                      selectedIndex: selectedMethodIndex,
+                      onChanged: (i) {
+                        provider.setWithdrawSubType(
+                          currentCategory.items[i].dbTitle,
+                        );
+                      },
+                    ),
                   ),
                   if (canExpand) ...[
                     Center(
@@ -143,14 +154,19 @@ class _WithdrawViewState extends State<_WithdrawView> {
                     ),
                   ],
                   SizedBox(height: AppSize.h18),
-                  _AmountCard(
-                    amount: _amount,
-                    onChanged: (v) => setState(() => _amount = v),
+                  _hPad(
+                    _AmountCard(
+                      amount: _amount,
+                      onChanged: (v) => setState(() => _amount = v),
+                    ),
                   ),
                   SizedBox(height: AppSize.h18),
-                  _WithdrawCta(
-                    amount: _amount,
-                    onPressed: () => _openWithdrawSheet(provider, selectedItem),
+                  _hPad(
+                    _WithdrawCta(
+                      amount: _amount,
+                      onPressed: () =>
+                          _openWithdrawSheet(provider, selectedItem),
+                    ),
                   ),
                   SizedBox(height: AppSize.h12),
                   Center(
@@ -173,6 +189,11 @@ class _WithdrawViewState extends State<_WithdrawView> {
       ),
     );
   }
+
+  Widget _hPad(Widget child) => Padding(
+    padding: EdgeInsets.symmetric(horizontal: AppSize.w16),
+    child: child,
+  );
 
   void _openWithdrawSheet(WithdrawProvider provider, WithdrawItem item) {
     provider.setWithdrawSubType(item.dbTitle);

@@ -102,10 +102,20 @@ final appRouter = GoRouter(
       path: '/${AppRoutes.language}',
       name: AppRoutes.language,
       pageBuilder: (context, state) {
-        final fromSettings = state.extra == true;
+        final extra = state.extra;
+        if (extra is LanguageScreenArgs) {
+          return MaterialPage(
+            key: state.pageKey,
+            child: LanguageScreen(
+              nativeAd1: extra.nativeAd1,
+              nativeAd2: extra.nativeAd2,
+            ),
+          );
+        }
+        // extra == true → from profile/settings
         return MaterialPage(
           key: state.pageKey,
-          child: LanguageScreen(fromSettings: fromSettings),
+          child: LanguageScreen(fromSettings: extra == true),
         );
       },
     ),

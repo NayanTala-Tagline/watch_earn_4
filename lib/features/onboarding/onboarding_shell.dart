@@ -1,16 +1,22 @@
+import 'package:ad_manager/ad_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:watch_earn_4/extension/ext_context.dart';
+import 'package:shimmer/shimmer.dart';
 
+import '../../extension/ext_context.dart';
 import '../../gen/assets.gen.dart';
 import '../../utils/app_size.dart';
 import '../../widgets/app_button.dart';
 
 /// Shared layout used by every onboarding screen.
 ///
-/// The illustration sits inside [Expanded] so it automatically gives up
-/// vertical space when the ad slot below is filled with a real banner widget.
+/// [nativeAd] is displayed in [Scaffold.bottomNavigationBar] — shimmer while
+/// loading, real widget once loaded, nothing when disabled/failed.
+///
+/// [onNext] is async so the screen can await the ad sequence (wait → show
+/// interstitial → navigate) before this callback returns.
+///
+/// [isLoading] drives the button spinner while the provider's [wait] call runs.
 class OnboardingShell extends StatelessWidget {
   const OnboardingShell({
     super.key,
@@ -20,19 +26,24 @@ class OnboardingShell extends StatelessWidget {
     required this.buttonText,
     required this.onNext,
     required this.onSkip,
+    this.nativeAd,
+    this.isLoading = false,
   });
 
   final AssetGenImage image;
   final String title;
   final String subtitle;
   final String buttonText;
-  final VoidCallback onNext;
+  final Future<void> Function() onNext;
   final VoidCallback onSkip;
+  final NativeAdManager? nativeAd;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: context.themeColors.backgroundColor,
+      bottomNavigationBar: _NativeAdBar(nativeAd: nativeAd),
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -62,7 +73,7 @@ class OnboardingShell extends StatelessWidget {
             ),
 
             // ── Illustration ─────────────────────────────────────────────────
-            // Expanded → auto-shrinks when the ad slot below gets a real widget.
+            // Expanded → auto-shrinks when the bottom nav bar gets a real ad.
             Expanded(
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: AppSize.w16),
@@ -138,6 +149,7 @@ class OnboardingShell extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: AppSize.w24),
               child: AppButton(
                 text: buttonText,
+                isLoading: isLoading,
                 buttonColor: context.themeColors.buttonColor,
                 shadowColor: context.themeColors.buttonBorderColor,
                 foregroundColor: context.themeColors.whiteColor,
@@ -147,7 +159,7 @@ class OnboardingShell extends StatelessWidget {
                   size: 20,
                 ),
                 borderRadius: AppSize.r29,
-                onPressed: onNext,
+                onPressed: () => onNext(),
               )
                   .animate()
                   .fadeIn(delay: 300.ms, duration: 450.ms, curve: Curves.easeOut)
@@ -161,9 +173,53 @@ class OnboardingShell extends StatelessWidget {
             ),
 
             SizedBox(height: AppSize.h16),
-
-            SizedBox(height: AppSize.h24),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+// ── Bottom native ad bar ──────────────────────────────────────────────────────
+
+class _NativeAdBar extends StatelessWidget {
+  const _NativeAdBar({this.nativeAd});
+
+  final NativeAdManager? nativeAd;
+
+  @override
+  Widget build(BuildContext context) {
+    final ad = nativeAd;
+
+    if (ad == null) return const SizedBox.shrink();
+    if (!ad.adData.enabled && ad.adData.adType != AdType.custom) {
+      return const SizedBox.shrink();
+    }
+
+    final isCustom = ad.adData.adType == AdType.custom;
+    final placeholderHeight =
+        ad.adData.templateType == TemplateType.medium ? AppSize.h360 : AppSize.h100;
+
+    return SafeArea(
+      top: false,
+      child: Padding(
+        padding: EdgeInsets.only(top: AppSize.h5),
+        child: Container(
+          color: context.theme.cardColor,
+          child: isCustom
+              ? ad.adWidget()
+              : ad.isLoaded
+                  ? SizedBox(height: placeholderHeight, child: ad.adWidget())
+                  : ad.isFailed
+                      ? const SizedBox.shrink()
+                      : Shimmer.fromColors(
+                          baseColor: Colors.grey.shade300,
+                          highlightColor: Colors.grey.shade100,
+                          child: Container(
+                            height: placeholderHeight,
+                            color: context.theme.cardColor,
+                          ),
+                        ),
         ),
       ),
     );

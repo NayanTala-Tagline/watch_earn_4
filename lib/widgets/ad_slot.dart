@@ -45,11 +45,19 @@ class _AdSlotState extends State<AdSlot> {
 
     if (ad.isFailed) return const SizedBox.shrink();
 
-    final placeholderHeight = widget.ad?.adData.height ?? AppSize.h120;
+    // Priority: caller override → adData.height (if > 0) → template-based default.
+    // adData.height defaults to 0 (not null), so ?? alone is not enough.
+    final adHeight = (widget.height != null && widget.height! > 0)
+        ? widget.height!
+        : (ad.adData.height > 0)
+            ? ad.adData.height
+            : (ad.adData.templateType == TemplateType.medium
+                ? 360.0
+                : 100.0);
 
     if (!ad.isLoaded) {
       return _ShimmerPlaceholder(
-        height: placeholderHeight,
+        height: adHeight,
         safeAreaTop: widget.safeAreaTop ?? false,
         safeAreaBottom: widget.safeAreaBottom ?? true,
       );
@@ -60,7 +68,10 @@ class _AdSlotState extends State<AdSlot> {
       child: SafeArea(
         top: widget.safeAreaTop ?? false,
         bottom: widget.safeAreaBottom ?? true,
-        child: ad.adWidget(),
+        child: SizedBox(
+          height: adHeight,
+          child: ad.adWidget(),
+        ),
       ),
     );
   }

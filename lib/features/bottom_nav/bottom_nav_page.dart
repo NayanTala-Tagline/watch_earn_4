@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../../provider/open_ad_provider.dart';
 import '../../utils/navigation_helper.dart';
 import '../home/home_screen.dart';
 import '../profile/profile_screen.dart';
@@ -26,11 +28,15 @@ class _BottomNavPageState extends State<BottomNavPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: IndexedStack(index: _index, children: _screens),
-      bottomNavigationBar: BottomNavBar(
-        currentIndex: _index,
-        onChanged: (i) => NavigationHelper().navigateWithAdCheck(context, () => setState(() => _index = i)),
+    return ChangeNotifierProvider(
+      create: (_) => OpenAdProvider()..startOpenAdListener(),
+      lazy: false,
+      child: Scaffold(
+        body: IndexedStack(index: _index, children: _screens),
+        bottomNavigationBar: BottomNavBar(
+          currentIndex: _index,
+          onChanged: (i) => NavigationHelper().navigateWithAdCheck(context, () => setState(() => _index = i)),
+        ),
       ),
     );
   }

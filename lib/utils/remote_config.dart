@@ -41,14 +41,12 @@ class RemoteConfigService {
       '⚠️ app_data key is empty in Remote Config'.logD;
       return;
     }
-    if (jsonString1.isEmpty) {
-      '⚠️ visit_websites key is empty in Remote Config'.logD;
-      return;
-    }
 
     try {
       _appData = jsonDecode(jsonString) as Map<String, dynamic>;
-      _visitWebsites = jsonDecode(jsonString1) as Map<String, dynamic>;
+      if (jsonString1.isNotEmpty) {
+        _visitWebsites = jsonDecode(jsonString1) as Map<String, dynamic>;
+      }
       '✅ Remote config loaded successfully'.logD;
     } catch (e) {
       _appData = {};
@@ -73,14 +71,19 @@ class RemoteConfigService {
       final Map<String, dynamic> data = {
         'ad_id': raw['ad_id'] ?? '',
         'enabled': raw['enabled'] ?? false,
-        'template_type': raw['template_type'] ?? 'small',
-        'is_custom_ad': raw['is_custom_ad'] ?? false,
 
-        // 🔥 INT → DOUBLE FIX
-        'custom_ad_height': (raw['custom_ad_height'] is num)
-            ? (raw['custom_ad_height'] as num).toDouble()
+        // ✅ NEW FIELD
+        'ad_type': raw['ad_type'] ?? 'native',
+
+        // ✅ TEMPLATE TYPE
+        'template_type': raw['template_type'] ?? 'small',
+
+        // 🔥 SAFE DOUBLE CONVERSION
+        'height': (raw['height'] is num)
+            ? (raw['height'] as num).toDouble()
             : 0.0,
 
+        // ✅ CUSTOM ADS
         'custom_ad_view_url': raw['custom_ad_view_url'] ?? '',
         'custom_ad_url': raw['custom_ad_url'] ?? '',
       };
@@ -96,9 +99,9 @@ class RemoteConfigService {
   Map<String, dynamic> _emptyAd() => {
     'ad_id': '',
     'enabled': false,
+    'ad_type': 'native',
     'template_type': 'small',
-    'is_custom_ad': false,
-    'custom_ad_height': 0.0,
+    'height': 0.0,
     'custom_ad_view_url': '',
     'custom_ad_url': '',
   };

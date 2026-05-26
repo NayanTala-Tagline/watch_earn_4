@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../db/app_db.dart';
 import '../di/injector.dart';
+import '../features/country_screen/country_screen.dart';
+import '../features/currency_screen/currency_screen.dart';
+import '../features/game_screen/game_screen.dart';
 import '../features/language_screen/language_screen.dart';
 import '../features/bottom_nav/bottom_nav_page.dart';
 import '../features/quiz_master/quiz_master_screen.dart';
@@ -118,6 +121,24 @@ final appRouter = GoRouter(
           child: LanguageScreen(fromSettings: extra == true),
         );
       },
+    ),
+    GoRoute(
+      path: '/${AppRoutes.country}',
+      name: AppRoutes.country,
+      pageBuilder: (context, state) =>
+          MaterialPage(key: state.pageKey, child: const CountryScreen()),
+    ),
+    GoRoute(
+      path: '/${AppRoutes.gameSelect}',
+      name: AppRoutes.gameSelect,
+      pageBuilder: (context, state) =>
+          MaterialPage(key: state.pageKey, child: const GameSelectScreen()),
+    ),
+    GoRoute(
+      path: '/${AppRoutes.currency}',
+      name: AppRoutes.currency,
+      pageBuilder: (context, state) =>
+          MaterialPage(key: state.pageKey, child: const CurrencyScreen()),
     ),
     GoRoute(
       path: '/${AppRoutes.login}',

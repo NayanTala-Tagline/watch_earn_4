@@ -33,6 +33,9 @@ class AppRoutes {
   static const String loanUrgency = 'LoanUrgencyScreen';
   static const String recommendations = 'RecommendationsScreen';
   static const String language = 'language';
+  static const String country = 'country';
+  static const String gameSelect = 'gameSelect';
+  static const String currency = 'currency';
   static const String contactUs = 'contactUs';
   static const String fixedDeposit = 'FixedDepositScreen';
   static const String recurringDeposit = 'RecurringDepositScreen';

@@ -157,6 +157,12 @@ class RemoteConfigService {
 
   AdData get withdrawNative => _getAdData('withdraw_native');
 
+  AdData get countryNative => _getAdData('country_native');
+
+  AdData get gameSelectNative => _getAdData('game_select_native');
+
+  AdData get currencyNative => _getAdData('currency_native');
+
   // AdData get settingNative => _getAdData('setting_native');
 
   AdData get websiteReward => _getAdData('website_reward');

@@ -1,9 +1,11 @@
+import 'package:ad_manager/ad_manager.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import '../../../db/app_db.dart';
 import '../../../di/injector.dart';
 import '../../../routes/app_router.dart';
+import '../../../services/reward_ad_service.dart';
 import '../../../utils/anaytics_manager.dart';
 import '../../../utils/remote_config.dart';
 import '../../../utils/reward_ad_helper.dart';
@@ -12,8 +14,23 @@ class HomeProvider extends ChangeNotifier {
   final _db = Injector.instance<AppDB>();
   final _fireStore = FirebaseFirestore.instance;
 
+  InlineAdManager? nativeAd1;
+  InlineAdManager? nativeAd2;
+
   HomeProvider() {
     _checkAndShowDailyReminder();
+    _loadAds();
+  }
+
+  Future<void> _loadAds() async {
+    nativeAd1 = InlineAdManager(
+      adData: RemoteConfigService.instance.homeNative1,
+    );
+    nativeAd2 = InlineAdManager(
+      adData: RemoteConfigService.instance.homeNative2,
+    );
+    await Future.wait([nativeAd1!.load(), nativeAd2!.load()]);
+    notifyListeners();
   }
 
   void _checkAndShowDailyReminder() {
@@ -111,4 +128,11 @@ class HomeProvider extends ChangeNotifier {
   }
 
   void refresh() => notifyListeners();
+
+  @override
+  void dispose() {
+    nativeAd1?.dispose();
+    nativeAd2?.dispose();
+    super.dispose();
+  }
 }

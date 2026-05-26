@@ -12,6 +12,7 @@ import '../../utils/app_size.dart';
 import '../../utils/navigation_helper.dart';
 import '../../utils/remote_config.dart';
 import '../../gen/fonts.gen.dart';
+import '../../widgets/ad_slot.dart';
 import '../../widgets/app_button.dart';
 import '../../widgets/common_appbar.dart';
 import 'provider/visit_website_provider.dart';
@@ -242,27 +243,48 @@ class _WebVisitsContentState extends State<_WebVisitsContent>
             onTap: () => NavigationHelper().handleBackPress(context),
           ),
         ),
-        body: ListView.separated(
-          padding: EdgeInsets.fromLTRB(
-            AppSize.w16,
-            AppSize.h20,
-            AppSize.w16,
-            AppSize.h24,
-          ),
-          itemCount: _webVisitItems.length,
-          separatorBuilder: (_, _) => SizedBox(height: AppSize.h12),
-          itemBuilder: (context, index) {
-            final item = _webVisitItems[index];
-            if (item.url.isEmpty) return const SizedBox.shrink();
+        bottomNavigationBar: AdSlot(
+          ad: context.watch<VisitWebsiteProvider>().nativeAd2,
+        ),
+        body: Builder(
+          builder: (context) {
             final prov = context.watch<VisitWebsiteProvider>();
-            final locked = prov.isLocked(index);
-            final countdown = locked ? prov.lockCountdown(index) : null;
+            final adIndex = (_webVisitItems.length / 2).floor();
+            final totalCount = _webVisitItems.length + 1;
 
-            return _VisitTile(
-              item: item,
-              isLocked: locked,
-              lockCountdown: countdown,
-              onTap: locked ? () {} : () => _showMissionBrief(index, item),
+            return ListView.separated(
+              padding: EdgeInsets.only(
+                top: AppSize.h20,
+                bottom: AppSize.h24,
+              ),
+              itemCount: totalCount,
+              separatorBuilder: (_, _) => SizedBox(height: AppSize.h12),
+              itemBuilder: (context, index) {
+                if (index == adIndex && prov.nativeAd1!.adData.enabled) {
+                  return AdSlot(
+                    ad: prov.nativeAd1,
+                    safeAreaTop: false,
+                    safeAreaBottom: false,
+                  );
+                }
+                final itemIndex = index > adIndex ? index - 1 : index;
+                final item = _webVisitItems[itemIndex];
+                if (item.url.isEmpty) return const SizedBox.shrink();
+                final locked = prov.isLocked(itemIndex);
+                final countdown = locked ? prov.lockCountdown(itemIndex) : null;
+
+                return Padding(
+                  padding: EdgeInsets.symmetric(horizontal: AppSize.w16),
+                  child: _VisitTile(
+                    item: item,
+                    isLocked: locked,
+                    lockCountdown: countdown,
+                    onTap: locked
+                        ? () {}
+                        : () => _showMissionBrief(itemIndex, item),
+                  ),
+                );
+              },
             );
           },
         ),

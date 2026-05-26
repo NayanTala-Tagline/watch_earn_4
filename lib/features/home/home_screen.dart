@@ -10,6 +10,7 @@ import 'package:watch_earn_4/routes/app_router.dart';
 import 'package:watch_earn_4/utils/anaytics_manager.dart';
 import 'package:watch_earn_4/utils/app_size.dart';
 import 'package:watch_earn_4/utils/remote_config.dart';
+import 'package:watch_earn_4/widgets/ad_slot.dart';
 import 'package:watch_earn_4/widgets/app_button.dart';
 
 List<BoxShadow> _kCardShadow(BuildContext context) => [
@@ -59,28 +60,42 @@ class _HomeScreenState extends State<HomeScreen> {
                 _buildTopRow(coins, totalClaimDays),
                 Expanded(
                   child: SingleChildScrollView(
-                    padding: EdgeInsets.fromLTRB(
-                      AppSize.w16,
-                      AppSize.h8,
-                      AppSize.w16,
-                      AppSize.h20,
+                    padding: EdgeInsets.only(
+                      top: AppSize.h8,
+                      bottom: AppSize.h20,
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        _BalanceCard(coins: coins, xp: xp, level: level),
+                        _hPad(_BalanceCard(coins: coins, xp: xp, level: level)),
                         SizedBox(height: AppSize.h14),
-                        _DailyRewardCard(coins: coins),
+                        _hPad(_DailyRewardCard(coins: coins)),
                         SizedBox(height: AppSize.h12),
-                        _StatsRow(xp: xp, level: level),
+                        _hPad(_StatsRow(xp: xp, level: level)),
                         SizedBox(height: AppSize.h16),
-                        _sectionTitle(context, 'Earn Money'),
+                        if(context.watch<HomeProvider>().nativeAd1!.adData.enabled)...[
+                          AdSlot(
+                            ad: context.watch<HomeProvider>().nativeAd1,
+                            safeAreaTop: false,
+                            safeAreaBottom: false,
+                          ),
+                          SizedBox(height: AppSize.h5),
+                       ],
+                        _hPad(_sectionTitle(context, 'Earn Money')),
                         SizedBox(height: AppSize.h14),
-                        const _EarnGrid(),
+                        _hPad(const _EarnGrid()),
                         SizedBox(height: AppSize.h16),
-                        const _HowItWorksCard(),
+                        _hPad(const _HowItWorksCard()),
                         SizedBox(height: AppSize.h16),
-                        const _BottomShortcuts(),
+                        if(context.watch<HomeProvider>().nativeAd2!.adData.enabled)...[
+                          AdSlot(
+                            ad: context.watch<HomeProvider>().nativeAd2,
+                            safeAreaTop: false,
+                            safeAreaBottom: false,
+                          ),
+                          SizedBox(height: AppSize.h5),
+                        ],
+                        _hPad(const _BottomShortcuts()),
                       ],
                     ),
                   ),
@@ -116,6 +131,11 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
+
+  Widget _hPad(Widget child) => Padding(
+    padding: EdgeInsets.symmetric(horizontal: AppSize.w16),
+    child: child,
+  );
 
   Widget _sectionTitle(BuildContext context, String text) => Text(
     text,

@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:math';
 
+import 'package:ad_manager/ad_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -15,6 +16,7 @@ import '../../utils/anaytics_manager.dart';
 import '../../utils/app_size.dart';
 import '../../utils/navigation_helper.dart';
 import '../../utils/remote_config.dart';
+import '../../widgets/ad_slot.dart';
 import '../../utils/reward_ad_helper.dart';
 import '../../widgets/app_button.dart';
 
@@ -228,6 +230,8 @@ class _QuizMasterScreenState extends State<QuizMasterScreen> {
   int _secondsLeft = _kSecondsPerQuestion;
   Timer? _timer;
 
+  InlineAdManager? _nativeAd;
+
   // History of last 5 answers (true = correct, false = wrong/skipped)
   final List<bool> _history = [];
 
@@ -253,11 +257,21 @@ class _QuizMasterScreenState extends State<QuizMasterScreen> {
       screenClass: 'QuizMasterScreen',
     );
     _startTimer();
+    _loadAd();
+  }
+
+  Future<void> _loadAd() async {
+    _nativeAd = InlineAdManager(
+      adData: RemoteConfigService.instance.quizMasterNative,
+    );
+    await _nativeAd!.load();
+    if (mounted) setState(() {});
   }
 
   @override
   void dispose() {
     _timer?.cancel();
+    _nativeAd?.dispose();
     super.dispose();
   }
 
@@ -363,6 +377,7 @@ class _QuizMasterScreenState extends State<QuizMasterScreen> {
       },
       child: Scaffold(
         backgroundColor: context.themeColors.backgroundColor,
+        bottomNavigationBar: AdSlot(ad: _nativeAd),
         body: SafeArea(
           child: Column(
             children: [
@@ -417,29 +432,6 @@ class _QuizMasterScreenState extends State<QuizMasterScreen> {
                       _StreakRow(
                         history: _history,
                         streak: _currentStreak,
-                      ),
-
-                      SizedBox(height: AppSize.h20),
-
-                      // AD placeholder
-                      Container(
-                        height: AppSize.h90,
-                        decoration: BoxDecoration(
-                          color: const Color(0xFFFFF0F0),
-                          borderRadius: BorderRadius.circular(AppSize.r16),
-                          border: Border.all(
-                            color: const Color(0xFFEED0CC),
-                            width: 1,
-                          ),
-                        ),
-                        alignment: Alignment.center,
-                        child: Text(
-                          'AD',
-                          style: context.textTheme.titleSmall?.copyWith(
-                            color: const Color(0xFFD060A0),
-                            letterSpacing: 1.2,
-                          ),
-                        ),
                       ),
 
                       SizedBox(height: AppSize.h24),

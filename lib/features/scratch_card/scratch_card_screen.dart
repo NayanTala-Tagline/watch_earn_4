@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:ad_manager/ad_manager.dart';
 import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -17,6 +18,7 @@ import '../../utils/app_size.dart';
 import '../../utils/navigation_helper.dart';
 import '../../utils/remote_config.dart';
 import '../../utils/reward_ad_helper.dart';
+import '../../widgets/ad_slot.dart';
 import '../../widgets/app_button.dart';
 
 // ── Scratch card state ────────────────────────────────────────────────────────
@@ -72,6 +74,8 @@ class _ScratchCardScreenState extends State<ScratchCardScreen>
   late final Animation<double> _shakeAnim;
   late final int _luckyNumber;
 
+  InlineAdManager? _nativeAd;
+
   @override
   void initState() {
     super.initState();
@@ -88,12 +92,22 @@ class _ScratchCardScreenState extends State<ScratchCardScreen>
     _shakeAnim = Tween<double>(begin: 0, end: 10).animate(
       CurvedAnimation(parent: _shakeCtrl, curve: Curves.elasticIn),
     );
+    _loadAd();
+  }
+
+  Future<void> _loadAd() async {
+    _nativeAd = InlineAdManager(
+      adData: RemoteConfigService.instance.scratchCardNative,
+    );
+    await _nativeAd!.load();
+    if (mounted) setState(() {});
   }
 
   @override
   void dispose() {
     _scratch.dispose();
     _shakeCtrl.dispose();
+    _nativeAd?.dispose();
     super.dispose();
   }
 
@@ -159,6 +173,7 @@ class _ScratchCardScreenState extends State<ScratchCardScreen>
       },
       child: Scaffold(
         backgroundColor: context.themeColors.backgroundColor,
+        bottomNavigationBar: AdSlot(ad: _nativeAd),
         body: Stack(
           children: [
             SafeArea(
@@ -213,28 +228,6 @@ class _ScratchCardScreenState extends State<ScratchCardScreen>
                                 () => _scratch.isThresholdReached = true),
                             onScratchStopped: _onScratchStopped,
                           ).animate().fadeIn(delay: 150.ms, duration: 500.ms),
-
-                          SizedBox(height: AppSize.h24),
-
-                          // AD placeholder
-                          Container(
-                            height: AppSize.h90,
-                            decoration: BoxDecoration(
-                              color: const Color(0xFFFFF0F0),
-                              borderRadius:
-                                  BorderRadius.circular(AppSize.r16),
-                              border: Border.all(
-                                  color: const Color(0xFFEED0CC)),
-                            ),
-                            alignment: Alignment.center,
-                            child: Text(
-                              'AD',
-                              style: context.textTheme.titleSmall?.copyWith(
-                                color: const Color(0xFFD060A0),
-                                letterSpacing: 1.2,
-                              ),
-                            ),
-                          ),
 
                           SizedBox(height: AppSize.h24),
                         ],

@@ -35,7 +35,6 @@ void main() async {
   await Hive.initFlutter();
   Injector.initModules();
   await Injector.instance.isReady<AppDB>();
-
   await GoogleSignIn.instance.initialize();
   await RemoteConfigService.instance.init();
   await MobileAds.instance.initialize();

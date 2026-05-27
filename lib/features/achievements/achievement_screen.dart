@@ -9,6 +9,7 @@ import '../../models/achievement_model.dart';
 import '../../utils/anaytics_manager.dart';
 import '../../utils/app_size.dart';
 import '../../utils/navigation_helper.dart';
+import '../../widgets/ad_slot.dart';
 import '../../widgets/app_button.dart';
 import 'provider/achievement_provider.dart';
 
@@ -48,12 +49,6 @@ class _AchievementBodyState extends State<_AchievementBody> {
 
   static const _achievements = AchievementDef.all;
 
-  int get _itemCount => _achievements.length + _achievements.length ~/ 2;
-
-  bool _isAdSlot(int index) => (index + 1) % 3 == 0;
-
-  int _achievementIndex(int index) => index - (index + 1) ~/ 3;
-
   @override
   Widget build(BuildContext context) {
     return PopScope(
@@ -67,6 +62,9 @@ class _AchievementBodyState extends State<_AchievementBody> {
         appBar: _AppBar(
           onBack: () => NavigationHelper().handleBackPress(context),
         ),
+        bottomNavigationBar: AdSlot(
+          ad: context.watch<AchievementProvider>().nativeAd2,
+        ),
         body: Consumer<AchievementProvider>(
           builder: (context, prov, _) {
             if (prov.isLoading) {
@@ -77,33 +75,40 @@ class _AchievementBodyState extends State<_AchievementBody> {
               );
             }
 
+            const adIndex = 3;
+            final totalCount = _achievements.length + 1;
+
             return ListView.builder(
-              padding: EdgeInsets.fromLTRB(
-                AppSize.w16,
-                AppSize.h16,
-                AppSize.w16,
-                AppSize.h32,
+              padding: EdgeInsets.only(
+                top: AppSize.h16,
+                bottom: AppSize.h32,
               ),
-              itemCount: _itemCount,
+              itemCount: totalCount,
               itemBuilder: (context, index) {
-                if (_isAdSlot(index)) {
-                  return const _AdPlaceholder()
-                      .animate()
-                      .fadeIn(duration: 400.ms);
+                if (index == adIndex && prov.nativeAd1!.adData.enabled) {
+                  return Padding(
+                    padding: EdgeInsets.only(bottom: AppSize.h12),
+                    child: AdSlot(
+                      ad: prov.nativeAd1,
+                      safeAreaTop: false,
+                      safeAreaBottom: false,
+                    ),
+                  );
                 }
 
-                final achIndex = _achievementIndex(index);
-                if (achIndex >= _achievements.length) {
-                  return const SizedBox.shrink();
-                }
-
+                final achIndex = index > adIndex ? index - 1 : index;
                 final def = _achievements[achIndex];
                 final progress  = prov.getProgress(def);
                 final completed = prov.isCompleted(def);
                 final claimed   = prov.isClaimed(def);
 
                 return Padding(
-                  padding: EdgeInsets.only(bottom: AppSize.h12),
+                  padding: EdgeInsets.fromLTRB(
+                    AppSize.w16,
+                    0,
+                    AppSize.w16,
+                    AppSize.h12,
+                  ),
                   child: _AchievementCard(
                     def: def,
                     progress: progress,
@@ -375,37 +380,6 @@ class _ProgressBar extends StatelessWidget {
           backgroundColor: context.themeColors.progressBgColor,
           valueColor: AlwaysStoppedAnimation<Color>(
             context.themeColors.coinGoldColor,
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-// ── AD placeholder ────────────────────────────────────────────────────────────
-
-class _AdPlaceholder extends StatelessWidget {
-  const _AdPlaceholder();
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: AppSize.h80,
-      width: double.infinity,
-      margin: EdgeInsets.only(bottom: AppSize.h12),
-      decoration: BoxDecoration(
-        color: context.themeColors.adPlaceholderBg,
-        borderRadius: BorderRadius.circular(AppSize.r16),
-        border: Border.all(color: context.themeColors.adPlaceholderBorder, width: 1),
-      ),
-      child: Center(
-        child: Text(
-          'AD',
-          style: context.textTheme.bodySmall?.copyWith(
-            color: context.themeColors.adPlaceholderText,
-            fontWeight: FontWeight.w700,
-            fontSize: AppSize.sp14,
-            letterSpacing: 2,
           ),
         ),
       ),

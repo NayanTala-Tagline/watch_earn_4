@@ -53,5 +53,6 @@ class AppRoutes {
   static const String gameZone = 'GameZoneScreen';
   static const String inAppWebView = 'InAppWebViewPage';
   static const String achievements = 'AchievementsScreen';
+  static const String howItWorks = 'HowItWorksScreen';
   static const String dailyCheckIn = 'DailyCheckInScreen';
 }

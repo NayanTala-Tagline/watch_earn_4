@@ -21,7 +21,7 @@ class _Currency {
 }
 
 const _currencies = [
-  _Currency('India', '₹'),
+  _Currency('Indian Rupees', '₹'),
   _Currency('Naira', '₦'),
   _Currency('Dollor', '\$'),
   _Currency('Euro', '€'),

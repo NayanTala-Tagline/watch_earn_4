@@ -7,6 +7,7 @@ import '../di/injector.dart';
 import '../features/country_screen/country_screen.dart';
 import '../features/currency_screen/currency_screen.dart';
 import '../features/game_screen/game_screen.dart';
+import '../features/how_it_works/how_it_works_screen.dart';
 import '../features/language_screen/language_screen.dart';
 import '../features/bottom_nav/bottom_nav_page.dart';
 import '../features/quiz_master/quiz_master_screen.dart';
@@ -200,6 +201,12 @@ final appRouter = GoRouter(
       name: AppRoutes.achievements,
       pageBuilder: (context, state) =>
           MaterialPage(key: state.pageKey, child: const AchievementScreen()),
+    ),
+    GoRoute(
+      path: '/${AppRoutes.howItWorks}',
+      name: AppRoutes.howItWorks,
+      pageBuilder: (context, state) =>
+          MaterialPage(key: state.pageKey, child: const HowItWorksScreen()),
     ),
     GoRoute(
       path: '/${AppRoutes.dailyCheckIn}',

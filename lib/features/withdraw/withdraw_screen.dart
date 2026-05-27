@@ -141,13 +141,16 @@ class _WithdrawViewState extends State<_WithdrawView> {
                         onTap: () => setState(
                           () => _expanded[categoryIndex] = !isExpanded,
                         ),
-                        child: Text(
-                          isExpanded ? 'View Less' : 'View More',
-                          style: TextStyle(
-                            fontFamily: FontFamily.kommonGrotesk,
-                            fontSize: AppSize.sp15,
-                            fontWeight: FontWeight.w900,
-                            color: context.themeColors.buttonColor,
+                        child: Padding(
+                          padding: EdgeInsets.only(top: canExpand ? AppSize.h5 : AppSize.h0),
+                          child: Text(
+                            isExpanded ? 'View Less' : 'View More',
+                            style: context.textTheme.bodyMedium?.copyWith(
+                              fontFamily: FontFamily.kommonGrotesk,
+                              fontSize: AppSize.sp15,
+                              fontWeight: FontWeight.w900,
+                              color: context.themeColors.buttonColor,
+                            ),
                           ),
                         ),
                       ),

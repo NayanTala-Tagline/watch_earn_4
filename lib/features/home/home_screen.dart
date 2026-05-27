@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:watch_earn_4/db/app_db.dart';
 import 'package:watch_earn_4/di/injector.dart';
 import 'package:watch_earn_4/extension/ext_context.dart';
+import 'package:watch_earn_4/features/bottom_nav/bottom_nav_page.dart';
 import 'package:watch_earn_4/features/home/provider/home_provider.dart';
 import 'package:watch_earn_4/gen/assets.gen.dart';
 import 'package:watch_earn_4/routes/app_router.dart';
@@ -170,7 +171,9 @@ class _CoinsPill extends StatelessWidget {
         color: context.themeColors.coinAmberColor,
       ),
       icon: Assets.icons.icCoin.svg(width: AppSize.w19, height: AppSize.w19),
-      onPressed: () {},
+      onPressed: () {
+        context.pushNamed(AppRoutes.withdraw);
+      },
     );
   }
 }
@@ -341,7 +344,8 @@ class _BalanceCard extends StatelessWidget {
                       fontSize: AppSize.sp15,
                       color: context.themeColors.buttonBorderColor,
                     ),
-                    onPressed: () => context.pushNamed(AppRoutes.rewards),
+                    onPressed: () =>
+                        context.read<BottomNavController>().setIndex(2),
                   ),
                 ),
               ),
@@ -837,7 +841,7 @@ class _HowItWorksCard extends StatelessWidget {
             borderRadius: AppSize.r16,
             wallOffset: 4,
             icon: Icon(Icons.question_mark, size: AppSize.h30),
-            onPressed: () {},
+            onPressed: () => context.pushNamed(AppRoutes.howItWorks),
           ),
           SizedBox(width: AppSize.w14),
           Expanded(
@@ -881,7 +885,7 @@ class _HowItWorksCard extends StatelessWidget {
               fontWeight: FontWeight.w800,
               color: context.themeColors.whiteColor,
             ),
-            onPressed: () {},
+            onPressed: () => context.pushNamed(AppRoutes.howItWorks),
           ),
         ],
       ),

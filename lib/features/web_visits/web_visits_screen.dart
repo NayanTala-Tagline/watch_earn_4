@@ -252,19 +252,21 @@ class _WebVisitsContentState extends State<_WebVisitsContent>
             final adIndex = (_webVisitItems.length / 2).floor();
             final totalCount = _webVisitItems.length + 1;
 
-            return ListView.separated(
+            return ListView.builder(
               padding: EdgeInsets.only(
-                top: AppSize.h20,
+                top: AppSize.h16,
                 bottom: AppSize.h24,
               ),
               itemCount: totalCount,
-              separatorBuilder: (_, _) => SizedBox(height: AppSize.h12),
               itemBuilder: (context, index) {
                 if (index == adIndex && prov.nativeAd1!.adData.enabled) {
-                  return AdSlot(
-                    ad: prov.nativeAd1,
-                    safeAreaTop: false,
-                    safeAreaBottom: false,
+                  return Padding(
+                    padding: EdgeInsets.only(bottom: AppSize.h12),
+                    child: AdSlot(
+                      ad: prov.nativeAd1,
+                      safeAreaTop: false,
+                      safeAreaBottom: false,
+                    ),
                   );
                 }
                 final itemIndex = index > adIndex ? index - 1 : index;
@@ -274,7 +276,12 @@ class _WebVisitsContentState extends State<_WebVisitsContent>
                 final countdown = locked ? prov.lockCountdown(itemIndex) : null;
 
                 return Padding(
-                  padding: EdgeInsets.symmetric(horizontal: AppSize.w16),
+                  padding: EdgeInsets.fromLTRB(
+                    AppSize.w16,
+                    0,
+                    AppSize.w16,
+                    AppSize.h12,
+                  ),
                   child: _VisitTile(
                     item: item,
                     isLocked: locked,

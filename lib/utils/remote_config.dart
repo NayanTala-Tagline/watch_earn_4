@@ -120,6 +120,10 @@ class RemoteConfigService {
 
   AdData get applicationAppOpen => _getAdData('application_app_open');
 
+  AdData get splashAppOpen => _getAdData('splash_app_open');
+
+  AdData get splashBanner => _getAdData('splash_banner');
+
   AdData get languageNative => _getAdData('language_native');
   AdData get languageNative2 => _getAdData('language_native2');
 
@@ -184,6 +188,11 @@ class RemoteConfigService {
   AdData get playGameReward => _getAdData('play_game_reward');
 
   int get appClickCounter => _get('app_click_counter', 15);
+
+  bool get skipOnBoarding => _get('skip_onboarding', false) as bool;
+
+  bool get showMultipleOnboarding =>
+      _get('show_multiple_onboarding', false) as bool;
 
   String get privacyPolicyUrl => _get('privacy_policy_url', '');
 

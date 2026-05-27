@@ -1,9 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import '../db/app_db.dart';
-import '../di/injector.dart';
 import '../features/country_screen/country_screen.dart';
 import '../features/currency_screen/currency_screen.dart';
 import '../features/game_screen/game_screen.dart';
@@ -39,23 +36,11 @@ final GlobalKey<NavigatorState> rootNavKey = GlobalKey<NavigatorState>(
 final GlobalKey<ScaffoldMessengerState> sfMessengerKey =
     GlobalKey<ScaffoldMessengerState>(debugLabel: 'appScaffold');
 
-final AppDB _db = Injector.instance<AppDB>();
-final FirebaseAuth _auth = FirebaseAuth.instance;
-
-/// Onboarding completed AND logged in → straight to home.
-bool get _isNavigateStart =>
-    _db.isOnboardingCompleted == true && _auth.currentUser != null;
-
-/// Onboarding completed but NOT logged in → straight to login.
-bool get _isNavigateAuth =>
-    _db.isOnboardingCompleted == true && _auth.currentUser == null;
-
-String _initialLocation() {
-  if (_isNavigateStart) return '/${AppRoutes.home}';
-  if (_isNavigateAuth) return '/${AppRoutes.login}';
-  // Fresh install or onboarding not yet finished → show splash → onboarding.
-  return '/${AppRoutes.splash}';
-}
+/// Always launch through the splash screen so the open-app ad can load and
+/// show before the user lands on home / login / onboarding. The splash
+/// itself decides the final destination based on auth + onboarding state
+/// (and the remote-config flags handled in [SplashScreen._shouldSkipOnboarding]).
+String _initialLocation() => '/${AppRoutes.splash}';
 
 /// current route
 String? currentRoute;

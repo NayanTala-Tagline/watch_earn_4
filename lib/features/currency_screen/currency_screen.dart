@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../db/app_db.dart';
+import '../../di/injector.dart';
 import '../../extension/ext_context.dart';
 import '../../extension/ext_string_alert.dart';
 import '../../routes/app_router.dart';
@@ -75,6 +77,7 @@ class _CurrencyScreenState extends State<CurrencyScreen> {
       'Please select a currency'.showInfoAlert();
       return;
     }
+    Injector.instance<AppDB>().isOnboardingCompleted = true;
     context.goNamed(AppRoutes.login);
   }
 

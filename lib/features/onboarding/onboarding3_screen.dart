@@ -1,3 +1,4 @@
+import 'package:ad_manager/ad_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:go_router/go_router.dart';
@@ -15,7 +16,10 @@ import '../../widgets/app_button.dart';
 import 'provider/onboarding_provider.dart';
 
 class Onboarding3Screen extends StatefulWidget {
-  const Onboarding3Screen({super.key});
+  const Onboarding3Screen({super.key, this.preloadedNative});
+
+  /// Native ad pre-loaded by onboarding 2.
+  final InlineAdManager? preloadedNative;
 
   @override
   State<Onboarding3Screen> createState() => _Onboarding3ScreenState();
@@ -35,8 +39,10 @@ class _Onboarding3ScreenState extends State<Onboarding3Screen> {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (_) => OnboardingProvider(
-        nativeAdData: RemoteConfigService.instance.onboardingNative3,
+        preloadedNative: widget.preloadedNative,
+        // No next inline native — language screen uses NativeAdManager directly.
         interAdData: RemoteConfigService.instance.onboardingInter3,
+        preloadLanguageAds: true,
       ),
       child: Consumer<OnboardingProvider>(
         builder: (context, prov, _) {
@@ -70,7 +76,7 @@ class _Onboarding3ScreenState extends State<Onboarding3Screen> {
                       borderRadius: AppSize.r29,
                       onPressed: () async {
                         AnalyticsManager.instance.logEvent(name: 'onboarding_completed');
-                        await prov.wait(context);
+                        await prov.waitForNextAd();
                         await prov.interAd?.show();
                         if (context.mounted) {
                           final ads = prov.takeLanguageAds();

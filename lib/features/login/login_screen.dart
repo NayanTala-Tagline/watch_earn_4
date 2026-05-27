@@ -226,7 +226,6 @@ class _LoginBodyState extends State<_LoginBody> {
               text: context.l10n.byContinuing,
               style: context.textTheme.bodyMedium?.copyWith(
                 fontSize: AppSize.sp13,
-                // color: context.themeTextColors.bodyTextColor,
               ),
             ),
             TextSpan(
@@ -243,7 +242,6 @@ class _LoginBodyState extends State<_LoginBody> {
               text: context.l10n.and,
               style: context.textTheme.bodyMedium?.copyWith(
                 fontSize: AppSize.sp13,
-                color: context.themeTextColors.bodyTextColor,
               ),
             ),
             TextSpan(

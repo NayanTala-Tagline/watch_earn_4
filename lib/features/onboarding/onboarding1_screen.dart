@@ -1,3 +1,4 @@
+import 'package:ad_manager/ad_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:go_router/go_router.dart';
@@ -6,7 +7,6 @@ import 'package:provider/provider.dart';
 import '../../extension/ext_context.dart';
 import '../../gen/assets.gen.dart';
 import '../../routes/app_router.dart';
-import '../../utils/ad_repository.dart';
 import '../../utils/anaytics_manager.dart';
 import '../../utils/app_size.dart';
 import '../../utils/remote_config.dart';
@@ -15,7 +15,10 @@ import '../../widgets/app_button.dart';
 import 'provider/onboarding_provider.dart';
 
 class Onboarding1Screen extends StatefulWidget {
-  const Onboarding1Screen({super.key});
+  const Onboarding1Screen({super.key, this.preloadedNative});
+
+  /// Native ad pre-loaded by the splash screen.
+  final InlineAdManager? preloadedNative;
 
   @override
   State<Onboarding1Screen> createState() => _Onboarding1ScreenState();
@@ -35,16 +38,14 @@ class _Onboarding1ScreenState extends State<Onboarding1Screen> {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (_) => OnboardingProvider(
-        nativeAdData: RemoteConfigService.instance.onboardingNative1,
+        preloadedNative: widget.preloadedNative,
+        nextNativeAdData: RemoteConfigService.instance.onboardingNative2,
         interAdData: RemoteConfigService.instance.onboardingInter1,
       ),
       child: Consumer<OnboardingProvider>(
         builder: (context, prov, _) {
           return Scaffold(
             backgroundColor: context.themeColors.backgroundColor,
-            // Ad + button anchored together at the bottom — mirrors finlora's pattern.
-            // Column(mainAxisSize.min) bounds the platform-view height so the body
-            // never gets squeezed to zero.
             bottomNavigationBar: SafeArea(
               top: false,
               bottom: true,
@@ -76,10 +77,14 @@ class _Onboarding1ScreenState extends State<Onboarding1Screen> {
                           name: 'onboarding_next',
                           parameters: {'page': 1},
                         );
-                        await prov.wait(context);
+                        await prov.waitForNextAd();
                         await prov.interAd?.show();
                         if (context.mounted) {
-                          context.goNamed(AppRoutes.onboarding2);
+                          final nextNative = prov.takeNextNativeAd();
+                          context.goNamed(
+                            AppRoutes.onboarding2,
+                            extra: nextNative,
+                          );
                         }
                       },
                     ).animate().fadeIn(delay: 300.ms, duration: 450.ms, curve: Curves.easeOut).slideY(

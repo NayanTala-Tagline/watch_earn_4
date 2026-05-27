@@ -25,26 +25,19 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  /// Floor on splash duration so the logo animation has room to play even when
-  /// ads resolve instantly (disabled / cached / failed).
   static const _minSplashDuration = Duration(milliseconds: 3000);
-
-  /// Per-ad load timeout — protects against SDKs that never resolve.
   static const _adLoadTimeout = Duration(seconds: 6);
-
-  /// Wall-clock ceiling. No matter what happens (RC stalls, callback never
-  /// fires, native code hangs), the user navigates away after this.
   static const _maxSplashDuration = Duration(seconds: 12);
-
-  /// Hard cap on the banner-load wait.
   static const _bannerLoadTimeout = Duration(seconds: 6);
 
   InlineAdManager? _banner;
   FullScreenAdManager? _fullScreen;
-
-  /// Cached banner fill future so the navigation flow can wait for the
-  /// banner to actually appear on screen before tearing the splash down.
   Future<void>? _bannerLoadFuture;
+
+  /// Pre-loaded native ad for onboarding 1 — only started when the routing
+  /// decision confirms the user will land on the onboarding flow.
+  InlineAdManager? _onboarding1NativeAd;
+  bool _onboarding1NativeAdTransferred = false;
 
   Timer? _safetyTimer;
   bool _navigated = false;
@@ -66,11 +59,26 @@ class _SplashScreenState extends State<SplashScreen> {
     _safetyTimer?.cancel();
     unawaited(_banner?.dispose());
     unawaited(_fullScreen?.dispose());
+    if (!_onboarding1NativeAdTransferred) {
+      unawaited(_onboarding1NativeAd?.dispose());
+    }
     super.dispose();
   }
 
   void _startAdFlow() {
     _startedAt = DateTime.now();
+
+    // Determine routing early so we can pre-load the onboarding 1 native ad
+    // while the splash animations and full-screen ad are running.
+    final db = Injector.instance<AppDB>();
+    final isLoggedIn =
+        FirebaseAuth.instance.currentUser != null || db.userModel != null;
+    if (!isLoggedIn && !_shouldSkipOnboarding()) {
+      final data = RemoteConfigService.instance.onboardingNative1;
+      _onboarding1NativeAd = InlineAdManager(adData: data);
+      unawaited(_onboarding1NativeAd!.load());
+    }
+
     _safetyTimer = Timer(_maxSplashDuration, () {
       '⚠️ splash safety timer fired — forcing navigate'.logD;
       unawaited(_goNext());
@@ -94,7 +102,6 @@ class _SplashScreenState extends State<SplashScreen> {
     try {
       final data = RemoteConfigService.instance.splashAppOpen;
 
-      // Slot disabled or no ad id → skip the ad, just honor the floor.
       if (!data.enabled || data.adId.isEmpty) {
         await _waitForMinSplash();
         unawaited(_goNext());
@@ -114,8 +121,6 @@ class _SplashScreenState extends State<SplashScreen> {
       );
 
       unawaited(_fullScreen!.load());
-      // Best-effort wait — even if this times out as failed, the SDK can
-      // still fill a moment later, so we re-check `isLoaded` below.
       await _fullScreen!.future().timeout(
             _adLoadTimeout,
             onTimeout: () => AdStatus.failed,
@@ -124,9 +129,6 @@ class _SplashScreenState extends State<SplashScreen> {
       await _waitForMinSplash();
       if (!mounted) return;
 
-      // Polling grace — give the SDK up to 3 s more if `future()` already
-      // resolved as `failed` but the ad is still in-flight. Capped well
-      // under [_maxSplashDuration].
       if (!(_fullScreen?.isLoaded ?? false)) {
         for (var i = 0; i < 6; i++) {
           await Future<void>.delayed(const Duration(milliseconds: 500));
@@ -138,7 +140,6 @@ class _SplashScreenState extends State<SplashScreen> {
       if (_fullScreen?.isLoaded ?? false) {
         final shown = await _fullScreen!.show();
         if (!shown) unawaited(_goNext());
-        // shown == true → dismiss / fail callback drives navigation.
       } else {
         unawaited(_goNext());
       }
@@ -155,9 +156,6 @@ class _SplashScreenState extends State<SplashScreen> {
     if (remaining > Duration.zero) {
       await Future<void>.delayed(remaining);
     }
-    // Also wait for the splash banner to actually fill so it's visible
-    // before navigation — capped by [_bannerLoadTimeout] and overall by
-    // the [_safetyTimer].
     final loadFuture = _bannerLoadFuture;
     if (loadFuture != null && _banner != null && !_banner!.isLoaded) {
       await loadFuture.timeout(_bannerLoadTimeout, onTimeout: () {});
@@ -188,19 +186,11 @@ class _SplashScreenState extends State<SplashScreen> {
       context.goNamed(AppRoutes.home);
     } else {
       'Splash: routing to onboarding'.logD;
-      context.goNamed(AppRoutes.onboarding1);
+      _onboarding1NativeAdTransferred = true;
+      context.goNamed(AppRoutes.onboarding1, extra: _onboarding1NativeAd);
     }
   }
 
-  /// Routing decision after the splash flow:
-  ///   • `skip_onboarding` (RC) → true (always skip, regardless of state).
-  ///   • `show_multiple_onboarding` (RC) → false (force onboarding even if
-  ///     the user has completed it before — useful for QA / feature gates).
-  ///   • Otherwise → true if onboarding has been completed before, else
-  ///     false (first-launch users see onboarding).
-  ///
-  /// The Firebase-login gate is applied separately in [_goNext], so
-  /// "skip onboarding" doesn't bypass auth.
   bool _shouldSkipOnboarding() {
     final rc = RemoteConfigService.instance;
     if (rc.skipOnBoarding) return true;
@@ -271,8 +261,7 @@ class _SplashScreenState extends State<SplashScreen> {
                     height: AppSize.h3,
                     child: LinearProgressIndicator(
                       minHeight: AppSize.h3,
-                      backgroundColor:
-                          context.themeColors.borderColor2,
+                      backgroundColor: context.themeColors.borderColor2,
                       valueColor: AlwaysStoppedAnimation<Color>(
                         context.themeColors.buttonColor,
                       ),

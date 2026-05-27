@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:ad_manager/ad_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -8,8 +10,9 @@ import 'package:shimmer/shimmer.dart';
 import '../../extension/ext_context.dart';
 import '../../routes/app_router.dart';
 import '../../utils/anaytics_manager.dart';
-import '../../utils/navigation_helper.dart';
 import '../../utils/app_size.dart';
+import '../../utils/navigation_helper.dart';
+import '../../utils/remote_config.dart';
 import '../../widgets/app_button.dart';
 import '../../widgets/common_appbar.dart';
 import 'provider/locale_provider.dart';
@@ -46,8 +49,6 @@ const _languages = [
 ];
 
 class LanguageScreen extends StatefulWidget {
-  /// [fromSettings] true  → navigated from profile/settings (show back, save & pop)
-  /// [fromSettings] false → navigated from onboarding (show Get Started, push to login)
   const LanguageScreen({
     super.key,
     this.fromSettings = false,
@@ -65,8 +66,12 @@ class LanguageScreen extends StatefulWidget {
 
 class _LanguageScreenState extends State<LanguageScreen> {
   late String _selectedCode;
-  // Flips to true on the first language tap this session; drives the ad swap.
   bool _hasSelectedOnce = false;
+
+  /// Country native ad pre-loaded here for the country screen.
+  InlineAdManager? _countryNativeAd;
+  bool _countryNativeAdTransferred = false;
+  bool _isButtonLoading = false;
 
   @override
   void initState() {
@@ -78,9 +83,24 @@ class _LanguageScreenState extends State<LanguageScreen> {
     final saved = context.read<LocaleProvider>().locale?.languageCode ?? '';
     _selectedCode = saved.isNotEmpty ? saved : 'en';
 
-    // Rebuild when either pre-loaded ad finishes so the bar shows immediately.
     widget.nativeAd1?.future().then((_) { if (mounted) setState(() {}); });
     widget.nativeAd2?.future().then((_) { if (mounted) setState(() {}); });
+
+    // Pre-load country native (only needed for onboarding flow, not settings).
+    if (!widget.fromSettings) {
+      _countryNativeAd = InlineAdManager(
+        adData: RemoteConfigService.instance.countryNative,
+      );
+      unawaited(_countryNativeAd!.load());
+    }
+  }
+
+  @override
+  void dispose() {
+    widget.nativeAd1?.dispose();
+    widget.nativeAd2?.dispose();
+    if (!_countryNativeAdTransferred) _countryNativeAd?.dispose();
+    super.dispose();
   }
 
   void _onSelect(String code) {
@@ -90,13 +110,24 @@ class _LanguageScreenState extends State<LanguageScreen> {
     });
   }
 
-  void _onConfirm() {
+  void _onConfirm() async {
     context.read<LocaleProvider>().setLocale(_selectedCode);
     if (widget.fromSettings) {
       context.pop();
-    } else {
-      context.goNamed(AppRoutes.country);
+      return;
     }
+
+    // Wait for country native if it's still loading (button shows loader).
+    if (_countryNativeAd != null && _countryNativeAd!.isLoading) {
+      setState(() => _isButtonLoading = true);
+      await _countryNativeAd!.future();
+      if (!mounted) return;
+      setState(() => _isButtonLoading = false);
+    }
+
+    if (!mounted) return;
+    _countryNativeAdTransferred = true;
+    context.goNamed(AppRoutes.country, extra: _countryNativeAd);
   }
 
   @override
@@ -187,6 +218,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
                 padding: EdgeInsets.symmetric(horizontal: AppSize.w24),
                 child: AppButton(
                   text: fromSettings ? context.l10n.save : context.l10n.getStarted,
+                  isLoading: _isButtonLoading,
                   buttonColor: context.themeColors.buttonColor,
                   shadowColor: context.themeColors.buttonBorderColor,
                   foregroundColor: context.themeColors.whiteColor,

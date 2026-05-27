@@ -11,7 +11,6 @@ import '../../routes/app_router.dart';
 import '../../utils/anaytics_manager.dart';
 import '../../utils/app_size.dart';
 import '../../utils/navigation_helper.dart';
-import '../../utils/remote_config.dart';
 import '../../widgets/ad_slot.dart';
 import '../../widgets/app_button.dart';
 import '../country_screen/country_screen.dart' show EmojiTile;
@@ -36,7 +35,10 @@ const _currencies = [
 ];
 
 class CurrencyScreen extends StatefulWidget {
-  const CurrencyScreen({super.key});
+  const CurrencyScreen({super.key, this.preloadedNative});
+
+  /// Native ad pre-loaded by the game select screen.
+  final InlineAdManager? preloadedNative;
 
   @override
   State<CurrencyScreen> createState() => _CurrencyScreenState();
@@ -44,7 +46,6 @@ class CurrencyScreen extends StatefulWidget {
 
 class _CurrencyScreenState extends State<CurrencyScreen> {
   String? _selectedName;
-  InlineAdManager? _nativeAd;
 
   @override
   void initState() {
@@ -53,20 +54,11 @@ class _CurrencyScreenState extends State<CurrencyScreen> {
       screenName: 'currency',
       screenClass: 'CurrencyScreen',
     );
-    _loadAd();
-  }
-
-  Future<void> _loadAd() async {
-    _nativeAd = InlineAdManager(
-      adData: RemoteConfigService.instance.currencyNative,
-    );
-    await _nativeAd!.load();
-    if (mounted) setState(() {});
   }
 
   @override
   void dispose() {
-    _nativeAd?.dispose();
+    widget.preloadedNative?.dispose();
     super.dispose();
   }
 
@@ -91,7 +83,7 @@ class _CurrencyScreenState extends State<CurrencyScreen> {
       },
       child: Scaffold(
         backgroundColor: context.themeColors.backgroundColor,
-        bottomNavigationBar: AdSlot(ad: _nativeAd),
+        bottomNavigationBar: AdSlot(ad: widget.preloadedNative),
         body: SafeArea(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: AppSize.w24),
@@ -179,31 +171,28 @@ class _CurrencyScreenState extends State<CurrencyScreen> {
                   ),
                 ),
                 SizedBox(height: AppSize.h16),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: AppSize.w24),
-                  child: AppButton(
-                    text: context.l10n.done,
-                    buttonColor: context.themeColors.buttonColor,
-                    shadowColor: context.themeColors.buttonBorderColor,
-                    foregroundColor: context.themeColors.whiteColor,
-                    trailingIcon: Icon(
-                      Icons.arrow_forward_rounded,
-                      color: context.themeColors.whiteColor,
-                      size: 20,
+                AppButton(
+                  text: context.l10n.done,
+                  buttonColor: context.themeColors.buttonColor,
+                  shadowColor: context.themeColors.buttonBorderColor,
+                  foregroundColor: context.themeColors.whiteColor,
+                  trailingIcon: Icon(
+                    Icons.arrow_forward_rounded,
+                    color: context.themeColors.whiteColor,
+                    size: 20,
+                  ),
+                  borderRadius: AppSize.r29,
+                  onPressed: _onConfirm,
+                )
+                    .animate()
+                    .fadeIn(delay: 200.ms, duration: 400.ms, curve: Curves.easeOut)
+                    .slideY(
+                      begin: 0.2,
+                      end: 0,
+                      delay: 200.ms,
+                      duration: 400.ms,
+                      curve: Curves.easeOut,
                     ),
-                    borderRadius: AppSize.r29,
-                    onPressed: _onConfirm,
-                  )
-                      .animate()
-                      .fadeIn(delay: 200.ms, duration: 400.ms, curve: Curves.easeOut)
-                      .slideY(
-                        begin: 0.2,
-                        end: 0,
-                        delay: 200.ms,
-                        duration: 400.ms,
-                        curve: Curves.easeOut,
-                      ),
-                ),
                 SizedBox(height: AppSize.h16),
               ],
             ),

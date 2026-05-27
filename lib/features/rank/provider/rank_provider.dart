@@ -12,7 +12,6 @@ const _kCycleDuration = Duration(minutes: 20);
 class RankProvider extends ChangeNotifier {
   final _fireStore = FirebaseFirestore.instance;
   final _db = Injector.instance<AppDB>();
-  StreamSubscription<QuerySnapshot>? _sub;
 
   bool isLoading = true;
   String? error;
@@ -27,7 +26,7 @@ class RankProvider extends ChangeNotifier {
 
   RankProvider() {
     _initTimer();
-    _listenToLeaderboard();
+    _fetchLeaderboard();
   }
 
   void _initTimer() {
@@ -76,47 +75,42 @@ class RankProvider extends ChangeNotifier {
     isLoading = true;
     error = null;
     notifyListeners();
-    await _sub?.cancel();
-    _listenToLeaderboard();
+    await _fetchLeaderboard();
     _setFreshTimer();
   }
 
-  void _listenToLeaderboard() {
-    _sub = _fireStore
-        .collection('users')
-        .orderBy('coin', descending: true)
-        .limit(25)
-        .snapshots()
-        .listen(
-          (snapshot) {
-            final all = snapshot.docs.map((doc) {
-              final data = doc.data();
-              final name = (data['name'] as String?) ?? 'Unknown';
-              final coin = (data['coin'] as num?)?.toDouble() ?? 0;
-              final level = (data['level'] as num?)?.toDouble() ?? 1;
-              return LeaderboardUser(name, coin.toInt().toString(), level.toInt());
-            }).where((u) => int.parse(u.coins) > 0).toList();
+  Future<void> _fetchLeaderboard() async {
+    try {
+      final snapshot = await _fireStore
+          .collection('users')
+          .orderBy('coin', descending: true)
+          .limit(25)
+          .get();
 
-            top3 = all.take(3).toList();
-            while (top3.length < 3) {
-              top3.add(const LeaderboardUser('—', '0', 1));
-            }
-            listUsers = all.length > 3 ? all.sublist(3) : [];
-            isLoading = false;
-            error = null;
-            notifyListeners();
-          },
-          onError: (_) {
-            error = 'Failed to load leaderboard';
-            isLoading = false;
-            notifyListeners();
-          },
-        );
+      final all = snapshot.docs.map((doc) {
+        final data = doc.data();
+        final name = (data['name'] as String?) ?? 'Unknown';
+        final coin = (data['coin'] as num?)?.toDouble() ?? 0;
+        final level = (data['level'] as num?)?.toDouble() ?? 1;
+        return LeaderboardUser(name, coin.toInt().toString(), level.toInt());
+      }).where((u) => int.parse(u.coins) > 0).toList();
+
+      top3 = all.take(3).toList();
+      while (top3.length < 3) {
+        top3.add(const LeaderboardUser('—', '0', 1));
+      }
+      listUsers = all.length > 3 ? all.sublist(3) : [];
+      isLoading = false;
+      error = null;
+    } catch (_) {
+      error = 'Failed to load leaderboard';
+      isLoading = false;
+    }
+    notifyListeners();
   }
 
   @override
   void dispose() {
-    _sub?.cancel();
     _timer?.cancel();
     super.dispose();
   }

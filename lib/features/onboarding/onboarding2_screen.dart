@@ -1,3 +1,4 @@
+import 'package:ad_manager/ad_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:go_router/go_router.dart';
@@ -14,7 +15,10 @@ import '../../widgets/app_button.dart';
 import 'provider/onboarding_provider.dart';
 
 class Onboarding2Screen extends StatefulWidget {
-  const Onboarding2Screen({super.key});
+  const Onboarding2Screen({super.key, this.preloadedNative});
+
+  /// Native ad pre-loaded by onboarding 1.
+  final InlineAdManager? preloadedNative;
 
   @override
   State<Onboarding2Screen> createState() => _Onboarding2ScreenState();
@@ -34,7 +38,8 @@ class _Onboarding2ScreenState extends State<Onboarding2Screen> {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (_) => OnboardingProvider(
-        nativeAdData: RemoteConfigService.instance.onboardingNative2,
+        preloadedNative: widget.preloadedNative,
+        nextNativeAdData: RemoteConfigService.instance.onboardingNative3,
         interAdData: RemoteConfigService.instance.onboardingInter2,
       ),
       child: Consumer<OnboardingProvider>(
@@ -72,10 +77,14 @@ class _Onboarding2ScreenState extends State<Onboarding2Screen> {
                           name: 'onboarding_next',
                           parameters: {'page': 2},
                         );
-                        await prov.wait(context);
+                        await prov.waitForNextAd();
                         await prov.interAd?.show();
                         if (context.mounted) {
-                          context.goNamed(AppRoutes.onboarding3);
+                          final nextNative = prov.takeNextNativeAd();
+                          context.goNamed(
+                            AppRoutes.onboarding3,
+                            extra: nextNative,
+                          );
                         }
                       },
                     ).animate().fadeIn(delay: 300.ms, duration: 450.ms, curve: Curves.easeOut).slideY(

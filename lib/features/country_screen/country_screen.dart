@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:ad_manager/ad_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -33,7 +35,10 @@ const _countries = [
 ];
 
 class CountryScreen extends StatefulWidget {
-  const CountryScreen({super.key});
+  const CountryScreen({super.key, this.preloadedNative});
+
+  /// Native ad pre-loaded by the language screen.
+  final InlineAdManager? preloadedNative;
 
   @override
   State<CountryScreen> createState() => _CountryScreenState();
@@ -41,7 +46,11 @@ class CountryScreen extends StatefulWidget {
 
 class _CountryScreenState extends State<CountryScreen> {
   String? _selectedName;
-  InlineAdManager? _nativeAd;
+
+  /// Next native ad pre-loaded for the game select screen.
+  InlineAdManager? _nextNativeAd;
+  bool _nextNativeAdTransferred = false;
+  bool _isButtonLoading = false;
 
   @override
   void initState() {
@@ -50,31 +59,38 @@ class _CountryScreenState extends State<CountryScreen> {
       screenName: 'country',
       screenClass: 'CountryScreen',
     );
-    _loadAd();
-  }
-
-  Future<void> _loadAd() async {
-    _nativeAd = InlineAdManager(
-      adData: RemoteConfigService.instance.countryNative,
+    _nextNativeAd = InlineAdManager(
+      adData: RemoteConfigService.instance.gameSelectNative,
     );
-    await _nativeAd!.load();
-    if (mounted) setState(() {});
+    unawaited(_nextNativeAd!.load());
   }
 
   @override
   void dispose() {
-    _nativeAd?.dispose();
+    widget.preloadedNative?.dispose();
+    if (!_nextNativeAdTransferred) _nextNativeAd?.dispose();
     super.dispose();
   }
 
   void _onSelect(String name) => setState(() => _selectedName = name);
 
-  void _onConfirm() {
+  void _onConfirm() async {
     if (_selectedName == null) {
       context.l10n.pleaseSelectCountry.showInfoAlert();
       return;
     }
-    context.goNamed(AppRoutes.gameSelect);
+
+    // Wait for game native if it's still loading (button shows loader).
+    if (_nextNativeAd != null && _nextNativeAd!.isLoading) {
+      setState(() => _isButtonLoading = true);
+      await _nextNativeAd!.future();
+      if (!mounted) return;
+      setState(() => _isButtonLoading = false);
+    }
+
+    if (!mounted) return;
+    _nextNativeAdTransferred = true;
+    context.goNamed(AppRoutes.gameSelect, extra: _nextNativeAd);
   }
 
   @override
@@ -87,7 +103,7 @@ class _CountryScreenState extends State<CountryScreen> {
       },
       child: Scaffold(
         backgroundColor: context.themeColors.backgroundColor,
-        bottomNavigationBar: AdSlot(ad: _nativeAd),
+        bottomNavigationBar: AdSlot(ad: widget.preloadedNative),
         body: SafeArea(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: AppSize.w24),
@@ -175,31 +191,29 @@ class _CountryScreenState extends State<CountryScreen> {
                   ),
                 ),
                 SizedBox(height: AppSize.h16),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: AppSize.w24),
-                  child: AppButton(
-                    text: context.l10n.done,
-                    buttonColor: context.themeColors.buttonColor,
-                    shadowColor: context.themeColors.buttonBorderColor,
-                    foregroundColor: context.themeColors.whiteColor,
-                    trailingIcon: Icon(
-                      Icons.arrow_forward_rounded,
-                      color: context.themeColors.whiteColor,
-                      size: 20,
+                AppButton(
+                  text: context.l10n.done,
+                  isLoading: _isButtonLoading,
+                  buttonColor: context.themeColors.buttonColor,
+                  shadowColor: context.themeColors.buttonBorderColor,
+                  foregroundColor: context.themeColors.whiteColor,
+                  trailingIcon: Icon(
+                    Icons.arrow_forward_rounded,
+                    color: context.themeColors.whiteColor,
+                    size: 20,
+                  ),
+                  borderRadius: AppSize.r29,
+                  onPressed: _onConfirm,
+                )
+                    .animate()
+                    .fadeIn(delay: 200.ms, duration: 400.ms, curve: Curves.easeOut)
+                    .slideY(
+                      begin: 0.2,
+                      end: 0,
+                      delay: 200.ms,
+                      duration: 400.ms,
+                      curve: Curves.easeOut,
                     ),
-                    borderRadius: AppSize.r29,
-                    onPressed: _onConfirm,
-                  )
-                      .animate()
-                      .fadeIn(delay: 200.ms, duration: 400.ms, curve: Curves.easeOut)
-                      .slideY(
-                        begin: 0.2,
-                        end: 0,
-                        delay: 200.ms,
-                        duration: 400.ms,
-                        curve: Curves.easeOut,
-                      ),
-                ),
                 SizedBox(height: AppSize.h16),
               ],
             ),
@@ -343,9 +357,12 @@ class _EmojiTileState extends State<_EmojiTile>
           children: [
             Text(
               widget.emoji,
-              style: TextStyle(fontSize: AppSize.sp22,color: widget.isSelected
-                  ? context.themeColors.whiteColor
-                  : context.themeColors.navyColor,),
+              style: TextStyle(
+                fontSize: AppSize.sp22,
+                color: widget.isSelected
+                    ? context.themeColors.whiteColor
+                    : context.themeColors.navyColor,
+              ),
             ),
             SizedBox(width: AppSize.w12),
             Expanded(

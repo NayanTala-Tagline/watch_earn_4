@@ -1,3 +1,4 @@
+import 'package:ad_manager/ad_manager.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -15,7 +16,6 @@ import '../features/achievements/achievement_screen.dart';
 import '../features/support/support_screen.dart';
 import '../features/daily_check_in/daily_check_in_screen.dart';
 import '../widgets/in_app_webview_page.dart';
-import 'package:ad_manager/models/ad_data.dart';
 import '../features/refer_and_earn/refer_and_earn_screen.dart';
 import '../features/spin_wheel/spin_wheel_screen.dart';
 import '../features/withdraw/withdraw_screen.dart';
@@ -73,20 +73,41 @@ final appRouter = GoRouter(
     GoRoute(
       path: '/${AppRoutes.onboarding1}',
       name: AppRoutes.onboarding1,
-      pageBuilder: (context, state) =>
-          MaterialPage(key: state.pageKey, child: const Onboarding1Screen()),
+      pageBuilder: (context, state) {
+        final native = state.extra is InlineAdManager
+            ? state.extra as InlineAdManager
+            : null;
+        return MaterialPage(
+          key: state.pageKey,
+          child: Onboarding1Screen(preloadedNative: native),
+        );
+      },
     ),
     GoRoute(
       path: '/${AppRoutes.onboarding2}',
       name: AppRoutes.onboarding2,
-      pageBuilder: (context, state) =>
-          MaterialPage(key: state.pageKey, child: const Onboarding2Screen()),
+      pageBuilder: (context, state) {
+        final native = state.extra is InlineAdManager
+            ? state.extra as InlineAdManager
+            : null;
+        return MaterialPage(
+          key: state.pageKey,
+          child: Onboarding2Screen(preloadedNative: native),
+        );
+      },
     ),
     GoRoute(
       path: '/${AppRoutes.onboarding3}',
       name: AppRoutes.onboarding3,
-      pageBuilder: (context, state) =>
-          MaterialPage(key: state.pageKey, child: const Onboarding3Screen()),
+      pageBuilder: (context, state) {
+        final native = state.extra is InlineAdManager
+            ? state.extra as InlineAdManager
+            : null;
+        return MaterialPage(
+          key: state.pageKey,
+          child: Onboarding3Screen(preloadedNative: native),
+        );
+      },
     ),
     GoRoute(
       path: '/${AppRoutes.language}',
@@ -112,20 +133,41 @@ final appRouter = GoRouter(
     GoRoute(
       path: '/${AppRoutes.country}',
       name: AppRoutes.country,
-      pageBuilder: (context, state) =>
-          MaterialPage(key: state.pageKey, child: const CountryScreen()),
+      pageBuilder: (context, state) {
+        final native = state.extra is InlineAdManager
+            ? state.extra as InlineAdManager
+            : null;
+        return MaterialPage(
+          key: state.pageKey,
+          child: CountryScreen(preloadedNative: native),
+        );
+      },
     ),
     GoRoute(
       path: '/${AppRoutes.gameSelect}',
       name: AppRoutes.gameSelect,
-      pageBuilder: (context, state) =>
-          MaterialPage(key: state.pageKey, child: const GameSelectScreen()),
+      pageBuilder: (context, state) {
+        final native = state.extra is InlineAdManager
+            ? state.extra as InlineAdManager
+            : null;
+        return MaterialPage(
+          key: state.pageKey,
+          child: GameSelectScreen(preloadedNative: native),
+        );
+      },
     ),
     GoRoute(
       path: '/${AppRoutes.currency}',
       name: AppRoutes.currency,
-      pageBuilder: (context, state) =>
-          MaterialPage(key: state.pageKey, child: const CurrencyScreen()),
+      pageBuilder: (context, state) {
+        final native = state.extra is InlineAdManager
+            ? state.extra as InlineAdManager
+            : null;
+        return MaterialPage(
+          key: state.pageKey,
+          child: CurrencyScreen(preloadedNative: native),
+        );
+      },
     ),
     GoRoute(
       path: '/${AppRoutes.login}',

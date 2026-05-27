@@ -4,64 +4,63 @@ import 'package:ad_manager/ad_manager.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../../../utils/remote_config.dart';
-import '../../../widgets/loading_overlay/loading_overlay.dart';
 
-/// Owns one inline (native/banner) ad and one interstitial for a single
-/// onboarding screen. Each screen creates its own instance via
-/// [ChangeNotifierProvider] and passes the correct [AdData] pair.
+/// Owns the interstitial for the current onboarding screen and pre-loads the
+/// native ad for the NEXT screen. The current screen's native is passed in
+/// pre-loaded from the previous screen (or splash).
 ///
-/// Language-screen ads are pre-loaded here in the background and handed off
-/// via [takeLanguageAds] before navigating, so [dispose] doesn't destroy them.
+/// Button loading state reflects whether the next screen's native is still
+/// loading. No overlay loader is used — only the button's [isLoading] flag.
 class OnboardingProvider extends ChangeNotifier {
   OnboardingProvider({
-    required AdData nativeAdData,
+    required InlineAdManager? preloadedNative,
+    AdData? nextNativeAdData,
     required AdData interAdData,
+    bool preloadLanguageAds = false,
   }) {
-    _load(nativeAdData, interAdData);
-    _loadLanguageAds();
+    nativeAd = preloadedNative;
+    _trackCurrentNativeLoad();
+    _loadAds(nextNativeAdData, interAdData);
+    if (preloadLanguageAds) _loadLanguageAds();
   }
 
   bool isLoading = false;
+  bool _disposed = false;
 
+  /// Native ad shown on THIS screen (pre-loaded by previous screen / splash).
   InlineAdManager? nativeAd;
+
+  /// Native ad pre-loaded for the NEXT screen.
+  InlineAdManager? _nextNativeAd;
+  bool _nextNativeTransferred = false;
+
   InterstitialAdManager? interAd;
 
+  /// Language-screen ads (only pre-loaded on onboarding 3).
   NativeAdManager? _languageNativeAd1;
   NativeAdManager? _languageNativeAd2;
   bool _languageAdsTransferred = false;
 
-  // ── Load ────────────────────────────────────────────────────────────────────
+  // ── Internal helpers ─────────────────────────────────────────────────────────
 
-  Future<void> _load(AdData nativeAdData, AdData interAdData) async {
-    nativeAd = InlineAdManager(adData: nativeAdData);
+  void _trackCurrentNativeLoad() {
+    if (nativeAd != null && nativeAd!.isLoading) {
+      nativeAd!.future().then((_) {
+        if (!_disposed) notifyListeners();
+      });
+    }
+  }
+
+  void _loadAds(AdData? nextNativeAdData, AdData interAdData) {
+    if (nextNativeAdData != null) {
+      _nextNativeAd = InlineAdManager(adData: nextNativeAdData);
+      unawaited(_nextNativeAd!.load());
+    }
     interAd = InterstitialAdManager(adData: interAdData);
-    await Future.wait([nativeAd!.load(), interAd!.load()]);
-    await Future.wait([nativeAd!.future(), interAd!.future()]);
-    notifyListeners();
+    unawaited(interAd!.load());
   }
 
-  // ── Wait / show helpers ─────────────────────────────────────────────────────
-
-  /// Shows a loading overlay, waits for both ads to finish loading, then hides
-  /// it. Call before showing the interstitial.
-  Future<void> wait(BuildContext context) async {
-    if (nativeAd == null || interAd == null) return;
-    isLoading = true;
-    notifyListeners();
-
-    final overlay = LoadingOverlay.instance();
-    overlay.show(context: context);
-
-    await Future.wait([nativeAd!.future(), interAd!.future()]);
-
-    overlay.hide();
-    isLoading = false;
-    notifyListeners();
-  }
-
-  // ── Language page ad pre-loading ────────────────────────────────────────────
-
-  Future<void> _loadLanguageAds() async {
+  void _loadLanguageAds() {
     final ad1Data = RemoteConfigService.instance.languageNative;
     if (ad1Data.enabled || ad1Data.adType == AdType.custom) {
       _languageNativeAd1 = NativeAdManager(adData: ad1Data);
@@ -75,18 +74,55 @@ class OnboardingProvider extends ChangeNotifier {
     }
   }
 
-  /// Transfers ownership of pre-loaded language ads to the caller.
-  /// Call before navigating to the language screen.
+  // ── Public API ────────────────────────────────────────────────────────────────
+
+  /// Waits for the next screen's native ad if it is still loading.
+  /// Sets [isLoading] = true (button shows loader), clears it when done.
+  /// On failure it returns immediately so the user is never blocked.
+  Future<void> waitForNextAd() async {
+    // Onboarding 3: wait for language native 1.
+    final langAd = _languageNativeAd1;
+    if (langAd != null && langAd.isLoading) {
+      isLoading = true;
+      notifyListeners();
+      await langAd.future();
+      isLoading = false;
+      notifyListeners();
+      return;
+    }
+
+    // Onboarding 1 / 2: wait for inline next native.
+    final nextAd = _nextNativeAd;
+    if (nextAd != null && nextAd.isLoading) {
+      isLoading = true;
+      notifyListeners();
+      await nextAd.future();
+      isLoading = false;
+      notifyListeners();
+    }
+  }
+
+  /// Transfers ownership of the next inline native ad to the caller.
+  /// Call before navigating to the next onboarding screen.
+  InlineAdManager? takeNextNativeAd() {
+    _nextNativeTransferred = true;
+    return _nextNativeAd;
+  }
+
+  /// Transfers ownership of the pre-loaded language ads to the caller.
+  /// Call before navigating to the language screen (onboarding 3 only).
   ({NativeAdManager? ad1, NativeAdManager? ad2}) takeLanguageAds() {
     _languageAdsTransferred = true;
     return (ad1: _languageNativeAd1, ad2: _languageNativeAd2);
   }
 
-  // ── Lifecycle ───────────────────────────────────────────────────────────────
+  // ── Lifecycle ─────────────────────────────────────────────────────────────────
 
   @override
   void dispose() {
+    _disposed = true;
     nativeAd?.dispose();
+    if (!_nextNativeTransferred) _nextNativeAd?.dispose();
     interAd?.dispose();
     if (!_languageAdsTransferred) {
       _languageNativeAd1?.dispose();

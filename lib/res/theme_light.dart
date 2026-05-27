@@ -42,7 +42,7 @@ const _themeColors = ThemeColors(
     dailyRewardGradientStart: Color(0xFFFFF1E0),
     dailyRewardGradientEnd: Color(0xFFFFE0C9),
     fieldBgColor: Color(0xFFF6F7FB),
-    linkColor: Color(0xFF87ECFF),
+    linkColor: Color(0xFF1A1AE8),
     progressBgColor: Color(0xFFE8EAF0),
     adPlaceholderBg: Color(0xFFF5E8FF),
     adPlaceholderBorder: Color(0xFFDEC6F5),

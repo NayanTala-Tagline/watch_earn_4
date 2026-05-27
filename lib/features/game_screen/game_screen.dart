@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:ad_manager/ad_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -35,7 +37,10 @@ const _games = <_Game>[
 ];
 
 class GameSelectScreen extends StatefulWidget {
-  const GameSelectScreen({super.key});
+  const GameSelectScreen({super.key, this.preloadedNative});
+
+  /// Native ad pre-loaded by the country screen.
+  final InlineAdManager? preloadedNative;
 
   @override
   State<GameSelectScreen> createState() => _GameSelectScreenState();
@@ -43,7 +48,11 @@ class GameSelectScreen extends StatefulWidget {
 
 class _GameSelectScreenState extends State<GameSelectScreen> {
   final Set<String> _selected = {};
-  InlineAdManager? _nativeAd;
+
+  /// Next native ad pre-loaded for the currency screen.
+  InlineAdManager? _nextNativeAd;
+  bool _nextNativeAdTransferred = false;
+  bool _isButtonLoading = false;
 
   @override
   void initState() {
@@ -52,20 +61,16 @@ class _GameSelectScreenState extends State<GameSelectScreen> {
       screenName: 'game_select',
       screenClass: 'GameSelectScreen',
     );
-    _loadAd();
-  }
-
-  Future<void> _loadAd() async {
-    _nativeAd = InlineAdManager(
-      adData: RemoteConfigService.instance.gameSelectNative,
+    _nextNativeAd = InlineAdManager(
+      adData: RemoteConfigService.instance.currencyNative,
     );
-    await _nativeAd!.load();
-    if (mounted) setState(() {});
+    unawaited(_nextNativeAd!.load());
   }
 
   @override
   void dispose() {
-    _nativeAd?.dispose();
+    widget.preloadedNative?.dispose();
+    if (!_nextNativeAdTransferred) _nextNativeAd?.dispose();
     super.dispose();
   }
 
@@ -79,12 +84,23 @@ class _GameSelectScreenState extends State<GameSelectScreen> {
     });
   }
 
-  void _onConfirm() {
+  void _onConfirm() async {
     if (_selected.isEmpty) {
       context.l10n.pleaseSelectGame.showInfoAlert();
       return;
     }
-    context.goNamed(AppRoutes.currency);
+
+    // Wait for currency native if it's still loading (button shows loader).
+    if (_nextNativeAd != null && _nextNativeAd!.isLoading) {
+      setState(() => _isButtonLoading = true);
+      await _nextNativeAd!.future();
+      if (!mounted) return;
+      setState(() => _isButtonLoading = false);
+    }
+
+    if (!mounted) return;
+    _nextNativeAdTransferred = true;
+    context.goNamed(AppRoutes.currency, extra: _nextNativeAd);
   }
 
   @override
@@ -97,7 +113,7 @@ class _GameSelectScreenState extends State<GameSelectScreen> {
       },
       child: Scaffold(
         backgroundColor: context.themeColors.backgroundColor,
-        bottomNavigationBar: AdSlot(ad: _nativeAd),
+        bottomNavigationBar: AdSlot(ad: widget.preloadedNative),
         body: SafeArea(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: AppSize.w24),
@@ -177,21 +193,19 @@ class _GameSelectScreenState extends State<GameSelectScreen> {
                   ),
                 ),
                 SizedBox(height: AppSize.h8),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: AppSize.w24),
-                  child: AppButton(
-                    text: context.l10n.done,
-                    buttonColor: context.themeColors.buttonColor,
-                    shadowColor: context.themeColors.buttonBorderColor,
-                    trailingIcon: Icon(
-                      Icons.arrow_forward_rounded,
-                      color: context.themeColors.whiteColor,
-                      size: 20,
-                    ),
-                    foregroundColor: context.themeColors.whiteColor,
-                    borderRadius: AppSize.r29,
-                    onPressed: _onConfirm,
+                AppButton(
+                  text: context.l10n.done,
+                  isLoading: _isButtonLoading,
+                  buttonColor: context.themeColors.buttonColor,
+                  shadowColor: context.themeColors.buttonBorderColor,
+                  trailingIcon: Icon(
+                    Icons.arrow_forward_rounded,
+                    color: context.themeColors.whiteColor,
+                    size: 20,
                   ),
+                  foregroundColor: context.themeColors.whiteColor,
+                  borderRadius: AppSize.r29,
+                  onPressed: _onConfirm,
                 ),
                 SizedBox(height: AppSize.h16),
               ],
@@ -203,7 +217,7 @@ class _GameSelectScreenState extends State<GameSelectScreen> {
   }
 }
 
-class _GameChip extends StatelessWidget {
+class _GameChip extends StatefulWidget {
   const _GameChip({
     required this.label,
     required this.isSelected,
@@ -217,46 +231,121 @@ class _GameChip extends StatelessWidget {
   final Duration animationDelay;
 
   @override
+  State<_GameChip> createState() => _GameChipState();
+}
+
+class _GameChipState extends State<_GameChip>
+    with SingleTickerProviderStateMixin {
+  static const _wallH = 4.0;
+
+  late final AnimationController _ctrl;
+  late final Animation<double> _anim;
+
+  @override
+  void initState() {
+    super.initState();
+    _ctrl = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 80),
+      reverseDuration: const Duration(milliseconds: 160),
+    );
+    _anim = CurvedAnimation(parent: _ctrl, curve: Curves.easeOut);
+  }
+
+  @override
+  void dispose() {
+    _ctrl.dispose();
+    super.dispose();
+  }
+
+  void _onTapDown(TapDownDetails _) => _ctrl.forward();
+
+  void _onTapUp(TapUpDetails _) {
+    _ctrl.reverse();
+    widget.onTap();
+  }
+
+  void _onTapCancel() => _ctrl.reverse();
+
+  @override
   Widget build(BuildContext context) {
-    return ChoiceChip(
-      label: Text(label),
-      selected: isSelected,
-      onSelected: (_) => onTap(),
-      labelStyle: context.textTheme.titleSmall?.copyWith(
-        fontSize: AppSize.sp13,
-        color: isSelected
-            ? context.themeColors.whiteColor
-            : context.themeColors.navyColor,
-      ),
-      backgroundColor: context.themeColors.whiteColor,
-      selectedColor: context.themeColors.buttonColor,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(AppSize.r24),
-        side: BorderSide(
-          color: isSelected
-              ? context.themeColors.buttonColor
-              : context.themeColors.borderColor2,
+    final isSelected = widget.isSelected;
+
+    final surfaceColor = isSelected
+        ? context.themeColors.buttonColor
+        : context.themeColors.whiteColor;
+    final wallColor = isSelected
+        ? context.themeColors.buttonBorderColor
+        : context.themeColors.borderColor;
+    final borderColor = isSelected
+        ? context.themeColors.buttonColor
+        : context.themeColors.dragHandleColor;
+    final textColor = isSelected
+        ? context.themeColors.whiteColor
+        : context.themeColors.navyColor;
+
+    return GestureDetector(
+      onTapDown: _onTapDown,
+      onTapUp: _onTapUp,
+      onTapCancel: _onTapCancel,
+      child: AnimatedBuilder(
+        animation: _anim,
+        builder: (_, child) {
+          final p = _anim.value;
+          final currentWall = (1 - p) * _wallH;
+          final shiftY = p * _wallH;
+
+          return Transform.translate(
+            offset: Offset(0, shiftY),
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 200),
+              padding: EdgeInsets.symmetric(
+                horizontal: AppSize.w12,
+                vertical: AppSize.h8,
+              ),
+              decoration: BoxDecoration(
+                color: surfaceColor,
+                borderRadius: BorderRadius.circular(AppSize.r24),
+                border: Border.all(color: borderColor, width: 1.5),
+                boxShadow: [
+                  BoxShadow(
+                    color: wallColor,
+                    blurRadius: 0,
+                    offset: Offset(0, currentWall),
+                  ),
+                ],
+              ),
+              child: child,
+            ),
+          );
+        },
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            if (widget.isSelected) ...[
+              Icon(
+                Icons.check_rounded,
+                size: AppSize.r14,
+                color: context.themeColors.whiteColor,
+              ),
+              SizedBox(width: AppSize.w4),
+            ],
+            AnimatedDefaultTextStyle(
+              duration: const Duration(milliseconds: 200),
+              style: (context.textTheme.titleSmall ?? const TextStyle())
+                  .copyWith(fontSize: AppSize.sp13, color: textColor),
+              child: Text(widget.label),
+            ),
+          ],
         ),
-      ),
-      showCheckmark: false,
-      avatar: isSelected
-          ? Icon(
-              Icons.check_rounded,
-              size: AppSize.r16,
-              color: context.themeColors.whiteColor,
-            )
-          : null,
-      padding: EdgeInsets.symmetric(
-        horizontal: AppSize.w8,
-        vertical: AppSize.h6,
       ),
     )
         .animate()
-        .fadeIn(delay: animationDelay, duration: 300.ms, curve: Curves.easeOut)
+        .fadeIn(delay: widget.animationDelay, duration: 300.ms, curve: Curves.easeOut)
         .scale(
           begin: const Offset(0.9, 0.9),
           end: const Offset(1, 1),
-          delay: animationDelay,
+          delay: widget.animationDelay,
           duration: 300.ms,
         );
   }

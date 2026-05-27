@@ -1,0 +1,673 @@
+{
+  "@@locale": "de",
+  "skip": "Überspringen",
+  "@skip": {},
+  "next": "Nächste",
+  "@next": {},
+  "done": "Erledigt",
+  "@done": {},
+  "cancel": "Stornieren",
+  "@cancel": {},
+  "claim": "Beanspruchen",
+  "@claim": {},
+  "claimed": "Behauptet",
+  "@claimed": {},
+  "tryAgain": "Versuchen Sie es erneut",
+  "@tryAgain": {},
+  "claimNow": "Jetzt anfordern",
+  "@claimNow": {},
+  "getStarted": "Legen Sie los",
+  "@getStarted": {},
+  "apply": "Anwenden",
+  "@apply": {},
+  "save": "Speichern",
+  "@save": {},
+  "delete": "Löschen",
+  "@delete": {},
+  "signOut": "Abmelden",
+  "@signOut": {},
+  "withdraw": "Zurückziehen",
+  "@withdraw": {},
+  "rewards": "Belohnungen",
+  "@rewards": {},
+  "sectionContainsAds": "Dieser Abschnitt kann Werbung enthalten",
+  "@sectionContainsAds": {},
+  "congratulations": "Glückwunsch..!",
+  "@congratulations": {},
+  "oops": "Hoppla!",
+  "@oops": {},
+  "betterLuckNextTime": "Viel Glück beim nächsten Mal!",
+  "@betterLuckNextTime": {},
+  "awesome": "Eindrucksvoll!",
+  "@awesome": {},
+  "coins": "Münzen",
+  "@coins": {},
+  "learn": "Lernen",
+  "@learn": {},
+  "rank": "Rang",
+  "@rank": {},
+  "level": "Ebene",
+  "@level": {},
+  "xp": "XP",
+  "@xp": {},
+  "top": "Spitze",
+  "@top": {},
+  "home": "Heim",
+  "@home": {},
+  "profile": "Profil",
+  "@profile": {},
+  "support": "Unterstützung",
+  "@support": {},
+  "language": "Sprache",
+  "@language": {},
+  "mystery": "GEHEIMNIS",
+  "@mystery": {},
+  "spinning": "Spinnen...",
+  "@spinning": {},
+  "spinNow": "Jetzt drehen",
+  "@spinNow": {},
+  "claimCoins": "Fordern Sie Münzen an",
+  "@claimCoins": {},
+  "viewMore": "Mehr anzeigen",
+  "@viewMore": {},
+  "viewLess": "Weniger anzeigen",
+  "@viewLess": {},
+  "useAll": "Benutze alle",
+  "@useAll": {},
+  "shareLink": "Link teilen",
+  "@shareLink": {},
+  "referralCodeCopied": "Empfehlungscode kopiert",
+  "@referralCodeCopied": {},
+  "privacyPolicy": "Datenschutzrichtlinie",
+  "@privacyPolicy": {},
+  "termsAndCondition": "Allgemeine Geschäftsbedingungen",
+  "@termsAndCondition": {},
+  "deleteAccount": "Konto löschen",
+  "@deleteAccount": {},
+  "soundEffects": "Soundeffekte",
+  "@soundEffects": {},
+  "hapticFeedback": "Haptisches Feedback",
+  "@hapticFeedback": {},
+  "levelProgress": "Levelfortschritt",
+  "@levelProgress": {},
+  "startNow": "Beginnen Sie jetzt",
+  "@startNow": {},
+  "daysValue": "{days} Tage",
+  "@daysValue": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "coinsValue": "{coins} Münzen",
+  "@coinsValue": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
+  "coinsReward": "+{coins} Münzen",
+  "@coinsReward": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
+  "coinsAwarded": "+{coins} Münzen vergeben!",
+  "@coinsAwarded": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
+  "youWonCoins": "Du hast {coins} Münzen gewonnen",
+  "@youWonCoins": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
+  "lvValue": "LV {level}",
+  "@lvValue": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      }
+    }
+  },
+  "lvXpValue": "LV {level} - {xp} XP",
+  "@lvXpValue": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      },
+      "xp": {
+        "type": "int"
+      }
+    }
+  },
+  "dailyRewardDay": "Tägliche Belohnung – Tag {day}",
+  "@dailyRewardDay": {
+    "placeholders": {
+      "day": {
+        "type": "int"
+      }
+    }
+  },
+  "collectCoins": "Sammle +{coins} Münzen",
+  "@collectCoins": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
+  "claimCoinsToday": "Fordern Sie noch heute +{coins} Münzen an!",
+  "@claimCoinsToday": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
+  "lvDotLevel": "Lv. {level} · {levelName}",
+  "@lvDotLevel": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      },
+      "levelName": {
+        "type": "String"
+      }
+    }
+  },
+  "inviteFriendsTitle": "Freunde einladen,\nHolen Sie sich {amount} Münzen!",
+  "@inviteFriendsTitle": {
+    "placeholders": {
+      "amount": {
+        "type": "int"
+      }
+    }
+  },
+  "refreshesIn": "Aktualisierungen in {time}",
+  "@refreshesIn": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "lvTierValue": "Lv. {level} {tier}",
+  "@lvTierValue": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      },
+      "tier": {
+        "type": "String"
+      }
+    }
+  },
+  "spinsLeftToday": "{count} Spins sind heute noch übrig",
+  "@spinsLeftToday": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "autoStartingIn": "Automatischer Start in {seconds} s",
+  "@autoStartingIn": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
+  "withdrawTo": "Auf {method} abheben",
+  "@withdrawTo": {
+    "placeholders": {
+      "method": {
+        "type": "String"
+      }
+    }
+  },
+  "minWithdrawal": "Min. Auszahlung – {amount}",
+  "@minWithdrawal": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "withdrawAmount": "$ {amount} abheben",
+  "@withdrawAmount": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "minSuffix": "Min. {min}",
+  "@minSuffix": {
+    "placeholders": {
+      "min": {
+        "type": "String"
+      }
+    }
+  },
+  "minimumWithdrawCoins": "Die Mindestauszahlung beträgt {coins} Münzen",
+  "@minimumWithdrawCoins": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
+  "convertedValue": "Wert ${value}",
+  "@convertedValue": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "timeNotCompletedDesc": "Sie sind {elapsed}s von {required}s geblieben.\nBitte bleiben Sie für die gesamte Dauer auf der Seite.",
+  "@timeNotCompletedDesc": {
+    "placeholders": {
+      "elapsed": {
+        "type": "int"
+      },
+      "required": {
+        "type": "int"
+      }
+    }
+  },
+  "missionBriefDuration": "Bleiben Sie {duration} Sekunden lang auf der Seite. Ein Countdown-Timer wird angezeigt. klicken",
+  "@missionBriefDuration": {
+    "placeholders": {
+      "duration": {
+        "type": "int"
+      }
+    }
+  },
+  "luckyNumber": "Glück gehabt #{number}",
+  "@luckyNumber": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "totalDaysValue": "{totalDays} Tage",
+  "@totalDaysValue": {
+    "placeholders": {
+      "totalDays": {
+        "type": "int"
+      }
+    }
+  },
+  "dayValue": "Tag {day}",
+  "@dayValue": {
+    "placeholders": {
+      "day": {
+        "type": "int"
+      }
+    }
+  },
+  "referralShareDesc": "Teilen Sie Ihren Code. Wenn sie sich anmelden oder daran teilnehmen, erhalten Sie beide {amount} Münzen!",
+  "@referralShareDesc": {
+    "placeholders": {
+      "amount": {
+        "type": "int"
+      }
+    }
+  },
+  "howReferralsWorkDesc": "Code teilen · Freund tritt bei · Sie verdienen beide {amount} Münzen",
+  "@howReferralsWorkDesc": {
+    "placeholders": {
+      "amount": {
+        "type": "int"
+      }
+    }
+  },
+  "splashAppName": "Belohnung",
+  "@splashAppName": {},
+  "onboarding1Title": "Tägliche Belohnungen",
+  "@onboarding1Title": {},
+  "onboarding1Desc": "Sie erhalten eine tägliche Punktebelohnung, die Sie einfordern und Ihre Punktezahl erhöhen können",
+  "@onboarding1Desc": {},
+  "onboarding2Title": "Ultimative Spiele",
+  "@onboarding2Title": {},
+  "onboarding2Desc": "Erhalten Sie mehrere Optionen zum Spielen und sammeln Sie mehr Punkte.",
+  "@onboarding2Desc": {},
+  "onboarding3Title": "Verfolgen Sie Erfolge",
+  "@onboarding3Title": {},
+  "onboarding3Desc": "Sehen Sie sich Ihre Erfolge an und verfolgen Sie sie mit anderen Benutzern über Leatherboard",
+  "@onboarding3Desc": {},
+  "startEarning": "Fangen Sie an zu verdienen",
+  "@startEarning": {},
+  "loginTitle": "Fangen Sie an zu verdienen\nBelohnungen",
+  "@loginTitle": {},
+  "loginSubtitle": "Erledige Aufgaben, spiele Spiele und verdiene Münzen, die sich in echtes Geld umwandeln lassen!",
+  "@loginSubtitle": {},
+  "continueWithGoogle": "Weiter mit Google",
+  "@continueWithGoogle": {},
+  "continueAsGuest": "Als Gast fortfahren",
+  "@continueAsGuest": {},
+  "byContinuing": "Indem Sie fortfahren, stimmen Sie unseren zu",
+  "@byContinuing": {},
+  "termsOfService": "Nutzungsbedingungen",
+  "@termsOfService": {},
+  "and": "Und",
+  "@and": {},
+  "pressAgainToExit": "Drücken Sie erneut, um die App zu verlassen",
+  "@pressAgainToExit": {},
+  "earnMoney": "Geld verdienen",
+  "@earnMoney": {},
+  "howItWorks": "Wie es funktioniert",
+  "@howItWorks": {},
+  "howItWorksSubtitle": "Erfahren Sie Schritt für Schritt, wie es geht\nGeld verdienen",
+  "@howItWorksSubtitle": {},
+  "totalBalance": "Gesamtsaldo",
+  "@totalBalance": {},
+  "claimedTodayComeBack": "Heute beansprucht! Komm morgen wieder",
+  "@claimedTodayComeBack": {},
+  "quizMaster": "Quizmeister",
+  "@quizMaster": {},
+  "answerAndEarn": "Antworten und verdienen",
+  "@answerAndEarn": {},
+  "spinWheel": "Drehrad",
+  "@spinWheel": {},
+  "spinAndWin": "Drehen und gewinnen",
+  "@spinAndWin": {},
+  "scratchCard": "Rubbellos",
+  "@scratchCard": {},
+  "scratchAndReveal": "Scratch and Reveal",
+  "@scratchAndReveal": {},
+  "webVisits": "Webbesuche",
+  "@webVisits": {},
+  "visitAndEarn": "Besuchen und verdienen",
+  "@visitAndEarn": {},
+  "gameZone": "Spielzone",
+  "@gameZone": {},
+  "playGames": "Spiele spielen",
+  "@playGames": {},
+  "referAndEarn": "Empfehlen und verdienen",
+  "@referAndEarn": {},
+  "inviteFriends": "Freunde einladen",
+  "@inviteFriends": {},
+  "seeTopEarner": "Siehe Spitzenverdiener",
+  "@seeTopEarner": {},
+  "leaderBoard": "Bestenliste",
+  "@leaderBoard": {},
+  "achievements": "Erfolge",
+  "@achievements": {},
+  "dailyCheckIn": "Täglicher Check-in",
+  "@dailyCheckIn": {},
+  "totalDaysClaimed": "Gesamtzahl der beanspruchten Tage",
+  "@totalDaysClaimed": {},
+  "dailyCheckInReward": "Tägliche Check-in-Prämie",
+  "@dailyCheckInReward": {},
+  "alreadyClaimedToday": "Sie haben die heutige Belohnung bereits beansprucht.",
+  "@alreadyClaimedToday": {},
+  "achievementUnlocked": "Erfolg freigeschaltet!",
+  "@achievementUnlocked": {},
+  "couldNotClaimReward": "Prämie konnte nicht beansprucht werden. Versuchen Sie es erneut.",
+  "@couldNotClaimReward": {},
+  "howItWorksReady": "Sind Sie bereit, mit dem Verdienen zu beginnen?",
+  "@howItWorksReady": {},
+  "backToHome": "Zurück nach Hause",
+  "@backToHome": {},
+  "stepWhatAreCoinsTitle": "Was sind Münzen?",
+  "@stepWhatAreCoinsTitle": {},
+  "stepWhatAreCoinsDesc": "Münzen sind die In-App-Währung, die Sie durch das Abschließen von Aktivitäten verdienen. Sammeln Sie genug, um sie in echtes Geld umzuwandeln!",
+  "@stepWhatAreCoinsDesc": {},
+  "stepDailyMissionsTitle": "Tägliche Missionen",
+  "@stepDailyMissionsTitle": {},
+  "stepDailyMissionsDesc": "Schauen Sie jeden Tag vorbei, um Ihre tägliche Belohnung zu erhalten. Je länger Ihr Streak ist, desto höher sind die Bonusmünzen, die Sie verdienen!",
+  "@stepDailyMissionsDesc": {},
+  "stepSpinWheelTitle": "Drehrad",
+  "@stepSpinWheelTitle": {},
+  "stepSpinWheelDesc": "Drehen Sie das Rad und haben Sie die Chance, sofort Bonusmünzen zu gewinnen. Begrenzte Spins pro Tag, also sorgen Sie dafür, dass sie zählen!",
+  "@stepSpinWheelDesc": {},
+  "stepScratchCardsTitle": "Rubbellose",
+  "@stepScratchCardsTitle": {},
+  "stepScratchCardsDesc": "Entdecken Sie versteckte Preise, indem Sie virtuelle Karten freirubbeln. Jeder Kratzer könnte eine große Münzbelohnung freischalten!",
+  "@stepScratchCardsDesc": {},
+  "stepQuizGameTitle": "Quizspiel",
+  "@stepQuizGameTitle": {},
+  "stepQuizGameDesc": "Testen Sie Ihr Wissen kategorienübergreifend und verdienen Sie Münzen für jede richtige Antwort. Je schwieriger das Quiz, desto mehr verdienen Sie!",
+  "@stepQuizGameDesc": {},
+  "stepWatchAdsTitle": "Schauen Sie sich Werbung an",
+  "@stepWatchAdsTitle": {},
+  "stepWatchAdsDesc": "Sehen Sie sich kurze gesponserte Videos an, um Münzen zu verdienen. Es ist schnell, einfach und eine großartige Möglichkeit, Ihr Guthaben aufzustocken!",
+  "@stepWatchAdsDesc": {},
+  "stepReferralSystemTitle": "Empfehlungssystem",
+  "@stepReferralSystemTitle": {},
+  "stepReferralSystemDesc": "Teilen Sie Ihren einzigartigen Empfehlungscode mit Freunden. Wenn sie beitreten und anfangen zu verdienen, erhalten Sie beide Bonusmünzen!",
+  "@stepReferralSystemDesc": {},
+  "stepWithdrawMoneyTitle": "Geld abheben",
+  "@stepWithdrawMoneyTitle": {},
+  "stepWithdrawMoneyDesc": "Sobald Sie den Mindestbetrag erreicht haben, wandeln Sie Ihre Münzen in echtes Bargeld um und lassen Sie sich mit Ihrer bevorzugten Zahlungsmethode auszahlen!",
+  "@stepWithdrawMoneyDesc": {},
+  "topEarners": "Spitzenverdiener",
+  "@topEarners": {},
+  "pullDownToRefresh": "Zum Aktualisieren nach unten ziehen",
+  "@pullDownToRefresh": {},
+  "rankHash": "#",
+  "@rankHash": {},
+  "rankPlayer": "Spieler",
+  "@rankPlayer": {},
+  "rankCoins": "Münzen",
+  "@rankCoins": {},
+  "yourReferralCode": "Ihr Empfehlungscode",
+  "@yourReferralCode": {},
+  "signInForReferralCode": "Melden Sie sich an, um Ihren Empfehlungscode zu erhalten",
+  "@signInForReferralCode": {},
+  "referralCodeAlreadyApplied": "Empfehlungscode bereits angewendet!",
+  "@referralCodeAlreadyApplied": {},
+  "enterReferralCode": "Geben Sie den Empfehlungscode ein",
+  "@enterReferralCode": {},
+  "haveAPromoCode": "Haben Sie einen Promo-Code?",
+  "@haveAPromoCode": {},
+  "howReferralsWork": "So funktionieren Empfehlungen",
+  "@howReferralsWork": {},
+  "friendsInvited": "Freunde eingeladen",
+  "@friendsInvited": {},
+  "coinsEarned": "Verdiente Münzen",
+  "@coinsEarned": {},
+  "pleaseSignInForReferral": "Bitte melden Sie sich an, um einen Empfehlungscode zu verwenden.",
+  "@pleaseSignInForReferral": {},
+  "rewardsAndBonuses": "Belohnungen und Boni",
+  "@rewardsAndBonuses": {},
+  "scratchToReveal": "Zum Enthüllen kratzen\nDeine Belohnung.",
+  "@scratchToReveal": {},
+  "dragToScratch": "Zum Scratchen ziehen",
+  "@dragToScratch": {},
+  "betterLuckNextTimeCard": "Mehr Glück\nNächstes Mal",
+  "@betterLuckNextTimeCard": {},
+  "spinAndWinTitle": "Drehen und gewinnen",
+  "@spinAndWinTitle": {},
+  "takeSpin": "Machen Sie eine Spritztour.\nStapeln Sie die Münzen.",
+  "@takeSpin": {},
+  "possibleWin": "Möglicher Sieg",
+  "@possibleWin": {},
+  "upToOneDollar": "Bis zu 1,00 $",
+  "@upToOneDollar": {},
+  "streakBonus": "Streak-Bonus",
+  "@streakBonus": {},
+  "x2": "x2",
+  "@x2": {},
+  "earnCoinsBySpinning": "Verdienen Sie ganz einfach Münzen mit\nSpinnrad",
+  "@earnCoinsBySpinning": {},
+  "youEarnedXpBonus": "Du hast einen +XP-Bonus erhalten!",
+  "@youEarnedXpBonus": {},
+  "howCanWeHelp": "Wie können wir helfen?",
+  "@howCanWeHelp": {},
+  "supportDesc": "Sagen Sie uns, was schief gelaufen ist oder wofür Sie Hilfe benötigen. Unser Team prüft jede Nachricht.",
+  "@supportDesc": {},
+  "titleLabel": "Titel",
+  "@titleLabel": {},
+  "titleHint": "Kurze Zusammenfassung Ihres Problems",
+  "@titleHint": {},
+  "pleaseAddTitle": "Bitte fügen Sie einen Titel hinzu",
+  "@pleaseAddTitle": {},
+  "titleTooShort": "Der Titel ist zu kurz",
+  "@titleTooShort": {},
+  "descriptionLabel": "Beschreibung",
+  "@descriptionLabel": {},
+  "descriptionHint": "Beschreiben Sie Ihr Problem im Detail...",
+  "@descriptionHint": {},
+  "pleaseAddDescription": "Bitte fügen Sie eine Beschreibung hinzu",
+  "@pleaseAddDescription": {},
+  "descriptionTooShort": "Beschreibung ist zu kurz",
+  "@descriptionTooShort": {},
+  "submitting": "Einreichen…",
+  "@submitting": {},
+  "submit": "Einreichen",
+  "@submit": {},
+  "ticketSubmittedSuccess": "Support-Ticket erfolgreich eingereicht!",
+  "@ticketSubmittedSuccess": {},
+  "ticketSubmitFailed": "Ticket konnte nicht gesendet werden. Bitte versuchen Sie es erneut.",
+  "@ticketSubmitFailed": {},
+  "areYouSureSignOut": "Sind Sie sicher, dass Sie sich abmelden möchten?",
+  "@areYouSureSignOut": {},
+  "nextLevel": "Nächste:",
+  "@nextLevel": {},
+  "deleteAccountTitle": "Konto löschen?",
+  "@deleteAccountTitle": {},
+  "deleteAccountDesc": "Dadurch werden Ihr Konto und alle Ihre Daten dauerhaft gelöscht. Diese Aktion kann nicht rückgängig gemacht werden.",
+  "@deleteAccountDesc": {},
+  "deletingAccount": "Konto wird gelöscht...",
+  "@deletingAccount": {},
+  "availableBalance": "Verfügbares Guthaben",
+  "@availableBalance": {},
+  "proceedWithin24h": "Innerhalb von 24 Stunden fortfahren – Keine Gebühren bei Bargeld",
+  "@proceedWithin24h": {},
+  "pendingWithdrawal": "Sie haben eine ausstehende Auszahlung. Neue Anfragen werden deaktiviert, bis sie genehmigt werden.",
+  "@pendingWithdrawal": {},
+  "enterWithdrawalAmount": "Geben Sie den Auszahlungsbetrag ein",
+  "@enterWithdrawalAmount": {},
+  "fieldRequired": "Feld erforderlich",
+  "@fieldRequired": {},
+  "invalidInput": "Ungültige Eingabe",
+  "@invalidInput": {},
+  "amountCoins": "Betrag (Münzen)",
+  "@amountCoins": {},
+  "enterValidAmount": "Geben Sie einen gültigen Betrag ein",
+  "@enterValidAmount": {},
+  "additionalNoteOptional": "Zusätzlicher Hinweis (optional)",
+  "@additionalNoteOptional": {},
+  "withdrawRequestSent": "Auszahlungsanfrage gesendet",
+  "@withdrawRequestSent": {},
+  "confirmWithdrawal": "Bestätigen Sie die Auszahlung",
+  "@confirmWithdrawal": {},
+  "missionBrief": "Missionsbrief",
+  "@missionBrief": {},
+  "claimCoinBold": "„MÜNZE ANFORDERN“",
+  "@claimCoinBold": {},
+  "whenReady": "wenn fertig!",
+  "@whenReady": {},
+  "timeNotCompleted": "Zeit nicht abgeschlossen!",
+  "@timeNotCompleted": {},
+  "plusCoinsValue": "+{coins} Münzen",
+  "@plusCoinsValue": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
+  "whichCountry": "Welches Land magst du?",
+  "@whichCountry": {},
+  "selectFavCountries": "Wählen Sie Ihre Lieblingsländer aus, die Ihnen gefallen.",
+  "@selectFavCountries": {},
+  "availableCountry": "Verfügbares Land",
+  "@availableCountry": {},
+  "pleaseSelectCountry": "Bitte wählen Sie ein Land aus",
+  "@pleaseSelectCountry": {},
+  "chooseYourCurrency": "Wählen Sie Ihre Währung",
+  "@chooseYourCurrency": {},
+  "selectFavCurrency": "Wählen Sie Ihre gewünschte Währung aus.",
+  "@selectFavCurrency": {},
+  "availableCurrency": "Verfügbare Währung",
+  "@availableCurrency": {},
+  "pleaseSelectCurrency": "Bitte wählen Sie eine Währung aus",
+  "@pleaseSelectCurrency": {},
+  "whichGame": "Welches Spiel magst du?",
+  "@whichGame": {},
+  "selectFavGames": "Wählen Sie Ihre Lieblingsspiele aus, die Sie spielen möchten",
+  "@selectFavGames": {},
+  "availableGames": "Verfügbare Spiele",
+  "@availableGames": {},
+  "pleaseSelectGame": "Bitte wählen Sie mindestens ein Spiel aus",
+  "@pleaseSelectGame": {},
+  "setDefaultLanguage": "Legen Sie die Standardsprache fest",
+  "@setDefaultLanguage": {},
+  "setDefaultLanguageDesc": "Die ausgewählte Sprache wird als Standardsprache für diese App verwendet, die Sie später bei Bedarf ändern können.",
+  "@setDefaultLanguageDesc": {},
+  "stayInUpdated": "Bleiben Sie auf dem Laufenden",
+  "@stayInUpdated": {},
+  "notificationPermissionDesc": "Lassen Sie Benachrichtigungen zu, damit wir Sie über den Status Ihres Kreditantrags und wichtige Aktualisierungen auf dem Laufenden halten können.",
+  "@notificationPermissionDesc": {},
+  "allow": "Erlauben",
+  "@allow": {},
+  "notNow": "Nicht jetzt",
+  "@notNow": {},
+  "notificationsOff": "Benachrichtigungen sind deaktiviert",
+  "@notificationsOff": {},
+  "notificationSettingsDesc": "Sie haben Benachrichtigungen zuvor blockiert. Öffnen Sie die Geräteeinstellungen und aktivieren Sie Benachrichtigungen für Finlora, um Kreditaktualisierungen zu erhalten.",
+  "@notificationSettingsDesc": {},
+  "openSettings": "Öffnen Sie Einstellungen",
+  "@openSettings": {},
+  "earnAReward": "Verdienen Sie eine Belohnung",
+  "@earnAReward": {},
+  "watchAdDesc": "Sehen Sie sich eine kurze Anzeige an, um Ihre Prämie einzufordern.\nDurch Ihre Unterstützung bleibt die App kostenlos!",
+  "@watchAdDesc": {},
+  "watchAd": "Anzeige ansehen",
+  "@watchAd": {},
+  "currentOfTotal": "{current} von {total}",
+  "@currentOfTotal": {
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "perCorrect": "+{coins} pro korrekt",
+  "@perCorrect": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
+  "streakInARow": "{streak} in Folge",
+  "@streakInARow": {
+    "placeholders": {
+      "streak": {
+        "type": "int"
+      }
+    }
+  },
+  "youScored": "Du hast {correct}/{total} erzielt",
+  "@youScored": {
+    "placeholders": {
+      "correct": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  }
+}

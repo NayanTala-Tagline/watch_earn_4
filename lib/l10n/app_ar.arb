@@ -1,3 +1,673 @@
 {
-   "@@locale": "ar"
+  "@@locale": "ar",
+  "skip": "يتخطى",
+  "@skip": {},
+  "next": "التالي",
+  "@next": {},
+  "done": "منتهي",
+  "@done": {},
+  "cancel": "يلغي",
+  "@cancel": {},
+  "claim": "مطالبة",
+  "@claim": {},
+  "claimed": "ادعى",
+  "@claimed": {},
+  "tryAgain": "حاول ثانية",
+  "@tryAgain": {},
+  "claimNow": "المطالبة الآن",
+  "@claimNow": {},
+  "getStarted": "ابدأ",
+  "@getStarted": {},
+  "apply": "يتقدم",
+  "@apply": {},
+  "save": "يحفظ",
+  "@save": {},
+  "delete": "يمسح",
+  "@delete": {},
+  "signOut": "تسجيل الخروج",
+  "@signOut": {},
+  "withdraw": "ينسحب",
+  "@withdraw": {},
+  "rewards": "المكافآت",
+  "@rewards": {},
+  "sectionContainsAds": "قد يحتوي هذا القسم على إعلانات",
+  "@sectionContainsAds": {},
+  "congratulations": "مبروك..!",
+  "@congratulations": {},
+  "oops": "أُووبس!",
+  "@oops": {},
+  "betterLuckNextTime": "حظا أفضل في المرة القادمة!",
+  "@betterLuckNextTime": {},
+  "awesome": "مذهل!",
+  "@awesome": {},
+  "coins": "عملات معدنية",
+  "@coins": {},
+  "learn": "يتعلم",
+  "@learn": {},
+  "rank": "رتبة",
+  "@rank": {},
+  "level": "مستوى",
+  "@level": {},
+  "xp": "XP",
+  "@xp": {},
+  "top": "قمة",
+  "@top": {},
+  "home": "بيت",
+  "@home": {},
+  "profile": "حساب تعريفي",
+  "@profile": {},
+  "support": "يدعم",
+  "@support": {},
+  "language": "لغة",
+  "@language": {},
+  "mystery": "أُحجِيَّة",
+  "@mystery": {},
+  "spinning": "الغزل...",
+  "@spinning": {},
+  "spinNow": "تدور الآن",
+  "@spinNow": {},
+  "claimCoins": "المطالبة بالعملات المعدنية",
+  "@claimCoins": {},
+  "viewMore": "عرض المزيد",
+  "@viewMore": {},
+  "viewLess": "عرض أقل",
+  "@viewLess": {},
+  "useAll": "استخدم الكل",
+  "@useAll": {},
+  "shareLink": "مشاركة الرابط",
+  "@shareLink": {},
+  "referralCodeCopied": "تم نسخ رمز الإحالة",
+  "@referralCodeCopied": {},
+  "privacyPolicy": "سياسة الخصوصية",
+  "@privacyPolicy": {},
+  "termsAndCondition": "الشروط والأحكام",
+  "@termsAndCondition": {},
+  "deleteAccount": "حذف الحساب",
+  "@deleteAccount": {},
+  "soundEffects": "المؤثرات الصوتية",
+  "@soundEffects": {},
+  "hapticFeedback": "ردود الفعل اللمسية",
+  "@hapticFeedback": {},
+  "levelProgress": "تقدم المستوى",
+  "@levelProgress": {},
+  "startNow": "ابدأ الآن",
+  "@startNow": {},
+  "daysValue": "{days} أيام",
+  "@daysValue": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "coinsValue": "{coins} عملات معدنية",
+  "@coinsValue": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
+  "coinsReward": "+{coins} عملات معدنية",
+  "@coinsReward": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
+  "coinsAwarded": "+{coins} العملات المعدنية الممنوحة!",
+  "@coinsAwarded": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
+  "youWonCoins": "لقد ربحت {coins} عملات معدنية",
+  "@youWonCoins": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
+  "lvValue": "الجهد المنخفض {level}",
+  "@lvValue": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      }
+    }
+  },
+  "lvXpValue": "LV {level} - {xp} XP",
+  "@lvXpValue": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      },
+      "xp": {
+        "type": "int"
+      }
+    }
+  },
+  "dailyRewardDay": "المكافأة اليومية - اليوم {day}",
+  "@dailyRewardDay": {
+    "placeholders": {
+      "day": {
+        "type": "int"
+      }
+    }
+  },
+  "collectCoins": "اجمع العملات المعدنية +{coins}",
+  "@collectCoins": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
+  "claimCoinsToday": "احصل على عملات معدنية +{coins} اليوم!",
+  "@claimCoinsToday": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
+  "lvDotLevel": "المستوى. {level} · {levelName}",
+  "@lvDotLevel": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      },
+      "levelName": {
+        "type": "String"
+      }
+    }
+  },
+  "inviteFriendsTitle": "دعوة الأصدقاء،\nاحصل على عملات {amount}!",
+  "@inviteFriendsTitle": {
+    "placeholders": {
+      "amount": {
+        "type": "int"
+      }
+    }
+  },
+  "refreshesIn": "يتم التحديث في {time}",
+  "@refreshesIn": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "lvTierValue": "المستوى. {level} {tier}",
+  "@lvTierValue": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      },
+      "tier": {
+        "type": "String"
+      }
+    }
+  },
+  "spinsLeftToday": "{count} يدور اليسار اليوم",
+  "@spinsLeftToday": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "autoStartingIn": "التشغيل التلقائي خلال {seconds} ثانية",
+  "@autoStartingIn": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
+  "withdrawTo": "السحب إلى {method}",
+  "@withdrawTo": {
+    "placeholders": {
+      "method": {
+        "type": "String"
+      }
+    }
+  },
+  "minWithdrawal": "دقيقة. الانسحاب – {amount}",
+  "@minWithdrawal": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "withdrawAmount": "سحب $ {amount}",
+  "@withdrawAmount": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "minSuffix": "الحد الأدنى {min}",
+  "@minSuffix": {
+    "placeholders": {
+      "min": {
+        "type": "String"
+      }
+    }
+  },
+  "minimumWithdrawCoins": "الحد الأدنى للسحب هو {coins} قطعة نقدية",
+  "@minimumWithdrawCoins": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
+  "convertedValue": "القيمة ${value}",
+  "@convertedValue": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "timeNotCompletedDesc": "لقد بقيت لمدة {elapsed}s من أصل {required}s.\nيرجى البقاء على الصفحة طوال المدة.",
+  "@timeNotCompletedDesc": {
+    "placeholders": {
+      "elapsed": {
+        "type": "int"
+      },
+      "required": {
+        "type": "int"
+      }
+    }
+  },
+  "missionBriefDuration": "ابق على الصفحة لمدة {duration} ثانية، وسيظهر مؤقت العد التنازلي. انقر",
+  "@missionBriefDuration": {
+    "placeholders": {
+      "duration": {
+        "type": "int"
+      }
+    }
+  },
+  "luckyNumber": "محظوظ #{number}",
+  "@luckyNumber": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "totalDaysValue": "{totalDays} أيام",
+  "@totalDaysValue": {
+    "placeholders": {
+      "totalDays": {
+        "type": "int"
+      }
+    }
+  },
+  "dayValue": "اليوم {day}",
+  "@dayValue": {
+    "placeholders": {
+      "day": {
+        "type": "int"
+      }
+    }
+  },
+  "referralShareDesc": "شارك الرمز الخاص بك. عند قيامهم بالتسجيل أو الدخول فيه، يحصل كل منكما على {amount} من العملات المعدنية!",
+  "@referralShareDesc": {
+    "placeholders": {
+      "amount": {
+        "type": "int"
+      }
+    }
+  },
+  "howReferralsWorkDesc": "رمز المشاركة · انضمام صديق · يربح كل منكما {amount} قطعة نقدية",
+  "@howReferralsWorkDesc": {
+    "placeholders": {
+      "amount": {
+        "type": "int"
+      }
+    }
+  },
+  "splashAppName": "مكافأة",
+  "@splashAppName": {},
+  "onboarding1Title": "المكافآت اليومية",
+  "@onboarding1Title": {},
+  "onboarding1Desc": "سوف تحصل على مكافأة النقاط اليومية، والتي يمكنك المطالبة بها وزيادة نقاطك",
+  "@onboarding1Desc": {},
+  "onboarding2Title": "الألعاب النهائية",
+  "@onboarding2Title": {},
+  "onboarding2Desc": "احصل على خيارات متعددة للألعاب للعبها واحصل على المزيد من النقاط.",
+  "@onboarding2Desc": {},
+  "onboarding3Title": "تتبع الإنجازات",
+  "@onboarding3Title": {},
+  "onboarding3Desc": "شاهد إنجازاتك وتتبعها مع مستخدم آخر من خلال Leatherboard",
+  "@onboarding3Desc": {},
+  "startEarning": "ابدأ بالكسب",
+  "@startEarning": {},
+  "loginTitle": "ابدأ بالكسب\nالمكافآت",
+  "@loginTitle": {},
+  "loginSubtitle": "أكمل المهام، ولعب الألعاب، واكسب العملات المعدنية التي تتحول إلى أموال حقيقية!",
+  "@loginSubtitle": {},
+  "continueWithGoogle": "تواصل مع جوجل",
+  "@continueWithGoogle": {},
+  "continueAsGuest": "الاستمرار كضيف",
+  "@continueAsGuest": {},
+  "byContinuing": "من خلال الاستمرار، فإنك توافق على لدينا",
+  "@byContinuing": {},
+  "termsOfService": "شروط الخدمة",
+  "@termsOfService": {},
+  "and": "و",
+  "@and": {},
+  "pressAgainToExit": "اضغط مرة أخرى للخروج من التطبيق",
+  "@pressAgainToExit": {},
+  "earnMoney": "كسب المال",
+  "@earnMoney": {},
+  "howItWorks": "كيف يعمل",
+  "@howItWorks": {},
+  "howItWorksSubtitle": "تعلم كيفية القيام بذلك خطوة بخطوة\nكسب المال",
+  "@howItWorksSubtitle": {},
+  "totalBalance": "الرصيد الإجمالي",
+  "@totalBalance": {},
+  "claimedTodayComeBack": "ادعى اليوم! أعود غدا",
+  "@claimedTodayComeBack": {},
+  "quizMaster": "سيد مسابقة",
+  "@quizMaster": {},
+  "answerAndEarn": "الإجابة وكسب",
+  "@answerAndEarn": {},
+  "spinWheel": "عجلة تدور",
+  "@spinWheel": {},
+  "spinAndWin": "تدور واربح",
+  "@spinAndWin": {},
+  "scratchCard": "بطاقة الصفر",
+  "@scratchCard": {},
+  "scratchAndReveal": "اخدش واكشف",
+  "@scratchAndReveal": {},
+  "webVisits": "زيارات الويب",
+  "@webVisits": {},
+  "visitAndEarn": "زيارة وكسب",
+  "@visitAndEarn": {},
+  "gameZone": "منطقة اللعبة",
+  "@gameZone": {},
+  "playGames": "لعب الألعاب",
+  "@playGames": {},
+  "referAndEarn": "الرجوع وكسب",
+  "@referAndEarn": {},
+  "inviteFriends": "دعوة الأصدقاء",
+  "@inviteFriends": {},
+  "seeTopEarner": "شاهد أعلى الرابحين",
+  "@seeTopEarner": {},
+  "leaderBoard": "مجلس الزعيم",
+  "@leaderBoard": {},
+  "achievements": "الإنجازات",
+  "@achievements": {},
+  "dailyCheckIn": "تسجيل الوصول اليومي",
+  "@dailyCheckIn": {},
+  "totalDaysClaimed": "إجمالي الأيام المطالب بها",
+  "@totalDaysClaimed": {},
+  "dailyCheckInReward": "مكافأة تسجيل الوصول اليومي",
+  "@dailyCheckInReward": {},
+  "alreadyClaimedToday": "لقد حصلت بالفعل على مكافأة اليوم.",
+  "@alreadyClaimedToday": {},
+  "achievementUnlocked": "الإنجاز مفتوح!",
+  "@achievementUnlocked": {},
+  "couldNotClaimReward": "لا يمكن المطالبة بالمكافأة. حاول ثانية.",
+  "@couldNotClaimReward": {},
+  "howItWorksReady": "هل أنت مستعد لبدء الربح؟",
+  "@howItWorksReady": {},
+  "backToHome": "العودة إلى المنزل",
+  "@backToHome": {},
+  "stepWhatAreCoinsTitle": "ما هي العملات المعدنية؟",
+  "@stepWhatAreCoinsTitle": {},
+  "stepWhatAreCoinsDesc": "العملات المعدنية هي العملة الموجودة داخل التطبيق والتي تربحها من خلال إكمال الأنشطة. قم بتجميع ما يكفي لتحويلها إلى أموال حقيقية!",
+  "@stepWhatAreCoinsDesc": {},
+  "stepDailyMissionsTitle": "البعثات اليومية",
+  "@stepDailyMissionsTitle": {},
+  "stepDailyMissionsDesc": "قم بتسجيل الدخول كل يوم للحصول على مكافأتك اليومية. كلما طالت خطتك، زادت العملات الإضافية التي تكسبها!",
+  "@stepDailyMissionsDesc": {},
+  "stepSpinWheelTitle": "عجلة تدور",
+  "@stepSpinWheelTitle": {},
+  "stepSpinWheelDesc": "قم بتدوير العجلة للحصول على فرصة للفوز بعملات معدنية إضافية على الفور. دورات محدودة يوميًا، لذا اجعلها ذات أهمية!",
+  "@stepSpinWheelDesc": {},
+  "stepScratchCardsTitle": "بطاقات الصفر",
+  "@stepScratchCardsTitle": {},
+  "stepScratchCardsDesc": "كشف الجوائز المخفية عن طريق خدش البطاقات الافتراضية. كل خدش يمكن أن يفتح مكافأة كبيرة من العملات المعدنية!",
+  "@stepScratchCardsDesc": {},
+  "stepQuizGameTitle": "لعبة مسابقة",
+  "@stepQuizGameTitle": {},
+  "stepQuizGameDesc": "اختبر معلوماتك عبر الفئات واكسب العملات المعدنية مقابل كل إجابة صحيحة. كلما كان الاختبار أصعب، كلما كسبت أكثر!",
+  "@stepQuizGameDesc": {},
+  "stepWatchAdsTitle": "مشاهدة الإعلانات",
+  "@stepWatchAdsTitle": {},
+  "stepWatchAdsDesc": "شاهد مقاطع فيديو دعائية قصيرة لكسب العملات المعدنية. إنها طريقة سريعة وسهلة ورائعة لزيادة رصيدك!",
+  "@stepWatchAdsDesc": {},
+  "stepReferralSystemTitle": "نظام الإحالة",
+  "@stepReferralSystemTitle": {},
+  "stepReferralSystemDesc": "شارك رمز الإحالة الفريد الخاص بك مع الأصدقاء. عندما ينضمون ويبدأون في الربح، يحصل كل منكما على عملات معدنية إضافية!",
+  "@stepReferralSystemDesc": {},
+  "stepWithdrawMoneyTitle": "سحب الأموال",
+  "@stepWithdrawMoneyTitle": {},
+  "stepWithdrawMoneyDesc": "بمجرد وصولك إلى الحد الأدنى، قم بتحويل عملاتك المعدنية إلى نقود حقيقية واسحبها إلى طريقة الدفع المفضلة لديك!",
+  "@stepWithdrawMoneyDesc": {},
+  "topEarners": "أعلى أصحاب الدخل",
+  "@topEarners": {},
+  "pullDownToRefresh": "اسحب للأسفل للتحديث",
+  "@pullDownToRefresh": {},
+  "rankHash": "#",
+  "@rankHash": {},
+  "rankPlayer": "لاعب",
+  "@rankPlayer": {},
+  "rankCoins": "عملات معدنية",
+  "@rankCoins": {},
+  "yourReferralCode": "رمز الإحالة الخاص بك",
+  "@yourReferralCode": {},
+  "signInForReferralCode": "قم بتسجيل الدخول للحصول على رمز الإحالة الخاص بك",
+  "@signInForReferralCode": {},
+  "referralCodeAlreadyApplied": "تم تطبيق رمز الإحالة بالفعل!",
+  "@referralCodeAlreadyApplied": {},
+  "enterReferralCode": "أدخل رمز الإحالة",
+  "@enterReferralCode": {},
+  "haveAPromoCode": "هل لديك رمز ترويجي؟",
+  "@haveAPromoCode": {},
+  "howReferralsWork": "كيف تعمل الإحالات",
+  "@howReferralsWork": {},
+  "friendsInvited": "الأصدقاء مدعوون",
+  "@friendsInvited": {},
+  "coinsEarned": "العملات المكتسبة",
+  "@coinsEarned": {},
+  "pleaseSignInForReferral": "الرجاء تسجيل الدخول لاستخدام رمز الإحالة.",
+  "@pleaseSignInForReferral": {},
+  "rewardsAndBonuses": "المكافآت والمكافآت",
+  "@rewardsAndBonuses": {},
+  "scratchToReveal": "اخدش لتكشف\nمكافأتك.",
+  "@scratchToReveal": {},
+  "dragToScratch": "اسحب إلى نقطة الصفر",
+  "@dragToScratch": {},
+  "betterLuckNextTimeCard": "حظا أفضل\nفي المرة القادمة",
+  "@betterLuckNextTimeCard": {},
+  "spinAndWinTitle": "تدور واربح",
+  "@spinAndWinTitle": {},
+  "takeSpin": "خذ جولة.\nكومة القطع النقدية.",
+  "@takeSpin": {},
+  "possibleWin": "فوز محتمل",
+  "@possibleWin": {},
+  "upToOneDollar": "ما يصل إلى 1.00 دولار",
+  "@upToOneDollar": {},
+  "streakBonus": "مكافأة الخط",
+  "@streakBonus": {},
+  "x2": "×2",
+  "@x2": {},
+  "earnCoinsBySpinning": "كسب العملات المعدنية بسهولة عن طريق\nعجلة الغزل",
+  "@earnCoinsBySpinning": {},
+  "youEarnedXpBonus": "لقد ربحت +XP مكافأة!",
+  "@youEarnedXpBonus": {},
+  "howCanWeHelp": "كيف يمكننا المساعدة؟",
+  "@howCanWeHelp": {},
+  "supportDesc": "أخبرنا بالخطأ الذي حدث أو ما الذي تحتاج إلى المساعدة فيه. يقوم فريقنا بمراجعة كل رسالة.",
+  "@supportDesc": {},
+  "titleLabel": "عنوان",
+  "@titleLabel": {},
+  "titleHint": "ملخص قصير لمشكلتك",
+  "@titleHint": {},
+  "pleaseAddTitle": "الرجاء إضافة عنوان",
+  "@pleaseAddTitle": {},
+  "titleTooShort": "العنوان قصير جدًا",
+  "@titleTooShort": {},
+  "descriptionLabel": "وصف",
+  "@descriptionLabel": {},
+  "descriptionHint": "اوصف مشكلتك بالتفصيل...",
+  "@descriptionHint": {},
+  "pleaseAddDescription": "الرجاء إضافة وصف",
+  "@pleaseAddDescription": {},
+  "descriptionTooShort": "الوصف قصير جدًا",
+  "@descriptionTooShort": {},
+  "submitting": "تقديم…",
+  "@submitting": {},
+  "submit": "يُقدِّم",
+  "@submit": {},
+  "ticketSubmittedSuccess": "تم إرسال تذكرة الدعم بنجاح!",
+  "@ticketSubmittedSuccess": {},
+  "ticketSubmitFailed": "لا يمكن تقديم التذكرة. يرجى المحاولة مرة أخرى.",
+  "@ticketSubmitFailed": {},
+  "areYouSureSignOut": "هل أنت متأكد أنك تريد تسجيل الخروج؟",
+  "@areYouSureSignOut": {},
+  "nextLevel": "التالي:",
+  "@nextLevel": {},
+  "deleteAccountTitle": "هل تريد حذف الحساب؟",
+  "@deleteAccountTitle": {},
+  "deleteAccountDesc": "سيؤدي هذا إلى حذف حسابك وجميع بياناتك نهائيًا. لا يمكن التراجع عن هذا الإجراء.",
+  "@deleteAccountDesc": {},
+  "deletingAccount": "جارٍ حذف الحساب...",
+  "@deletingAccount": {},
+  "availableBalance": "الرصيد المتاح",
+  "@availableBalance": {},
+  "proceedWithin24h": "تابع خلال 24 ساعة - لا توجد رسوم على النقد",
+  "@proceedWithin24h": {},
+  "pendingWithdrawal": "لديك انسحاب معلق. يتم تعطيل الطلبات الجديدة حتى تتم الموافقة عليها.",
+  "@pendingWithdrawal": {},
+  "enterWithdrawalAmount": "أدخل مبلغ السحب",
+  "@enterWithdrawalAmount": {},
+  "fieldRequired": "الحقل مطلوب",
+  "@fieldRequired": {},
+  "invalidInput": "إدخال غير صالح",
+  "@invalidInput": {},
+  "amountCoins": "المبلغ (العملات المعدنية)",
+  "@amountCoins": {},
+  "enterValidAmount": "أدخل مبلغًا صالحًا",
+  "@enterValidAmount": {},
+  "additionalNoteOptional": "ملاحظة إضافية (اختياري)",
+  "@additionalNoteOptional": {},
+  "withdrawRequestSent": "تم إرسال طلب السحب",
+  "@withdrawRequestSent": {},
+  "confirmWithdrawal": "تأكيد الانسحاب",
+  "@confirmWithdrawal": {},
+  "missionBrief": "ملخص المهمة",
+  "@missionBrief": {},
+  "claimCoinBold": "\"المطالبة بالعملة\"",
+  "@claimCoinBold": {},
+  "whenReady": "عندما تكون جاهزة!",
+  "@whenReady": {},
+  "timeNotCompleted": "الوقت لم يكتمل!",
+  "@timeNotCompleted": {},
+  "plusCoinsValue": "+{coins} عملات معدنية",
+  "@plusCoinsValue": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
+  "whichCountry": "أي بلد تحب؟",
+  "@whichCountry": {},
+  "selectFavCountries": "اختر الدول المفضلة لديك والتي تريدها.",
+  "@selectFavCountries": {},
+  "availableCountry": "البلد المتاح",
+  "@availableCountry": {},
+  "pleaseSelectCountry": "الرجاء اختيار البلد",
+  "@pleaseSelectCountry": {},
+  "chooseYourCurrency": "اختر عملتك",
+  "@chooseYourCurrency": {},
+  "selectFavCurrency": "حدد العملة التي تريدها.",
+  "@selectFavCurrency": {},
+  "availableCurrency": "العملة المتاحة",
+  "@availableCurrency": {},
+  "pleaseSelectCurrency": "الرجاء تحديد العملة",
+  "@pleaseSelectCurrency": {},
+  "whichGame": "ما هي اللعبة التي تحبها؟",
+  "@whichGame": {},
+  "selectFavGames": "اختر ألعابك المفضلة التي تريد لعبها",
+  "@selectFavGames": {},
+  "availableGames": "الألعاب المتاحة",
+  "@availableGames": {},
+  "pleaseSelectGame": "الرجاء تحديد لعبة واحدة على الأقل",
+  "@pleaseSelectGame": {},
+  "setDefaultLanguage": "ضبط اللغة الافتراضية",
+  "@setDefaultLanguage": {},
+  "setDefaultLanguageDesc": "ستستخدم اللغة المحددة كلغة افتراضية لهذا التطبيق والتي يمكنك تغييرها لاحقًا إذا كنت تريد ذلك.",
+  "@setDefaultLanguageDesc": {},
+  "stayInUpdated": "البقاء في تحديث",
+  "@stayInUpdated": {},
+  "notificationPermissionDesc": "اسمح بالإشعارات حتى نتمكن من إطلاعك على حالة طلب القرض الخاص بك والتحديثات المهمة.",
+  "@notificationPermissionDesc": {},
+  "allow": "يسمح",
+  "@allow": {},
+  "notNow": "ليس الآن",
+  "@notNow": {},
+  "notificationsOff": "الإخطارات معطلة",
+  "@notificationsOff": {},
+  "notificationSettingsDesc": "لقد حظرت الإخطارات في وقت سابق. افتح إعدادات الجهاز وقم بتمكين إشعارات Finlora لتلقي تحديثات القروض.",
+  "@notificationSettingsDesc": {},
+  "openSettings": "افتح الإعدادات",
+  "@openSettings": {},
+  "earnAReward": "احصل على مكافأة",
+  "@earnAReward": {},
+  "watchAdDesc": "شاهد إعلانًا قصيرًا لتحصل على مكافأتك.\nدعمكم يبقي التطبيق مجانيًا!",
+  "@watchAdDesc": {},
+  "watchAd": "مشاهدة الإعلان",
+  "@watchAd": {},
+  "currentOfTotal": "{current} من {total}",
+  "@currentOfTotal": {
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "perCorrect": "+{coins} لكل صحيح",
+  "@perCorrect": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
+  "streakInARow": "{streak} على التوالي",
+  "@streakInARow": {
+    "placeholders": {
+      "streak": {
+        "type": "int"
+      }
+    }
+  },
+  "youScored": "لقد سجلت {correct}/{total}",
+  "@youScored": {
+    "placeholders": {
+      "correct": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  }
 }

@@ -1,0 +1,673 @@
+{
+  "@@locale": "es",
+  "skip": "Saltar",
+  "@skip": {},
+  "next": "Próximo",
+  "@next": {},
+  "done": "Hecho",
+  "@done": {},
+  "cancel": "Cancelar",
+  "@cancel": {},
+  "claim": "Afirmar",
+  "@claim": {},
+  "claimed": "Reclamado",
+  "@claimed": {},
+  "tryAgain": "Intentar otra vez",
+  "@tryAgain": {},
+  "claimNow": "Reclamar ahora",
+  "@claimNow": {},
+  "getStarted": "Empezar",
+  "@getStarted": {},
+  "apply": "Aplicar",
+  "@apply": {},
+  "save": "Ahorrar",
+  "@save": {},
+  "delete": "Borrar",
+  "@delete": {},
+  "signOut": "Desconectar",
+  "@signOut": {},
+  "withdraw": "Retirar",
+  "@withdraw": {},
+  "rewards": "Recompensas",
+  "@rewards": {},
+  "sectionContainsAds": "Esta sección puede contener anuncios.",
+  "@sectionContainsAds": {},
+  "congratulations": "Felicidades..!",
+  "@congratulations": {},
+  "oops": "¡Ups!",
+  "@oops": {},
+  "betterLuckNextTime": "¡Más suerte la próxima vez!",
+  "@betterLuckNextTime": {},
+  "awesome": "¡Impresionante!",
+  "@awesome": {},
+  "coins": "monedas",
+  "@coins": {},
+  "learn": "Aprender",
+  "@learn": {},
+  "rank": "Rango",
+  "@rank": {},
+  "level": "Nivel",
+  "@level": {},
+  "xp": "experiencia",
+  "@xp": {},
+  "top": "Arriba",
+  "@top": {},
+  "home": "Hogar",
+  "@home": {},
+  "profile": "Perfil",
+  "@profile": {},
+  "support": "Apoyo",
+  "@support": {},
+  "language": "Idioma",
+  "@language": {},
+  "mystery": "MISTERIO",
+  "@mystery": {},
+  "spinning": "Hilado...",
+  "@spinning": {},
+  "spinNow": "Girar ahora",
+  "@spinNow": {},
+  "claimCoins": "Reclamar monedas",
+  "@claimCoins": {},
+  "viewMore": "Ver más",
+  "@viewMore": {},
+  "viewLess": "Ver menos",
+  "@viewLess": {},
+  "useAll": "Usar todo",
+  "@useAll": {},
+  "shareLink": "Compartir enlace",
+  "@shareLink": {},
+  "referralCodeCopied": "Código de referencia copiado",
+  "@referralCodeCopied": {},
+  "privacyPolicy": "política de privacidad",
+  "@privacyPolicy": {},
+  "termsAndCondition": "Términos y condiciones",
+  "@termsAndCondition": {},
+  "deleteAccount": "Eliminar cuenta",
+  "@deleteAccount": {},
+  "soundEffects": "Efectos sonoros",
+  "@soundEffects": {},
+  "hapticFeedback": "Retroalimentación háptica",
+  "@hapticFeedback": {},
+  "levelProgress": "Progreso de nivel",
+  "@levelProgress": {},
+  "startNow": "Empezar ahora",
+  "@startNow": {},
+  "daysValue": "{days} Días",
+  "@daysValue": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "coinsValue": "{coins} Monedas",
+  "@coinsValue": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
+  "coinsReward": "+{coins} Monedas",
+  "@coinsReward": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
+  "coinsAwarded": "+{coins} ¡Monedas otorgadas!",
+  "@coinsAwarded": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
+  "youWonCoins": "Ganaste {coins} monedas",
+  "@youWonCoins": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
+  "lvValue": "VI {level}",
+  "@lvValue": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      }
+    }
+  },
+  "lvXpValue": "VI {level} - {xp} XP",
+  "@lvXpValue": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      },
+      "xp": {
+        "type": "int"
+      }
+    }
+  },
+  "dailyRewardDay": "Recompensa diaria - Día {day}",
+  "@dailyRewardDay": {
+    "placeholders": {
+      "day": {
+        "type": "int"
+      }
+    }
+  },
+  "collectCoins": "Recoge +{coins} monedas",
+  "@collectCoins": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
+  "claimCoinsToday": "¡Reclama +{coins} monedas hoy!",
+  "@claimCoinsToday": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
+  "lvDotLevel": "Lv. {level} · {levelName}",
+  "@lvDotLevel": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      },
+      "levelName": {
+        "type": "String"
+      }
+    }
+  },
+  "inviteFriendsTitle": "invitar amigos,\n¡Consigue {amount} monedas!",
+  "@inviteFriendsTitle": {
+    "placeholders": {
+      "amount": {
+        "type": "int"
+      }
+    }
+  },
+  "refreshesIn": "Se actualiza en {time}",
+  "@refreshesIn": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "lvTierValue": "Lv. {level} {tier}",
+  "@lvTierValue": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      },
+      "tier": {
+        "type": "String"
+      }
+    }
+  },
+  "spinsLeftToday": "{count} Giros restantes hoy",
+  "@spinsLeftToday": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "autoStartingIn": "Inicio automático en {seconds} s",
+  "@autoStartingIn": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
+  "withdrawTo": "Retirar a {method}",
+  "@withdrawTo": {
+    "placeholders": {
+      "method": {
+        "type": "String"
+      }
+    }
+  },
+  "minWithdrawal": "Mín. Retiro – {amount}",
+  "@minWithdrawal": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "withdrawAmount": "Retirar ${amount}",
+  "@withdrawAmount": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "minSuffix": "Mín {min}",
+  "@minSuffix": {
+    "placeholders": {
+      "min": {
+        "type": "String"
+      }
+    }
+  },
+  "minimumWithdrawCoins": "El retiro mínimo es {coins} monedas",
+  "@minimumWithdrawCoins": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
+  "convertedValue": "Valor ${value}",
+  "@convertedValue": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "timeNotCompletedDesc": "Te quedaste por {elapsed}s de {required}s.\nPermanezca en la página durante toda su duración.",
+  "@timeNotCompletedDesc": {
+    "placeholders": {
+      "elapsed": {
+        "type": "int"
+      },
+      "required": {
+        "type": "int"
+      }
+    }
+  },
+  "missionBriefDuration": "Permanezca en la página durante {duration} segundos. Aparecerá un temporizador de cuenta regresiva. hacer clic",
+  "@missionBriefDuration": {
+    "placeholders": {
+      "duration": {
+        "type": "int"
+      }
+    }
+  },
+  "luckyNumber": "Suerte #{number}",
+  "@luckyNumber": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "totalDaysValue": "{totalDays} Días",
+  "@totalDaysValue": {
+    "placeholders": {
+      "totalDays": {
+        "type": "int"
+      }
+    }
+  },
+  "dayValue": "Día {day}",
+  "@dayValue": {
+    "placeholders": {
+      "day": {
+        "type": "int"
+      }
+    }
+  },
+  "referralShareDesc": "Comparte tu código. Cuando se registren o ingresen, ¡ambos obtendrán {amount} monedas!",
+  "@referralShareDesc": {
+    "placeholders": {
+      "amount": {
+        "type": "int"
+      }
+    }
+  },
+  "howReferralsWorkDesc": "Compartir código · Un amigo se une · Ambos ganan {amount} monedas",
+  "@howReferralsWorkDesc": {
+    "placeholders": {
+      "amount": {
+        "type": "int"
+      }
+    }
+  },
+  "splashAppName": "recompensa",
+  "@splashAppName": {},
+  "onboarding1Title": "Recompensas diarias",
+  "@onboarding1Title": {},
+  "onboarding1Desc": "Obtendrá una recompensa de puntos diarios, que podrá reclamar y aumentar sus puntos",
+  "@onboarding1Desc": {},
+  "onboarding2Title": "Juegos definitivos",
+  "@onboarding2Title": {},
+  "onboarding2Desc": "Obtenga múltiples opciones de juegos para jugar y obtenga más puntos.",
+  "@onboarding2Desc": {},
+  "onboarding3Title": "Seguimiento de logros",
+  "@onboarding3Title": {},
+  "onboarding3Desc": "Vea sus logros y realice un seguimiento con otros usuarios a través de Leatherboard",
+  "@onboarding3Desc": {},
+  "startEarning": "Comience a ganar",
+  "@startEarning": {},
+  "loginTitle": "Comience a ganar\nRecompensas",
+  "@loginTitle": {},
+  "loginSubtitle": "¡Completa tareas, juega y gana monedas que se convierten en dinero real!",
+  "@loginSubtitle": {},
+  "continueWithGoogle": "Continuar con Google",
+  "@continueWithGoogle": {},
+  "continueAsGuest": "Continuar como invitado",
+  "@continueAsGuest": {},
+  "byContinuing": "Al continuar, aceptas nuestra",
+  "@byContinuing": {},
+  "termsOfService": "Términos de servicio",
+  "@termsOfService": {},
+  "and": "y",
+  "@and": {},
+  "pressAgainToExit": "Presione nuevamente para salir de la aplicación",
+  "@pressAgainToExit": {},
+  "earnMoney": "ganar dinero",
+  "@earnMoney": {},
+  "howItWorks": "Cómo funciona",
+  "@howItWorks": {},
+  "howItWorksSubtitle": "Aprenda paso a paso cómo\nganar dinero",
+  "@howItWorksSubtitle": {},
+  "totalBalance": "Saldo total",
+  "@totalBalance": {},
+  "claimedTodayComeBack": "¡Reclamado hoy! Vuelve mañana",
+  "@claimedTodayComeBack": {},
+  "quizMaster": "Maestro de pruebas",
+  "@quizMaster": {},
+  "answerAndEarn": "Responde y gana",
+  "@answerAndEarn": {},
+  "spinWheel": "Rueda giratoria",
+  "@spinWheel": {},
+  "spinAndWin": "Gira y gana",
+  "@spinAndWin": {},
+  "scratchCard": "Tarjeta rasca y gana",
+  "@scratchCard": {},
+  "scratchAndReveal": "Rascar y revelar",
+  "@scratchAndReveal": {},
+  "webVisits": "Visitas web",
+  "@webVisits": {},
+  "visitAndEarn": "Visita y gana",
+  "@visitAndEarn": {},
+  "gameZone": "Zona de juego",
+  "@gameZone": {},
+  "playGames": "Jugar juegos",
+  "@playGames": {},
+  "referAndEarn": "Recomiende y gane",
+  "@referAndEarn": {},
+  "inviteFriends": "invitar amigos",
+  "@inviteFriends": {},
+  "seeTopEarner": "Ver mejor ganador",
+  "@seeTopEarner": {},
+  "leaderBoard": "tabla de líderes",
+  "@leaderBoard": {},
+  "achievements": "Logros",
+  "@achievements": {},
+  "dailyCheckIn": "Registro diario",
+  "@dailyCheckIn": {},
+  "totalDaysClaimed": "Total de días reclamados",
+  "@totalDaysClaimed": {},
+  "dailyCheckInReward": "Recompensa por check-in diario",
+  "@dailyCheckInReward": {},
+  "alreadyClaimedToday": "Ya has reclamado la recompensa de hoy.",
+  "@alreadyClaimedToday": {},
+  "achievementUnlocked": "¡Logro desbloqueado!",
+  "@achievementUnlocked": {},
+  "couldNotClaimReward": "No se pudo reclamar la recompensa. Intentar otra vez.",
+  "@couldNotClaimReward": {},
+  "howItWorksReady": "¿Listo para empezar a ganar?",
+  "@howItWorksReady": {},
+  "backToHome": "Volver a Inicio",
+  "@backToHome": {},
+  "stepWhatAreCoinsTitle": "¿Qué son las monedas?",
+  "@stepWhatAreCoinsTitle": {},
+  "stepWhatAreCoinsDesc": "Las monedas son la moneda dentro de la aplicación que se gana al completar actividades. ¡Acumula lo suficiente para convertirlos en dinero real!",
+  "@stepWhatAreCoinsDesc": {},
+  "stepDailyMissionsTitle": "Misiones Diarias",
+  "@stepDailyMissionsTitle": {},
+  "stepDailyMissionsDesc": "Regístrese todos los días para obtener su recompensa diaria. ¡Cuanto más larga sea tu racha, mayores serán las monedas de bonificación que ganes!",
+  "@stepDailyMissionsDesc": {},
+  "stepSpinWheelTitle": "Rueda giratoria",
+  "@stepSpinWheelTitle": {},
+  "stepSpinWheelDesc": "Dale una vuelta a la rueda para tener la oportunidad de ganar monedas de bonificación al instante. Giros limitados por día, ¡así que haz que cuenten!",
+  "@stepSpinWheelDesc": {},
+  "stepScratchCardsTitle": "Tarjetas rasca y gana",
+  "@stepScratchCardsTitle": {},
+  "stepScratchCardsDesc": "Revela premios ocultos rascando tarjetas virtuales. ¡Cada rasguño podría desbloquear una gran recompensa en monedas!",
+  "@stepScratchCardsDesc": {},
+  "stepQuizGameTitle": "Juego de preguntas",
+  "@stepQuizGameTitle": {},
+  "stepQuizGameDesc": "Pon a prueba tus conocimientos en todas las categorías y gana monedas por cada respuesta correcta. ¡Cuanto más difícil sea el cuestionario, más ganarás!",
+  "@stepQuizGameDesc": {},
+  "stepWatchAdsTitle": "Ver anuncios",
+  "@stepWatchAdsTitle": {},
+  "stepWatchAdsDesc": "Mire videos cortos patrocinados para ganar monedas. ¡Es rápido, fácil y una excelente manera de acumular saldo!",
+  "@stepWatchAdsDesc": {},
+  "stepReferralSystemTitle": "Sistema de referencia",
+  "@stepReferralSystemTitle": {},
+  "stepReferralSystemDesc": "Comparta su código de referencia único con amigos. Cuando se unen y comienzan a ganar, ¡ambos reciben monedas de bonificación!",
+  "@stepReferralSystemDesc": {},
+  "stepWithdrawMoneyTitle": "Retirar dinero",
+  "@stepWithdrawMoneyTitle": {},
+  "stepWithdrawMoneyDesc": "Una vez que alcance el umbral mínimo, convierta sus monedas en efectivo real y retírelas a su método de pago preferido.",
+  "@stepWithdrawMoneyDesc": {},
+  "topEarners": "Principales ganadores",
+  "@topEarners": {},
+  "pullDownToRefresh": "Tira hacia abajo para actualizar",
+  "@pullDownToRefresh": {},
+  "rankHash": "#",
+  "@rankHash": {},
+  "rankPlayer": "Jugador",
+  "@rankPlayer": {},
+  "rankCoins": "monedas",
+  "@rankCoins": {},
+  "yourReferralCode": "Su código de referencia",
+  "@yourReferralCode": {},
+  "signInForReferralCode": "Inicia sesión para obtener tu código de referencia",
+  "@signInForReferralCode": {},
+  "referralCodeAlreadyApplied": "¡El código de referencia ya se aplicó!",
+  "@referralCodeAlreadyApplied": {},
+  "enterReferralCode": "Ingrese el código de referencia",
+  "@enterReferralCode": {},
+  "haveAPromoCode": "¿Tiene un código promocional?",
+  "@haveAPromoCode": {},
+  "howReferralsWork": "Cómo funcionan las referencias",
+  "@howReferralsWork": {},
+  "friendsInvited": "amigos invitados",
+  "@friendsInvited": {},
+  "coinsEarned": "Monedas ganadas",
+  "@coinsEarned": {},
+  "pleaseSignInForReferral": "Inicie sesión para utilizar un código de referencia.",
+  "@pleaseSignInForReferral": {},
+  "rewardsAndBonuses": "Recompensas y bonificaciones",
+  "@rewardsAndBonuses": {},
+  "scratchToReveal": "Rasca para revelar\ntu recompensa.",
+  "@scratchToReveal": {},
+  "dragToScratch": "Arrastrar para rascar",
+  "@dragToScratch": {},
+  "betterLuckNextTimeCard": "Mejor suerte\nLa próxima vez",
+  "@betterLuckNextTimeCard": {},
+  "spinAndWinTitle": "Gira y gana",
+  "@spinAndWinTitle": {},
+  "takeSpin": "Date una vuelta.\nApila las monedas.",
+  "@takeSpin": {},
+  "possibleWin": "Posible victoria",
+  "@possibleWin": {},
+  "upToOneDollar": "Hasta $1.00",
+  "@upToOneDollar": {},
+  "streakBonus": "Bonificación por racha",
+  "@streakBonus": {},
+  "x2": "x2",
+  "@x2": {},
+  "earnCoinsBySpinning": "Gana monedas fácilmente\nRueda giratoria",
+  "@earnCoinsBySpinning": {},
+  "youEarnedXpBonus": "¡Obtuviste un bono de +XP!",
+  "@youEarnedXpBonus": {},
+  "howCanWeHelp": "¿Cómo podemos ayudar?",
+  "@howCanWeHelp": {},
+  "supportDesc": "Cuéntanos qué salió mal o en qué necesitas ayuda. Nuestro equipo revisa cada mensaje.",
+  "@supportDesc": {},
+  "titleLabel": "Título",
+  "@titleLabel": {},
+  "titleHint": "Breve resumen de su problema",
+  "@titleHint": {},
+  "pleaseAddTitle": "Por favor agrega un título",
+  "@pleaseAddTitle": {},
+  "titleTooShort": "El título es demasiado corto.",
+  "@titleTooShort": {},
+  "descriptionLabel": "Descripción",
+  "@descriptionLabel": {},
+  "descriptionHint": "Describe tu problema en detalle...",
+  "@descriptionHint": {},
+  "pleaseAddDescription": "Por favor agregue una descripción",
+  "@pleaseAddDescription": {},
+  "descriptionTooShort": "La descripción es demasiado corta",
+  "@descriptionTooShort": {},
+  "submitting": "Sumisión…",
+  "@submitting": {},
+  "submit": "Entregar",
+  "@submit": {},
+  "ticketSubmittedSuccess": "¡El ticket de soporte se envió exitosamente!",
+  "@ticketSubmittedSuccess": {},
+  "ticketSubmitFailed": "No se pudo enviar el ticket. Por favor inténtalo de nuevo.",
+  "@ticketSubmitFailed": {},
+  "areYouSureSignOut": "¿Estás seguro de que deseas cerrar sesión?",
+  "@areYouSureSignOut": {},
+  "nextLevel": "Próximo:",
+  "@nextLevel": {},
+  "deleteAccountTitle": "¿Eliminar cuenta?",
+  "@deleteAccountTitle": {},
+  "deleteAccountDesc": "Esto eliminará permanentemente su cuenta y todos sus datos. Esta acción no se puede deshacer.",
+  "@deleteAccountDesc": {},
+  "deletingAccount": "Eliminando cuenta...",
+  "@deletingAccount": {},
+  "availableBalance": "Saldo disponible",
+  "@availableBalance": {},
+  "proceedWithin24h": "Proceda dentro de las 24 horas: sin cargos por efectivo",
+  "@proceedWithin24h": {},
+  "pendingWithdrawal": "Tienes un retiro pendiente. Las nuevas solicitudes están deshabilitadas hasta que se aprueben.",
+  "@pendingWithdrawal": {},
+  "enterWithdrawalAmount": "Ingrese el monto del retiro",
+  "@enterWithdrawalAmount": {},
+  "fieldRequired": "Campo requerido",
+  "@fieldRequired": {},
+  "invalidInput": "Entrada no válida",
+  "@invalidInput": {},
+  "amountCoins": "Cantidad (monedas)",
+  "@amountCoins": {},
+  "enterValidAmount": "Introduce un importe válido",
+  "@enterValidAmount": {},
+  "additionalNoteOptional": "Nota adicional (opcional)",
+  "@additionalNoteOptional": {},
+  "withdrawRequestSent": "Solicitud de retiro enviada",
+  "@withdrawRequestSent": {},
+  "confirmWithdrawal": "Confirmar retiro",
+  "@confirmWithdrawal": {},
+  "missionBrief": "Resumen de la misión",
+  "@missionBrief": {},
+  "claimCoinBold": "\"RECLAMAR MONEDA\"",
+  "@claimCoinBold": {},
+  "whenReady": "cuando esté listo!",
+  "@whenReady": {},
+  "timeNotCompleted": "¡Tiempo no completado!",
+  "@timeNotCompleted": {},
+  "plusCoinsValue": "+{coins} Monedas",
+  "@plusCoinsValue": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
+  "whichCountry": "¿Qué país te gusta?",
+  "@whichCountry": {},
+  "selectFavCountries": "Seleccione sus países favoritos que le gusten.",
+  "@selectFavCountries": {},
+  "availableCountry": "País disponible",
+  "@availableCountry": {},
+  "pleaseSelectCountry": "Por favor seleccione un país",
+  "@pleaseSelectCountry": {},
+  "chooseYourCurrency": "Elige tu moneda",
+  "@chooseYourCurrency": {},
+  "selectFavCurrency": "Selecciona la moneda que más te guste.",
+  "@selectFavCurrency": {},
+  "availableCurrency": "Moneda disponible",
+  "@availableCurrency": {},
+  "pleaseSelectCurrency": "Por favor seleccione una moneda",
+  "@pleaseSelectCurrency": {},
+  "whichGame": "¿Qué juego te gusta?",
+  "@whichGame": {},
+  "selectFavGames": "Selecciona tus juegos favoritos a los que quieres jugar",
+  "@selectFavGames": {},
+  "availableGames": "Juegos disponibles",
+  "@availableGames": {},
+  "pleaseSelectGame": "Por favor selecciona al menos un juego",
+  "@pleaseSelectGame": {},
+  "setDefaultLanguage": "Establecer idioma predeterminado",
+  "@setDefaultLanguage": {},
+  "setDefaultLanguageDesc": "El idioma seleccionado se utilizará como idioma predeterminado para esta aplicación, que podrá cambiar más tarde si lo desea.",
+  "@setDefaultLanguageDesc": {},
+  "stayInUpdated": "Manténgase actualizado",
+  "@stayInUpdated": {},
+  "notificationPermissionDesc": "Permita notificaciones para que podamos mantenerlo informado sobre el estado de su solicitud de préstamo y actualizaciones importantes.",
+  "@notificationPermissionDesc": {},
+  "allow": "Permitir",
+  "@allow": {},
+  "notNow": "Ahora no",
+  "@notNow": {},
+  "notificationsOff": "Las notificaciones están desactivadas",
+  "@notificationsOff": {},
+  "notificationSettingsDesc": "Bloqueaste las notificaciones antes. Abra la configuración del dispositivo y habilite las notificaciones para que Finlora reciba actualizaciones de préstamos.",
+  "@notificationSettingsDesc": {},
+  "openSettings": "Abrir configuración",
+  "@openSettings": {},
+  "earnAReward": "Gana una recompensa",
+  "@earnAReward": {},
+  "watchAdDesc": "Watch a short ad to claim your reward.\n¡Tu apoyo mantiene la aplicación gratuita!",
+  "@watchAdDesc": {},
+  "watchAd": "Ver anuncio",
+  "@watchAd": {},
+  "currentOfTotal": "{current} de {total}",
+  "@currentOfTotal": {
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "perCorrect": "+{coins} por correcto",
+  "@perCorrect": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
+  "streakInARow": "{streak} seguidos",
+  "@streakInARow": {
+    "placeholders": {
+      "streak": {
+        "type": "int"
+      }
+    }
+  },
+  "youScored": "Obtuviste una puntuación de {correct}/{total}",
+  "@youScored": {
+    "placeholders": {
+      "correct": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  }
+}

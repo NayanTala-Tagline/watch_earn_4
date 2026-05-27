@@ -40,6 +40,9 @@ const _languages = [
   _Language('Filipino', 'fil', '🇵🇭'),
   _Language('Dutch', 'nl', '🇳🇱'),
   _Language('Swahili', 'sw', '🇹🇿'),
+  _Language('Russian', 'ru', '🇷🇺'),
+  _Language('Korean', 'ko', '🇰🇷'),
+  _Language('Chinese', 'zh', '🇨🇳'),
 ];
 
 class LanguageScreen extends StatefulWidget {

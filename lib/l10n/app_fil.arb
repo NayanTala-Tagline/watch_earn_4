@@ -1,0 +1,673 @@
+{
+  "@@locale": "fil",
+  "skip": "Laktawan",
+  "@skip": {},
+  "next": "Susunod",
+  "@next": {},
+  "done": "Tapos na",
+  "@done": {},
+  "cancel": "Kanselahin",
+  "@cancel": {},
+  "claim": "Claim",
+  "@claim": {},
+  "claimed": "Inangkin",
+  "@claimed": {},
+  "tryAgain": "Subukan Muli",
+  "@tryAgain": {},
+  "claimNow": "I-claim Ngayon",
+  "@claimNow": {},
+  "getStarted": "Magsimula",
+  "@getStarted": {},
+  "apply": "Mag-apply",
+  "@apply": {},
+  "save": "I-save",
+  "@save": {},
+  "delete": "Tanggalin",
+  "@delete": {},
+  "signOut": "Mag-sign Out",
+  "@signOut": {},
+  "withdraw": "Mag-withdraw",
+  "@withdraw": {},
+  "rewards": "Mga gantimpala",
+  "@rewards": {},
+  "sectionContainsAds": "Maaaring naglalaman ang seksyong ito ng mga ad",
+  "@sectionContainsAds": {},
+  "congratulations": "Binabati kita..!",
+  "@congratulations": {},
+  "oops": "Oops!",
+  "@oops": {},
+  "betterLuckNextTime": "Better luck sa susunod!",
+  "@betterLuckNextTime": {},
+  "awesome": "Galing!",
+  "@awesome": {},
+  "coins": "mga barya",
+  "@coins": {},
+  "learn": "Matuto",
+  "@learn": {},
+  "rank": "Ranggo",
+  "@rank": {},
+  "level": "Antas",
+  "@level": {},
+  "xp": "XP",
+  "@xp": {},
+  "top": "Nangunguna",
+  "@top": {},
+  "home": "Bahay",
+  "@home": {},
+  "profile": "Profile",
+  "@profile": {},
+  "support": "Suporta",
+  "@support": {},
+  "language": "Wika",
+  "@language": {},
+  "mystery": "MISTERYO",
+  "@mystery": {},
+  "spinning": "Umiikot...",
+  "@spinning": {},
+  "spinNow": "Iikot Ngayon",
+  "@spinNow": {},
+  "claimCoins": "Mag-claim ng mga barya",
+  "@claimCoins": {},
+  "viewMore": "Tingnan ang Higit Pa",
+  "@viewMore": {},
+  "viewLess": "Tingnan ang Mas kaunti",
+  "@viewLess": {},
+  "useAll": "Gamitin ang lahat",
+  "@useAll": {},
+  "shareLink": "Ibahagi ang Link",
+  "@shareLink": {},
+  "referralCodeCopied": "Nakopya ang referral code",
+  "@referralCodeCopied": {},
+  "privacyPolicy": "Patakaran sa Privacy",
+  "@privacyPolicy": {},
+  "termsAndCondition": "Mga Tuntunin at Kundisyon",
+  "@termsAndCondition": {},
+  "deleteAccount": "Tanggalin ang Account",
+  "@deleteAccount": {},
+  "soundEffects": "Mga Sound Effect",
+  "@soundEffects": {},
+  "hapticFeedback": "Haptic Feedback",
+  "@hapticFeedback": {},
+  "levelProgress": "Antas ng Pag-unlad",
+  "@levelProgress": {},
+  "startNow": "Magsimula na",
+  "@startNow": {},
+  "daysValue": "{days} Araw",
+  "@daysValue": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "coinsValue": "{coins} Barya",
+  "@coinsValue": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
+  "coinsReward": "+{coins} Mga barya",
+  "@coinsReward": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
+  "coinsAwarded": "+{coins} Coins Iginawad!",
+  "@coinsAwarded": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
+  "youWonCoins": "Nanalo ka ng {coins} Coins",
+  "@youWonCoins": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
+  "lvValue": "LV {level}",
+  "@lvValue": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      }
+    }
+  },
+  "lvXpValue": "LV {level} - {xp} XP",
+  "@lvXpValue": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      },
+      "xp": {
+        "type": "int"
+      }
+    }
+  },
+  "dailyRewardDay": "Pang-araw-araw na Gantimpala - Araw {day}",
+  "@dailyRewardDay": {
+    "placeholders": {
+      "day": {
+        "type": "int"
+      }
+    }
+  },
+  "collectCoins": "Mangolekta ng +{coins} na barya",
+  "@collectCoins": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
+  "claimCoinsToday": "Mag-claim ng +{coins} na barya ngayon!",
+  "@claimCoinsToday": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
+  "lvDotLevel": "Lv. {level} · {levelName}",
+  "@lvDotLevel": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      },
+      "levelName": {
+        "type": "String"
+      }
+    }
+  },
+  "inviteFriendsTitle": "Mag-imbita ng mga kaibigan,\nKumuha ng {amount} Coins!",
+  "@inviteFriendsTitle": {
+    "placeholders": {
+      "amount": {
+        "type": "int"
+      }
+    }
+  },
+  "refreshesIn": "Nagre-refresh sa {time}",
+  "@refreshesIn": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "lvTierValue": "Lv. {level} {tier}",
+  "@lvTierValue": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      },
+      "tier": {
+        "type": "String"
+      }
+    }
+  },
+  "spinsLeftToday": "{count} Umiikot Ngayon",
+  "@spinsLeftToday": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "autoStartingIn": "Awtomatikong pagsisimula sa loob ng {seconds} s",
+  "@autoStartingIn": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
+  "withdrawTo": "Mag-withdraw sa {method}",
+  "@withdrawTo": {
+    "placeholders": {
+      "method": {
+        "type": "String"
+      }
+    }
+  },
+  "minWithdrawal": "Min. Withdrawal – {amount}",
+  "@minWithdrawal": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "withdrawAmount": "I-withdraw ang $ {amount}",
+  "@withdrawAmount": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "minSuffix": "Min {min}",
+  "@minSuffix": {
+    "placeholders": {
+      "min": {
+        "type": "String"
+      }
+    }
+  },
+  "minimumWithdrawCoins": "Ang minimum na withdraw ay {coins} na mga barya",
+  "@minimumWithdrawCoins": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
+  "convertedValue": "Halaga ${value}",
+  "@convertedValue": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "timeNotCompletedDesc": "Nanatili ka ng {elapsed}s sa {required}s.\nMangyaring manatili sa pahina para sa buong tagal.",
+  "@timeNotCompletedDesc": {
+    "placeholders": {
+      "elapsed": {
+        "type": "int"
+      },
+      "required": {
+        "type": "int"
+      }
+    }
+  },
+  "missionBriefDuration": "Manatili sa page sa loob ng {duration} Seg., May lalabas na countdown timer. i-click",
+  "@missionBriefDuration": {
+    "placeholders": {
+      "duration": {
+        "type": "int"
+      }
+    }
+  },
+  "luckyNumber": "Maswerteng #{number}",
+  "@luckyNumber": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "totalDaysValue": "{totalDays} Araw",
+  "@totalDaysValue": {
+    "placeholders": {
+      "totalDays": {
+        "type": "int"
+      }
+    }
+  },
+  "dayValue": "Araw {day}",
+  "@dayValue": {
+    "placeholders": {
+      "day": {
+        "type": "int"
+      }
+    }
+  },
+  "referralShareDesc": "Ibahagi ang iyong code. Kapag sila ay nag-sign up o pumasok dito, pareho kayong makakakuha ng {amount} na mga barya!",
+  "@referralShareDesc": {
+    "placeholders": {
+      "amount": {
+        "type": "int"
+      }
+    }
+  },
+  "howReferralsWorkDesc": "Ibahagi ang code · Sumali ang kaibigan · Pareho kayong kumikita ng {amount} na barya",
+  "@howReferralsWorkDesc": {
+    "placeholders": {
+      "amount": {
+        "type": "int"
+      }
+    }
+  },
+  "splashAppName": "Rewardo",
+  "@splashAppName": {},
+  "onboarding1Title": "Pang-araw-araw na Gantimpala",
+  "@onboarding1Title": {},
+  "onboarding1Desc": "Makakakuha ka ng Daily Points Reward, na maaari mong i-claim at pataasin ang iyong mga Puntos",
+  "@onboarding1Desc": {},
+  "onboarding2Title": "Ultimate Games",
+  "@onboarding2Title": {},
+  "onboarding2Desc": "Kumuha ng Maramihang mga opsyon para sa Mga Larong Laruin at Makakuha ng Higit pang Mga Puntos.",
+  "@onboarding2Desc": {},
+  "onboarding3Title": "Subaybayan ang mga Nakamit",
+  "@onboarding3Title": {},
+  "onboarding3Desc": "Tingnan ang iyong mga nagawa at Subaybayan ito kasama ng ibang user sa pamamagitan ng Leatherboard",
+  "@onboarding3Desc": {},
+  "startEarning": "Simulan ang Kumita",
+  "@startEarning": {},
+  "loginTitle": "Simulan ang Kumita\nMga gantimpala",
+  "@loginTitle": {},
+  "loginSubtitle": "Kumpletuhin ang mga gawain, maglaro, at kumita ng mga barya na nagko-convert sa totoong pera!",
+  "@loginSubtitle": {},
+  "continueWithGoogle": "Magpatuloy sa Google",
+  "@continueWithGoogle": {},
+  "continueAsGuest": "Magpatuloy bilang Bisita",
+  "@continueAsGuest": {},
+  "byContinuing": "Sa pagpapatuloy, sumasang-ayon ka sa aming",
+  "@byContinuing": {},
+  "termsOfService": "Mga Tuntunin ng Serbisyo",
+  "@termsOfService": {},
+  "and": "at",
+  "@and": {},
+  "pressAgainToExit": "Pindutin muli upang lumabas sa app",
+  "@pressAgainToExit": {},
+  "earnMoney": "Kumita ng Pera",
+  "@earnMoney": {},
+  "howItWorks": "Paano Ito Gumagana",
+  "@howItWorks": {},
+  "howItWorksSubtitle": "Alamin ang Step-by-Step kung paano\nkumita ng pera",
+  "@howItWorksSubtitle": {},
+  "totalBalance": "Kabuuang Balanse",
+  "@totalBalance": {},
+  "claimedTodayComeBack": "Na-claim ngayon! Bumalik ka bukas",
+  "@claimedTodayComeBack": {},
+  "quizMaster": "Quiz Master",
+  "@quizMaster": {},
+  "answerAndEarn": "Sagot at Kumita",
+  "@answerAndEarn": {},
+  "spinWheel": "Paikot na Gulong",
+  "@spinWheel": {},
+  "spinAndWin": "Paikutin at Manalo",
+  "@spinAndWin": {},
+  "scratchCard": "Scratch Card",
+  "@scratchCard": {},
+  "scratchAndReveal": "Scratch and Reveal",
+  "@scratchAndReveal": {},
+  "webVisits": "Mga Pagbisita sa Web",
+  "@webVisits": {},
+  "visitAndEarn": "Bisitahin at Kumita",
+  "@visitAndEarn": {},
+  "gameZone": "Zone ng Laro",
+  "@gameZone": {},
+  "playGames": "Maglaro ng Laro",
+  "@playGames": {},
+  "referAndEarn": "Sumangguni at Kumita",
+  "@referAndEarn": {},
+  "inviteFriends": "Mag-imbita ng mga Kaibigan",
+  "@inviteFriends": {},
+  "seeTopEarner": "Tingnan ang nangungunang kumikita",
+  "@seeTopEarner": {},
+  "leaderBoard": "Leader board",
+  "@leaderBoard": {},
+  "achievements": "Mga nagawa",
+  "@achievements": {},
+  "dailyCheckIn": "Araw-araw na Check-in",
+  "@dailyCheckIn": {},
+  "totalDaysClaimed": "Kabuuang Mga Araw na Na-claim",
+  "@totalDaysClaimed": {},
+  "dailyCheckInReward": "Gantimpala sa Pang-araw-araw na Check-in",
+  "@dailyCheckInReward": {},
+  "alreadyClaimedToday": "Na-claim mo na ang reward ngayong araw.",
+  "@alreadyClaimedToday": {},
+  "achievementUnlocked": "Na-unlock ang Achievement!",
+  "@achievementUnlocked": {},
+  "couldNotClaimReward": "Hindi ma-claim ang reward. Subukan muli.",
+  "@couldNotClaimReward": {},
+  "howItWorksReady": "Handa nang magsimulang kumita?",
+  "@howItWorksReady": {},
+  "backToHome": "Bumalik sa Bahay",
+  "@backToHome": {},
+  "stepWhatAreCoinsTitle": "Ano ang mga barya?",
+  "@stepWhatAreCoinsTitle": {},
+  "stepWhatAreCoinsDesc": "Ang mga barya ay ang in-app na currency na kikitain mo sa pamamagitan ng pagkumpleto ng mga aktibidad. Mag-ipon ng sapat upang i-convert ang mga ito sa totoong pera!",
+  "@stepWhatAreCoinsDesc": {},
+  "stepDailyMissionsTitle": "Pang-araw-araw na Misyon",
+  "@stepDailyMissionsTitle": {},
+  "stepDailyMissionsDesc": "Mag-check in araw-araw para makuha ang iyong pang-araw-araw na reward. Kung mas mahaba ang iyong streak, mas malaki ang bonus na mga barya na iyong kikitain!",
+  "@stepDailyMissionsDesc": {},
+  "stepSpinWheelTitle": "Paikot na Gulong",
+  "@stepSpinWheelTitle": {},
+  "stepSpinWheelDesc": "Bigyan ang gulong ng isang pag-ikot para sa isang pagkakataong manalo ng mga bonus na barya kaagad. Limitadong mga spin bawat araw, kaya bilangin sila!",
+  "@stepSpinWheelDesc": {},
+  "stepScratchCardsTitle": "Scratch Card",
+  "@stepScratchCardsTitle": {},
+  "stepScratchCardsDesc": "Magbunyag ng mga nakatagong premyo sa pamamagitan ng pag-scratch ng mga virtual card. Ang bawat scratch ay maaaring mag-unlock ng malaking coin reward!",
+  "@stepScratchCardsDesc": {},
+  "stepQuizGameTitle": "Larong Pagsusulit",
+  "@stepQuizGameTitle": {},
+  "stepQuizGameDesc": "Subukan ang iyong kaalaman sa mga kategorya at kumita ng mga barya para sa bawat tamang sagot. Kung mas mahirap ang pagsusulit, mas marami kang kinikita!",
+  "@stepQuizGameDesc": {},
+  "stepWatchAdsTitle": "Manood ng mga Ad",
+  "@stepWatchAdsTitle": {},
+  "stepWatchAdsDesc": "Manood ng mga maikling naka-sponsor na video upang kumita ng mga barya. Ito ay mabilis, madali, at isang mahusay na paraan upang i-stack up ang iyong balanse!",
+  "@stepWatchAdsDesc": {},
+  "stepReferralSystemTitle": "Sistema ng Referral",
+  "@stepReferralSystemTitle": {},
+  "stepReferralSystemDesc": "Ibahagi ang iyong natatanging referral code sa mga kaibigan. Kapag sumali sila at nagsimulang kumita, pareho kayong makakatanggap ng mga bonus na barya!",
+  "@stepReferralSystemDesc": {},
+  "stepWithdrawMoneyTitle": "Mag-withdraw ng Pera",
+  "@stepWithdrawMoneyTitle": {},
+  "stepWithdrawMoneyDesc": "Kapag naabot mo na ang pinakamababang threshold, i-convert ang iyong mga barya sa totoong cash at mag-withdraw sa iyong gustong paraan ng pagbabayad!",
+  "@stepWithdrawMoneyDesc": {},
+  "topEarners": "Mga Nangungunang Kumita",
+  "@topEarners": {},
+  "pullDownToRefresh": "Hilahin pababa para i-refresh",
+  "@pullDownToRefresh": {},
+  "rankHash": "#",
+  "@rankHash": {},
+  "rankPlayer": "Manlalaro",
+  "@rankPlayer": {},
+  "rankCoins": "mga barya",
+  "@rankCoins": {},
+  "yourReferralCode": "Ang iyong Referral Code",
+  "@yourReferralCode": {},
+  "signInForReferralCode": "Mag-sign in para makuha ang iyong referral code",
+  "@signInForReferralCode": {},
+  "referralCodeAlreadyApplied": "Nailapat na ang referral code!",
+  "@referralCodeAlreadyApplied": {},
+  "enterReferralCode": "Ilagay ang referral code",
+  "@enterReferralCode": {},
+  "haveAPromoCode": "May Promo Code?",
+  "@haveAPromoCode": {},
+  "howReferralsWork": "Paano Gumagana ang Mga Referral",
+  "@howReferralsWork": {},
+  "friendsInvited": "Inimbitahan ang mga Kaibigan",
+  "@friendsInvited": {},
+  "coinsEarned": "Nakuhang mga barya",
+  "@coinsEarned": {},
+  "pleaseSignInForReferral": "Mangyaring mag-sign in upang gumamit ng referral code.",
+  "@pleaseSignInForReferral": {},
+  "rewardsAndBonuses": "Mga Gantimpala at Bonus",
+  "@rewardsAndBonuses": {},
+  "scratchToReveal": "Scratch para ibunyag\nang iyong gantimpala.",
+  "@scratchToReveal": {},
+  "dragToScratch": "I-drag para scratch",
+  "@dragToScratch": {},
+  "betterLuckNextTimeCard": "Mas Mapalad\nSa susunod na pagkakataon",
+  "@betterLuckNextTimeCard": {},
+  "spinAndWinTitle": "Paikutin at Manalo",
+  "@spinAndWinTitle": {},
+  "takeSpin": "Mag-ikot.\nIsalansan ang mga barya.",
+  "@takeSpin": {},
+  "possibleWin": "Posibleng Panalo",
+  "@possibleWin": {},
+  "upToOneDollar": "Hanggang $1.00",
+  "@upToOneDollar": {},
+  "streakBonus": "Streak Bonus",
+  "@streakBonus": {},
+  "x2": "x2",
+  "@x2": {},
+  "earnCoinsBySpinning": "Madaling kumita ng mga barya sa pamamagitan ng\nUmiikot na Gulong",
+  "@earnCoinsBySpinning": {},
+  "youEarnedXpBonus": "Nakakuha ka ng +XP Bonus!",
+  "@youEarnedXpBonus": {},
+  "howCanWeHelp": "Paano tayo makakatulong?",
+  "@howCanWeHelp": {},
+  "supportDesc": "Sabihin sa amin kung ano ang nangyaring mali o kung ano ang kailangan mong hawakan. Sinusuri ng aming koponan ang bawat mensahe.",
+  "@supportDesc": {},
+  "titleLabel": "Pamagat",
+  "@titleLabel": {},
+  "titleHint": "Maikling buod ng iyong isyu",
+  "@titleHint": {},
+  "pleaseAddTitle": "Mangyaring magdagdag ng pamagat",
+  "@pleaseAddTitle": {},
+  "titleTooShort": "Masyadong maikli ang pamagat",
+  "@titleTooShort": {},
+  "descriptionLabel": "Paglalarawan",
+  "@descriptionLabel": {},
+  "descriptionHint": "Ilarawan ang iyong isyu nang detalyado...",
+  "@descriptionHint": {},
+  "pleaseAddDescription": "Mangyaring magdagdag ng paglalarawan",
+  "@pleaseAddDescription": {},
+  "descriptionTooShort": "Masyadong maikli ang paglalarawan",
+  "@descriptionTooShort": {},
+  "submitting": "Isinusumite…",
+  "@submitting": {},
+  "submit": "Isumite",
+  "@submit": {},
+  "ticketSubmittedSuccess": "Matagumpay na naisumite ang ticket ng suporta!",
+  "@ticketSubmittedSuccess": {},
+  "ticketSubmitFailed": "Hindi makapagsumite ng ticket. Pakisubukang muli.",
+  "@ticketSubmitFailed": {},
+  "areYouSureSignOut": "Sigurado ka bang gusto mong mag-sign out?",
+  "@areYouSureSignOut": {},
+  "nextLevel": "Susunod:",
+  "@nextLevel": {},
+  "deleteAccountTitle": "Tanggalin ang Account?",
+  "@deleteAccountTitle": {},
+  "deleteAccountDesc": "Permanente nitong tatanggalin ang iyong account at lahat ng iyong data. Ang pagkilos na ito ay hindi maaaring i-undo.",
+  "@deleteAccountDesc": {},
+  "deletingAccount": "Tinatanggal ang account...",
+  "@deletingAccount": {},
+  "availableBalance": "Magagamit na Balanse",
+  "@availableBalance": {},
+  "proceedWithin24h": "Magpatuloy sa loob ng 24h - Walang bayad sa cash",
+  "@proceedWithin24h": {},
+  "pendingWithdrawal": "Mayroon kang nakabinbing withdrawal. Ang mga bagong kahilingan ay hindi pinagana hanggang sa ito ay maaprubahan.",
+  "@pendingWithdrawal": {},
+  "enterWithdrawalAmount": "Ipasok ang Halaga ng Pag-withdraw",
+  "@enterWithdrawalAmount": {},
+  "fieldRequired": "Kinakailangan ang field",
+  "@fieldRequired": {},
+  "invalidInput": "Di-wastong input",
+  "@invalidInput": {},
+  "amountCoins": "Halaga (Mga Barya)",
+  "@amountCoins": {},
+  "enterValidAmount": "Maglagay ng wastong halaga",
+  "@enterValidAmount": {},
+  "additionalNoteOptional": "Karagdagang tala (opsyonal)",
+  "@additionalNoteOptional": {},
+  "withdrawRequestSent": "Ipinadala ang kahilingan sa pag-withdraw",
+  "@withdrawRequestSent": {},
+  "confirmWithdrawal": "Kumpirmahin ang Pag-withdraw",
+  "@confirmWithdrawal": {},
+  "missionBrief": "Maikling Misyon",
+  "@missionBrief": {},
+  "claimCoinBold": "\"CLAIM COIN\"",
+  "@claimCoinBold": {},
+  "whenReady": "kapag handa na!",
+  "@whenReady": {},
+  "timeNotCompleted": "Hindi Nakumpleto ang Oras!",
+  "@timeNotCompleted": {},
+  "plusCoinsValue": "+{coins} Mga barya",
+  "@plusCoinsValue": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
+  "whichCountry": "Aling Bansa ang gusto mo?",
+  "@whichCountry": {},
+  "selectFavCountries": "Piliin ang iyong mga paboritong bansa kung alin ang gusto mo.",
+  "@selectFavCountries": {},
+  "availableCountry": "Magagamit na Bansa",
+  "@availableCountry": {},
+  "pleaseSelectCountry": "Mangyaring pumili ng isang bansa",
+  "@pleaseSelectCountry": {},
+  "chooseYourCurrency": "Piliin ang iyong pera",
+  "@chooseYourCurrency": {},
+  "selectFavCurrency": "Piliin ang iyong pera na gusto mo.",
+  "@selectFavCurrency": {},
+  "availableCurrency": "Magagamit na Pera",
+  "@availableCurrency": {},
+  "pleaseSelectCurrency": "Mangyaring pumili ng pera",
+  "@pleaseSelectCurrency": {},
+  "whichGame": "Aling Laro ang gusto mo?",
+  "@whichGame": {},
+  "selectFavGames": "Piliin ang iyong mga paboritong Laro na gusto mong laruin",
+  "@selectFavGames": {},
+  "availableGames": "Mga Magagamit na Laro",
+  "@availableGames": {},
+  "pleaseSelectGame": "Mangyaring pumili ng hindi bababa sa isang laro",
+  "@pleaseSelectGame": {},
+  "setDefaultLanguage": "Itakda ang Default na Wika",
+  "@setDefaultLanguage": {},
+  "setDefaultLanguageDesc": "Gagamitin ang napiling wika bilang default na wika para sa app na ito na maaari mong baguhin sa ibang pagkakataon kung gusto mo.",
+  "@setDefaultLanguageDesc": {},
+  "stayInUpdated": "Manatili sa updated",
+  "@stayInUpdated": {},
+  "notificationPermissionDesc": "Pahintulutan ang mga abiso upang mapanatili ka naming naka-post sa status ng iyong loan application at mahahalagang update.",
+  "@notificationPermissionDesc": {},
+  "allow": "Payagan",
+  "@allow": {},
+  "notNow": "Hindi Ngayon",
+  "@notNow": {},
+  "notificationsOff": "Naka-off ang mga notification",
+  "@notificationsOff": {},
+  "notificationSettingsDesc": "Na-block mo ang mga notification kanina. Buksan ang mga setting ng device at paganahin ang mga notification para sa Finlora na makatanggap ng mga update sa loan.",
+  "@notificationSettingsDesc": {},
+  "openSettings": "Buksan ang Mga Setting",
+  "@openSettings": {},
+  "earnAReward": "Makakuha ng Gantimpala",
+  "@earnAReward": {},
+  "watchAdDesc": "Manood ng maikling ad para makuha ang iyong reward.\nPinapanatiling libre ng iyong suporta ang app!",
+  "@watchAdDesc": {},
+  "watchAd": "Manood ng Ad",
+  "@watchAd": {},
+  "currentOfTotal": "{current} ng {total}",
+  "@currentOfTotal": {
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "perCorrect": "+{coins} bawat tama",
+  "@perCorrect": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
+  "streakInARow": "{streak} sunod-sunod",
+  "@streakInARow": {
+    "placeholders": {
+      "streak": {
+        "type": "int"
+      }
+    }
+  },
+  "youScored": "Nakakuha ka ng {correct}/{total}",
+  "@youScored": {
+    "placeholders": {
+      "correct": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  }
+}

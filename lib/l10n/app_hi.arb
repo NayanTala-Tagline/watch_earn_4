@@ -1,0 +1,673 @@
+{
+  "@@locale": "hi",
+  "skip": "छोडना",
+  "@skip": {},
+  "next": "अगला",
+  "@next": {},
+  "done": "हो गया",
+  "@done": {},
+  "cancel": "रद्द करना",
+  "@cancel": {},
+  "claim": "दावा",
+  "@claim": {},
+  "claimed": "दावा किया",
+  "@claimed": {},
+  "tryAgain": "पुनः प्रयास करें",
+  "@tryAgain": {},
+  "claimNow": "अभी दावा करें",
+  "@claimNow": {},
+  "getStarted": "शुरू हो जाओ",
+  "@getStarted": {},
+  "apply": "आवेदन करना",
+  "@apply": {},
+  "save": "बचाना",
+  "@save": {},
+  "delete": "मिटाना",
+  "@delete": {},
+  "signOut": "साइन आउट",
+  "@signOut": {},
+  "withdraw": "निकालना",
+  "@withdraw": {},
+  "rewards": "पुरस्कार",
+  "@rewards": {},
+  "sectionContainsAds": "इस अनुभाग में विज्ञापन हो सकते हैं",
+  "@sectionContainsAds": {},
+  "congratulations": "बधाई हो..!",
+  "@congratulations": {},
+  "oops": "उफ़!",
+  "@oops": {},
+  "betterLuckNextTime": "अगली बार किस्मत तुम्हारा साथ देगी!",
+  "@betterLuckNextTime": {},
+  "awesome": "बहुत बढ़िया!",
+  "@awesome": {},
+  "coins": "सिक्के",
+  "@coins": {},
+  "learn": "सीखना",
+  "@learn": {},
+  "rank": "पद",
+  "@rank": {},
+  "level": "स्तर",
+  "@level": {},
+  "xp": "एक्सपी",
+  "@xp": {},
+  "top": "शीर्ष",
+  "@top": {},
+  "home": "घर",
+  "@home": {},
+  "profile": "प्रोफ़ाइल",
+  "@profile": {},
+  "support": "सहायता",
+  "@support": {},
+  "language": "भाषा",
+  "@language": {},
+  "mystery": "रहस्य",
+  "@mystery": {},
+  "spinning": "घूम रहा है...",
+  "@spinning": {},
+  "spinNow": "अभी घुमाएँ",
+  "@spinNow": {},
+  "claimCoins": "सिक्के का दावा करें",
+  "@claimCoins": {},
+  "viewMore": "और देखें",
+  "@viewMore": {},
+  "viewLess": "कम देखें",
+  "@viewLess": {},
+  "useAll": "सभी का उपयोग करें",
+  "@useAll": {},
+  "shareLink": "लिंक शेयर करें",
+  "@shareLink": {},
+  "referralCodeCopied": "रेफरल कोड कॉपी किया गया",
+  "@referralCodeCopied": {},
+  "privacyPolicy": "गोपनीयता नीति",
+  "@privacyPolicy": {},
+  "termsAndCondition": "नियम व शर्त",
+  "@termsAndCondition": {},
+  "deleteAccount": "खाता हटा दो",
+  "@deleteAccount": {},
+  "soundEffects": "ध्वनि प्रभाव",
+  "@soundEffects": {},
+  "hapticFeedback": "हैप्टिक राय",
+  "@hapticFeedback": {},
+  "levelProgress": "स्तर की प्रगति",
+  "@levelProgress": {},
+  "startNow": "शुरू करें",
+  "@startNow": {},
+  "daysValue": "{days} दिन",
+  "@daysValue": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "coinsValue": "{coins} सिक्के",
+  "@coinsValue": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
+  "coinsReward": "+{coins} सिक्के",
+  "@coinsReward": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
+  "coinsAwarded": "+{coins} सिक्के प्रदान किए गए!",
+  "@coinsAwarded": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
+  "youWonCoins": "आपने {coins} सिक्के जीते",
+  "@youWonCoins": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
+  "lvValue": "एलवी {level}",
+  "@lvValue": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      }
+    }
+  },
+  "lvXpValue": "एलवी {level} - {xp} XP",
+  "@lvXpValue": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      },
+      "xp": {
+        "type": "int"
+      }
+    }
+  },
+  "dailyRewardDay": "दैनिक इनाम - दिन {day}",
+  "@dailyRewardDay": {
+    "placeholders": {
+      "day": {
+        "type": "int"
+      }
+    }
+  },
+  "collectCoins": "+{coins} सिक्के एकत्र करें",
+  "@collectCoins": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
+  "claimCoinsToday": "+{coins} सिक्कों पर आज ही दावा करें!",
+  "@claimCoinsToday": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
+  "lvDotLevel": "लव. {level} · {levelName}",
+  "@lvDotLevel": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      },
+      "levelName": {
+        "type": "String"
+      }
+    }
+  },
+  "inviteFriendsTitle": "मित्रों को आमंत्रित करें,\n{amount} सिक्के प्राप्त करें!",
+  "@inviteFriendsTitle": {
+    "placeholders": {
+      "amount": {
+        "type": "int"
+      }
+    }
+  },
+  "refreshesIn": "{time} में ताज़ा होता है",
+  "@refreshesIn": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "lvTierValue": "लव. {level} {tier}",
+  "@lvTierValue": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      },
+      "tier": {
+        "type": "String"
+      }
+    }
+  },
+  "spinsLeftToday": "{count} आज बायीं ओर घूम रहा है",
+  "@spinsLeftToday": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "autoStartingIn": "{seconds} s में स्वतः प्रारंभ",
+  "@autoStartingIn": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
+  "withdrawTo": "{method} पर वापस लें",
+  "@withdrawTo": {
+    "placeholders": {
+      "method": {
+        "type": "String"
+      }
+    }
+  },
+  "minWithdrawal": "न्यूनतम. निकासी - {amount}",
+  "@minWithdrawal": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "withdrawAmount": "${amount} निकालें",
+  "@withdrawAmount": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "minSuffix": "न्यूनतम {min}",
+  "@minSuffix": {
+    "placeholders": {
+      "min": {
+        "type": "String"
+      }
+    }
+  },
+  "minimumWithdrawCoins": "न्यूनतम निकासी {coins} सिक्के है",
+  "@minimumWithdrawCoins": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
+  "convertedValue": "मूल्य ${value}",
+  "@convertedValue": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "timeNotCompletedDesc": "आप {required}s में से {elapsed}s तक रुके रहे।\nकृपया पूरी अवधि तक पेज पर बने रहें।",
+  "@timeNotCompletedDesc": {
+    "placeholders": {
+      "elapsed": {
+        "type": "int"
+      },
+      "required": {
+        "type": "int"
+      }
+    }
+  },
+  "missionBriefDuration": "{duration} सेकंड के लिए पेज पर बने रहें, एक उलटी गिनती घड़ी दिखाई देगी। क्लिक",
+  "@missionBriefDuration": {
+    "placeholders": {
+      "duration": {
+        "type": "int"
+      }
+    }
+  },
+  "luckyNumber": "भाग्यशाली #{number}",
+  "@luckyNumber": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "totalDaysValue": "{totalDays} दिन",
+  "@totalDaysValue": {
+    "placeholders": {
+      "totalDays": {
+        "type": "int"
+      }
+    }
+  },
+  "dayValue": "दिन {day}",
+  "@dayValue": {
+    "placeholders": {
+      "day": {
+        "type": "int"
+      }
+    }
+  },
+  "referralShareDesc": "अपना कोड साझा करें. जब वे साइन अप करते हैं या इसमें प्रवेश करते हैं, तो आप दोनों को {amount} सिक्के मिलते हैं!",
+  "@referralShareDesc": {
+    "placeholders": {
+      "amount": {
+        "type": "int"
+      }
+    }
+  },
+  "howReferralsWorkDesc": "कोड साझा करें · मित्र जुड़ें · आप दोनों {amount} सिक्के अर्जित करें",
+  "@howReferralsWorkDesc": {
+    "placeholders": {
+      "amount": {
+        "type": "int"
+      }
+    }
+  },
+  "splashAppName": "इनाम",
+  "@splashAppName": {},
+  "onboarding1Title": "दैनिक पुरस्कार",
+  "@onboarding1Title": {},
+  "onboarding1Desc": "आपको दैनिक अंक पुरस्कार मिलेगा, जिस पर आप दावा कर सकते हैं और अपने अंक बढ़ा सकते हैं",
+  "@onboarding1Desc": {},
+  "onboarding2Title": "परम खेल",
+  "@onboarding2Title": {},
+  "onboarding2Desc": "गेम खेलने के लिए अनेक विकल्प प्राप्त करें और अधिक अंक प्राप्त करें।",
+  "@onboarding2Desc": {},
+  "onboarding3Title": "उपलब्धियों को ट्रैक करें",
+  "@onboarding3Title": {},
+  "onboarding3Desc": "अपनी उपलब्धियाँ देखें और लेदरबोर्ड के माध्यम से इसे अन्य उपयोगकर्ताओं के साथ ट्रैक करें",
+  "@onboarding3Desc": {},
+  "startEarning": "कमाई शुरू करें",
+  "@startEarning": {},
+  "loginTitle": "कमाई शुरू करें\nपुरस्कार",
+  "@loginTitle": {},
+  "loginSubtitle": "कार्य पूरे करें, गेम खेलें और सिक्के अर्जित करें जो वास्तविक धन में परिवर्तित हो जाते हैं!",
+  "@loginSubtitle": {},
+  "continueWithGoogle": "Google के साथ जारी रखें",
+  "@continueWithGoogle": {},
+  "continueAsGuest": "अतिथि के रूप में जारी रखें",
+  "@continueAsGuest": {},
+  "byContinuing": "जारी रखकर, आप हमारी बात से सहमत हैं",
+  "@byContinuing": {},
+  "termsOfService": "सेवा की शर्तें",
+  "@termsOfService": {},
+  "and": "और",
+  "@and": {},
+  "pressAgainToExit": "ऐप से बाहर निकलने के लिए फिर से दबाएँ",
+  "@pressAgainToExit": {},
+  "earnMoney": "पैसे कमाएं",
+  "@earnMoney": {},
+  "howItWorks": "यह काम किस प्रकार करता है",
+  "@howItWorks": {},
+  "howItWorksSubtitle": "चरण-दर-चरण जानें कि कैसे करें\nपैसा कमाओ",
+  "@howItWorksSubtitle": {},
+  "totalBalance": "कुल शेष",
+  "@totalBalance": {},
+  "claimedTodayComeBack": "आज दावा किया गया! कल फिर आना",
+  "@claimedTodayComeBack": {},
+  "quizMaster": "प्रश्नोत्तरी मास्टर",
+  "@quizMaster": {},
+  "answerAndEarn": "उत्तर दें और कमाएँ",
+  "@answerAndEarn": {},
+  "spinWheel": "घूमता हुआ पहिया",
+  "@spinWheel": {},
+  "spinAndWin": "स्पिन और जीत",
+  "@spinAndWin": {},
+  "scratchCard": "स्क्रैच कार्ड",
+  "@scratchCard": {},
+  "scratchAndReveal": "खरोंचें और प्रकट करें",
+  "@scratchAndReveal": {},
+  "webVisits": "वेब विज़िट",
+  "@webVisits": {},
+  "visitAndEarn": "जाएँ और कमाएँ",
+  "@visitAndEarn": {},
+  "gameZone": "खेल क्षेत्र",
+  "@gameZone": {},
+  "playGames": "खेल खेलें",
+  "@playGames": {},
+  "referAndEarn": "देखें और कमाएँ",
+  "@referAndEarn": {},
+  "inviteFriends": "मित्रों को आमंत्रित करें",
+  "@inviteFriends": {},
+  "seeTopEarner": "शीर्ष कमाई करने वाला देखें",
+  "@seeTopEarner": {},
+  "leaderBoard": "लीडर बोर्ड",
+  "@leaderBoard": {},
+  "achievements": "उपलब्धियों",
+  "@achievements": {},
+  "dailyCheckIn": "दैनिक चेक-इन",
+  "@dailyCheckIn": {},
+  "totalDaysClaimed": "दावा किए गए कुल दिन",
+  "@totalDaysClaimed": {},
+  "dailyCheckInReward": "दैनिक चेक-इन पुरस्कार",
+  "@dailyCheckInReward": {},
+  "alreadyClaimedToday": "आप आज का इनाम पहले ही ले चुके हैं।",
+  "@alreadyClaimedToday": {},
+  "achievementUnlocked": "खुली उपलब्धि!",
+  "@achievementUnlocked": {},
+  "couldNotClaimReward": "इनाम का दावा नहीं किया जा सका. पुनः प्रयास करें।",
+  "@couldNotClaimReward": {},
+  "howItWorksReady": "कमाई शुरू करने के लिए तैयार हैं?",
+  "@howItWorksReady": {},
+  "backToHome": "घर वापिस जा रहा हूँ",
+  "@backToHome": {},
+  "stepWhatAreCoinsTitle": "सिक्के क्या हैं?",
+  "@stepWhatAreCoinsTitle": {},
+  "stepWhatAreCoinsDesc": "सिक्के इन-ऐप मुद्रा हैं जो आप गतिविधियों को पूरा करके अर्जित करते हैं। उन्हें वास्तविक धन में बदलने के लिए पर्याप्त संचय करें!",
+  "@stepWhatAreCoinsDesc": {},
+  "stepDailyMissionsTitle": "दैनिक मिशन",
+  "@stepDailyMissionsTitle": {},
+  "stepDailyMissionsDesc": "अपना दैनिक इनाम पाने के लिए हर दिन चेक इन करें। आपकी स्ट्रीक जितनी लंबी होगी, आप उतने ही बड़े बोनस सिक्के अर्जित करेंगे!",
+  "@stepDailyMissionsDesc": {},
+  "stepSpinWheelTitle": "घूमता हुआ पहिया",
+  "@stepSpinWheelTitle": {},
+  "stepSpinWheelDesc": "तुरंत बोनस सिक्के जीतने का मौका पाने के लिए पहिये को घुमाएँ। प्रति दिन सीमित स्पिन, इसलिए उनकी गिनती करें!",
+  "@stepSpinWheelDesc": {},
+  "stepScratchCardsTitle": "स्क्रैच कार्ड",
+  "@stepScratchCardsTitle": {},
+  "stepScratchCardsDesc": "वर्चुअल कार्ड स्क्रैच करके छिपे हुए पुरस्कार प्रकट करें। प्रत्येक स्क्रैच एक बड़ा सिक्का इनाम अनलॉक कर सकता है!",
+  "@stepScratchCardsDesc": {},
+  "stepQuizGameTitle": "प्रश्नोत्तरी खेल",
+  "@stepQuizGameTitle": {},
+  "stepQuizGameDesc": "विभिन्न श्रेणियों में अपने ज्ञान का परीक्षण करें और प्रत्येक सही उत्तर के लिए सिक्के अर्जित करें। क्विज़ जितना कठिन होगा, आप उतना अधिक कमाएँगे!",
+  "@stepQuizGameDesc": {},
+  "stepWatchAdsTitle": "विज्ञापन देखें",
+  "@stepWatchAdsTitle": {},
+  "stepWatchAdsDesc": "सिक्के कमाने के लिए लघु प्रायोजित वीडियो देखें। यह त्वरित, आसान और अपना संतुलन बढ़ाने का एक शानदार तरीका है!",
+  "@stepWatchAdsDesc": {},
+  "stepReferralSystemTitle": "संदर्भ तंत्र",
+  "@stepReferralSystemTitle": {},
+  "stepReferralSystemDesc": "दोस्तों के साथ अपना अद्वितीय रेफरल कोड साझा करें। जब वे जुड़ते हैं और कमाई शुरू करते हैं, तो आप दोनों को बोनस सिक्के मिलते हैं!",
+  "@stepReferralSystemDesc": {},
+  "stepWithdrawMoneyTitle": "पैसे निकाले",
+  "@stepWithdrawMoneyTitle": {},
+  "stepWithdrawMoneyDesc": "एक बार जब आप न्यूनतम सीमा तक पहुँच जाते हैं, तो अपने सिक्कों को वास्तविक नकदी में बदल दें और अपनी पसंदीदा भुगतान विधि से निकाल लें!",
+  "@stepWithdrawMoneyDesc": {},
+  "topEarners": "शीर्ष कमाई करने वाले",
+  "@topEarners": {},
+  "pullDownToRefresh": "ताज़ा करने के लिए नीचे खींचें",
+  "@pullDownToRefresh": {},
+  "rankHash": "#",
+  "@rankHash": {},
+  "rankPlayer": "खिलाड़ी",
+  "@rankPlayer": {},
+  "rankCoins": "सिक्के",
+  "@rankCoins": {},
+  "yourReferralCode": "आपका रेफरल कोड",
+  "@yourReferralCode": {},
+  "signInForReferralCode": "अपना रेफरल कोड प्राप्त करने के लिए साइन इन करें",
+  "@signInForReferralCode": {},
+  "referralCodeAlreadyApplied": "रेफरल कोड पहले ही लागू हो चुका है!",
+  "@referralCodeAlreadyApplied": {},
+  "enterReferralCode": "रेफरल कोड दर्ज करें",
+  "@enterReferralCode": {},
+  "haveAPromoCode": "क्या प्रोमो कोड है?",
+  "@haveAPromoCode": {},
+  "howReferralsWork": "रेफरल कैसे काम करते हैं",
+  "@howReferralsWork": {},
+  "friendsInvited": "मित्रों को आमंत्रित किया गया",
+  "@friendsInvited": {},
+  "coinsEarned": "सिक्के कमाए",
+  "@coinsEarned": {},
+  "pleaseSignInForReferral": "रेफरल कोड का उपयोग करने के लिए कृपया साइन इन करें।",
+  "@pleaseSignInForReferral": {},
+  "rewardsAndBonuses": "पुरस्कार एवं बोनस",
+  "@rewardsAndBonuses": {},
+  "scratchToReveal": "प्रकट करने के लिए खरोंचें\nआपका इनाम.",
+  "@scratchToReveal": {},
+  "dragToScratch": "खरोंचने के लिए खींचें",
+  "@dragToScratch": {},
+  "betterLuckNextTimeCard": "अगली बार किस्मत तुम्हारा साथ देगी",
+  "@betterLuckNextTimeCard": {},
+  "spinAndWinTitle": "घूमो और जीतो",
+  "@spinAndWinTitle": {},
+  "takeSpin": "एक चक्कर ले।\nसिक्के जमा करो.",
+  "@takeSpin": {},
+  "possibleWin": "संभावित जीत",
+  "@possibleWin": {},
+  "upToOneDollar": "$1.00 तक",
+  "@upToOneDollar": {},
+  "streakBonus": "स्ट्रीक बोनस",
+  "@streakBonus": {},
+  "x2": "x2",
+  "@x2": {},
+  "earnCoinsBySpinning": "आसानी से सिक्के कमाएँ\nचरखा",
+  "@earnCoinsBySpinning": {},
+  "youEarnedXpBonus": "आपने +XP बोनस अर्जित किया!",
+  "@youEarnedXpBonus": {},
+  "howCanWeHelp": "हम कैसे मदद कर सकते हैं?",
+  "@howCanWeHelp": {},
+  "supportDesc": "हमें बताएं कि क्या ग़लत हुआ या आपको किस चीज़ में मदद की ज़रूरत है। हमारी टीम हर संदेश की समीक्षा करती है.",
+  "@supportDesc": {},
+  "titleLabel": "शीर्षक",
+  "@titleLabel": {},
+  "titleHint": "आपके मुद्दे का संक्षिप्त सारांश",
+  "@titleHint": {},
+  "pleaseAddTitle": "कृपया एक शीर्षक जोड़ें",
+  "@pleaseAddTitle": {},
+  "titleTooShort": "शीर्षक बहुत छोटा है",
+  "@titleTooShort": {},
+  "descriptionLabel": "विवरण",
+  "@descriptionLabel": {},
+  "descriptionHint": "अपनी समस्या का विस्तार से वर्णन करें...",
+  "@descriptionHint": {},
+  "pleaseAddDescription": "कृपया विवरण जोड़ें",
+  "@pleaseAddDescription": {},
+  "descriptionTooShort": "विवरण बहुत छोटा है",
+  "@descriptionTooShort": {},
+  "submitting": "सबमिट किया जा रहा है...",
+  "@submitting": {},
+  "submit": "जमा करना",
+  "@submit": {},
+  "ticketSubmittedSuccess": "समर्थन टिकट सफलतापूर्वक सबमिट किया गया!",
+  "@ticketSubmittedSuccess": {},
+  "ticketSubmitFailed": "टिकट जमा नहीं किया जा सका. कृपया पुन: प्रयास करें।",
+  "@ticketSubmitFailed": {},
+  "areYouSureSignOut": "क्या आप द्वारा साइन आउट किया जाना सुनिश्चित है?",
+  "@areYouSureSignOut": {},
+  "nextLevel": "अगला:",
+  "@nextLevel": {},
+  "deleteAccountTitle": "खाता हटा दो?",
+  "@deleteAccountTitle": {},
+  "deleteAccountDesc": "इससे आपका खाता और आपका सारा डेटा स्थायी रूप से हटा दिया जाएगा। इस एक्शन को वापस नहीं किया जा सकता।",
+  "@deleteAccountDesc": {},
+  "deletingAccount": "खाता हटाया जा रहा है...",
+  "@deletingAccount": {},
+  "availableBalance": "उपलब्ध शेष राशि",
+  "@availableBalance": {},
+  "proceedWithin24h": "24 घंटे के भीतर आगे बढ़ें - नकद पर कोई शुल्क नहीं",
+  "@proceedWithin24h": {},
+  "pendingWithdrawal": "आपके पास एक लंबित निकासी है. नए अनुरोध स्वीकृत होने तक अक्षम हैं।",
+  "@pendingWithdrawal": {},
+  "enterWithdrawalAmount": "निकासी राशि दर्ज करें",
+  "@enterWithdrawalAmount": {},
+  "fieldRequired": "फ़ील्ड आवश्यक है",
+  "@fieldRequired": {},
+  "invalidInput": "अमान्य निवेश",
+  "@invalidInput": {},
+  "amountCoins": "राशि (सिक्के)",
+  "@amountCoins": {},
+  "enterValidAmount": "एक वैध राशि दर्ज करें",
+  "@enterValidAmount": {},
+  "additionalNoteOptional": "अतिरिक्त नोट (वैकल्पिक)",
+  "@additionalNoteOptional": {},
+  "withdrawRequestSent": "वापसी अनुरोध भेजा गया",
+  "@withdrawRequestSent": {},
+  "confirmWithdrawal": "निकासी की पुष्टि करें",
+  "@confirmWithdrawal": {},
+  "missionBrief": "मिशन संक्षिप्त",
+  "@missionBrief": {},
+  "claimCoinBold": "\"दावा सिक्का\"",
+  "@claimCoinBold": {},
+  "whenReady": "जब तैयार हो!",
+  "@whenReady": {},
+  "timeNotCompleted": "समय पूरा नहीं हुआ!",
+  "@timeNotCompleted": {},
+  "plusCoinsValue": "+{coins} सिक्के",
+  "@plusCoinsValue": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
+  "whichCountry": "आपको कौन सा देश पसंद है?",
+  "@whichCountry": {},
+  "selectFavCountries": "अपने पसंदीदा देशों का चयन करें जो आपको पसंद हैं।",
+  "@selectFavCountries": {},
+  "availableCountry": "उपलब्ध देश",
+  "@availableCountry": {},
+  "pleaseSelectCountry": "कृपया देश को चुनें",
+  "@pleaseSelectCountry": {},
+  "chooseYourCurrency": "अपनी मुद्रा चुनें",
+  "@chooseYourCurrency": {},
+  "selectFavCurrency": "अपनी पसंदीदा मुद्रा चुनें।",
+  "@selectFavCurrency": {},
+  "availableCurrency": "उपलब्ध मुद्रा",
+  "@availableCurrency": {},
+  "pleaseSelectCurrency": "कृपया एक मुद्रा चुनें",
+  "@pleaseSelectCurrency": {},
+  "whichGame": "आपको कौन सा गेम पसंद है?",
+  "@whichGame": {},
+  "selectFavGames": "अपने पसंदीदा गेम चुनें जिन्हें आप खेलना चाहते हैं",
+  "@selectFavGames": {},
+  "availableGames": "उपलब्ध खेल",
+  "@availableGames": {},
+  "pleaseSelectGame": "कृपया कम से कम एक गेम चुनें",
+  "@pleaseSelectGame": {},
+  "setDefaultLanguage": "डिफ़ॉल्ट भाषा सेट करें",
+  "@setDefaultLanguage": {},
+  "setDefaultLanguageDesc": "चयनित भाषा इस ऐप के लिए डिफ़ॉल्ट भाषा के रूप में उपयोग की जाएगी जिसे आप चाहें तो बाद में बदल सकते हैं।",
+  "@setDefaultLanguageDesc": {},
+  "stayInUpdated": "अपडेट रहें",
+  "@stayInUpdated": {},
+  "notificationPermissionDesc": "सूचनाओं की अनुमति दें ताकि हम आपको आपके ऋण आवेदन की स्थिति और महत्वपूर्ण अपडेट के बारे में सूचित कर सकें।",
+  "@notificationPermissionDesc": {},
+  "allow": "अनुमति दें",
+  "@allow": {},
+  "notNow": "अभी नहीं",
+  "@notNow": {},
+  "notificationsOff": "सूचनाएं बंद हैं",
+  "@notificationsOff": {},
+  "notificationSettingsDesc": "आपने पहले सूचनाएं अवरुद्ध कर दी थीं. डिवाइस सेटिंग खोलें और फ़िनलोरा को ऋण अपडेट प्राप्त करने के लिए सूचनाएं सक्षम करें।",
+  "@notificationSettingsDesc": {},
+  "openSettings": "खुली सेटिंग",
+  "@openSettings": {},
+  "earnAReward": "पुरस्कार अर्जित करें",
+  "@earnAReward": {},
+  "watchAdDesc": "अपने इनाम का दावा करने के लिए एक छोटा विज्ञापन देखें।\nआपका समर्थन ऐप को मुफ़्त रखता है!",
+  "@watchAdDesc": {},
+  "watchAd": "विज्ञापन देखें",
+  "@watchAd": {},
+  "currentOfTotal": "{current} का {total}",
+  "@currentOfTotal": {
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "perCorrect": "+{coins} प्रति सही",
+  "@perCorrect": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
+  "streakInARow": "{streak} एक पंक्ति में",
+  "@streakInARow": {
+    "placeholders": {
+      "streak": {
+        "type": "int"
+      }
+    }
+  },
+  "youScored": "आपने {correct}/{total} स्कोर किया",
+  "@youScored": {
+    "placeholders": {
+      "correct": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  }
+}

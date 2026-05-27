@@ -1,0 +1,673 @@
+{
+  "@@locale": "ms",
+  "skip": "Langkau",
+  "@skip": {},
+  "next": "Seterusnya",
+  "@next": {},
+  "done": "Selesai",
+  "@done": {},
+  "cancel": "Batal",
+  "@cancel": {},
+  "claim": "Tuntutan",
+  "@claim": {},
+  "claimed": "Dituntut",
+  "@claimed": {},
+  "tryAgain": "Cuba Lagi",
+  "@tryAgain": {},
+  "claimNow": "Tuntut Sekarang",
+  "@claimNow": {},
+  "getStarted": "Mulakan",
+  "@getStarted": {},
+  "apply": "Mohon",
+  "@apply": {},
+  "save": "Jimat",
+  "@save": {},
+  "delete": "Padam",
+  "@delete": {},
+  "signOut": "Log Keluar",
+  "@signOut": {},
+  "withdraw": "tarik diri",
+  "@withdraw": {},
+  "rewards": "Ganjaran",
+  "@rewards": {},
+  "sectionContainsAds": "Bahagian ini mungkin mengandungi iklan",
+  "@sectionContainsAds": {},
+  "congratulations": "tahniah..!",
+  "@congratulations": {},
+  "oops": "Aduh!",
+  "@oops": {},
+  "betterLuckNextTime": "Semoga berjaya lain kali!",
+  "@betterLuckNextTime": {},
+  "awesome": "Hebat!",
+  "@awesome": {},
+  "coins": "syiling",
+  "@coins": {},
+  "learn": "Belajar",
+  "@learn": {},
+  "rank": "pangkat",
+  "@rank": {},
+  "level": "Tahap",
+  "@level": {},
+  "xp": "XP",
+  "@xp": {},
+  "top": "Atas",
+  "@top": {},
+  "home": "Rumah",
+  "@home": {},
+  "profile": "Profil",
+  "@profile": {},
+  "support": "Sokongan",
+  "@support": {},
+  "language": "Bahasa",
+  "@language": {},
+  "mystery": "MISTERI",
+  "@mystery": {},
+  "spinning": "Berpusing...",
+  "@spinning": {},
+  "spinNow": "Putar Sekarang",
+  "@spinNow": {},
+  "claimCoins": "Tuntut Syiling",
+  "@claimCoins": {},
+  "viewMore": "Lihat Lagi",
+  "@viewMore": {},
+  "viewLess": "Lihat Kurang",
+  "@viewLess": {},
+  "useAll": "Guna semua",
+  "@useAll": {},
+  "shareLink": "Kongsi Pautan",
+  "@shareLink": {},
+  "referralCodeCopied": "Kod rujukan disalin",
+  "@referralCodeCopied": {},
+  "privacyPolicy": "Dasar Privasi",
+  "@privacyPolicy": {},
+  "termsAndCondition": "Terma & Syarat",
+  "@termsAndCondition": {},
+  "deleteAccount": "Padam Akaun",
+  "@deleteAccount": {},
+  "soundEffects": "Kesan Bunyi",
+  "@soundEffects": {},
+  "hapticFeedback": "Maklum Balas Haptic",
+  "@hapticFeedback": {},
+  "levelProgress": "Tahap Kemajuan",
+  "@levelProgress": {},
+  "startNow": "Mulakan Sekarang",
+  "@startNow": {},
+  "daysValue": "{days} Hari",
+  "@daysValue": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "coinsValue": "{coins} Syiling",
+  "@coinsValue": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
+  "coinsReward": "+{coins} Syiling",
+  "@coinsReward": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
+  "coinsAwarded": "+{coins} Syiling Dianugerahkan!",
+  "@coinsAwarded": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
+  "youWonCoins": "Anda memenangi {coins} Syiling",
+  "@youWonCoins": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
+  "lvValue": "LV {level}",
+  "@lvValue": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      }
+    }
+  },
+  "lvXpValue": "LV {level} - {xp} XP",
+  "@lvXpValue": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      },
+      "xp": {
+        "type": "int"
+      }
+    }
+  },
+  "dailyRewardDay": "Ganjaran Harian - Hari {day}",
+  "@dailyRewardDay": {
+    "placeholders": {
+      "day": {
+        "type": "int"
+      }
+    }
+  },
+  "collectCoins": "Kumpul +{coins} syiling",
+  "@collectCoins": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
+  "claimCoinsToday": "Tuntut +{coins} syiling hari ini!",
+  "@claimCoinsToday": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
+  "lvDotLevel": "Lv. {level} · {levelName}",
+  "@lvDotLevel": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      },
+      "levelName": {
+        "type": "String"
+      }
+    }
+  },
+  "inviteFriendsTitle": "Jemput Kawan,\nDapatkan {amount} Syiling!",
+  "@inviteFriendsTitle": {
+    "placeholders": {
+      "amount": {
+        "type": "int"
+      }
+    }
+  },
+  "refreshesIn": "Muat semula dalam {time}",
+  "@refreshesIn": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "lvTierValue": "Lv. {level} {tier}",
+  "@lvTierValue": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      },
+      "tier": {
+        "type": "String"
+      }
+    }
+  },
+  "spinsLeftToday": "{count} Pusingan Tinggalkan Hari Ini",
+  "@spinsLeftToday": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "autoStartingIn": "Automula dalam {seconds} s",
+  "@autoStartingIn": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
+  "withdrawTo": "Tarik balik ke {method}",
+  "@withdrawTo": {
+    "placeholders": {
+      "method": {
+        "type": "String"
+      }
+    }
+  },
+  "minWithdrawal": "Min. Pengeluaran – {amount}",
+  "@minWithdrawal": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "withdrawAmount": "Keluarkan $ {amount}",
+  "@withdrawAmount": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "minSuffix": "Min {min}",
+  "@minSuffix": {
+    "placeholders": {
+      "min": {
+        "type": "String"
+      }
+    }
+  },
+  "minimumWithdrawCoins": "Pengeluaran minimum ialah {coins} syiling",
+  "@minimumWithdrawCoins": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
+  "convertedValue": "Nilai ${value}",
+  "@convertedValue": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "timeNotCompletedDesc": "Anda tinggal selama {elapsed}s daripada {required}s.\nSila kekal di halaman untuk tempoh penuh.",
+  "@timeNotCompletedDesc": {
+    "placeholders": {
+      "elapsed": {
+        "type": "int"
+      },
+      "required": {
+        "type": "int"
+      }
+    }
+  },
+  "missionBriefDuration": "Kekal di halaman selama {duration} Saat, Pemasa kira detik akan muncul. klik",
+  "@missionBriefDuration": {
+    "placeholders": {
+      "duration": {
+        "type": "int"
+      }
+    }
+  },
+  "luckyNumber": "Bertuah #{number}",
+  "@luckyNumber": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "totalDaysValue": "{totalDays} Hari",
+  "@totalDaysValue": {
+    "placeholders": {
+      "totalDays": {
+        "type": "int"
+      }
+    }
+  },
+  "dayValue": "Hari {day}",
+  "@dayValue": {
+    "placeholders": {
+      "day": {
+        "type": "int"
+      }
+    }
+  },
+  "referralShareDesc": "Kongsi kod anda. Apabila mereka mendaftar atau memasukkannya, anda berdua mendapat {amount} syiling!",
+  "@referralShareDesc": {
+    "placeholders": {
+      "amount": {
+        "type": "int"
+      }
+    }
+  },
+  "howReferralsWorkDesc": "Kongsi kod · Rakan menyertai · Anda berdua memperoleh {amount} syiling",
+  "@howReferralsWorkDesc": {
+    "placeholders": {
+      "amount": {
+        "type": "int"
+      }
+    }
+  },
+  "splashAppName": "Rewardo",
+  "@splashAppName": {},
+  "onboarding1Title": "Ganjaran Harian",
+  "@onboarding1Title": {},
+  "onboarding1Desc": "Anda akan Mendapat Ganjaran Mata Harian, Yang boleh anda tuntut dan tingkatkan Mata anda",
+  "@onboarding1Desc": {},
+  "onboarding2Title": "Permainan Terbaik",
+  "@onboarding2Title": {},
+  "onboarding2Desc": "Dapatkan Berbilang pilihan untuk Permainan untuk Dimainkan dan Dapatkan Lebih Banyak Mata.",
+  "@onboarding2Desc": {},
+  "onboarding3Title": "Jejaki Pencapaian",
+  "@onboarding3Title": {},
+  "onboarding3Desc": "Lihat pencapaian anda dan Jejakinya dengan pengguna lain melalui Papan Kulit",
+  "@onboarding3Desc": {},
+  "startEarning": "Mula Mendapat",
+  "@startEarning": {},
+  "loginTitle": "Mula Mendapat\nGanjaran",
+  "@loginTitle": {},
+  "loginSubtitle": "Selesaikan tugas, bermain permainan dan dapatkan syiling yang ditukar kepada wang sebenar!",
+  "@loginSubtitle": {},
+  "continueWithGoogle": "Teruskan dengan Google",
+  "@continueWithGoogle": {},
+  "continueAsGuest": "Teruskan sebagai Tetamu",
+  "@continueAsGuest": {},
+  "byContinuing": "Dengan meneruskan, anda bersetuju dengan kami",
+  "@byContinuing": {},
+  "termsOfService": "Syarat Perkhidmatan",
+  "@termsOfService": {},
+  "and": "dan",
+  "@and": {},
+  "pressAgainToExit": "Tekan sekali lagi untuk keluar daripada apl",
+  "@pressAgainToExit": {},
+  "earnMoney": "Dapatkan Wang",
+  "@earnMoney": {},
+  "howItWorks": "Bagaimana Ia Berfungsi",
+  "@howItWorks": {},
+  "howItWorksSubtitle": "Ketahui Langkah demi Langkah bagaimana untuk\nmendapatkan wang",
+  "@howItWorksSubtitle": {},
+  "totalBalance": "Jumlah Baki",
+  "@totalBalance": {},
+  "claimedTodayComeBack": "Dituntut hari ini! Esok balik",
+  "@claimedTodayComeBack": {},
+  "quizMaster": "Guru Kuiz",
+  "@quizMaster": {},
+  "answerAndEarn": "Jawab & Dapatkan",
+  "@answerAndEarn": {},
+  "spinWheel": "Roda Pusing",
+  "@spinWheel": {},
+  "spinAndWin": "Putar dan Menang",
+  "@spinAndWin": {},
+  "scratchCard": "Kad Gores",
+  "@scratchCard": {},
+  "scratchAndReveal": "Gores dan Dedahkan",
+  "@scratchAndReveal": {},
+  "webVisits": "Lawatan Web",
+  "@webVisits": {},
+  "visitAndEarn": "Lawati & Dapatkan",
+  "@visitAndEarn": {},
+  "gameZone": "Zon Permainan",
+  "@gameZone": {},
+  "playGames": "Main Permainan",
+  "@playGames": {},
+  "referAndEarn": "Rujuk & Dapatkan",
+  "@referAndEarn": {},
+  "inviteFriends": "Jemput Rakan",
+  "@inviteFriends": {},
+  "seeTopEarner": "Lihat yang berpendapatan tinggi",
+  "@seeTopEarner": {},
+  "leaderBoard": "Papan pemimpin",
+  "@leaderBoard": {},
+  "achievements": "Pencapaian",
+  "@achievements": {},
+  "dailyCheckIn": "Daftar Masuk Harian",
+  "@dailyCheckIn": {},
+  "totalDaysClaimed": "Jumlah Hari Dituntut",
+  "@totalDaysClaimed": {},
+  "dailyCheckInReward": "Ganjaran Daftar Masuk Harian",
+  "@dailyCheckInReward": {},
+  "alreadyClaimedToday": "Anda telah pun menuntut ganjaran hari ini.",
+  "@alreadyClaimedToday": {},
+  "achievementUnlocked": "Pencapaian Dibuka!",
+  "@achievementUnlocked": {},
+  "couldNotClaimReward": "Tidak dapat menuntut ganjaran. Cuba lagi.",
+  "@couldNotClaimReward": {},
+  "howItWorksReady": "Bersedia untuk mula menjana pendapatan?",
+  "@howItWorksReady": {},
+  "backToHome": "Kembali ke Rumah",
+  "@backToHome": {},
+  "stepWhatAreCoinsTitle": "Apa itu Syiling?",
+  "@stepWhatAreCoinsTitle": {},
+  "stepWhatAreCoinsDesc": "Syiling ialah mata wang dalam apl yang anda perolehi dengan melengkapkan aktiviti. Kumpul cukup untuk menukarnya kepada wang sebenar!",
+  "@stepWhatAreCoinsDesc": {},
+  "stepDailyMissionsTitle": "Misi Harian",
+  "@stepDailyMissionsTitle": {},
+  "stepDailyMissionsDesc": "Daftar masuk setiap hari untuk meraih ganjaran harian anda. Lebih lama coretan anda, lebih besar syiling bonus yang anda perolehi!",
+  "@stepDailyMissionsDesc": {},
+  "stepSpinWheelTitle": "Roda Pusing",
+  "@stepSpinWheelTitle": {},
+  "stepSpinWheelDesc": "Beri roda pusingan untuk peluang memenangi syiling bonus serta-merta. Putaran terhad setiap hari, jadi pastikan mereka berkira!",
+  "@stepSpinWheelDesc": {},
+  "stepScratchCardsTitle": "Kad Gores",
+  "@stepScratchCardsTitle": {},
+  "stepScratchCardsDesc": "Dedahkan hadiah tersembunyi dengan menconteng kad maya. Setiap calar boleh membuka kunci ganjaran syiling yang besar!",
+  "@stepScratchCardsDesc": {},
+  "stepQuizGameTitle": "Permainan Kuiz",
+  "@stepQuizGameTitle": {},
+  "stepQuizGameDesc": "Uji pengetahuan anda merentas kategori dan dapatkan syiling untuk setiap jawapan yang betul. Lebih sukar kuiz, lebih banyak pendapatan anda!",
+  "@stepQuizGameDesc": {},
+  "stepWatchAdsTitle": "Tonton Iklan",
+  "@stepWatchAdsTitle": {},
+  "stepWatchAdsDesc": "Tonton video tajaan pendek untuk mendapatkan syiling. Ia cepat, mudah dan cara yang bagus untuk menyusun baki anda!",
+  "@stepWatchAdsDesc": {},
+  "stepReferralSystemTitle": "Sistem Rujukan",
+  "@stepReferralSystemTitle": {},
+  "stepReferralSystemDesc": "Kongsi kod rujukan unik anda dengan rakan-rakan. Apabila mereka menyertai dan mula menjana pendapatan, anda berdua menerima syiling bonus!",
+  "@stepReferralSystemDesc": {},
+  "stepWithdrawMoneyTitle": "Keluarkan Wang",
+  "@stepWithdrawMoneyTitle": {},
+  "stepWithdrawMoneyDesc": "Sebaik sahaja anda mencapai ambang minimum, tukarkan syiling anda kepada wang tunai sebenar dan keluarkan kepada kaedah pembayaran pilihan anda!",
+  "@stepWithdrawMoneyDesc": {},
+  "topEarners": "Pencapaian Terbanyak",
+  "@topEarners": {},
+  "pullDownToRefresh": "Tarik ke bawah untuk menyegarkan",
+  "@pullDownToRefresh": {},
+  "rankHash": "#",
+  "@rankHash": {},
+  "rankPlayer": "Pemain",
+  "@rankPlayer": {},
+  "rankCoins": "syiling",
+  "@rankCoins": {},
+  "yourReferralCode": "Kod Rujukan Anda",
+  "@yourReferralCode": {},
+  "signInForReferralCode": "Log masuk untuk mendapatkan kod rujukan anda",
+  "@signInForReferralCode": {},
+  "referralCodeAlreadyApplied": "Kod rujukan sudah digunakan!",
+  "@referralCodeAlreadyApplied": {},
+  "enterReferralCode": "Masukkan kod rujukan",
+  "@enterReferralCode": {},
+  "haveAPromoCode": "Mempunyai Kod Promosi?",
+  "@haveAPromoCode": {},
+  "howReferralsWork": "Cara Rujukan Berfungsi",
+  "@howReferralsWork": {},
+  "friendsInvited": "Rakan Dijemput",
+  "@friendsInvited": {},
+  "coinsEarned": "Syiling Diperolehi",
+  "@coinsEarned": {},
+  "pleaseSignInForReferral": "Sila log masuk untuk menggunakan kod rujukan.",
+  "@pleaseSignInForReferral": {},
+  "rewardsAndBonuses": "Ganjaran & Bonus",
+  "@rewardsAndBonuses": {},
+  "scratchToReveal": "Gores untuk mendedahkan\nganjaran anda.",
+  "@scratchToReveal": {},
+  "dragToScratch": "Seret untuk menggaru",
+  "@dragToScratch": {},
+  "betterLuckNextTimeCard": "Nasib yang lebih baik\nLain kali",
+  "@betterLuckNextTimeCard": {},
+  "spinAndWinTitle": "Putar & Menang",
+  "@spinAndWinTitle": {},
+  "takeSpin": "Ambil pusingan.\nTumpukan syiling.",
+  "@takeSpin": {},
+  "possibleWin": "Kemungkinan Menang",
+  "@possibleWin": {},
+  "upToOneDollar": "Sehingga $1.00",
+  "@upToOneDollar": {},
+  "streakBonus": "Bonus Streak",
+  "@streakBonus": {},
+  "x2": "x2",
+  "@x2": {},
+  "earnCoinsBySpinning": "Dapatkan Syiling Dengan Mudah dengan\nRoda Berputar",
+  "@earnCoinsBySpinning": {},
+  "youEarnedXpBonus": "Anda memperoleh + Bonus XP!",
+  "@youEarnedXpBonus": {},
+  "howCanWeHelp": "Bagaimana kami boleh membantu?",
+  "@howCanWeHelp": {},
+  "supportDesc": "Beritahu kami apa yang salah atau perkara yang anda perlukan. Pasukan kami menyemak setiap mesej.",
+  "@supportDesc": {},
+  "titleLabel": "Tajuk",
+  "@titleLabel": {},
+  "titleHint": "Ringkasan ringkas isu anda",
+  "@titleHint": {},
+  "pleaseAddTitle": "Sila tambah tajuk",
+  "@pleaseAddTitle": {},
+  "titleTooShort": "Tajuk terlalu pendek",
+  "@titleTooShort": {},
+  "descriptionLabel": "Penerangan",
+  "@descriptionLabel": {},
+  "descriptionHint": "Terangkan isu anda secara terperinci…",
+  "@descriptionHint": {},
+  "pleaseAddDescription": "Sila tambah penerangan",
+  "@pleaseAddDescription": {},
+  "descriptionTooShort": "Penerangan terlalu pendek",
+  "@descriptionTooShort": {},
+  "submitting": "Menyerahkan…",
+  "@submitting": {},
+  "submit": "Hantar",
+  "@submit": {},
+  "ticketSubmittedSuccess": "Tiket sokongan berjaya diserahkan!",
+  "@ticketSubmittedSuccess": {},
+  "ticketSubmitFailed": "Tidak dapat menyerahkan tiket. Sila cuba lagi.",
+  "@ticketSubmitFailed": {},
+  "areYouSureSignOut": "Adakah anda pasti mahu log keluar?",
+  "@areYouSureSignOut": {},
+  "nextLevel": "Seterusnya:",
+  "@nextLevel": {},
+  "deleteAccountTitle": "Padamkan Akaun?",
+  "@deleteAccountTitle": {},
+  "deleteAccountDesc": "Ini akan memadamkan akaun anda dan semua data anda secara kekal. Tindakan ini tidak boleh dibuat asal.",
+  "@deleteAccountDesc": {},
+  "deletingAccount": "Memadamkan akaun...",
+  "@deletingAccount": {},
+  "availableBalance": "Baki Tersedia",
+  "@availableBalance": {},
+  "proceedWithin24h": "Teruskan dalam masa 24 jam - Tiada bayaran tunai",
+  "@proceedWithin24h": {},
+  "pendingWithdrawal": "Anda mempunyai pengeluaran yang belum selesai. Permintaan baharu dilumpuhkan sehingga ia diluluskan.",
+  "@pendingWithdrawal": {},
+  "enterWithdrawalAmount": "Masukkan Jumlah Pengeluaran",
+  "@enterWithdrawalAmount": {},
+  "fieldRequired": "Medan diperlukan",
+  "@fieldRequired": {},
+  "invalidInput": "Input tidak sah",
+  "@invalidInput": {},
+  "amountCoins": "Jumlah (Syiling)",
+  "@amountCoins": {},
+  "enterValidAmount": "Masukkan jumlah yang sah",
+  "@enterValidAmount": {},
+  "additionalNoteOptional": "Nota tambahan (pilihan)",
+  "@additionalNoteOptional": {},
+  "withdrawRequestSent": "Permintaan tarik balik dihantar",
+  "@withdrawRequestSent": {},
+  "confirmWithdrawal": "Sahkan Pengeluaran",
+  "@confirmWithdrawal": {},
+  "missionBrief": "Ringkas Misi",
+  "@missionBrief": {},
+  "claimCoinBold": "\"TUNTUT SYILING\"",
+  "@claimCoinBold": {},
+  "whenReady": "bila dah siap!",
+  "@whenReady": {},
+  "timeNotCompleted": "Masa Belum Selesai!",
+  "@timeNotCompleted": {},
+  "plusCoinsValue": "+{coins} Syiling",
+  "@plusCoinsValue": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
+  "whichCountry": "Negara mana yang anda suka?",
+  "@whichCountry": {},
+  "selectFavCountries": "Pilih negara kegemaran anda yang anda suka.",
+  "@selectFavCountries": {},
+  "availableCountry": "Negara Tersedia",
+  "@availableCountry": {},
+  "pleaseSelectCountry": "Sila pilih negara",
+  "@pleaseSelectCountry": {},
+  "chooseYourCurrency": "Pilih mata wang anda",
+  "@chooseYourCurrency": {},
+  "selectFavCurrency": "Pilih mata wang anda yang anda suka.",
+  "@selectFavCurrency": {},
+  "availableCurrency": "Mata Wang Tersedia",
+  "@availableCurrency": {},
+  "pleaseSelectCurrency": "Sila pilih mata wang",
+  "@pleaseSelectCurrency": {},
+  "whichGame": "Permainan mana yang anda suka?",
+  "@whichGame": {},
+  "selectFavGames": "Pilih Permainan kegemaran anda yang anda mahu mainkan",
+  "@selectFavGames": {},
+  "availableGames": "Permainan Tersedia",
+  "@availableGames": {},
+  "pleaseSelectGame": "Sila pilih sekurang-kurangnya satu permainan",
+  "@pleaseSelectGame": {},
+  "setDefaultLanguage": "Tetapkan Bahasa Lalai",
+  "@setDefaultLanguage": {},
+  "setDefaultLanguageDesc": "Bahasa yang dipilih akan digunakan sebagai bahasa lalai untuk apl ini yang boleh anda ubah kemudian jika anda mahu.",
+  "@setDefaultLanguageDesc": {},
+  "stayInUpdated": "Kekal dalam kemas kini",
+  "@stayInUpdated": {},
+  "notificationPermissionDesc": "Benarkan pemberitahuan supaya kami dapat memaklumkan anda tentang status permohonan pinjaman anda dan kemas kini penting.",
+  "@notificationPermissionDesc": {},
+  "allow": "benarkan",
+  "@allow": {},
+  "notNow": "Bukan Sekarang",
+  "@notNow": {},
+  "notificationsOff": "Pemberitahuan dimatikan",
+  "@notificationsOff": {},
+  "notificationSettingsDesc": "Anda telah menyekat pemberitahuan lebih awal. Buka tetapan peranti dan dayakan pemberitahuan untuk Finlora menerima kemas kini pinjaman.",
+  "@notificationSettingsDesc": {},
+  "openSettings": "Buka Tetapan",
+  "@openSettings": {},
+  "earnAReward": "Dapatkan Ganjaran",
+  "@earnAReward": {},
+  "watchAdDesc": "Tonton iklan pendek untuk menuntut ganjaran anda.\nSokongan anda memastikan apl percuma!",
+  "@watchAdDesc": {},
+  "watchAd": "Tonton Iklan",
+  "@watchAd": {},
+  "currentOfTotal": "{current} daripada {total}",
+  "@currentOfTotal": {
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "perCorrect": "+{coins} setiap betul",
+  "@perCorrect": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
+  "streakInARow": "{streak} berturut-turut",
+  "@streakInARow": {
+    "placeholders": {
+      "streak": {
+        "type": "int"
+      }
+    }
+  },
+  "youScored": "Anda mendapat {correct}/{total}",
+  "@youScored": {
+    "placeholders": {
+      "correct": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  }
+}

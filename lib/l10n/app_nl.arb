@@ -1,0 +1,673 @@
+{
+  "@@locale": "nl",
+  "skip": "Overslaan",
+  "@skip": {},
+  "next": "Volgende",
+  "@next": {},
+  "done": "Klaar",
+  "@done": {},
+  "cancel": "Annuleren",
+  "@cancel": {},
+  "claim": "Claim",
+  "@claim": {},
+  "claimed": "Geclaimd",
+  "@claimed": {},
+  "tryAgain": "Probeer het opnieuw",
+  "@tryAgain": {},
+  "claimNow": "Claim nu",
+  "@claimNow": {},
+  "getStarted": "Aan de slag",
+  "@getStarted": {},
+  "apply": "Toepassen",
+  "@apply": {},
+  "save": "Redden",
+  "@save": {},
+  "delete": "Verwijderen",
+  "@delete": {},
+  "signOut": "Uitloggen",
+  "@signOut": {},
+  "withdraw": "Terugtrekken",
+  "@withdraw": {},
+  "rewards": "Beloningen",
+  "@rewards": {},
+  "sectionContainsAds": "Dit gedeelte kan advertenties bevatten",
+  "@sectionContainsAds": {},
+  "congratulations": "Gefeliciteerd..!",
+  "@congratulations": {},
+  "oops": "Oeps!",
+  "@oops": {},
+  "betterLuckNextTime": "Volgende keer beter!",
+  "@betterLuckNextTime": {},
+  "awesome": "Geweldig!",
+  "@awesome": {},
+  "coins": "Munten",
+  "@coins": {},
+  "learn": "Leren",
+  "@learn": {},
+  "rank": "Rang",
+  "@rank": {},
+  "level": "Niveau",
+  "@level": {},
+  "xp": "XP",
+  "@xp": {},
+  "top": "Bovenkant",
+  "@top": {},
+  "home": "Thuis",
+  "@home": {},
+  "profile": "Profiel",
+  "@profile": {},
+  "support": "Steun",
+  "@support": {},
+  "language": "Taal",
+  "@language": {},
+  "mystery": "MYSTERIE",
+  "@mystery": {},
+  "spinning": "Draaien...",
+  "@spinning": {},
+  "spinNow": "Draai nu",
+  "@spinNow": {},
+  "claimCoins": "Munten claimen",
+  "@claimCoins": {},
+  "viewMore": "Bekijk meer",
+  "@viewMore": {},
+  "viewLess": "Bekijk minder",
+  "@viewLess": {},
+  "useAll": "Gebruik alles",
+  "@useAll": {},
+  "shareLink": "Deel link",
+  "@shareLink": {},
+  "referralCodeCopied": "Verwijzingscode gekopieerd",
+  "@referralCodeCopied": {},
+  "privacyPolicy": "Privacybeleid",
+  "@privacyPolicy": {},
+  "termsAndCondition": "Algemene voorwaarden",
+  "@termsAndCondition": {},
+  "deleteAccount": "Account verwijderen",
+  "@deleteAccount": {},
+  "soundEffects": "Geluidseffecten",
+  "@soundEffects": {},
+  "hapticFeedback": "Haptische feedback",
+  "@hapticFeedback": {},
+  "levelProgress": "Niveau vooruitgang",
+  "@levelProgress": {},
+  "startNow": "Begin nu",
+  "@startNow": {},
+  "daysValue": "{days} Dagen",
+  "@daysValue": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "coinsValue": "{coins} Munten",
+  "@coinsValue": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
+  "coinsReward": "+{coins} Munten",
+  "@coinsReward": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
+  "coinsAwarded": "+{coins} Munten toegekend!",
+  "@coinsAwarded": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
+  "youWonCoins": "Je hebt {coins} munten gewonnen",
+  "@youWonCoins": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
+  "lvValue": "LV {level}",
+  "@lvValue": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      }
+    }
+  },
+  "lvXpValue": "LV {level} - {xp} XP",
+  "@lvXpValue": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      },
+      "xp": {
+        "type": "int"
+      }
+    }
+  },
+  "dailyRewardDay": "Dagelijkse beloning - dag {day}",
+  "@dailyRewardDay": {
+    "placeholders": {
+      "day": {
+        "type": "int"
+      }
+    }
+  },
+  "collectCoins": "Verzamel +{coins} munten",
+  "@collectCoins": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
+  "claimCoinsToday": "Claim vandaag nog +{coins} munten!",
+  "@claimCoinsToday": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
+  "lvDotLevel": "Lv. {level} · {levelName}",
+  "@lvDotLevel": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      },
+      "levelName": {
+        "type": "String"
+      }
+    }
+  },
+  "inviteFriendsTitle": "Vrienden uitnodigen,\nOntvang {amount} munten!",
+  "@inviteFriendsTitle": {
+    "placeholders": {
+      "amount": {
+        "type": "int"
+      }
+    }
+  },
+  "refreshesIn": "Vernieuwt over {time}",
+  "@refreshesIn": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "lvTierValue": "Lv. {level} {tier}",
+  "@lvTierValue": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      },
+      "tier": {
+        "type": "String"
+      }
+    }
+  },
+  "spinsLeftToday": "{count} Draait vandaag nog",
+  "@spinsLeftToday": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "autoStartingIn": "Automatische start over {seconds} s",
+  "@autoStartingIn": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
+  "withdrawTo": "Opnemen naar {method}",
+  "@withdrawTo": {
+    "placeholders": {
+      "method": {
+        "type": "String"
+      }
+    }
+  },
+  "minWithdrawal": "Min. Opname – {amount}",
+  "@minWithdrawal": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "withdrawAmount": "$ {amount} opnemen",
+  "@withdrawAmount": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "minSuffix": "Min. {min}",
+  "@minSuffix": {
+    "placeholders": {
+      "min": {
+        "type": "String"
+      }
+    }
+  },
+  "minimumWithdrawCoins": "Minimale opname is {coins} munten",
+  "@minimumWithdrawCoins": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
+  "convertedValue": "Waarde ${value}",
+  "@convertedValue": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "timeNotCompletedDesc": "Je bent {elapsed}s van de {required}s gebleven.\nBlijf de volledige duur op de pagina.",
+  "@timeNotCompletedDesc": {
+    "placeholders": {
+      "elapsed": {
+        "type": "int"
+      },
+      "required": {
+        "type": "int"
+      }
+    }
+  },
+  "missionBriefDuration": "Blijf {duration} sec. op de pagina. Er verschijnt een afteltimer. klik",
+  "@missionBriefDuration": {
+    "placeholders": {
+      "duration": {
+        "type": "int"
+      }
+    }
+  },
+  "luckyNumber": "Gelukkig #{number}",
+  "@luckyNumber": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "totalDaysValue": "{totalDays} Dagen",
+  "@totalDaysValue": {
+    "placeholders": {
+      "totalDays": {
+        "type": "int"
+      }
+    }
+  },
+  "dayValue": "Dag {day}",
+  "@dayValue": {
+    "placeholders": {
+      "day": {
+        "type": "int"
+      }
+    }
+  },
+  "referralShareDesc": "Deel uw code. Wanneer ze zich aanmelden of meedoen, krijgen jullie allebei {amount} munten!",
+  "@referralShareDesc": {
+    "placeholders": {
+      "amount": {
+        "type": "int"
+      }
+    }
+  },
+  "howReferralsWorkDesc": "Deel code · Vriend sluit zich aan · Jullie verdienen allebei {amount} munten",
+  "@howReferralsWorkDesc": {
+    "placeholders": {
+      "amount": {
+        "type": "int"
+      }
+    }
+  },
+  "splashAppName": "Beloning",
+  "@splashAppName": {},
+  "onboarding1Title": "Dagelijkse beloningen",
+  "@onboarding1Title": {},
+  "onboarding1Desc": "U krijgt een dagelijkse puntenbeloning, die u kunt claimen en waarmee u uw punten kunt verhogen",
+  "@onboarding1Desc": {},
+  "onboarding2Title": "Ultieme spellen",
+  "@onboarding2Title": {},
+  "onboarding2Desc": "Krijg meerdere opties om games te spelen en ontvang meer punten.",
+  "@onboarding2Desc": {},
+  "onboarding3Title": "Volg prestaties",
+  "@onboarding3Title": {},
+  "onboarding3Desc": "Bekijk uw prestaties en volg deze samen met andere gebruikers via Leatherboard",
+  "@onboarding3Desc": {},
+  "startEarning": "Begin met verdienen",
+  "@startEarning": {},
+  "loginTitle": "Begin met verdienen\nBeloningen",
+  "@loginTitle": {},
+  "loginSubtitle": "Voltooi taken, speel games en verdien munten die worden omgezet in echt geld!",
+  "@loginSubtitle": {},
+  "continueWithGoogle": "Ga verder met Google",
+  "@continueWithGoogle": {},
+  "continueAsGuest": "Ga verder als gast",
+  "@continueAsGuest": {},
+  "byContinuing": "Als u doorgaat, gaat u akkoord met onze",
+  "@byContinuing": {},
+  "termsOfService": "Servicevoorwaarden",
+  "@termsOfService": {},
+  "and": "En",
+  "@and": {},
+  "pressAgainToExit": "Druk nogmaals om de app te verlaten",
+  "@pressAgainToExit": {},
+  "earnMoney": "Verdien geld",
+  "@earnMoney": {},
+  "howItWorks": "Hoe het werkt",
+  "@howItWorks": {},
+  "howItWorksSubtitle": "Leer stap voor stap hoe u dat kunt doen\ngeld verdienen",
+  "@howItWorksSubtitle": {},
+  "totalBalance": "Totaal saldo",
+  "@totalBalance": {},
+  "claimedTodayComeBack": "Vandaag geclaimd! Kom morgen terug",
+  "@claimedTodayComeBack": {},
+  "quizMaster": "Quizmeester",
+  "@quizMaster": {},
+  "answerAndEarn": "Beantwoord en verdien",
+  "@answerAndEarn": {},
+  "spinWheel": "Draaiwiel",
+  "@spinWheel": {},
+  "spinAndWin": "Draai en win",
+  "@spinAndWin": {},
+  "scratchCard": "Kraskaart",
+  "@scratchCard": {},
+  "scratchAndReveal": "Kras en onthul",
+  "@scratchAndReveal": {},
+  "webVisits": "Webbezoeken",
+  "@webVisits": {},
+  "visitAndEarn": "Bezoek en verdien",
+  "@visitAndEarn": {},
+  "gameZone": "Spelzone",
+  "@gameZone": {},
+  "playGames": "Speel spellen",
+  "@playGames": {},
+  "referAndEarn": "Verwijs en verdien",
+  "@referAndEarn": {},
+  "inviteFriends": "Nodig vrienden uit",
+  "@inviteFriends": {},
+  "seeTopEarner": "Zie topverdiener",
+  "@seeTopEarner": {},
+  "leaderBoard": "Leiderbord",
+  "@leaderBoard": {},
+  "achievements": "Prestaties",
+  "@achievements": {},
+  "dailyCheckIn": "Dagelijks inchecken",
+  "@dailyCheckIn": {},
+  "totalDaysClaimed": "Totaal aantal geclaimde dagen",
+  "@totalDaysClaimed": {},
+  "dailyCheckInReward": "Dagelijkse incheckbeloning",
+  "@dailyCheckInReward": {},
+  "alreadyClaimedToday": "Je hebt de beloning van vandaag al geclaimd.",
+  "@alreadyClaimedToday": {},
+  "achievementUnlocked": "Prestatie ontgrendeld!",
+  "@achievementUnlocked": {},
+  "couldNotClaimReward": "Kon geen beloning claimen. Probeer het opnieuw.",
+  "@couldNotClaimReward": {},
+  "howItWorksReady": "Klaar om te beginnen met verdienen?",
+  "@howItWorksReady": {},
+  "backToHome": "Terug naar Thuis",
+  "@backToHome": {},
+  "stepWhatAreCoinsTitle": "Wat zijn munten?",
+  "@stepWhatAreCoinsTitle": {},
+  "stepWhatAreCoinsDesc": "Munten zijn de in-app-valuta die je verdient door activiteiten te voltooien. Verzamel genoeg om ze in echt geld om te zetten!",
+  "@stepWhatAreCoinsDesc": {},
+  "stepDailyMissionsTitle": "Dagelijkse missies",
+  "@stepDailyMissionsTitle": {},
+  "stepDailyMissionsDesc": "Meld u elke dag aan om uw dagelijkse beloning te ontvangen. Hoe langer je streak, hoe groter de bonusmunten die je verdient!",
+  "@stepDailyMissionsDesc": {},
+  "stepSpinWheelTitle": "Draaiwiel",
+  "@stepSpinWheelTitle": {},
+  "stepSpinWheelDesc": "Draai aan het wiel en maak kans om direct bonusmunten te winnen. Beperkte spins per dag, dus zorg ervoor dat ze tellen!",
+  "@stepSpinWheelDesc": {},
+  "stepScratchCardsTitle": "Kraskaarten",
+  "@stepScratchCardsTitle": {},
+  "stepScratchCardsDesc": "Onthul verborgen prijzen door virtuele kaarten te krassen. Elke kras kan een grote muntbeloning ontgrendelen!",
+  "@stepScratchCardsDesc": {},
+  "stepQuizGameTitle": "Quizspel",
+  "@stepQuizGameTitle": {},
+  "stepQuizGameDesc": "Test je kennis in verschillende categorieën en verdien munten voor elk juist antwoord. Hoe moeilijker de quiz, hoe meer je verdient!",
+  "@stepQuizGameDesc": {},
+  "stepWatchAdsTitle": "Bekijk advertenties",
+  "@stepWatchAdsTitle": {},
+  "stepWatchAdsDesc": "Bekijk korte gesponsorde video's om munten te verdienen. Het is snel, gemakkelijk en een geweldige manier om uw saldo op te bouwen!",
+  "@stepWatchAdsDesc": {},
+  "stepReferralSystemTitle": "Verwijzingssysteem",
+  "@stepReferralSystemTitle": {},
+  "stepReferralSystemDesc": "Deel uw unieke verwijzingscode met vrienden. Wanneer ze lid worden en beginnen te verdienen, ontvangen jullie allebei bonusmunten!",
+  "@stepReferralSystemDesc": {},
+  "stepWithdrawMoneyTitle": "Geld opnemen",
+  "@stepWithdrawMoneyTitle": {},
+  "stepWithdrawMoneyDesc": "Zodra u de minimumdrempel heeft bereikt, kunt u uw munten omzetten in echt contant geld en opnemen via de betaalmethode van uw voorkeur!",
+  "@stepWithdrawMoneyDesc": {},
+  "topEarners": "Topverdieners",
+  "@topEarners": {},
+  "pullDownToRefresh": "Trek omlaag om te vernieuwen",
+  "@pullDownToRefresh": {},
+  "rankHash": "#",
+  "@rankHash": {},
+  "rankPlayer": "Speler",
+  "@rankPlayer": {},
+  "rankCoins": "Munten",
+  "@rankCoins": {},
+  "yourReferralCode": "Uw verwijzingscode",
+  "@yourReferralCode": {},
+  "signInForReferralCode": "Meld u aan om uw verwijzingscode te ontvangen",
+  "@signInForReferralCode": {},
+  "referralCodeAlreadyApplied": "Verwijzingscode is al toegepast!",
+  "@referralCodeAlreadyApplied": {},
+  "enterReferralCode": "Voer de verwijzingscode in",
+  "@enterReferralCode": {},
+  "haveAPromoCode": "Heeft u een promotiecode?",
+  "@haveAPromoCode": {},
+  "howReferralsWork": "Hoe verwijzingen werken",
+  "@howReferralsWork": {},
+  "friendsInvited": "Vrienden uitgenodigd",
+  "@friendsInvited": {},
+  "coinsEarned": "Munten verdiend",
+  "@coinsEarned": {},
+  "pleaseSignInForReferral": "Meld u aan om een ​​verwijzingscode te gebruiken.",
+  "@pleaseSignInForReferral": {},
+  "rewardsAndBonuses": "Beloningen en bonussen",
+  "@rewardsAndBonuses": {},
+  "scratchToReveal": "Kras om te onthullen\njouw beloning.",
+  "@scratchToReveal": {},
+  "dragToScratch": "Sleep om te krabben",
+  "@dragToScratch": {},
+  "betterLuckNextTimeCard": "Beter geluk\nVolgende keer",
+  "@betterLuckNextTimeCard": {},
+  "spinAndWinTitle": "Draai en win",
+  "@spinAndWinTitle": {},
+  "takeSpin": "Maak een draai.\nStapel de munten.",
+  "@takeSpin": {},
+  "possibleWin": "Mogelijke overwinning",
+  "@possibleWin": {},
+  "upToOneDollar": "Tot $ 1,00",
+  "@upToOneDollar": {},
+  "streakBonus": "Streak-bonus",
+  "@streakBonus": {},
+  "x2": "x2",
+  "@x2": {},
+  "earnCoinsBySpinning": "Verdien eenvoudig munten door\nSpinnewiel",
+  "@earnCoinsBySpinning": {},
+  "youEarnedXpBonus": "Je hebt +XP-bonus verdiend!",
+  "@youEarnedXpBonus": {},
+  "howCanWeHelp": "Hoe kunnen wij helpen?",
+  "@howCanWeHelp": {},
+  "supportDesc": "Vertel ons wat er mis is gegaan of waar u hulp bij nodig heeft. Ons team beoordeelt elk bericht.",
+  "@supportDesc": {},
+  "titleLabel": "Titel",
+  "@titleLabel": {},
+  "titleHint": "Korte samenvatting van uw probleem",
+  "@titleHint": {},
+  "pleaseAddTitle": "Voeg een titel toe",
+  "@pleaseAddTitle": {},
+  "titleTooShort": "Titel is te kort",
+  "@titleTooShort": {},
+  "descriptionLabel": "Beschrijving",
+  "@descriptionLabel": {},
+  "descriptionHint": "Beschrijf uw probleem gedetailleerd...",
+  "@descriptionHint": {},
+  "pleaseAddDescription": "Voeg een beschrijving toe",
+  "@pleaseAddDescription": {},
+  "descriptionTooShort": "Beschrijving is te kort",
+  "@descriptionTooShort": {},
+  "submitting": "Verzenden…",
+  "@submitting": {},
+  "submit": "Indienen",
+  "@submit": {},
+  "ticketSubmittedSuccess": "Ondersteuningsticket succesvol ingediend!",
+  "@ticketSubmittedSuccess": {},
+  "ticketSubmitFailed": "Kan ticket niet indienen. Probeer het opnieuw.",
+  "@ticketSubmitFailed": {},
+  "areYouSureSignOut": "Weet u zeker dat u zich wilt afmelden?",
+  "@areYouSureSignOut": {},
+  "nextLevel": "Volgende:",
+  "@nextLevel": {},
+  "deleteAccountTitle": "Account verwijderen?",
+  "@deleteAccountTitle": {},
+  "deleteAccountDesc": "Hiermee worden uw account en al uw gegevens definitief verwijderd. Deze actie kan niet ongedaan worden gemaakt.",
+  "@deleteAccountDesc": {},
+  "deletingAccount": "Account verwijderen...",
+  "@deletingAccount": {},
+  "availableBalance": "Beschikbaar saldo",
+  "@availableBalance": {},
+  "proceedWithin24h": "Ga binnen 24 uur verder - Geen kosten voor contant geld",
+  "@proceedWithin24h": {},
+  "pendingWithdrawal": "U heeft een uitbetaling in behandeling. Nieuwe verzoeken worden uitgeschakeld totdat deze zijn goedgekeurd.",
+  "@pendingWithdrawal": {},
+  "enterWithdrawalAmount": "Voer het opnamebedrag in",
+  "@enterWithdrawalAmount": {},
+  "fieldRequired": "Veld vereist",
+  "@fieldRequired": {},
+  "invalidInput": "Ongeldige invoer",
+  "@invalidInput": {},
+  "amountCoins": "Bedrag (munten)",
+  "@amountCoins": {},
+  "enterValidAmount": "Vul een geldig bedrag in",
+  "@enterValidAmount": {},
+  "additionalNoteOptional": "Aanvullende opmerking (optioneel)",
+  "@additionalNoteOptional": {},
+  "withdrawRequestSent": "Intrekkingsverzoek verzonden",
+  "@withdrawRequestSent": {},
+  "confirmWithdrawal": "Bevestig de intrekking",
+  "@confirmWithdrawal": {},
+  "missionBrief": "Missie kort",
+  "@missionBrief": {},
+  "claimCoinBold": "\"CLAIMMUNT\"",
+  "@claimCoinBold": {},
+  "whenReady": "als je klaar bent!",
+  "@whenReady": {},
+  "timeNotCompleted": "Tijd niet voltooid!",
+  "@timeNotCompleted": {},
+  "plusCoinsValue": "+{coins} Munten",
+  "@plusCoinsValue": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
+  "whichCountry": "Welk land vind je leuk?",
+  "@whichCountry": {},
+  "selectFavCountries": "Selecteer uw favoriete landen waar u van houdt.",
+  "@selectFavCountries": {},
+  "availableCountry": "Beschikbaar land",
+  "@availableCountry": {},
+  "pleaseSelectCountry": "Selecteer een land",
+  "@pleaseSelectCountry": {},
+  "chooseYourCurrency": "Kies uw valuta",
+  "@chooseYourCurrency": {},
+  "selectFavCurrency": "Selecteer uw valuta die u leuk vindt.",
+  "@selectFavCurrency": {},
+  "availableCurrency": "Beschikbare valuta",
+  "@availableCurrency": {},
+  "pleaseSelectCurrency": "Selecteer een valuta",
+  "@pleaseSelectCurrency": {},
+  "whichGame": "Welk spel vind je leuk?",
+  "@whichGame": {},
+  "selectFavGames": "Selecteer uw favoriete games die u wilt spelen",
+  "@selectFavGames": {},
+  "availableGames": "Beschikbare spellen",
+  "@availableGames": {},
+  "pleaseSelectGame": "Selecteer minimaal één spel",
+  "@pleaseSelectGame": {},
+  "setDefaultLanguage": "Stel standaardtaal in",
+  "@setDefaultLanguage": {},
+  "setDefaultLanguageDesc": "De geselecteerde taal wordt gebruikt als standaardtaal voor deze app, die u later kunt wijzigen als u dat wilt.",
+  "@setDefaultLanguageDesc": {},
+  "stayInUpdated": "Blijf op de hoogte",
+  "@stayInUpdated": {},
+  "notificationPermissionDesc": "Sta meldingen toe zodat we u op de hoogte kunnen houden van de status van uw leningaanvraag en belangrijke updates.",
+  "@notificationPermissionDesc": {},
+  "allow": "Toestaan",
+  "@allow": {},
+  "notNow": "Niet nu",
+  "@notNow": {},
+  "notificationsOff": "Meldingen staan ​​uit",
+  "@notificationsOff": {},
+  "notificationSettingsDesc": "Je hebt eerder meldingen geblokkeerd. Open de apparaatinstellingen en schakel meldingen in zodat Finlora leningupdates kan ontvangen.",
+  "@notificationSettingsDesc": {},
+  "openSettings": "Instellingen openen",
+  "@openSettings": {},
+  "earnAReward": "Verdien een beloning",
+  "@earnAReward": {},
+  "watchAdDesc": "Bekijk een korte advertentie om uw beloning te claimen.\nDankzij uw steun blijft de app gratis!",
+  "@watchAdDesc": {},
+  "watchAd": "Bekijk advertentie",
+  "@watchAd": {},
+  "currentOfTotal": "{current} van {total}",
+  "@currentOfTotal": {
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "perCorrect": "+{coins} per correct",
+  "@perCorrect": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
+  "streakInARow": "{streak} op een rij",
+  "@streakInARow": {
+    "placeholders": {
+      "streak": {
+        "type": "int"
+      }
+    }
+  },
+  "youScored": "Je hebt {correct}/{total} gescoord",
+  "@youScored": {
+    "placeholders": {
+      "correct": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  }
+}

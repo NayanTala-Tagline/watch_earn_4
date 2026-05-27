@@ -335,7 +335,7 @@ class _AppButtonState extends State<AppButton>
               button,
               Positioned.fill(
                 child: Container(
-                  color: context.themeColors.whiteColor.withValues(alpha: 0.45),
+                  color: context.themeColors.whiteColor.withValues(alpha: 0.4),
                 ),
               ),
             ],

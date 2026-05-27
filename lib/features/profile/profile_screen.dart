@@ -3,7 +3,9 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:watch_earn_4/widgets/app_button.dart';
 import 'package:watch_earn_4/widgets/common_appbar.dart';
+import 'package:watch_earn_4/widgets/loading_overlay/loading_overlay.dart';
 
 import '../../extension/ext_context.dart';
 import '../../extension/ext_string_alert.dart';
@@ -238,6 +240,19 @@ class _ProfileBodyState extends State<_ProfileBody> {
             ),
             trailing: _buildChevron(context),
             textColors: textColors,
+          ),
+          _SettingsTile(
+            icon: Icons.delete_forever_outlined,
+            label: 'Delete Account',
+            onTap: () => _handleDeleteAccount(context, provider),
+            trailing: Icon(
+              Icons.chevron_right_rounded,
+              color: colors.buttonColor2,
+              size: AppSize.sp22,
+            ),
+            textColors: textColors,
+            iconColor: colors.buttonColor2,
+            labelColor: colors.buttonColor2,
             isLast: true,
           ),
         ],
@@ -323,6 +338,29 @@ class _ProfileBodyState extends State<_ProfileBody> {
       await provider.signOut();
       if (context.mounted) context.goNamed(AppRoutes.login);
     }
+  }
+
+  Future<void> _handleDeleteAccount(
+    BuildContext context,
+    ProfileProvider provider,
+  ) async {
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (ctx) => _DeleteAccountDialog(),
+    );
+    if (confirmed != true || !context.mounted) return;
+
+    LoadingOverlay.instance().show(
+      context: context,
+      text: 'Deleting account...',
+    );
+    try {
+      await provider.deleteAccount();
+    } finally {
+      LoadingOverlay.instance().hide();
+    }
+
+    if (context.mounted) context.goNamed(AppRoutes.login);
   }
 
   Future<void> _launchUrl(String url, String label) async {
@@ -532,6 +570,8 @@ class _SettingsTile extends StatelessWidget {
     required this.textColors,
     this.onTap,
     this.isLast = false,
+    this.iconColor,
+    this.labelColor,
   });
 
   final IconData icon;
@@ -540,6 +580,8 @@ class _SettingsTile extends StatelessWidget {
   final ThemeTextColors textColors;
   final VoidCallback? onTap;
   final bool isLast;
+  final Color? iconColor;
+  final Color? labelColor;
 
   @override
   Widget build(BuildContext context) {
@@ -557,13 +599,13 @@ class _SettingsTile extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: AppSize.w20),
           child: Row(
             children: [
-              Icon(icon, color: context.themeTextColors.bodyTextColor, size: AppSize.sp22),
+              Icon(icon, color: iconColor ?? context.themeTextColors.bodyTextColor, size: AppSize.sp22),
               SizedBox(width: AppSize.w14),
               Expanded(
                 child: Text(
                   label,
                   style: context.textTheme.bodyMedium?.copyWith(
-                    color: textColors.textBlackColor,
+                    color: labelColor ?? textColors.textBlackColor,
                     fontSize: AppSize.sp16,
                   ),
                 ),
@@ -573,6 +615,105 @@ class _SettingsTile extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Delete account confirmation dialog
+// ─────────────────────────────────────────────────────────────────────────────
+
+class _DeleteAccountDialog extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final colors = context.themeColors;
+    final textColors = context.themeTextColors;
+
+    return AlertDialog(
+      backgroundColor: colors.backgroundColor,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(AppSize.r28),
+      ),
+      titlePadding: EdgeInsets.fromLTRB(
+        AppSize.w24,
+        AppSize.h28,
+        AppSize.w24,
+        0,
+      ),
+      contentPadding: EdgeInsets.fromLTRB(
+        AppSize.w24,
+        AppSize.h12,
+        AppSize.w24,
+        0,
+      ),
+      actionsPadding: EdgeInsets.fromLTRB(
+        AppSize.w16,
+        AppSize.h16,
+        AppSize.w16,
+        AppSize.h20,
+      ),
+      title: Column(
+        children: [
+          Container(
+            width: AppSize.w60,
+            height: AppSize.w60,
+            decoration: BoxDecoration(
+              color: colors.buttonColor2.withValues(alpha: 0.12),
+              shape: BoxShape.circle,
+            ),
+            alignment: Alignment.center,
+            child: Icon(
+              Icons.delete_forever_rounded,
+              color: colors.buttonColor2,
+              size: AppSize.sp32,
+            ),
+          ),
+          SizedBox(height: AppSize.h14),
+          Text(
+            'Delete Account?',
+            style: context.textTheme.titleLarge?.copyWith(
+              color: colors.buttonColor2,
+              fontWeight: FontWeight.w700,
+              fontSize: AppSize.sp18,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ],
+      ),
+      content: Text(
+        'This will permanently delete your account and all your data. This action cannot be undone.',
+        textAlign: TextAlign.center,
+        style: context.textTheme.bodyMedium?.copyWith(
+          color: textColors.hintTextColor,
+          height: 1.4,
+          fontSize: AppSize.sp14,
+        ),
+      ),
+      actionsAlignment: MainAxisAlignment.center,
+      actions: [
+        Row(
+          children: [
+            Expanded(
+              child: AppButton(
+                text: 'Cancel',
+                buttonColor: context.themeColors.whiteColor,
+                shadowColor: context.themeColors.borderColor,
+                onPressed: () => Navigator.of(context).pop(false),
+              ),
+            ),
+            SizedBox(width: AppSize.w12),
+            Expanded(
+              child: AppButton(
+                text: 'Delete',
+                buttonColor: context.themeColors.buttonColor2,
+                shadowColor: context.themeColors.buttonBorderColor2,
+                foregroundColor: context.themeColors.whiteColor,
+                onPressed: () => Navigator.of(context).pop(true),
+              ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 }

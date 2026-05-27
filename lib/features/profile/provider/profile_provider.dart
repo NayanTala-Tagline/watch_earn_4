@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -52,6 +53,22 @@ class ProfileProvider extends ChangeNotifier {
   }
 
   Future<void> signOut() async {
+    await FirebaseAuth.instance.signOut();
+    await _db.logoutUser();
+  }
+
+  Future<void> deleteAccount() async {
+    final userId = _db.userModel?.userId;
+    if (userId != null) {
+      try {
+        await FirebaseFirestore.instance
+            .collection('users')
+            .doc(userId)
+            .delete();
+      } catch (e) {
+        debugPrint('deleteAccount: Firestore delete failed: $e');
+      }
+    }
     await FirebaseAuth.instance.signOut();
     await _db.logoutUser();
   }

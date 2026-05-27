@@ -599,7 +599,18 @@ class _ResultSheet extends StatelessWidget {
                         color: context.themeTextColors.subtitleColor,
                       ),
                     ),
-                    SizedBox(height: AppSize.h28),
+                    SizedBox(height: AppSize.h20),
+                    if(!isLoss)
+                      Text(
+                        'This section may contain ads',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: context.textTheme.bodyMedium?.copyWith(
+                          fontSize: AppSize.sp10,
+                          fontStyle: FontStyle.italic,
+                          color: context.themeTextColors.descriptionColor,
+                        ),
+                      ),
                     AppButton(
                       text: isLoss ? 'Try Again' : 'Claim Now',
                       buttonColor: context.themeColors.buttonColor,

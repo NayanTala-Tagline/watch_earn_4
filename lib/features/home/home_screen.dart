@@ -199,7 +199,7 @@ class _DaysPill extends StatelessWidget {
         width: AppSize.w19,
         height: AppSize.w19,
       ),
-      onPressed: () {},
+      onPressed: () => context.pushNamed(AppRoutes.dailyCheckIn),
     );
   }
 }
@@ -461,6 +461,16 @@ class _DailyRewardCard extends StatelessWidget {
                   style: context.textTheme.titleSmall?.copyWith(
                     fontSize: AppSize.sp12,
                     color: context.themeTextColors.bodyTextColor,
+                  ),
+                ),
+                Text(
+                  'This section may contain ads',
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: context.textTheme.bodyMedium?.copyWith(
+                    fontSize: AppSize.sp10,
+                    fontStyle: FontStyle.italic,
+                    color: context.themeTextColors.descriptionColor,
                   ),
                 ),
               ],

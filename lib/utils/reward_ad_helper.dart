@@ -1,5 +1,6 @@
 import 'package:ad_manager/ad_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:watch_earn_4/widgets/ad_loading_overlay.dart';
 
 import '../widgets/loading_overlay/loading_overlay.dart';
 import '../widgets/reward_ad_bottom_sheet.dart';
@@ -39,7 +40,8 @@ class RewardAdHelper {
   
   static Future<void> _showRewardAd(BuildContext context, AdData adData) async {
     try {
-      LoadingOverlay.instance().show(context: context);
+      AdLoadingOverlay.show(context);
+      // LoadingOverlay.instance().show(context: context);
 
       final rewardAd = FullScreenAdManager(adData: adData);
 
@@ -54,7 +56,8 @@ class RewardAdHelper {
       );
       await Future.delayed(const Duration(milliseconds: 400));
     } finally {
-      LoadingOverlay.instance().hide();
+      // LoadingOverlay.instance().hide();
+      AdLoadingOverlay.hide();
     }
   }
 }

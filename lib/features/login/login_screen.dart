@@ -226,7 +226,7 @@ class _LoginBodyState extends State<_LoginBody> {
               text: 'By continuing, you agree to our ',
               style: context.textTheme.bodyMedium?.copyWith(
                 fontSize: AppSize.sp13,
-                color: context.themeTextColors.bodyTextColor,
+                // color: context.themeTextColors.bodyTextColor,
               ),
             ),
             TextSpan(

@@ -25,7 +25,6 @@ class _Onboarding1ScreenState extends State<Onboarding1Screen> {
   @override
   void initState() {
     super.initState();
-    AdRepository.showConsentUMP();
     AnalyticsManager.instance.logScreenView(
       screenName: 'onboarding_1',
       screenClass: 'Onboarding1Screen',

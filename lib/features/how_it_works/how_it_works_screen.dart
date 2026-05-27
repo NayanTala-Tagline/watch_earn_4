@@ -6,7 +6,6 @@ import '../../extension/ext_context.dart';
 import '../../utils/anaytics_manager.dart';
 import '../../utils/app_size.dart';
 import '../../utils/navigation_helper.dart';
-import '../../utils/remote_config.dart';
 import '../../widgets/ad_slot.dart';
 import '../../widgets/app_button.dart';
 
@@ -28,14 +27,14 @@ List<_Step> _buildSteps(BuildContext context) => [
     ];
 
 class HowItWorksScreen extends StatefulWidget {
-  const HowItWorksScreen({super.key});
+  const HowItWorksScreen({super.key, this.preloadedNative});
+  final InlineAdManager? preloadedNative;
 
   @override
   State<HowItWorksScreen> createState() => _HowItWorksScreenState();
 }
 
 class _HowItWorksScreenState extends State<HowItWorksScreen> {
-  InlineAdManager? _nativeAd;
 
   @override
   void initState() {
@@ -44,20 +43,10 @@ class _HowItWorksScreenState extends State<HowItWorksScreen> {
       screenName: 'how_it_works',
       screenClass: 'HowItWorksScreen',
     );
-    _loadAd();
-  }
-
-  Future<void> _loadAd() async {
-    _nativeAd = InlineAdManager(
-      adData: RemoteConfigService.instance.howItWorksNative,
-    );
-    await _nativeAd!.load();
-    if (mounted) setState(() {});
   }
 
   @override
   void dispose() {
-    _nativeAd?.dispose();
     super.dispose();
   }
 
@@ -85,7 +74,7 @@ class _HowItWorksScreenState extends State<HowItWorksScreen> {
                 onPressed: () => NavigationHelper().handleBackPress(context),
               ),
             ),
-            AdSlot(ad: _nativeAd),
+            AdSlot(ad: widget.preloadedNative),
           ],
         ),
         body: SafeArea(

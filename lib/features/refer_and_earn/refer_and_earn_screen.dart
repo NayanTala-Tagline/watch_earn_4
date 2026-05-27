@@ -8,6 +8,7 @@ import 'package:watch_earn_4/db/app_db.dart';
 import 'package:watch_earn_4/di/injector.dart';
 import 'package:watch_earn_4/extension/ext_context.dart';
 import 'package:watch_earn_4/extension/ext_string_alert.dart';
+import 'package:watch_earn_4/features/bottom_nav/bottom_nav_page.dart';
 import 'package:watch_earn_4/features/rewards/provider/rewards_provider.dart';
 import 'package:watch_earn_4/gen/assets.gen.dart';
 import 'package:watch_earn_4/gen/fonts.gen.dart';
@@ -84,7 +85,7 @@ class _ReferAndEarnBodyState extends State<_ReferAndEarnBody> {
       final storeUrl = await _getPlayStoreUrl();
       await SharePlus.instance.share(
         ShareParams(
-          text: 'Join me on Watch & Earn and earn coins! '
+          text: 'Join me on Rewardo : Daily Rewards and earn coins! '
               'Use my referral code: $_referralCode\n\n'
               'Download the app: $storeUrl',
         ),
@@ -134,6 +135,10 @@ class _ReferAndEarnBodyState extends State<_ReferAndEarnBody> {
                       _buildHowItWorksCard(context),
                       SizedBox(height: AppSize.h14),
                       _buildStatsRow(context, provider),
+                      if (_isGuest) ...[
+                        SizedBox(height: AppSize.h12),
+                        _LinkAccountCard(),
+                      ],
                     ],
                   ),
                 );
@@ -627,6 +632,65 @@ class _StatCard extends StatelessWidget {
             ],
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _LinkAccountCard extends StatelessWidget {
+  const _LinkAccountCard();
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      borderRadius: BorderRadius.circular(AppSize.r20),
+      onTap: () {
+        // AnalyticsManager.instance.logEvent(name: 'rewards_link_account_tap');
+        // context.read<BottomNavController>().setIndex(3);
+        // Navigator.of(context).pop();
+      },
+      child: Container(
+        padding: EdgeInsets.symmetric(
+          horizontal: AppSize.w20,
+          vertical: AppSize.h24,
+        ),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(AppSize.r20),
+          border: Border.all(color: context.themeColors.borderColor),
+          boxShadow: [
+            BoxShadow(
+                color: context.themeColors.borderColor,
+                offset: const Offset(0, 4)
+            ),
+          ],
+        ),
+        child: Column(
+          children: [
+            Icon(
+              Icons.link_rounded,
+              color: context.themeColors.primary,
+              size: AppSize.sp40,
+            ),
+            SizedBox(height: AppSize.h8),
+            Text(
+              'Link Your Account',
+              style: context.textTheme.titleSmall?.copyWith(
+                color: Colors.black,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            SizedBox(height: AppSize.h6),
+            Text(
+              'Sign in with Google to get your referral code and invite friends, Go to Profile and link your account.',
+              textAlign: TextAlign.center,
+              style: context.textTheme.bodyMedium?.copyWith(
+                color: context.themeTextColors.descriptionColor,
+                height: 1.4,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

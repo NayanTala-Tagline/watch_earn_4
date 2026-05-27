@@ -1,4 +1,3 @@
-import 'package:ad_manager/ad_manager.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:watch_earn_4/db/app_db.dart';
@@ -16,19 +15,7 @@ class WithdrawProvider extends ChangeNotifier {
   final _firestore = FirebaseFirestore.instance;
   final _db = Injector.instance<AppDB>();
 
-  InlineAdManager? nativeAd;
-
-  WithdrawProvider() {
-    _loadAd();
-  }
-
-  Future<void> _loadAd() async {
-    nativeAd = InlineAdManager(
-      adData: RemoteConfigService.instance.withdrawNative,
-    );
-    await nativeAd!.load();
-    notifyListeners();
-  }
+  WithdrawProvider();
 
   List<WithdrawCategory> getWithdrawCategories(BuildContext context) {
     return [
@@ -1534,7 +1521,6 @@ class WithdrawProvider extends ChangeNotifier {
     btcWalletAddressController.dispose();
     amountController.dispose();
     noteController.dispose();
-    nativeAd?.dispose();
     super.dispose();
   }
 

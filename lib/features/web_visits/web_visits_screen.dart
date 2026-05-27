@@ -17,6 +17,14 @@ import '../../widgets/app_button.dart';
 import '../../widgets/common_appbar.dart';
 import 'provider/visit_website_provider.dart';
 
+// ── Screen args ───────────────────────────────────────────────────────────────
+
+class WebVisitsScreenArgs {
+  const WebVisitsScreenArgs({this.nativeAd1, this.nativeAd2});
+  final InlineAdManager? nativeAd1;
+  final InlineAdManager? nativeAd2;
+}
+
 // ── Data ──────────────────────────────────────────────────────────────────────
 
 class _WebVisitItem {
@@ -40,19 +48,21 @@ final _webVisitItems = <_WebVisitItem>[
 // ── Screen ────────────────────────────────────────────────────────────────────
 
 class WebVisitsScreen extends StatelessWidget {
-  const WebVisitsScreen({super.key});
+  const WebVisitsScreen({super.key, this.args});
+  final WebVisitsScreenArgs? args;
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (_) => VisitWebsiteProvider(),
-      child: const _WebVisitsContent(),
+      child: _WebVisitsContent(args: args),
     );
   }
 }
 
 class _WebVisitsContent extends StatefulWidget {
-  const _WebVisitsContent();
+  const _WebVisitsContent({this.args});
+  final WebVisitsScreenArgs? args;
 
   @override
   State<_WebVisitsContent> createState() => _WebVisitsContentState();
@@ -244,7 +254,7 @@ class _WebVisitsContentState extends State<_WebVisitsContent>
           ),
         ),
         bottomNavigationBar: AdSlot(
-          ad: context.watch<VisitWebsiteProvider>().nativeAd2,
+          ad: widget.args?.nativeAd2,
         ),
         body: Builder(
           builder: (context) {
@@ -259,11 +269,11 @@ class _WebVisitsContentState extends State<_WebVisitsContent>
               ),
               itemCount: totalCount,
               itemBuilder: (context, index) {
-                if (index == adIndex && prov.nativeAd1!.adData.enabled) {
+                if (index == adIndex && (widget.args?.nativeAd1?.adData.enabled ?? false)) {
                   return Padding(
                     padding: EdgeInsets.only(bottom: AppSize.h12),
                     child: AdSlot(
-                      ad: prov.nativeAd1,
+                      ad: widget.args?.nativeAd1,
                       safeAreaTop: false,
                       safeAreaBottom: false,
                     ),

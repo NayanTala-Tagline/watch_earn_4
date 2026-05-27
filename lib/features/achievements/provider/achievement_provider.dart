@@ -1,4 +1,3 @@
-import 'package:ad_manager/ad_manager.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -7,37 +6,14 @@ import '../../../di/injector.dart';
 import '../../../models/achievement_model.dart';
 import '../../../services/coin_service.dart';
 import '../../../utils/logger.dart';
-import '../../../utils/remote_config.dart';
 
 class AchievementProvider extends ChangeNotifier {
   AchievementProvider() {
     _init();
-    _loadAds();
   }
 
   final _db = Injector.instance<AppDB>();
   final _firestore = FirebaseFirestore.instance;
-
-  InlineAdManager? nativeAd1;
-  InlineAdManager? nativeAd2;
-
-  Future<void> _loadAds() async {
-    nativeAd1 = InlineAdManager(
-      adData: RemoteConfigService.instance.achievementsNative1,
-    );
-    nativeAd2 = InlineAdManager(
-      adData: RemoteConfigService.instance.achievementsNative2,
-    );
-    await Future.wait([nativeAd1!.load(), nativeAd2!.load()]);
-    notifyListeners();
-  }
-
-  @override
-  void dispose() {
-    nativeAd1?.dispose();
-    nativeAd2?.dispose();
-    super.dispose();
-  }
 
   bool _isLoading = true;
   bool get isLoading => _isLoading;

@@ -61,7 +61,8 @@ class _ScratchState {
 // ── Main screen ───────────────────────────────────────────────────────────────
 
 class ScratchCardScreen extends StatefulWidget {
-  const ScratchCardScreen({super.key});
+  const ScratchCardScreen({super.key, this.preloadedNative});
+  final InlineAdManager? preloadedNative;
 
   @override
   State<ScratchCardScreen> createState() => _ScratchCardScreenState();
@@ -74,7 +75,6 @@ class _ScratchCardScreenState extends State<ScratchCardScreen>
   late final Animation<double> _shakeAnim;
   late final int _luckyNumber;
 
-  InlineAdManager? _nativeAd;
 
   @override
   void initState() {
@@ -92,22 +92,12 @@ class _ScratchCardScreenState extends State<ScratchCardScreen>
     _shakeAnim = Tween<double>(begin: 0, end: 10).animate(
       CurvedAnimation(parent: _shakeCtrl, curve: Curves.elasticIn),
     );
-    _loadAd();
-  }
-
-  Future<void> _loadAd() async {
-    _nativeAd = InlineAdManager(
-      adData: RemoteConfigService.instance.scratchCardNative,
-    );
-    await _nativeAd!.load();
-    if (mounted) setState(() {});
   }
 
   @override
   void dispose() {
     _scratch.dispose();
     _shakeCtrl.dispose();
-    _nativeAd?.dispose();
     super.dispose();
   }
 
@@ -173,7 +163,7 @@ class _ScratchCardScreenState extends State<ScratchCardScreen>
       },
       child: Scaffold(
         backgroundColor: context.themeColors.backgroundColor,
-        bottomNavigationBar: AdSlot(ad: _nativeAd),
+        bottomNavigationBar: AdSlot(ad: widget.preloadedNative),
         body: Stack(
           children: [
             SafeArea(

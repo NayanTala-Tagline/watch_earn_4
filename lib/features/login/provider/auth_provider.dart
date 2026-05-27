@@ -145,6 +145,94 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
+  // ── Link Google Account (guest → Google) ──────────────────────────────────
+
+  bool _isLinkLoading = false;
+  String? _linkErrorMessage;
+  bool _linkSuccess = false;
+
+  bool get isLinkLoading => _isLinkLoading;
+  String? get linkErrorMessage => _linkErrorMessage;
+  bool get linkSuccess => _linkSuccess;
+
+  Future<void> linkGoogleAccount() async {
+    _isLinkLoading = true;
+    _linkErrorMessage = null;
+    _linkSuccess = false;
+    notifyListeners();
+
+    try {
+      await GoogleSignIn.instance.signOut();
+      final googleUser = await GoogleSignIn.instance.authenticate();
+      final credential = GoogleAuthProvider.credential(
+        idToken: googleUser.authentication.idToken,
+      );
+
+      final userCredential = await _auth.signInWithCredential(credential);
+      final firebaseUser = userCredential.user!;
+
+      final existingDoc = await _firestore
+          .collection('users')
+          .doc(firebaseUser.uid)
+          .get();
+      if (existingDoc.exists) {
+        _linkErrorMessage =
+            'An account is already linked with the selected Google account.';
+        _isLinkLoading = false;
+        notifyListeners();
+        return;
+      }
+
+      if (firebaseUser.email != null) {
+        final emailQuery = await _firestore
+            .collection('users')
+            .where('email', isEqualTo: firebaseUser.email)
+            .limit(1)
+            .get();
+        if (emailQuery.docs.isNotEmpty) {
+          _linkErrorMessage =
+              'An account is already linked with the selected email address.';
+          _isLinkLoading = false;
+          notifyListeners();
+          return;
+        }
+      }
+
+      final guestUser = _db.userModel!;
+      final oldDocId = guestUser.userId;
+
+      final linkedUser = guestUser.copyWith(
+        userId: firebaseUser.uid,
+        name: firebaseUser.displayName ?? guestUser.name,
+        email: firebaseUser.email,
+        photoUrl: firebaseUser.photoURL,
+        isGuest: false,
+      );
+
+      await _firestore
+          .collection('users')
+          .doc(firebaseUser.uid)
+          .set(linkedUser.toMap());
+
+      await _firestore.collection('users').doc(oldDocId).delete();
+
+      _db.userModel = linkedUser;
+      _linkSuccess = true;
+    } catch (e) {
+      if (e is GoogleSignInException &&
+          e.code == GoogleSignInExceptionCode.canceled) {
+        _isLinkLoading = false;
+        notifyListeners();
+        return;
+      }
+      e.logFatal;
+      _linkErrorMessage = 'Failed to link account. Please try again.';
+    } finally {
+      _isLinkLoading = false;
+      notifyListeners();
+    }
+  }
+
   // ── Sign-Out ───────────────────────────────────────────────────────────────
 
   Future<void> signOut() async {

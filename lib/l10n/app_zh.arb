@@ -225,4 +225,14 @@
   "perCorrect": "每题+{coins}",
   "streakInARow": "连续{streak}次",
   "youScored": "您得了{correct}/{total}分"
+,
+
+  "linkGoogleAccount": "关联Google账户",
+  "@linkGoogleAccount": {},
+
+  "googleAccountLinkedSuccess": "Google账户关联成功！",
+  "@googleAccountLinkedSuccess": {},
+
+  "rateUs": "给我们评分",
+  "@rateUs": {}
 }

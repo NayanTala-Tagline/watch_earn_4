@@ -670,4 +670,14 @@
       }
     }
   }
+,
+
+  "linkGoogleAccount": "Google-account koppelen",
+  "@linkGoogleAccount": {},
+
+  "googleAccountLinkedSuccess": "Google-account succesvol gekoppeld!",
+  "@googleAccountLinkedSuccess": {},
+
+  "rateUs": "Beoordeel ons",
+  "@rateUs": {}
 }

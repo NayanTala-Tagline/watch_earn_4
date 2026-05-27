@@ -196,50 +196,106 @@ final appRouter = GoRouter(
     GoRoute(
       path: '/${AppRoutes.withdraw}',
       name: AppRoutes.withdraw,
-      pageBuilder: (context, state) =>
-          MaterialPage(key: state.pageKey, child: const WithdrawScreen()),
+      pageBuilder: (context, state) {
+        final native = state.extra is InlineAdManager
+            ? state.extra as InlineAdManager
+            : null;
+        return MaterialPage(
+          key: state.pageKey,
+          child: WithdrawScreen(preloadedNative: native),
+        );
+      },
     ),
     GoRoute(
       path: '/${AppRoutes.quiz}',
       name: AppRoutes.quiz,
-      pageBuilder: (context, state) =>
-          MaterialPage(key: state.pageKey, child: const QuizMasterScreen()),
+      pageBuilder: (context, state) {
+        final native = state.extra is InlineAdManager
+            ? state.extra as InlineAdManager
+            : null;
+        return MaterialPage(
+          key: state.pageKey,
+          child: QuizMasterScreen(preloadedNative: native),
+        );
+      },
     ),
     GoRoute(
       path: '/${AppRoutes.scratchCard}',
       name: AppRoutes.scratchCard,
-      pageBuilder: (context, state) =>
-          MaterialPage(key: state.pageKey, child: const ScratchCardScreen()),
+      pageBuilder: (context, state) {
+        final native = state.extra is InlineAdManager
+            ? state.extra as InlineAdManager
+            : null;
+        return MaterialPage(
+          key: state.pageKey,
+          child: ScratchCardScreen(preloadedNative: native),
+        );
+      },
     ),
     GoRoute(
       path: '/${AppRoutes.webVisits}',
       name: AppRoutes.webVisits,
-      pageBuilder: (context, state) =>
-          MaterialPage(key: state.pageKey, child: const WebVisitsScreen()),
+      pageBuilder: (context, state) {
+        final args = state.extra is WebVisitsScreenArgs
+            ? state.extra as WebVisitsScreenArgs
+            : null;
+        return MaterialPage(
+          key: state.pageKey,
+          child: WebVisitsScreen(args: args),
+        );
+      },
     ),
     GoRoute(
       path: '/${AppRoutes.gameZone}',
       name: AppRoutes.gameZone,
-      pageBuilder: (context, state) =>
-          MaterialPage(key: state.pageKey, child: const GameZoneScreen()),
+      pageBuilder: (context, state) {
+        final args = state.extra is GameZoneScreenArgs
+            ? state.extra as GameZoneScreenArgs
+            : null;
+        return MaterialPage(
+          key: state.pageKey,
+          child: GameZoneScreen(args: args),
+        );
+      },
     ),
     GoRoute(
       path: '/${AppRoutes.achievements}',
       name: AppRoutes.achievements,
-      pageBuilder: (context, state) =>
-          MaterialPage(key: state.pageKey, child: const AchievementScreen()),
+      pageBuilder: (context, state) {
+        final args = state.extra is AchievementsScreenArgs
+            ? state.extra as AchievementsScreenArgs
+            : null;
+        return MaterialPage(
+          key: state.pageKey,
+          child: AchievementScreen(args: args),
+        );
+      },
     ),
     GoRoute(
       path: '/${AppRoutes.howItWorks}',
       name: AppRoutes.howItWorks,
-      pageBuilder: (context, state) =>
-          MaterialPage(key: state.pageKey, child: const HowItWorksScreen()),
+      pageBuilder: (context, state) {
+        final native = state.extra is InlineAdManager
+            ? state.extra as InlineAdManager
+            : null;
+        return MaterialPage(
+          key: state.pageKey,
+          child: HowItWorksScreen(preloadedNative: native),
+        );
+      },
     ),
     GoRoute(
       path: '/${AppRoutes.dailyCheckIn}',
       name: AppRoutes.dailyCheckIn,
-      pageBuilder: (context, state) =>
-          MaterialPage(key: state.pageKey, child: const DailyCheckInScreen()),
+      pageBuilder: (context, state) {
+        final native = state.extra is InlineAdManager
+            ? state.extra as InlineAdManager
+            : null;
+        return MaterialPage(
+          key: state.pageKey,
+          child: DailyCheckInScreen(preloadedNative: native),
+        );
+      },
     ),
     GoRoute(
       path: '/${AppRoutes.contactUs}',

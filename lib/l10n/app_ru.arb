@@ -225,4 +225,14 @@
   "perCorrect": "+{coins} за правильный",
   "streakInARow": "{streak} подряд",
   "youScored": "Вы набрали {correct}/{total}"
+,
+
+  "linkGoogleAccount": "Привязать аккаунт Google",
+  "@linkGoogleAccount": {},
+
+  "googleAccountLinkedSuccess": "Аккаунт Google успешно привязан!",
+  "@googleAccountLinkedSuccess": {},
+
+  "rateUs": "Оценить нас",
+  "@rateUs": {}
 }

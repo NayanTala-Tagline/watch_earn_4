@@ -670,4 +670,14 @@
       }
     }
   }
+,
+
+  "linkGoogleAccount": "Google-Konto verknüpfen",
+  "@linkGoogleAccount": {},
+
+  "googleAccountLinkedSuccess": "Google-Konto erfolgreich verknüpft!",
+  "@googleAccountLinkedSuccess": {},
+
+  "rateUs": "Bewerte uns",
+  "@rateUs": {}
 }

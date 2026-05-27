@@ -670,4 +670,14 @@
       }
     }
   }
+,
+
+  "linkGoogleAccount": "Pautkan Akaun Google",
+  "@linkGoogleAccount": {},
+
+  "googleAccountLinkedSuccess": "Akaun Google berjaya dipautkan!",
+  "@googleAccountLinkedSuccess": {},
+
+  "rateUs": "Beri Penilaian",
+  "@rateUs": {}
 }

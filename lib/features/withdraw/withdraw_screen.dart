@@ -1,3 +1,4 @@
+import 'package:ad_manager/ad_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:watch_earn_4/db/app_db.dart';
@@ -21,19 +22,21 @@ import 'package:watch_earn_4/widgets/common_header.dart';
 const _coinPillText = Color(0xFF7A4A00);
 
 class WithdrawScreen extends StatelessWidget {
-  const WithdrawScreen({super.key});
+  const WithdrawScreen({super.key, this.preloadedNative});
+  final InlineAdManager? preloadedNative;
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (_) => WithdrawProvider(),
-      child: const _WithdrawView(),
+      child: _WithdrawView(preloadedNative: preloadedNative),
     );
   }
 }
 
 class _WithdrawView extends StatefulWidget {
-  const _WithdrawView();
+  const _WithdrawView({this.preloadedNative});
+  final InlineAdManager? preloadedNative;
 
   @override
   State<_WithdrawView> createState() => _WithdrawViewState();
@@ -103,9 +106,9 @@ class _WithdrawViewState extends State<_WithdrawView> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   _hPad(const _LiveBalanceCard()),
-                  if (provider.nativeAd?.adData.enabled ?? false) ...[
+                  if (widget.preloadedNative?.adData.enabled ?? false) ...[
                     AdSlot(
-                      ad: provider.nativeAd,
+                      ad: widget.preloadedNative,
                       safeAreaTop: false,
                       safeAreaBottom: false,
                     ),

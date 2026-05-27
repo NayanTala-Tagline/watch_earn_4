@@ -8,13 +8,13 @@ import 'package:watch_earn_4/features/home/provider/home_provider.dart';
 import 'package:watch_earn_4/gen/assets.gen.dart';
 import 'package:watch_earn_4/utils/anaytics_manager.dart';
 import 'package:watch_earn_4/utils/app_size.dart';
-import 'package:watch_earn_4/utils/remote_config.dart';
 import 'package:watch_earn_4/widgets/ad_slot.dart';
 import 'package:watch_earn_4/widgets/app_button.dart';
 import 'package:watch_earn_4/widgets/common_appbar.dart';
 
 class DailyCheckInScreen extends StatefulWidget {
-  const DailyCheckInScreen({super.key});
+  const DailyCheckInScreen({super.key, this.preloadedNative});
+  final InlineAdManager? preloadedNative;
 
   @override
   State<DailyCheckInScreen> createState() => _DailyCheckInScreenState();
@@ -22,7 +22,6 @@ class DailyCheckInScreen extends StatefulWidget {
 
 class _DailyCheckInScreenState extends State<DailyCheckInScreen> {
   final _db = Injector.instance<AppDB>();
-  InlineAdManager? _nativeAd;
 
   @override
   void initState() {
@@ -31,20 +30,10 @@ class _DailyCheckInScreenState extends State<DailyCheckInScreen> {
       screenName: 'daily_check_in',
       screenClass: 'DailyCheckInScreen',
     );
-    _loadAd();
-  }
-
-  Future<void> _loadAd() async {
-    _nativeAd = InlineAdManager(
-      adData: RemoteConfigService.instance.dailyCheckInNative,
-    );
-    await _nativeAd!.load();
-    if (mounted) setState(() {});
   }
 
   @override
   void dispose() {
-    _nativeAd?.dispose();
     super.dispose();
   }
 
@@ -55,7 +44,7 @@ class _DailyCheckInScreenState extends State<DailyCheckInScreen> {
     return Scaffold(
       backgroundColor: context.themeColors.backgroundColor,
       appBar: CommonAppBar(titleText: context.l10n.dailyCheckIn),
-      bottomNavigationBar: AdSlot(ad: _nativeAd),
+      bottomNavigationBar: AdSlot(ad: widget.preloadedNative),
       body: StreamBuilder(
         stream: _db.userListenable(),
         builder: (context, _) {

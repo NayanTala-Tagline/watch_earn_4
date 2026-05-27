@@ -17,6 +17,14 @@ import '../../widgets/app_button.dart';
 import '../../widgets/common_appbar.dart';
 import 'provider/game_zone_provider.dart';
 
+// ── Screen args ───────────────────────────────────────────────────────────────
+
+class GameZoneScreenArgs {
+  const GameZoneScreenArgs({this.nativeAd1, this.nativeAd2});
+  final InlineAdManager? nativeAd1;
+  final InlineAdManager? nativeAd2;
+}
+
 // ── Data ──────────────────────────────────────────────────────────────────────
 
 class _GameItem {
@@ -40,19 +48,21 @@ final _gameItems = <_GameItem>[
 // ── Screen ────────────────────────────────────────────────────────────────────
 
 class GameZoneScreen extends StatelessWidget {
-  const GameZoneScreen({super.key});
+  const GameZoneScreen({super.key, this.args});
+  final GameZoneScreenArgs? args;
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (_) => GameZoneProvider(),
-      child: const _GameZoneContent(),
+      child: _GameZoneContent(args: args),
     );
   }
 }
 
 class _GameZoneContent extends StatefulWidget {
-  const _GameZoneContent();
+  const _GameZoneContent({this.args});
+  final GameZoneScreenArgs? args;
 
   @override
   State<_GameZoneContent> createState() => _GameZoneContentState();
@@ -244,7 +254,7 @@ class _GameZoneContentState extends State<_GameZoneContent>
           ),
         ),
         bottomNavigationBar: AdSlot(
-          ad: context.watch<GameZoneProvider>().nativeAd2,
+          ad: widget.args?.nativeAd2,
         ),
         body: Builder(
           builder: (context) {
@@ -259,11 +269,11 @@ class _GameZoneContentState extends State<_GameZoneContent>
               ),
               itemCount: totalCount,
               itemBuilder: (context, index) {
-                if (index == adIndex && prov.nativeAd1!.adData.enabled) {
+                if (index == adIndex && (widget.args?.nativeAd1?.adData.enabled ?? false)) {
                   return Padding(
                     padding: EdgeInsets.only(bottom: AppSize.h12),
                     child: AdSlot(
-                      ad: prov.nativeAd1,
+                      ad: widget.args?.nativeAd1,
                       safeAreaTop: false,
                     ),
                   );

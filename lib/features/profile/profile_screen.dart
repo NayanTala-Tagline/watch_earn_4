@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:go_router/go_router.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:watch_earn_4/widgets/app_button.dart';
@@ -15,6 +16,7 @@ import '../../routes/app_router.dart';
 import '../../utils/anaytics_manager.dart';
 import '../../utils/app_size.dart';
 import '../../utils/remote_config.dart';
+import '../login/provider/auth_provider.dart';
 import 'provider/profile_provider.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -190,20 +192,33 @@ class _ProfileBodyState extends State<_ProfileBody> {
       ),
       child: Column(
         children: [
+          if (provider.user?.isGuest == true)
+            _SettingsTile(
+              icon: Icons.link_rounded,
+              label: context.l10n.linkGoogleAccount,
+              onTap: () => _handleLinkGoogle(context),
+              trailing: _buildChevron(context),
+              textColors: textColors,
+            ),
+          // _SettingsTile(
+          //   icon: Icons.volume_up_rounded,
+          //   label: context.l10n.soundEffects,
+          //   trailing: _buildSwitch(context, provider.soundEffects, provider.toggleSoundEffects),
+          //   textColors: textColors,
+          // ),
+          // _SettingsTile(
+          //   icon: Icons.vibration_rounded,
+          //   label: context.l10n.hapticFeedback,
+          //   trailing: _buildSwitch(context, provider.hapticFeedback, provider.toggleHapticFeedback),
+          //   textColors: textColors,
+          // ),
           _SettingsTile(
-            icon: Icons.volume_up_rounded,
-            label: context.l10n.soundEffects,
-            trailing: _buildSwitch(context, provider.soundEffects, provider.toggleSoundEffects),
+            icon: Icons.star_outline_rounded,
+            label: context.l10n.rateUs,
+            onTap: _handleRateUs,
+            trailing: _buildChevron(context),
             textColors: textColors,
           ),
-          // _divider(),
-          _SettingsTile(
-            icon: Icons.vibration_rounded,
-            label: context.l10n.hapticFeedback,
-            trailing: _buildSwitch(context, provider.hapticFeedback, provider.toggleHapticFeedback),
-            textColors: textColors,
-          ),
-          // _divider(),
           _SettingsTile(
             icon: Icons.translate_rounded,
             label: context.l10n.language,
@@ -260,20 +275,6 @@ class _ProfileBodyState extends State<_ProfileBody> {
     );
   }
 
-  Widget _buildSwitch(BuildContext context, bool value, ValueChanged<bool> onChanged) {
-    return Transform.scale(
-      scale: 0.85,
-      child: Switch.adaptive(
-        value: value,
-        onChanged: onChanged,
-        activeThumbColor: context.themeColors.whiteColor,
-        activeTrackColor: context.themeColors.toggleActiveColor,
-        inactiveThumbColor: context.themeColors.whiteColor,
-        inactiveTrackColor: context.themeColors.toggleInactiveColor,
-      ),
-    );
-  }
-
   Widget _buildChevron(BuildContext context) {
     return Icon(
       Icons.chevron_right_rounded,
@@ -282,11 +283,34 @@ class _ProfileBodyState extends State<_ProfileBody> {
     );
   }
 
-  Widget _divider() {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: AppSize.w16),
-      child: const Divider(height: 1, thickness: 1, color: Color(0xFFF0F2FA)),
-    );
+  Future<void> _handleRateUs() async {
+    AnalyticsManager.instance.logEvent(name: 'profile_rate_us_tap');
+    try {
+      final info = await PackageInfo.fromPlatform();
+      final url = 'https://play.google.com/store/apps/details?id=${info.packageName}';
+      await _launchUrl(url, 'Rate Us');
+    } catch (e) {
+      debugPrint('Rate Us: launch failed: $e');
+    }
+  }
+
+  Future<void> _handleLinkGoogle(BuildContext context) async {
+    AnalyticsManager.instance.logEvent(name: 'profile_link_google_tap');
+    final auth = AuthProvider();
+    await auth.linkGoogleAccount();
+
+    if (!context.mounted) return;
+    if (auth.linkSuccess) {
+      AnalyticsManager.instance.logEvent(name: 'profile_link_google_success');
+      context.l10n.googleAccountLinkedSuccess.showSuccessAlert();
+      setState(() {});
+    } else if (auth.linkErrorMessage != null) {
+      AnalyticsManager.instance.logEvent(
+        name: 'profile_link_google_failed',
+        parameters: {'error': auth.linkErrorMessage ?? 'unknown'},
+      );
+      auth.linkErrorMessage!.showErrorAlert();
+    }
   }
 
   Future<void> _handleSignOut(

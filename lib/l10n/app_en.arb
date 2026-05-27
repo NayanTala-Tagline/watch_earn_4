@@ -881,5 +881,14 @@
       "correct": { "type": "int" },
       "total": { "type": "int" }
     }
-  }
+  },
+
+  "linkGoogleAccount": "Link Google Account",
+  "@linkGoogleAccount": {},
+
+  "googleAccountLinkedSuccess": "Google account linked successfully!",
+  "@googleAccountLinkedSuccess": {},
+
+  "rateUs": "Rate Us",
+  "@rateUs": {}
 }

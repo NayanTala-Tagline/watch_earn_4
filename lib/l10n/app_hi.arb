@@ -670,4 +670,14 @@
       }
     }
   }
+,
+
+  "linkGoogleAccount": "Google खाता लिंक करें",
+  "@linkGoogleAccount": {},
+
+  "googleAccountLinkedSuccess": "Google खाता सफलतापूर्वक लिंक किया गया!",
+  "@googleAccountLinkedSuccess": {},
+
+  "rateUs": "हमें रेट करें",
+  "@rateUs": {}
 }

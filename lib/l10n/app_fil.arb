@@ -670,4 +670,14 @@
       }
     }
   }
+,
+
+  "linkGoogleAccount": "I-link ang Google Account",
+  "@linkGoogleAccount": {},
+
+  "googleAccountLinkedSuccess": "Matagumpay na na-link ang Google account!",
+  "@googleAccountLinkedSuccess": {},
+
+  "rateUs": "I-rate kami",
+  "@rateUs": {}
 }

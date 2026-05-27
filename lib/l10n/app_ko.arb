@@ -225,4 +225,14 @@
   "perCorrect": "정답당 +{coins}",
   "streakInARow": "{streak}연속",
   "youScored": "{correct}/{total} 점수"
+,
+
+  "linkGoogleAccount": "Google 계정 연결",
+  "@linkGoogleAccount": {},
+
+  "googleAccountLinkedSuccess": "Google 계정이 성공적으로 연결되었습니다!",
+  "@googleAccountLinkedSuccess": {},
+
+  "rateUs": "평가하기",
+  "@rateUs": {}
 }

@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:ad_manager/ad_manager.dart';
 import 'package:flutter/material.dart';
 
 import '../../../db/app_db.dart';
@@ -18,25 +17,10 @@ class VisitWebsiteProvider extends ChangeNotifier {
   final _db = Injector.instance<AppDB>();
   Timer? _refreshTimer;
 
-  InlineAdManager? nativeAd1;
-  InlineAdManager? nativeAd2;
-
   VisitWebsiteProvider() {
     _refreshTimer = Timer.periodic(const Duration(seconds: 1), (_) {
       notifyListeners();
     });
-    _loadAds();
-  }
-
-  Future<void> _loadAds() async {
-    nativeAd1 = InlineAdManager(
-      adData: RemoteConfigService.instance.webVisitsNative1,
-    );
-    nativeAd2 = InlineAdManager(
-      adData: RemoteConfigService.instance.webVisitsNative2,
-    );
-    await Future.wait([nativeAd1!.load(), nativeAd2!.load()]);
-    notifyListeners();
   }
 
   String _lockKey(int index) {
@@ -98,8 +82,6 @@ class VisitWebsiteProvider extends ChangeNotifier {
   @override
   void dispose() {
     _refreshTimer?.cancel();
-    nativeAd1?.dispose();
-    nativeAd2?.dispose();
     super.dispose();
   }
 }

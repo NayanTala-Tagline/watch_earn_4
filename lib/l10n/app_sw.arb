@@ -670,4 +670,14 @@
       }
     }
   }
+,
+
+  "linkGoogleAccount": "Unganisha Akaunti ya Google",
+  "@linkGoogleAccount": {},
+
+  "googleAccountLinkedSuccess": "Akaunti ya Google imefanikiwa kuunganishwa!",
+  "@googleAccountLinkedSuccess": {},
+
+  "rateUs": "Tupime",
+  "@rateUs": {}
 }

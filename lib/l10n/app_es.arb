@@ -670,4 +670,14 @@
       }
     }
   }
+,
+
+  "linkGoogleAccount": "Vincular cuenta de Google",
+  "@linkGoogleAccount": {},
+
+  "googleAccountLinkedSuccess": "¡Cuenta de Google vinculada con éxito!",
+  "@googleAccountLinkedSuccess": {},
+
+  "rateUs": "Califícanos",
+  "@rateUs": {}
 }

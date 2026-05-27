@@ -4,8 +4,11 @@ import 'package:provider/provider.dart';
 import 'package:watch_earn_4/db/app_db.dart';
 import 'package:watch_earn_4/di/injector.dart';
 import 'package:watch_earn_4/extension/ext_context.dart';
+import 'package:watch_earn_4/features/achievements/achievement_screen.dart' show AchievementsScreenArgs;
 import 'package:watch_earn_4/features/bottom_nav/bottom_nav_page.dart';
+import 'package:watch_earn_4/features/game_zone/game_zone_screen.dart' show GameZoneScreenArgs;
 import 'package:watch_earn_4/features/home/provider/home_provider.dart';
+import 'package:watch_earn_4/features/web_visits/web_visits_screen.dart' show WebVisitsScreenArgs;
 import 'package:watch_earn_4/gen/assets.gen.dart';
 import 'package:watch_earn_4/routes/app_router.dart';
 import 'package:watch_earn_4/utils/anaytics_manager.dart';
@@ -171,9 +174,8 @@ class _CoinsPill extends StatelessWidget {
         color: context.themeColors.coinAmberColor,
       ),
       icon: Assets.icons.icCoin.svg(width: AppSize.w19, height: AppSize.w19),
-      onPressed: () {
-        context.pushNamed(AppRoutes.withdraw);
-      },
+      onPressed: () => context.pushNamed(AppRoutes.withdraw,
+          extra: context.read<HomeProvider>().withdrawNativeAd),
     );
   }
 }
@@ -202,7 +204,8 @@ class _DaysPill extends StatelessWidget {
         width: AppSize.w19,
         height: AppSize.w19,
       ),
-      onPressed: () => context.pushNamed(AppRoutes.dailyCheckIn),
+      onPressed: () => context.pushNamed(AppRoutes.dailyCheckIn,
+          extra: context.read<HomeProvider>().dailyCheckInNativeAd),
     );
   }
 }
@@ -326,7 +329,8 @@ class _BalanceCard extends StatelessWidget {
                       fontSize: AppSize.sp15,
                       color: context.themeColors.whiteColor,
                     ),
-                    onPressed: () => context.pushNamed(AppRoutes.withdraw),
+                    onPressed: () => context.pushNamed(AppRoutes.withdraw,
+                        extra: context.read<HomeProvider>().withdrawNativeAd),
                   ),
                 ),
               ),
@@ -614,48 +618,57 @@ class _EarnGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final rc = RemoteConfigService.instance;
+    final hp = context.read<HomeProvider>();
     final items = [
       _EarnItem(
         title: context.l10n.quizMaster,
         subtitle: context.l10n.answerAndEarn,
         reward: '+${rc.quizPerQuestionReward * 6}',
         illustration: _EarnIllustration.quiz,
-        routeName: AppRoutes.quiz,
+        onTap: () => context.pushNamed(AppRoutes.quiz, extra: hp.quizNativeAd),
       ),
       _EarnItem(
         title: context.l10n.spinWheel,
         subtitle: context.l10n.spinAndWin,
         reward: '+${rc.spinBoardRewardValues.isNotEmpty ? rc.spinBoardRewardValues.reduce((a, b) => a > b ? a : b) : 30}',
         illustration: _EarnIllustration.spin,
-        routeName: AppRoutes.spinWheel,
+        onTap: () => context.pushNamed(AppRoutes.spinWheel),
       ),
       _EarnItem(
         title: context.l10n.scratchCard,
         subtitle: context.l10n.scratchAndReveal,
         reward: '+${rc.scrachMaxReward}',
         illustration: _EarnIllustration.scratch,
-        routeName: AppRoutes.scratchCard,
+        onTap: () => context.pushNamed(AppRoutes.scratchCard, extra: hp.scratchNativeAd),
       ),
       _EarnItem(
         title: context.l10n.webVisits,
         subtitle: context.l10n.visitAndEarn,
         reward: '+${rc.webVisitRewardCoins}',
         illustration: _EarnIllustration.web,
-        routeName: AppRoutes.webVisits,
+        onTap: () {
+          final ads = hp.webVisitsAds;
+          context.pushNamed(AppRoutes.webVisits,
+              extra: WebVisitsScreenArgs(nativeAd1: ads.ad1, nativeAd2: ads.ad2));
+        },
       ),
       _EarnItem(
         title: context.l10n.gameZone,
         subtitle: context.l10n.playGames,
         reward: '+${rc.gameVisitRewardCoins}',
         illustration: _EarnIllustration.game,
-        routeName: AppRoutes.gameZone,
+        onTap: () {
+          final ads = hp.gameZoneAds;
+          context.pushNamed(AppRoutes.gameZone,
+              extra: GameZoneScreenArgs(nativeAd1: ads.ad1, nativeAd2: ads.ad2));
+        },
       ),
       _EarnItem(
         title: context.l10n.referAndEarn,
         subtitle: context.l10n.inviteFriends,
         reward: '+${rc.referralRewardAmount}',
         illustration: _EarnIllustration.refer,
-        routeName: AppRoutes.referAndEarn,
+        onTap: () => context.pushNamed(AppRoutes.referAndEarn),
       ),
     ];
 
@@ -682,14 +695,14 @@ class _EarnItem {
     required this.subtitle,
     required this.reward,
     required this.illustration,
-    this.routeName,
+    this.onTap,
   });
 
   final String title;
   final String subtitle;
   final String reward;
   final _EarnIllustration illustration;
-  final String? routeName;
+  final VoidCallback? onTap;
 }
 
 class _EarnTile extends StatelessWidget {
@@ -700,9 +713,7 @@ class _EarnTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
-      onTap: item.routeName != null
-          ? () => context.pushNamed(item.routeName!)
-          : null,
+      onTap: item.onTap,
       child: Container(
         padding: EdgeInsets.symmetric(vertical: AppSize.w12),
         decoration: BoxDecoration(
@@ -842,7 +853,8 @@ class _HowItWorksCard extends StatelessWidget {
             borderRadius: AppSize.r16,
             wallOffset: 4,
             icon: Icon(Icons.question_mark, size: AppSize.h30),
-            onPressed: () => context.pushNamed(AppRoutes.howItWorks),
+            onPressed: () => context.pushNamed(AppRoutes.howItWorks,
+                extra: context.read<HomeProvider>().howItWorksNativeAd),
           ),
           SizedBox(width: AppSize.w14),
           Expanded(
@@ -886,7 +898,8 @@ class _HowItWorksCard extends StatelessWidget {
               fontWeight: FontWeight.w800,
               color: context.themeColors.whiteColor,
             ),
-            onPressed: () => context.pushNamed(AppRoutes.howItWorks),
+            onPressed: () => context.pushNamed(AppRoutes.howItWorks,
+                extra: context.read<HomeProvider>().howItWorksNativeAd),
           ),
         ],
       ),
@@ -916,7 +929,11 @@ class _BottomShortcuts extends StatelessWidget {
             topLabel: context.l10n.xp,
             title: context.l10n.achievements,
             icon: Assets.icons.icAchievements.svg(),
-            onTap: () => context.pushNamed(AppRoutes.achievements),
+            onTap: () {
+              final ads = context.read<HomeProvider>().achievementsAds;
+              context.pushNamed(AppRoutes.achievements,
+                  extra: AchievementsScreenArgs(nativeAd1: ads.ad1, nativeAd2: ads.ad2));
+            },
           ),
         ),
       ],

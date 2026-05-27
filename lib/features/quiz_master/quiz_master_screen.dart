@@ -212,7 +212,8 @@ int get _coinsPerCorrect => RemoteConfigService.instance.quizPerQuestionReward;
 // ── Main screen ───────────────────────────────────────────────────────────────
 
 class QuizMasterScreen extends StatefulWidget {
-  const QuizMasterScreen({super.key});
+  const QuizMasterScreen({super.key, this.preloadedNative});
+  final InlineAdManager? preloadedNative;
 
   @override
   State<QuizMasterScreen> createState() => _QuizMasterScreenState();
@@ -230,7 +231,6 @@ class _QuizMasterScreenState extends State<QuizMasterScreen> {
   int _secondsLeft = _kSecondsPerQuestion;
   Timer? _timer;
 
-  InlineAdManager? _nativeAd;
 
   // History of last 5 answers (true = correct, false = wrong/skipped)
   final List<bool> _history = [];
@@ -257,21 +257,11 @@ class _QuizMasterScreenState extends State<QuizMasterScreen> {
       screenClass: 'QuizMasterScreen',
     );
     _startTimer();
-    _loadAd();
-  }
-
-  Future<void> _loadAd() async {
-    _nativeAd = InlineAdManager(
-      adData: RemoteConfigService.instance.quizMasterNative,
-    );
-    await _nativeAd!.load();
-    if (mounted) setState(() {});
   }
 
   @override
   void dispose() {
     _timer?.cancel();
-    _nativeAd?.dispose();
     super.dispose();
   }
 
@@ -377,7 +367,7 @@ class _QuizMasterScreenState extends State<QuizMasterScreen> {
       },
       child: Scaffold(
         backgroundColor: context.themeColors.backgroundColor,
-        bottomNavigationBar: AdSlot(ad: _nativeAd),
+        bottomNavigationBar: AdSlot(ad: widget.preloadedNative),
         body: SafeArea(
           child: Column(
             children: [

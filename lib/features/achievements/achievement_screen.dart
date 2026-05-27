@@ -1,3 +1,4 @@
+import 'package:ad_manager/ad_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:provider/provider.dart';
@@ -13,17 +14,25 @@ import '../../widgets/ad_slot.dart';
 import '../../widgets/app_button.dart';
 import 'provider/achievement_provider.dart';
 
+// ── Screen args ───────────────────────────────────────────────────────────────
+
+class AchievementsScreenArgs {
+  const AchievementsScreenArgs({this.nativeAd1, this.nativeAd2});
+  final InlineAdManager? nativeAd1;
+  final InlineAdManager? nativeAd2;
+}
 
 // ── Screen ────────────────────────────────────────────────────────────────────
 
 class AchievementScreen extends StatelessWidget {
-  const AchievementScreen({super.key});
+  const AchievementScreen({super.key, this.args});
+  final AchievementsScreenArgs? args;
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (_) => AchievementProvider(),
-      child: const _AchievementBody(),
+      child: _AchievementBody(args: args),
     );
   }
 }
@@ -31,7 +40,8 @@ class AchievementScreen extends StatelessWidget {
 // ── Body ──────────────────────────────────────────────────────────────────────
 
 class _AchievementBody extends StatefulWidget {
-  const _AchievementBody();
+  const _AchievementBody({this.args});
+  final AchievementsScreenArgs? args;
 
   @override
   State<_AchievementBody> createState() => _AchievementBodyState();
@@ -63,7 +73,7 @@ class _AchievementBodyState extends State<_AchievementBody> {
           onBack: () => NavigationHelper().handleBackPress(context),
         ),
         bottomNavigationBar: AdSlot(
-          ad: context.watch<AchievementProvider>().nativeAd2,
+          ad: widget.args?.nativeAd2,
         ),
         body: Consumer<AchievementProvider>(
           builder: (context, prov, _) {
@@ -85,11 +95,11 @@ class _AchievementBodyState extends State<_AchievementBody> {
               ),
               itemCount: totalCount,
               itemBuilder: (context, index) {
-                if (index == adIndex && prov.nativeAd1!.adData.enabled) {
+                if (index == adIndex && (widget.args?.nativeAd1?.adData.enabled ?? false)) {
                   return Padding(
                     padding: EdgeInsets.only(bottom: AppSize.h12),
                     child: AdSlot(
-                      ad: prov.nativeAd1,
+                      ad: widget.args?.nativeAd1,
                       safeAreaTop: false,
                       safeAreaBottom: false,
                     ),

@@ -670,4 +670,14 @@
       }
     }
   }
+,
+
+  "linkGoogleAccount": "ربط حساب جوجل",
+  "@linkGoogleAccount": {},
+
+  "googleAccountLinkedSuccess": "تم ربط حساب جوجل بنجاح!",
+  "@googleAccountLinkedSuccess": {},
+
+  "rateUs": "قيّمنا",
+  "@rateUs": {}
 }

@@ -148,7 +148,7 @@ class _AchievementBodyState extends State<_AchievementBody> {
     if (success) {
       _showClaimSuccess(def);
     } else {
-      'Could not claim reward. Try again.'.showErrorAlert();
+      context.l10n.couldNotClaimReward.showErrorAlert();
     }
   }
 
@@ -210,7 +210,7 @@ class _AppBar extends StatelessWidget implements PreferredSizeWidget {
           ),
           leadingWidth: AppSize.w50,
           title: Text(
-            'Achievements',
+            context.l10n.achievements,
             style: context.textTheme.titleSmall?.copyWith(
               fontSize: AppSize.sp19,
               fontWeight: FontWeight.w800,
@@ -294,7 +294,7 @@ class _AchievementCard extends StatelessWidget {
                 // In-progress / claimable: buttonColor2 — same look, onPressed guards action
                 // Claimed:                 successColor (green)
                 AppButton(
-                  text: isClaimed ? 'Claimed' : 'Claim',
+                  text: isClaimed ? context.l10n.claimed : context.l10n.claim,
                   isAdjust: true,
                   buttonColor: isClaimed
                       ? context.themeColors.successColor
@@ -326,7 +326,7 @@ class _AchievementCard extends StatelessWidget {
                 ),
                 SizedBox(width: AppSize.w3),
                 Text(
-                  '+${def.reward} Coins',
+                  context.l10n.coinsReward(def.reward),
                   style: context.textTheme.titleLarge?.copyWith(
                     color: context.themeColors.coinAmberColor,
                     fontWeight: FontWeight.w800,
@@ -434,7 +434,7 @@ class _ClaimSuccessSheet extends StatelessWidget {
           ),
           SizedBox(height: AppSize.h16),
           Text(
-            'Achievement Unlocked!',
+            context.l10n.achievementUnlocked,
             style: context.textTheme.titleLarge?.copyWith(
               fontSize: AppSize.sp22,
               fontWeight: FontWeight.w800,
@@ -459,7 +459,7 @@ class _ClaimSuccessSheet extends StatelessWidget {
               ),
               SizedBox(width: AppSize.w6),
               Text(
-                '+${def.reward} Coins Awarded!',
+                context.l10n.coinsAwarded(def.reward),
                 style: context.textTheme.bodyLarge?.copyWith(
                   color: context.themeColors.coinGoldColor,
                   fontWeight: FontWeight.w700,
@@ -470,7 +470,7 @@ class _ClaimSuccessSheet extends StatelessWidget {
           ),
           SizedBox(height: AppSize.h28),
           AppButton(
-            text: 'Awesome!',
+            text: context.l10n.awesome,
             buttonColor: context.themeColors.buttonColor2,
             shadowColor: context.themeColors.buttonBorderColor2,
             foregroundColor: context.themeColors.whiteColor,

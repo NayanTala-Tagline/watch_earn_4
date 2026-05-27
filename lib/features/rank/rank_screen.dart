@@ -40,7 +40,7 @@ class _RankScreenState extends State<RankScreen> {
             },
             child: Scaffold(
               backgroundColor: context.themeColors.backgroundColor,
-              appBar: CommonAppBar(titleText: 'Top Earners', showLeading: false,),
+              appBar: CommonAppBar(titleText: context.l10n.topEarners, showLeading: false,),
               body: provider.isLoading
                   ? const Center(child: CircularProgressIndicator())
                   : provider.error != null
@@ -128,7 +128,7 @@ class _RefreshTimerRow extends StatelessWidget {
           ),
           SizedBox(width: AppSize.w8),
           Text(
-            canRefresh ? 'Pull down to refresh' : 'Refreshes in $formattedTimer',
+            canRefresh ? context.l10n.pullDownToRefresh : context.l10n.refreshesIn(formattedTimer),
             style: context.textTheme.bodyMedium?.copyWith(
               color: canRefresh
                   ? colors.successColor
@@ -171,7 +171,7 @@ class _TableHeader extends StatelessWidget {
           SizedBox(
             width: AppSize.w30,
             child: Text(
-              '#',
+              context.l10n.rankHash,
               style: context.textTheme.titleSmall?.copyWith(
                 fontWeight: FontWeight.w700,
                 color: _RankColors.title,
@@ -180,7 +180,7 @@ class _TableHeader extends StatelessWidget {
           ),
           Expanded(
             child: Text(
-              'Player',
+              context.l10n.rankPlayer,
               style: context.textTheme.titleSmall?.copyWith(
                 fontWeight: FontWeight.w700,
                 color: _RankColors.title,
@@ -188,7 +188,7 @@ class _TableHeader extends StatelessWidget {
             ),
           ),
           Text(
-            'Coins',
+            context.l10n.rankCoins,
             style: context.textTheme.titleSmall?.copyWith(
               fontWeight: FontWeight.w700,
               color: _RankColors.title,
@@ -447,7 +447,7 @@ class _RankRow extends StatelessWidget {
                 ),
                 SizedBox(height: AppSize.h2),
                 Text(
-                  'Lv. ${user.level}  ${user.tier}',
+                  context.l10n.lvTierValue(user.level, user.tier),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: context.textTheme.titleSmall?.copyWith(

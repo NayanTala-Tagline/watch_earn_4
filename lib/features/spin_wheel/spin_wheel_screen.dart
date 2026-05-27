@@ -215,7 +215,7 @@ class _AppBar extends StatelessWidget {
             ),
           ),
           Text(
-            'Spin & Win',
+            context.l10n.spinAndWinTitle,
             style: context.textTheme.titleLarge?.copyWith(
               fontSize: AppSize.sp18,
               color: context.themeColors.navyColor,
@@ -260,7 +260,7 @@ class _WelcomeBody extends StatelessWidget {
 
           // Headline
           Text(
-            'Take a spin.\nStack the coins.',
+            context.l10n.takeSpin,
             textAlign: TextAlign.center,
             style: context.textTheme.titleLarge?.copyWith(
               fontSize: AppSize.sp28,
@@ -294,9 +294,9 @@ class _WelcomeBody extends StatelessWidget {
           // Info cards row
           Row(
             spacing: AppSize.w12,
-            children: const [
-              Expanded(child: _InfoCard(label: 'Possible Win', value: 'Up to \$1.00')),
-              Expanded(child: _InfoCard(label: 'Streak Bonus', value: 'x2')),
+            children: [
+              Expanded(child: _InfoCard(label: context.l10n.possibleWin, value: context.l10n.upToOneDollar)),
+              Expanded(child: _InfoCard(label: context.l10n.streakBonus, value: context.l10n.x2)),
             ],
           )
               .animate()
@@ -307,7 +307,7 @@ class _WelcomeBody extends StatelessWidget {
 
           // Get Started button
           AppButton(
-            text: 'Get Started',
+            text: context.l10n.getStarted,
             buttonColor: context.themeColors.buttonColor2,
             shadowColor: context.themeColors.buttonBorderColor2,
             foregroundColor: context.themeColors.whiteColor,
@@ -367,7 +367,7 @@ class _SpinBody extends StatelessWidget {
 
           // Headline
           Text(
-            'Earn Coins Easily by\nSpinning Wheel',
+            context.l10n.earnCoinsBySpinning,
             textAlign: TextAlign.center,
             style: context.textTheme.titleLarge?.copyWith(
               fontSize: AppSize.sp22,
@@ -394,7 +394,7 @@ class _SpinBody extends StatelessWidget {
           SizedBox(height: AppSize.h20),
 
           AppButton(
-            text: isSpinning ? 'Spinning...' : 'Spin Now',
+            text: isSpinning ? context.l10n.spinning : context.l10n.spinNow,
             buttonColor: context.themeColors.buttonColor2,
             shadowColor: context.themeColors.buttonBorderColor2,
             foregroundColor: context.themeColors.whiteColor,
@@ -524,7 +524,7 @@ class _SpinsLeftBadge extends StatelessWidget {
           Text('🔥', style: TextStyle(fontSize: AppSize.sp16)),
           SizedBox(width: AppSize.w6),
           Text(
-            '$count Spins Left Today',
+            context.l10n.spinsLeftToday(count),
             style: context.textTheme.titleMedium?.copyWith(
               color: context.themeColors.buttonColor2,
             ),
@@ -653,16 +653,14 @@ class _ResultSheet extends StatelessWidget {
   // Trophy circle diameter; half used for the spacer / negative top offset.
   static const double _trophyD = 104.0;
 
-  String get _title => isLoss ? 'Oops!' : 'Congratulations..!';
-
-  String get _subtitle {
-    if (isLoss) return 'Better luck next time!';
-    if (isXp) return 'You earned +XP Bonus!';
-    return 'You won $coins Coins';
-  }
-
   @override
   Widget build(BuildContext context) {
+    final title = isLoss ? context.l10n.oops : context.l10n.congratulations;
+    final subtitle = isLoss
+        ? context.l10n.betterLuckNextTime
+        : isXp
+            ? context.l10n.youEarnedXpBonus
+            : context.l10n.youWonCoins(coins);
     final half = (_trophyD / 2).r;
     final bottomPad = MediaQuery.of(context).padding.bottom;
 
@@ -716,7 +714,7 @@ class _ResultSheet extends StatelessWidget {
 
                   // Title
                   Text(
-                    _title,
+                    title,
                     textAlign: TextAlign.center,
                     style: context.textTheme.titleLarge?.copyWith(
                       fontSize: AppSize.sp26,
@@ -729,7 +727,7 @@ class _ResultSheet extends StatelessWidget {
 
                   // Subtitle
                   Text(
-                    _subtitle,
+                    subtitle,
                     textAlign: TextAlign.center,
                     style: context.textTheme.bodyLarge?.copyWith(
                       fontSize: AppSize.sp16,
@@ -740,7 +738,7 @@ class _ResultSheet extends StatelessWidget {
                   SizedBox(height: AppSize.h28),
                   if(!isLoss)
                     Text(
-                      'This section may contain ads',
+                      context.l10n.sectionContainsAds,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: context.textTheme.bodyMedium?.copyWith(
@@ -751,7 +749,7 @@ class _ResultSheet extends StatelessWidget {
                     ),
                   // Claim / Try Again button
                   AppButton(
-                    text: isLoss ? 'Try Again' : 'Claim Now',
+                    text: isLoss ? context.l10n.tryAgain : context.l10n.claimNow,
                     buttonColor: context.themeColors.buttonColor,
                     shadowColor: context.themeColors.buttonBorderColor,
                     foregroundColor: context.themeColors.whiteColor,

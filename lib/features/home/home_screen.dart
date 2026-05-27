@@ -82,7 +82,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           SizedBox(height: AppSize.h5),
                        ],
-                        _hPad(_sectionTitle(context, 'Earn Money')),
+                        _hPad(_sectionTitle(context, context.l10n.earnMoney)),
                         SizedBox(height: AppSize.h14),
                         _hPad(const _EarnGrid()),
                         SizedBox(height: AppSize.h16),
@@ -185,7 +185,7 @@ class _DaysPill extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppButton(
-      text: '$days Days',
+      text: context.l10n.daysValue(days),
       isAdjust: true,
       buttonColor: context.themeColors.daysPillSurfaceColor,
       shadowColor: context.themeColors.buttonColor2,
@@ -246,7 +246,7 @@ class _BalanceCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Total Balance',
+            context.l10n.totalBalance,
             style: context.textTheme.bodyLarge?.copyWith(
               fontSize: AppSize.sp13,
               color: context.themeTextColors.bodyTextColor,
@@ -276,7 +276,7 @@ class _BalanceCard extends StatelessWidget {
           SizedBox(height: AppSize.h12),
           Row(
             children: [
-              _CoinPill(label: '$coins Coins'),
+              _CoinPill(label: context.l10n.coinsValue(coins)),
               SizedBox(width: AppSize.w10),
               Container(
                 padding: EdgeInsets.symmetric(
@@ -297,7 +297,7 @@ class _BalanceCard extends StatelessWidget {
                     ),
                     SizedBox(width: AppSize.w4),
                     Text(
-                      'LV $level - $xp XP',
+                      context.l10n.lvXpValue(level, xp),
                       style: context.textTheme.titleLarge?.copyWith(
                         fontSize: AppSize.sp12,
                         fontWeight: FontWeight.w900,
@@ -316,7 +316,7 @@ class _BalanceCard extends StatelessWidget {
                 child: SizedBox(
                   height: 55,
                   child: AppButton(
-                    text: 'Withdraw',
+                    text: context.l10n.withdraw,
                     buttonColor: context.themeColors.buttonColor,
                     shadowColor: context.themeColors.buttonBorderColor,
                     foregroundColor: context.themeColors.whiteColor,
@@ -335,7 +335,7 @@ class _BalanceCard extends StatelessWidget {
                 child: SizedBox(
                   height: 56,
                   child: AppButton(
-                    text: 'Rewards',
+                    text: context.l10n.rewards,
                     isFillButton: false,
                     borderRadius: AppSize.r28,
                     borderColor: context.themeColors.borderColor2,
@@ -447,7 +447,7 @@ class _DailyRewardCard extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  'Daily Reward - Day $day',
+                  context.l10n.dailyRewardDay(day),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: context.textTheme.titleMedium?.copyWith(
@@ -458,8 +458,8 @@ class _DailyRewardCard extends StatelessWidget {
                 SizedBox(height: AppSize.h2),
                 Text(
                   isClaimed
-                      ? 'Claimed today! Come back tomorrow'
-                      : 'Collect +$rewardCoins coins',
+                      ? context.l10n.claimedTodayComeBack
+                      : context.l10n.collectCoins(rewardCoins),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: context.textTheme.titleSmall?.copyWith(
@@ -467,8 +467,9 @@ class _DailyRewardCard extends StatelessWidget {
                     color: context.themeTextColors.bodyTextColor,
                   ),
                 ),
+                if(!isClaimed)
                 Text(
-                  'This section may contain ads',
+                  context.l10n.sectionContainsAds,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: context.textTheme.bodyMedium?.copyWith(
@@ -482,7 +483,7 @@ class _DailyRewardCard extends StatelessWidget {
           ),
           SizedBox(width: AppSize.w8),
           AppButton(
-            text: isClaimed ? 'Claimed' : 'Claim',
+            text: isClaimed ? context.l10n.claimed : context.l10n.claim,
             isAdjust: true,
             buttonColor: context.themeColors.buttonColor2,
             shadowColor: context.themeColors.buttonBorderColor2,
@@ -518,15 +519,15 @@ class _StatsRow extends StatelessWidget {
         Expanded(
           child: _StatCard(
             icon: Assets.icons.icCoin.svg(width: AppSize.w20, height: AppSize.w20),
-            label: 'Level',
-            value: 'LV $level',
+            label: context.l10n.level,
+            value: context.l10n.lvValue(level),
           ),
         ),
         SizedBox(width: AppSize.w10),
         Expanded(
           child: _StatCard(
             icon: Assets.icons.icXp.svg(width: AppSize.w15, height: AppSize.w15),
-            label: 'XP',
+            label: context.l10n.xp,
             value: '$xp',
           ),
         ),
@@ -534,8 +535,8 @@ class _StatsRow extends StatelessWidget {
         Expanded(
           child: _StatCard(
             icon: Assets.icons.icRank.svg(width: AppSize.w15, height: AppSize.w15),
-            label: 'Rank',
-            value: 'Top',
+            label: context.l10n.rank,
+            value: context.l10n.top,
           ),
         ),
       ],
@@ -615,43 +616,43 @@ class _EarnGrid extends StatelessWidget {
     final rc = RemoteConfigService.instance;
     final items = [
       _EarnItem(
-        title: 'Quiz Master',
-        subtitle: 'Answer & Earn',
+        title: context.l10n.quizMaster,
+        subtitle: context.l10n.answerAndEarn,
         reward: '+${rc.quizPerQuestionReward * 6}',
         illustration: _EarnIllustration.quiz,
         routeName: AppRoutes.quiz,
       ),
       _EarnItem(
-        title: 'Spin Wheel',
-        subtitle: 'Spin and Win',
+        title: context.l10n.spinWheel,
+        subtitle: context.l10n.spinAndWin,
         reward: '+${rc.spinBoardRewardValues.isNotEmpty ? rc.spinBoardRewardValues.reduce((a, b) => a > b ? a : b) : 30}',
         illustration: _EarnIllustration.spin,
         routeName: AppRoutes.spinWheel,
       ),
       _EarnItem(
-        title: 'Scratch Card',
-        subtitle: 'Scratch and Reveal',
+        title: context.l10n.scratchCard,
+        subtitle: context.l10n.scratchAndReveal,
         reward: '+${rc.scrachMaxReward}',
         illustration: _EarnIllustration.scratch,
         routeName: AppRoutes.scratchCard,
       ),
       _EarnItem(
-        title: 'Web Visits',
-        subtitle: 'Visit & Earn',
+        title: context.l10n.webVisits,
+        subtitle: context.l10n.visitAndEarn,
         reward: '+${rc.webVisitRewardCoins}',
         illustration: _EarnIllustration.web,
         routeName: AppRoutes.webVisits,
       ),
       _EarnItem(
-        title: 'Game Zone',
-        subtitle: 'Play Games',
+        title: context.l10n.gameZone,
+        subtitle: context.l10n.playGames,
         reward: '+${rc.gameVisitRewardCoins}',
         illustration: _EarnIllustration.game,
         routeName: AppRoutes.gameZone,
       ),
       _EarnItem(
-        title: 'Refer & Earn',
-        subtitle: 'Invite Friends',
+        title: context.l10n.referAndEarn,
+        subtitle: context.l10n.inviteFriends,
         reward: '+${rc.referralRewardAmount}',
         illustration: _EarnIllustration.refer,
         routeName: AppRoutes.referAndEarn,
@@ -850,7 +851,7 @@ class _HowItWorksCard extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  'How It Works',
+                  context.l10n.howItWorks,
                   style: context.textTheme.titleLarge?.copyWith(
                     fontSize: AppSize.sp15,
                     fontWeight: FontWeight.w900,
@@ -859,7 +860,7 @@ class _HowItWorksCard extends StatelessWidget {
                 ),
                 SizedBox(height: AppSize.h4),
                 Text(
-                  'Learn Step-by-Step how to\nearn money',
+                  context.l10n.howItWorksSubtitle,
                   style: context.textTheme.titleSmall?.copyWith(
                     fontSize: AppSize.sp12,
                     color: context.themeTextColors.bodyTextColor,
@@ -871,7 +872,7 @@ class _HowItWorksCard extends StatelessWidget {
           ),
           SizedBox(width: AppSize.w8),
           AppButton(
-            text: 'Learn',
+            text: context.l10n.learn,
             isAdjust: true,
             buttonColor: context.themeColors.buttonColor,
             shadowColor: context.themeColors.buttonBorderColor,
@@ -903,8 +904,8 @@ class _BottomShortcuts extends StatelessWidget {
       children: [
         Expanded(
           child: _ShortcutCard(
-            topLabel: 'See top earner',
-            title: 'Leader board',
+            topLabel: context.l10n.seeTopEarner,
+            title: context.l10n.leaderBoard,
             icon: Assets.icons.icLeaderboard.svg(),
             onTap: () => context.pushNamed(AppRoutes.rank),
           ),
@@ -912,8 +913,8 @@ class _BottomShortcuts extends StatelessWidget {
         SizedBox(width: AppSize.w12),
         Expanded(
           child: _ShortcutCard(
-            topLabel: 'XP',
-            title: 'Achievements',
+            topLabel: context.l10n.xp,
+            title: context.l10n.achievements,
             icon: Assets.icons.icAchievements.svg(),
             onTap: () => context.pushNamed(AppRoutes.achievements),
           ),

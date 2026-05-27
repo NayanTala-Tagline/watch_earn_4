@@ -63,7 +63,7 @@ class _ProfileBodyState extends State<_ProfileBody> {
 
     return Scaffold(
       backgroundColor: colors.backgroundColor,
-      appBar: CommonAppBar(titleText: 'Profile', showLeading: false),
+      appBar: CommonAppBar(titleText: context.l10n.profile, showLeading: false),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: EdgeInsets.symmetric(horizontal: AppSize.w20),
@@ -153,7 +153,7 @@ class _ProfileBodyState extends State<_ProfileBody> {
               GestureDetector(
                 onTap: () => _handleSignOut(context, provider),
                 child: Text(
-                  'Sign Out',
+                  context.l10n.signOut,
                   style: context.textTheme.bodyMedium?.copyWith(
                     color: colors.primary,
                     fontSize: AppSize.sp16,
@@ -192,21 +192,21 @@ class _ProfileBodyState extends State<_ProfileBody> {
         children: [
           _SettingsTile(
             icon: Icons.volume_up_rounded,
-            label: 'Sound Effects',
+            label: context.l10n.soundEffects,
             trailing: _buildSwitch(context, provider.soundEffects, provider.toggleSoundEffects),
             textColors: textColors,
           ),
           // _divider(),
           _SettingsTile(
             icon: Icons.vibration_rounded,
-            label: 'Haptic Feedback',
+            label: context.l10n.hapticFeedback,
             trailing: _buildSwitch(context, provider.hapticFeedback, provider.toggleHapticFeedback),
             textColors: textColors,
           ),
           // _divider(),
           _SettingsTile(
             icon: Icons.translate_rounded,
-            label: 'Language',
+            label: context.l10n.language,
             onTap: () => context.pushNamed(AppRoutes.language, extra: true),
             trailing: _buildChevron(context),
             textColors: textColors,
@@ -214,7 +214,7 @@ class _ProfileBodyState extends State<_ProfileBody> {
           // _divider(),
           _SettingsTile(
             icon: Icons.headset_mic_rounded,
-            label: 'Support',
+            label: context.l10n.support,
             onTap: () => context.pushNamed(AppRoutes.contactUs),
             trailing: _buildChevron(context),
             textColors: textColors,
@@ -222,7 +222,7 @@ class _ProfileBodyState extends State<_ProfileBody> {
           // _divider(),
           _SettingsTile(
             icon: Icons.lock_outline_rounded,
-            label: 'Privacy Policy',
+            label: context.l10n.privacyPolicy,
             onTap: () => _launchUrl(
               RemoteConfigService.instance.privacyPolicyUrl,
               'Privacy Policy',
@@ -233,7 +233,7 @@ class _ProfileBodyState extends State<_ProfileBody> {
           // _divider(),
           _SettingsTile(
             icon: Icons.description_outlined,
-            label: 'Terms & Condition',
+            label: context.l10n.termsAndCondition,
             onTap: () => _launchUrl(
               RemoteConfigService.instance.termsAndConditions,
               'Terms & Conditions',
@@ -243,7 +243,7 @@ class _ProfileBodyState extends State<_ProfileBody> {
           ),
           _SettingsTile(
             icon: Icons.delete_forever_outlined,
-            label: 'Delete Account',
+            label: context.l10n.deleteAccount,
             onTap: () => _handleDeleteAccount(context, provider),
             trailing: Icon(
               Icons.chevron_right_rounded,
@@ -301,14 +301,14 @@ class _ProfileBodyState extends State<_ProfileBody> {
           borderRadius: BorderRadius.circular(AppSize.r16),
         ),
         title: Text(
-          'Sign Out',
+          ctx.l10n.signOut,
           style: ctx.textTheme.titleLarge?.copyWith(
             fontWeight: FontWeight.w700,
             color: ctx.themeTextColors.textBlackColor,
           ),
         ),
         content: Text(
-          'Are you sure you want to sign out?',
+          ctx.l10n.areYouSureSignOut,
           style: ctx.textTheme.bodyMedium?.copyWith(
             color: ctx.themeTextColors.hintTextColor,
           ),
@@ -317,14 +317,14 @@ class _ProfileBodyState extends State<_ProfileBody> {
           TextButton(
             onPressed: () => Navigator.pop(ctx, false),
             child: Text(
-              'Cancel',
+              ctx.l10n.cancel,
               style: TextStyle(color: ctx.themeTextColors.hintTextColor),
             ),
           ),
           TextButton(
             onPressed: () => Navigator.pop(ctx, true),
             child: Text(
-              'Sign Out',
+              ctx.l10n.signOut,
               style: TextStyle(
                 color: ctx.themeColors.primary,
                 fontWeight: FontWeight.w600,
@@ -352,7 +352,7 @@ class _ProfileBodyState extends State<_ProfileBody> {
 
     LoadingOverlay.instance().show(
       context: context,
-      text: 'Deleting account...',
+      text: context.l10n.deletingAccount,
     );
     try {
       await provider.deleteAccount();
@@ -448,7 +448,7 @@ class _LevelBadge extends StatelessWidget {
           ),
           SizedBox(width: AppSize.w6),
           Text(
-            'Lv. ${level.toInt()} · $levelName',
+            context.l10n.lvDotLevel(level.toInt(), levelName),
             style: context.textTheme.titleMedium?.copyWith(
               color: context.themeColors.coinAmberColor,
               fontSize: AppSize.sp12,
@@ -502,7 +502,7 @@ class _LevelProgressCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Level Progress',
+                context.l10n.levelProgress,
                 style: context.textTheme.titleSmall?.copyWith(
                   fontSize: AppSize.sp15,
                   fontWeight: FontWeight.w700,
@@ -535,7 +535,7 @@ class _LevelProgressCard extends StatelessWidget {
           Row(
             children: [
               Text(
-                'Next:  ',
+                context.l10n.nextLevel,
                 style: context.textTheme.bodyMedium?.copyWith(
                   color: textColors.textBlackColor,
                   fontSize: AppSize.sp13,
@@ -670,7 +670,7 @@ class _DeleteAccountDialog extends StatelessWidget {
           ),
           SizedBox(height: AppSize.h14),
           Text(
-            'Delete Account?',
+            context.l10n.deleteAccountTitle,
             style: context.textTheme.titleLarge?.copyWith(
               color: colors.buttonColor2,
               fontWeight: FontWeight.w700,
@@ -681,7 +681,7 @@ class _DeleteAccountDialog extends StatelessWidget {
         ],
       ),
       content: Text(
-        'This will permanently delete your account and all your data. This action cannot be undone.',
+        context.l10n.deleteAccountDesc,
         textAlign: TextAlign.center,
         style: context.textTheme.bodyMedium?.copyWith(
           color: textColors.hintTextColor,
@@ -695,7 +695,7 @@ class _DeleteAccountDialog extends StatelessWidget {
           children: [
             Expanded(
               child: AppButton(
-                text: 'Cancel',
+                text: context.l10n.cancel,
                 buttonColor: context.themeColors.whiteColor,
                 shadowColor: context.themeColors.borderColor,
                 onPressed: () => Navigator.of(context).pop(false),
@@ -704,7 +704,7 @@ class _DeleteAccountDialog extends StatelessWidget {
             SizedBox(width: AppSize.w12),
             Expanded(
               child: AppButton(
-                text: 'Delete',
+                text: context.l10n.delete,
                 buttonColor: context.themeColors.buttonColor2,
                 shadowColor: context.themeColors.buttonBorderColor2,
                 foregroundColor: context.themeColors.whiteColor,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
+import '../../extension/ext_context.dart';
 import '../../extension/ext_string_alert.dart';
 import '../../provider/open_ad_provider.dart';
 import '../../utils/navigation_helper.dart';
@@ -41,7 +42,7 @@ class _BottomNavPageState extends State<BottomNavPage> {
     ProfileScreen(),
   ];
 
-  void _handlePop(BottomNavController controller) {
+  void _handlePop(BuildContext context, BottomNavController controller) {
     if (controller.index != 0) {
       controller.setIndex(0);
       return;
@@ -51,7 +52,7 @@ class _BottomNavPageState extends State<BottomNavPage> {
     if (_lastBackPressAt == null ||
         now.difference(_lastBackPressAt!) > const Duration(seconds: 2)) {
       _lastBackPressAt = now;
-      'Press again to exit from app'.showInfoAlert();
+      context.l10n.pressAgainToExit.showInfoAlert();
       return;
     }
 
@@ -74,7 +75,7 @@ class _BottomNavPageState extends State<BottomNavPage> {
             canPop: false,
             onPopInvokedWithResult: (didPop, _) {
               if (didPop) return;
-              _handlePop(controller);
+              _handlePop(context, controller);
             },
             child: Scaffold(
               body: IndexedStack(index: controller.index, children: _screens),

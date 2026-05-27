@@ -114,7 +114,7 @@ class NotificationSettingsDialog extends StatelessWidget {
             animatedIcon,
             SizedBox(height: AppSize.h12),
             Text(
-              'Notifications are off',
+              context.l10n.notificationsOff,
               textAlign: TextAlign.center,
               style: context.textTheme.titleLarge?.copyWith(
                 color: textColors.textColor,
@@ -124,7 +124,7 @@ class NotificationSettingsDialog extends StatelessWidget {
             ),
             SizedBox(height: AppSize.h10),
             Text(
-              'You blocked notifications earlier. Open device settings and enable notifications for Finlora to receive loan updates.',
+              context.l10n.notificationSettingsDesc,
               textAlign: TextAlign.center,
               style: context.textTheme.bodyMedium?.copyWith(
                 color: textColors.descriptionColor,
@@ -138,7 +138,7 @@ class NotificationSettingsDialog extends StatelessWidget {
               children: [
                 Expanded(
                   child: AppButton(
-                    text: 'Open Settings',
+                    text: context.l10n.openSettings,
                     onPressed: () {
                       Navigator.of(context).pop();
                       onOpenSettings();
@@ -165,7 +165,7 @@ class NotificationSettingsDialog extends StatelessWidget {
                         ),
                       ),
                       child: Text(
-                        'Cancel',
+                        context.l10n.cancel,
                         style: context.textTheme.titleSmall?.copyWith(
                           color: textColors.textColor,
                           fontWeight: FontWeight.w600,

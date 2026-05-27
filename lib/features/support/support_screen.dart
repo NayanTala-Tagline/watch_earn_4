@@ -50,6 +50,9 @@ class _SupportScreenState extends State<SupportScreen> {
     AnalyticsManager.instance.logEvent(name: 'support_ticket_submit_attempt');
     setState(() => _submitting = true);
 
+    final successMsg = context.l10n.ticketSubmittedSuccess;
+    final failMsg = context.l10n.ticketSubmitFailed;
+
     try {
       final db = Injector.instance<AppDB>();
       final user = db.userModel;
@@ -68,7 +71,7 @@ class _SupportScreenState extends State<SupportScreen> {
       'support_ticket submitted'.logI;
 
       if (!mounted) return;
-      'Support ticket submitted successfully!'.showSuccessAlert();
+      successMsg.showSuccessAlert();
       context.pop();
     } catch (e) {
       AnalyticsManager.instance.logEvent(
@@ -77,7 +80,7 @@ class _SupportScreenState extends State<SupportScreen> {
       );
       'Failed to submit: $e'.logE;
       if (!mounted) return;
-      'Could not submit ticket. Please try again.'.showErrorAlert();
+      failMsg.showErrorAlert();
     } finally {
       if (mounted) setState(() => _submitting = false);
     }
@@ -96,7 +99,7 @@ class _SupportScreenState extends State<SupportScreen> {
       },
       child: Scaffold(
       backgroundColor: colors.backgroundColor,
-      appBar: CommonAppBar(titleText: 'Support'),
+      appBar: CommonAppBar(titleText: context.l10n.support),
       body: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
         behavior: HitTestBehavior.opaque,
@@ -116,7 +119,7 @@ class _SupportScreenState extends State<SupportScreen> {
               children: [
                 // Header
                 Text(
-                  'How can we help?',
+                  context.l10n.howCanWeHelp,
                   style: context.textTheme.titleLarge?.copyWith(
                     fontSize: AppSize.sp22,
                     fontWeight: FontWeight.w800,
@@ -125,8 +128,7 @@ class _SupportScreenState extends State<SupportScreen> {
                 ),
                 SizedBox(height: AppSize.h8),
                 Text(
-                  'Tell us what went wrong or what you need a hand with. '
-                  'Our team reviews every message.',
+                  context.l10n.supportDesc,
                   style: context.textTheme.bodyMedium?.copyWith(
                     color: textColors.bodyTextColor,
                     height: 1.45,
@@ -136,17 +138,17 @@ class _SupportScreenState extends State<SupportScreen> {
                 SizedBox(height: AppSize.h28),
 
                 // Title field
-                _FieldLabel('Title'),
+                _FieldLabel(context.l10n.titleLabel),
                 SizedBox(height: AppSize.h8),
                 _SupportField(
                   controller: _titleController,
-                  hint: 'Short summary of your issue',
+                  hint: context.l10n.titleHint,
                   maxLines: 1,
                   textInputAction: TextInputAction.next,
                   validator: (v) {
                     final value = v?.trim() ?? '';
-                    if (value.isEmpty) return 'Please add a title';
-                    if (value.length < 3) return 'Title is too short';
+                    if (value.isEmpty) return context.l10n.pleaseAddTitle;
+                    if (value.length < 3) return context.l10n.titleTooShort;
                     return null;
                   },
                 ),
@@ -154,17 +156,17 @@ class _SupportScreenState extends State<SupportScreen> {
                 SizedBox(height: AppSize.h20),
 
                 // Description field
-                _FieldLabel('Description'),
+                _FieldLabel(context.l10n.descriptionLabel),
                 SizedBox(height: AppSize.h8),
                 _SupportField(
                   controller: _descController,
-                  hint: 'Describe your issue in detail…',
+                  hint: context.l10n.descriptionHint,
                   maxLines: 6,
                   textInputAction: TextInputAction.newline,
                   validator: (v) {
                     final value = v?.trim() ?? '';
-                    if (value.isEmpty) return 'Please add a description';
-                    if (value.length < 10) return 'Description is too short';
+                    if (value.isEmpty) return context.l10n.pleaseAddDescription;
+                    if (value.length < 10) return context.l10n.descriptionTooShort;
                     return null;
                   },
                 ),
@@ -176,7 +178,7 @@ class _SupportScreenState extends State<SupportScreen> {
                   width: double.infinity,
                   height: AppSize.h56,
                   child: AppButton(
-                    text: _submitting ? 'Submitting…' : 'Submit',
+                    text: _submitting ? context.l10n.submitting : context.l10n.submit,
                     isLoading: _submitting,
                     buttonColor: colors.buttonColor,
                     shadowColor: colors.buttonBorderColor,

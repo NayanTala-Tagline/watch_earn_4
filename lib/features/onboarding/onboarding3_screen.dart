@@ -57,7 +57,7 @@ class _Onboarding3ScreenState extends State<Onboarding3Screen> {
                       AppSize.h16,
                     ),
                     child: AppButton(
-                      text: 'Start Earning',
+                      text: context.l10n.startEarning,
                       isLoading: prov.isLoading,
                       buttonColor: context.themeColors.buttonColor,
                       shadowColor: context.themeColors.buttonBorderColor,
@@ -112,7 +112,7 @@ class _Onboarding3ScreenState extends State<Onboarding3Screen> {
                           left: AppSize.w40,
                         ),
                         child: Text(
-                          'Skip',
+                          context.l10n.skip,
                           style: context.textTheme.bodyLarge?.copyWith(
                             fontSize: AppSize.sp16,
                             color: context.themeColors.navyColor,
@@ -149,7 +149,7 @@ class _Onboarding3ScreenState extends State<Onboarding3Screen> {
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: AppSize.w24),
                     child: Text(
-                      'Track Achievements',
+                      context.l10n.onboarding3Title,
                       style: context.textTheme.titleLarge?.copyWith(
                         fontSize: AppSize.sp28,
                         color: context.themeColors.navyColor,
@@ -173,7 +173,7 @@ class _Onboarding3ScreenState extends State<Onboarding3Screen> {
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: AppSize.w24),
                     child: Text(
-                      'See your achievements and Track it with other user through Leatherboard',
+                      context.l10n.onboarding3Desc,
                       style: context.textTheme.bodyMedium?.copyWith(
                         fontSize: AppSize.sp15,
                         color: context.themeTextColors.subtitleColor,

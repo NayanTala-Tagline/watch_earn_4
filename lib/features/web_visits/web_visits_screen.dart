@@ -238,7 +238,7 @@ class _WebVisitsContentState extends State<_WebVisitsContent>
       child: Scaffold(
         backgroundColor: context.themeColors.backgroundColor,
         appBar: CommonAppBar(
-          titleText: 'Web Visits',
+          titleText: context.l10n.webVisits,
           leading: _BackButton(
             onTap: () => NavigationHelper().handleBackPress(context),
           ),
@@ -392,7 +392,7 @@ class _VisitTile extends StatelessWidget {
                       Assets.icons.icCoin.svg(height: AppSize.h16, width: AppSize.h16),
                       SizedBox(width: AppSize.w3),
                       Text(
-                        '+$_coinsPerVisit Coins',
+                        context.l10n.plusCoinsValue(_coinsPerVisit),
                         style: context.textTheme.titleSmall?.copyWith(
                           fontSize: AppSize.sp13,
                           color: const Color(0xFFFF9500),
@@ -543,7 +543,7 @@ class _MissionBriefSheet extends StatelessWidget {
                 SizedBox(height: iconRadius + 5),
 
                 Text(
-                  'Mission Brief',
+                  context.l10n.missionBrief,
                   style: TextStyle(
                     fontFamily: FontFamily.kommonGrotesk,
                     fontSize: AppSize.sp28,
@@ -562,20 +562,20 @@ class _MissionBriefSheet extends StatelessWidget {
                     ),
                     children: [
                       TextSpan(
-                        text: 'Stay on the page for $durationSecs Secs., '
-                            'A countdown timer will appear. click ',
+                        text: context.l10n.missionBriefDuration(durationSecs),
                         style: context.textTheme.bodyLarge?.copyWith(
                           fontSize: AppSize.sp18,
                         ),
                       ),
                       TextSpan(
-                        text: '"CLAIM COIN"',
+                        text: context.l10n.claimCoinBold,
                         style: context.textTheme.bodyLarge?.copyWith(
                           fontSize: AppSize.sp18,
-                          fontWeight: FontWeight.w900
-                        )
+                          fontWeight: FontWeight.w900,
+                        ),
                       ),
-                      TextSpan(text: ' when ready!',
+                      TextSpan(
+                        text: context.l10n.whenReady,
                         style: context.textTheme.bodyLarge?.copyWith(
                           fontSize: AppSize.sp18,
                         ),
@@ -588,9 +588,9 @@ class _MissionBriefSheet extends StatelessWidget {
 
                 Row(
                   children: [
-                    Expanded(child: _OutlinePill(label: 'Cancel', onPressed: onCancel)),
+                    Expanded(child: _OutlinePill(label: context.l10n.cancel, onPressed: onCancel)),
                     SizedBox(width: AppSize.w12),
-                    Expanded(child: _CyanPill(label: 'Start Now', onPressed: onStart)),
+                    Expanded(child: _CyanPill(label: context.l10n.startNow, onPressed: onStart)),
                   ],
                 ),
               ],
@@ -637,7 +637,7 @@ class _CongratsSheet extends StatelessWidget {
           Assets.images.trophy.image(height: 90, width: 90, fit: BoxFit.contain),
           SizedBox(height: AppSize.h16),
           Text(
-            'Congratulations..!',
+            context.l10n.congratulations,
             style: context.textTheme.titleLarge?.copyWith(
               fontSize: AppSize.sp24,
               fontWeight: FontWeight.w800,
@@ -646,14 +646,14 @@ class _CongratsSheet extends StatelessWidget {
           ),
           SizedBox(height: AppSize.h8),
           Text(
-            'You won $coins Coins',
+            context.l10n.youWonCoins(coins),
             style: context.textTheme.bodyLarge?.copyWith(
               fontSize: AppSize.sp16,
               color: context.themeTextColors.textColor,
             ),
           ),
           SizedBox(height: AppSize.h28),
-          _CyanPill(label: 'Claim Coins', onPressed: onClaim),
+          _CyanPill(label: context.l10n.claimCoins, onPressed: onClaim),
         ],
       ),
     );
@@ -686,7 +686,7 @@ class _TimeFailSheet extends StatelessWidget {
           ),
           SizedBox(height: AppSize.h16),
           Text(
-            'Time Not Completed!',
+            context.l10n.timeNotCompleted,
             style: context.textTheme.titleLarge?.copyWith(
               fontSize: AppSize.sp22,
               fontWeight: FontWeight.w800,
@@ -695,7 +695,7 @@ class _TimeFailSheet extends StatelessWidget {
           ),
           SizedBox(height: AppSize.h8),
           Text(
-            'You stayed for ${elapsed}s out of ${required}s.\nPlease stay on the page for the full duration.',
+            context.l10n.timeNotCompletedDesc(elapsed, required),
             textAlign: TextAlign.center,
             style: context.textTheme.bodyMedium?.copyWith(
               color: context.themeTextColors.descriptionColor,
@@ -703,7 +703,7 @@ class _TimeFailSheet extends StatelessWidget {
             ),
           ),
           SizedBox(height: AppSize.h28),
-          _CyanPill(label: 'Try Again', onPressed: onDismiss),
+          _CyanPill(label: context.l10n.tryAgain, onPressed: onDismiss),
         ],
       ),
     );

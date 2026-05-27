@@ -16,40 +16,16 @@ class _Step {
   final String description;
 }
 
-const _steps = <_Step>[
-  _Step(
-    'What are Coins?',
-    'Coins are the main currency in this app. You can earn coins by completing tasks and exchange them for real money.',
-  ),
-  _Step(
-    'Daily Missions',
-    'Complete daily tasks like spinning the wheel, scratching cards, or answering quizzes. Each completed mission rewards you with coins.',
-  ),
-  _Step(
-    'Spin Wheel',
-    'Spin the lucky wheel to win instant coin rewards! Each spin can reward you with 10-500 coins.',
-  ),
-  _Step(
-    'Scratch Cards',
-    'Scratch virtual cards to reveal hidden coin rewards from 5 to 50 coins. Free cards daily!',
-  ),
-  _Step(
-    'Quiz Game',
-    'Answer trivia questions correctly to earn 22 coins per question. Build your combo streak.',
-  ),
-  _Step(
-    'Watch Ads',
-    'Watch short video ads to earn quick coins. Each ad rewards you instantly. Up to 10 ads per day.',
-  ),
-  _Step(
-    'Referral System',
-    'Share your referral code with friends. When they sign up and earn, you get bonus coins!',
-  ),
-  _Step(
-    'Withdraw Money',
-    'Once you reach the minimum threshold, convert your coins to real money via PayPal, bank transfer, or gift cards.',
-  ),
-];
+List<_Step> _buildSteps(BuildContext context) => [
+      _Step(context.l10n.stepWhatAreCoinsTitle, context.l10n.stepWhatAreCoinsDesc),
+      _Step(context.l10n.stepDailyMissionsTitle, context.l10n.stepDailyMissionsDesc),
+      _Step(context.l10n.stepSpinWheelTitle, context.l10n.stepSpinWheelDesc),
+      _Step(context.l10n.stepScratchCardsTitle, context.l10n.stepScratchCardsDesc),
+      _Step(context.l10n.stepQuizGameTitle, context.l10n.stepQuizGameDesc),
+      _Step(context.l10n.stepWatchAdsTitle, context.l10n.stepWatchAdsDesc),
+      _Step(context.l10n.stepReferralSystemTitle, context.l10n.stepReferralSystemDesc),
+      _Step(context.l10n.stepWithdrawMoneyTitle, context.l10n.stepWithdrawMoneyDesc),
+    ];
 
 class HowItWorksScreen extends StatefulWidget {
   const HowItWorksScreen({super.key});
@@ -127,13 +103,14 @@ class _HowItWorksScreenState extends State<HowItWorksScreen> {
                     AppSize.w16,
                     AppSize.h12,
                   ),
-                  itemCount: _steps.length,
+                  itemCount: _buildSteps(context).length,
                   itemBuilder: (context, index) {
+                    final steps = _buildSteps(context);
                     return Padding(
                       padding: EdgeInsets.only(bottom: AppSize.h12),
                       child: _StepCard(
                         index: index + 1,
-                        step: _steps[index],
+                        step: steps[index],
                       )
                           .animate()
                           .fadeIn(
@@ -204,7 +181,7 @@ class _AppBar extends StatelessWidget {
               child: Padding(
                 padding: EdgeInsets.only(right: AppSize.r40),
                 child: Text(
-                  'How It Works',
+                  context.l10n.howItWorks,
                   style: context.textTheme.titleSmall?.copyWith(
                     fontSize: AppSize.sp19,
                     fontWeight: FontWeight.w800,
@@ -329,7 +306,7 @@ class _ReadyCard extends StatelessWidget {
       child: Column(
         children: [
           Text(
-            'Ready to start earning?',
+            context.l10n.howItWorksReady,
             style: context.textTheme.titleLarge?.copyWith(
               fontSize: AppSize.sp16,
               fontWeight: FontWeight.w900,
@@ -338,7 +315,7 @@ class _ReadyCard extends StatelessWidget {
           ),
           SizedBox(height: AppSize.h14),
           AppButton(
-            text: 'Back to Home',
+            text: context.l10n.backToHome,
             buttonColor: context.themeColors.buttonColor,
             shadowColor: context.themeColors.buttonBorderColor,
             foregroundColor: context.themeColors.whiteColor,

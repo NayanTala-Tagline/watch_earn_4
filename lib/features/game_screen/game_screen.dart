@@ -81,7 +81,7 @@ class _GameSelectScreenState extends State<GameSelectScreen> {
 
   void _onConfirm() {
     if (_selected.isEmpty) {
-      'Please select at least one game'.showInfoAlert();
+      context.l10n.pleaseSelectGame.showInfoAlert();
       return;
     }
     context.goNamed(AppRoutes.currency);
@@ -110,7 +110,7 @@ class _GameSelectScreenState extends State<GameSelectScreen> {
                   children: [
                     Expanded(
                       child: Text(
-                        'Which Game do you like?',
+                        context.l10n.whichGame,
                         textAlign: TextAlign.center,
                         style: context.textTheme.titleLarge?.copyWith(
                           fontSize: AppSize.sp24,
@@ -127,7 +127,7 @@ class _GameSelectScreenState extends State<GameSelectScreen> {
                   children: [
                     Expanded(
                       child: Text(
-                        'Select your fav Games which are you want to play',
+                        context.l10n.selectFavGames,
                         textAlign: TextAlign.center,
                         style: context.textTheme.bodyMedium?.copyWith(
                           color: context.themeTextColors.subtitleColor,
@@ -145,7 +145,7 @@ class _GameSelectScreenState extends State<GameSelectScreen> {
                     ),
                     SizedBox(width: AppSize.w8),
                     Text(
-                      'Available Games',
+                      context.l10n.availableGames,
                       style: context.textTheme.titleSmall?.copyWith(
                         fontSize: AppSize.sp13,
                         color: context.themeColors.navyColor,
@@ -180,7 +180,7 @@ class _GameSelectScreenState extends State<GameSelectScreen> {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: AppSize.w24),
                   child: AppButton(
-                    text: 'Done',
+                    text: context.l10n.done,
                     buttonColor: context.themeColors.buttonColor,
                     shadowColor: context.themeColors.buttonBorderColor,
                     trailingIcon: Icon(

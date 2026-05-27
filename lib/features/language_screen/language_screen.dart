@@ -108,7 +108,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
       },
       child: Scaffold(
         backgroundColor: context.themeColors.backgroundColor,
-        appBar: fromSettings ? CommonAppBar(titleText: 'Language') : null,
+        appBar: fromSettings ? CommonAppBar(titleText: context.l10n.language) : null,
         bottomNavigationBar: fromSettings
             ? null
             : _NativeAdBar(
@@ -125,7 +125,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: AppSize.w24),
                   child: Text(
-                    'Set Default Language',
+                    context.l10n.setDefaultLanguage,
                     style: context.textTheme.titleLarge?.copyWith(
                       fontSize: AppSize.sp28,
                       color: context.themeColors.navyColor,
@@ -145,7 +145,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: AppSize.w24),
                   child: Text(
-                    'Selected language will use as default language for this app which you can change later if you want to.',
+                    context.l10n.setDefaultLanguageDesc,
                     style: context.textTheme.bodyMedium?.copyWith(
                       color: context.themeTextColors.subtitleColor,
                       height: 1.5,
@@ -183,7 +183,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: AppSize.w24),
                 child: AppButton(
-                  text: fromSettings ? 'Save' : 'Get Started',
+                  text: fromSettings ? context.l10n.save : context.l10n.getStarted,
                   buttonColor: context.themeColors.buttonColor,
                   shadowColor: context.themeColors.buttonBorderColor,
                   foregroundColor: context.themeColors.whiteColor,

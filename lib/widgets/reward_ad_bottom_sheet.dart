@@ -109,7 +109,7 @@ class _RewardAdBottomSheetState extends State<RewardAdBottomSheet> {
 
           // Title
           Text(
-            'Earn a Reward',
+            context.l10n.earnAReward,
             style: context.textTheme.titleLarge?.copyWith(
               fontSize: AppSize.sp22,
               fontWeight: FontWeight.w800,
@@ -120,7 +120,7 @@ class _RewardAdBottomSheetState extends State<RewardAdBottomSheet> {
 
           // Description
           Text(
-            'Watch a short ad to claim your reward.\nYour support keeps the app free!',
+            context.l10n.watchAdDesc,
             textAlign: TextAlign.center,
             style: context.textTheme.bodyMedium?.copyWith(
               fontSize: AppSize.sp14,
@@ -157,7 +157,7 @@ class _RewardAdBottomSheetState extends State<RewardAdBottomSheet> {
                         ),
                         SizedBox(width: AppSize.w6),
                         Text(
-                          'Auto-starting in $_remainingSeconds s',
+                          context.l10n.autoStartingIn(_remainingSeconds),
                           style: context.textTheme.bodySmall?.copyWith(
                             fontSize: AppSize.sp13,
                             fontWeight: FontWeight.w600,
@@ -176,7 +176,7 @@ class _RewardAdBottomSheetState extends State<RewardAdBottomSheet> {
             children: [
               Expanded(
                 child: AppButton(
-                  text: 'Cancel',
+                  text: context.l10n.cancel,
                   buttonColor: context.themeColors.whiteColor,
                   shadowColor: context.themeColors.borderColor,
                   foregroundColor: context.themeTextColors.textColor,
@@ -191,8 +191,7 @@ class _RewardAdBottomSheetState extends State<RewardAdBottomSheet> {
               Expanded(
                 flex: 2,
                 child: AppButton(
-                  text: 'Watch Ad',
-                  // text: 'Get Reward',
+                  text: context.l10n.watchAd,
                   buttonColor: context.themeColors.buttonColor,
                   shadowColor: context.themeColors.buttonBorderColor,
                   foregroundColor: context.themeColors.whiteColor,
@@ -296,7 +295,7 @@ class _CancelButton extends StatelessWidget {
           border: Border.all(color: colors.borderColor, width: 1.2),
         ),
         child: Text(
-          'Cancel',
+          context.l10n.cancel,
           style: context.textTheme.bodyMedium?.copyWith(
             fontSize: AppSize.sp15,
             fontWeight: FontWeight.w600,

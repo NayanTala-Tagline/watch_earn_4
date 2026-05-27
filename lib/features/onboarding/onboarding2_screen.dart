@@ -56,7 +56,7 @@ class _Onboarding2ScreenState extends State<Onboarding2Screen> {
                       AppSize.h16,
                     ),
                     child: AppButton(
-                      text: 'Next',
+                      text: context.l10n.next,
                       isLoading: prov.isLoading,
                       buttonColor: context.themeColors.buttonColor,
                       shadowColor: context.themeColors.buttonBorderColor,
@@ -107,7 +107,7 @@ class _Onboarding2ScreenState extends State<Onboarding2Screen> {
                           left: AppSize.w40,
                         ),
                         child: Text(
-                          'Skip',
+                          context.l10n.skip,
                           style: context.textTheme.bodyLarge?.copyWith(
                             fontSize: AppSize.sp16,
                             color: context.themeColors.navyColor,
@@ -144,7 +144,7 @@ class _Onboarding2ScreenState extends State<Onboarding2Screen> {
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: AppSize.w24),
                     child: Text(
-                      'Ultimate Games',
+                      context.l10n.onboarding2Title,
                       style: context.textTheme.titleLarge?.copyWith(
                         fontSize: AppSize.sp28,
                         color: context.themeColors.navyColor,
@@ -168,7 +168,7 @@ class _Onboarding2ScreenState extends State<Onboarding2Screen> {
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: AppSize.w24),
                     child: Text(
-                      'Get Multiple options for Games to Play and Get More Points.',
+                      context.l10n.onboarding2Desc,
                       style: context.textTheme.bodyMedium?.copyWith(
                         fontSize: AppSize.sp15,
                         color: context.themeTextColors.subtitleColor,

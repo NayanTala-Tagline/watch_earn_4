@@ -54,7 +54,7 @@ class _DailyCheckInScreenState extends State<DailyCheckInScreen> {
 
     return Scaffold(
       backgroundColor: context.themeColors.backgroundColor,
-      appBar: CommonAppBar(titleText: 'Daily Check-in'),
+      appBar: CommonAppBar(titleText: context.l10n.dailyCheckIn),
       bottomNavigationBar: AdSlot(ad: _nativeAd),
       body: StreamBuilder(
         stream: _db.userListenable(),
@@ -151,7 +151,7 @@ class _TotalDaysCard extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                'Total Days Claimed',
+                context.l10n.totalDaysClaimed,
                 style: context.textTheme.titleSmall?.copyWith(
                   fontSize: AppSize.sp13,
                   fontWeight: FontWeight.w600,
@@ -160,7 +160,7 @@ class _TotalDaysCard extends StatelessWidget {
               ),
               SizedBox(height: AppSize.h4),
               Text(
-                '$totalDays Days',
+                context.l10n.totalDaysValue(totalDays),
                 style: context.textTheme.titleLarge?.copyWith(
                   fontSize: AppSize.sp24,
                   fontWeight: FontWeight.w900,
@@ -234,7 +234,7 @@ class _RewardCard extends StatelessWidget {
           ),
           SizedBox(height: AppSize.h20),
           Text(
-            'Daily Check-in Reward',
+            context.l10n.dailyCheckInReward,
             style: context.textTheme.titleLarge?.copyWith(
               fontSize: AppSize.sp18,
               fontWeight: FontWeight.w900,
@@ -243,7 +243,7 @@ class _RewardCard extends StatelessWidget {
           ),
           SizedBox(height: AppSize.h6),
           Text(
-            'Day $currentDay',
+            context.l10n.dayValue(currentDay),
             style: context.textTheme.titleMedium?.copyWith(
               fontSize: AppSize.sp15,
               fontWeight: FontWeight.w900,
@@ -253,8 +253,8 @@ class _RewardCard extends StatelessWidget {
           SizedBox(height: AppSize.h8),
           Text(
             isClaimed
-                ? 'You have already claimed today\'s reward.'
-                : 'Claim +$rewardCoins coins today!',
+                ? context.l10n.alreadyClaimedToday
+                : context.l10n.claimCoinsToday(rewardCoins),
             textAlign: TextAlign.center,
             style: context.textTheme.bodyLarge?.copyWith(
               fontSize: AppSize.sp13,
@@ -266,7 +266,7 @@ class _RewardCard extends StatelessWidget {
           SizedBox(height: AppSize.h22),
           if (!isClaimed) ...[
             Text(
-              'This section may contain ads',
+              context.l10n.sectionContainsAds,
               style: context.textTheme.bodySmall?.copyWith(
                 fontSize: AppSize.sp11,
                 fontStyle: FontStyle.italic,
@@ -279,7 +279,7 @@ class _RewardCard extends StatelessWidget {
             width: double.infinity,
             height: AppSize.h54,
             child: AppButton(
-              text: isClaimed ? 'Claimed' : 'Claim',
+              text: isClaimed ? context.l10n.claimed : context.l10n.claim,
               buttonColor: context.themeColors.buttonColor2,
               shadowColor: context.themeColors.buttonBorderColor2,
               foregroundColor: context.themeColors.whiteColor,

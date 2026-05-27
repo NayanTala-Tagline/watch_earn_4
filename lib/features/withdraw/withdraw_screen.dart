@@ -84,7 +84,7 @@ class _WithdrawViewState extends State<_WithdrawView> {
       body: Column(
         children: [
           CommonHeader(
-            title: 'Withdraw',
+            title: context.l10n.withdraw,
             backgroundColor: context.themeColors.backgroundColor,
             trailingIcon: Icon(
               Icons.refresh_rounded,
@@ -144,7 +144,7 @@ class _WithdrawViewState extends State<_WithdrawView> {
                         child: Padding(
                           padding: EdgeInsets.only(top: canExpand ? AppSize.h5 : AppSize.h0),
                           child: Text(
-                            isExpanded ? 'View Less' : 'View More',
+                            isExpanded ? context.l10n.viewLess : context.l10n.viewMore,
                             style: context.textTheme.bodyMedium?.copyWith(
                               fontFamily: FontFamily.kommonGrotesk,
                               fontSize: AppSize.sp15,
@@ -174,7 +174,7 @@ class _WithdrawViewState extends State<_WithdrawView> {
                   SizedBox(height: AppSize.h12),
                   Center(
                     child: Text(
-                      'Proceed within 24h - No fees on cash',
+                      context.l10n.proceedWithin24h,
                       style: TextStyle(
                         fontFamily: FontFamily.kommonGrotesk,
                         fontSize: AppSize.sp12,
@@ -232,7 +232,7 @@ class _LiveBalanceCard extends StatelessWidget {
         final fraction = '.${dollarValue.toStringAsFixed(5).split('.').last}';
 
         return BalanceCard(
-          title: 'Available Balance',
+          title: context.l10n.availableBalance,
           amountWhole: whole,
           amountFraction: fraction,
           body: _BalanceBody(coins: coins.toInt(), minDollar: minDollar),
@@ -263,7 +263,7 @@ class _BalanceBody extends StatelessWidget {
               Assets.icons.icCoin.svg(width: 18, height: 18),
               SizedBox(width: AppSize.w6),
               Text(
-                '$coins Coins',
+                context.l10n.coinsValue(coins),
                 style: TextStyle(
                   fontFamily: FontFamily.kommonGrotesk,
                   fontSize: AppSize.sp12,
@@ -286,7 +286,7 @@ class _BalanceBody extends StatelessWidget {
               ),
               SizedBox(width: AppSize.w4),
               Text(
-                'Min. Withdrawal – \$${minDollar.toStringAsFixed(2)}',
+                context.l10n.minWithdrawal('\$${minDollar.toStringAsFixed(2)}'),
                 style: TextStyle(
                   fontFamily: FontFamily.kommonGrotesk,
                   fontSize: AppSize.sp12,
@@ -351,7 +351,7 @@ class _PendingWithdrawBanner extends StatelessWidget {
               SizedBox(width: AppSize.w10),
               Expanded(
                 child: Text(
-                  'You have a pending withdrawal. New requests are disabled until it is approved.',
+                  context.l10n.pendingWithdrawal,
                   style: context.textTheme.bodySmall?.copyWith(
                     color: context.themeTextColors.darkTitleColor,
                     fontSize: AppSize.sp13,
@@ -379,7 +379,7 @@ class _WithdrawCta extends StatelessWidget {
     return SizedBox(
       height: 56,
       child: AppButton(
-        text: 'Withdraw \$ ${amount.toStringAsFixed(2)}',
+        text: context.l10n.withdrawAmount(amount.toStringAsFixed(2)),
         buttonColor: context.themeColors.buttonColor,
         shadowColor: context.themeColors.buttonBorderColor,
         foregroundColor: context.themeColors.whiteColor,
@@ -617,7 +617,7 @@ class _AmountCard extends StatelessWidget {
           Row(
             children: [
               Text(
-                'Enter Withdrawal Amount',
+                context.l10n.enterWithdrawalAmount,
                 style: TextStyle(
                   fontFamily: FontFamily.kommonGrotesk,
                   fontSize: AppSize.sp13,
@@ -629,7 +629,7 @@ class _AmountCard extends StatelessWidget {
               GestureDetector(
                 onTap: () => onChanged(0.00015),
                 child: Text(
-                  'Use all',
+                  context.l10n.useAll,
                   style: TextStyle(
                     fontFamily: FontFamily.kommonGrotesk,
                     fontSize: AppSize.sp13,

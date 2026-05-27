@@ -71,7 +71,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   .shimmer(duration: 1400.ms, color: context.themeColors.whiteColor.withValues(alpha: 0.6)),
               SizedBox(height: AppSize.h16),
               Text(
-                'Rewardo',
+                context.l10n.splashAppName,
                 style: context.textTheme.titleLarge?.copyWith(
                   fontSize: AppSize.sp32,
                   color: context.themeColors.navyColor,

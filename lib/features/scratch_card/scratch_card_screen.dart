@@ -205,7 +205,7 @@ class _ScratchCardScreenState extends State<ScratchCardScreen>
 
                           // Headline
                           Text(
-                            'Scratch to reveal\nyour reward.',
+                            context.l10n.scratchToReveal,
                             textAlign: TextAlign.center,
                             style: context.textTheme.titleLarge?.copyWith(
                               fontSize: AppSize.sp28,
@@ -299,7 +299,7 @@ class _ScratchAppBar extends StatelessWidget {
             ),
           ),
           Text(
-            'Scratch Card',
+            context.l10n.scratchCard,
             style: context.textTheme.titleLarge?.copyWith(
               fontSize: AppSize.sp18,
               color: context.themeColors.navyColor,
@@ -335,7 +335,7 @@ class _LuckyBadge extends StatelessWidget {
         ],
       ),
       child: Text(
-        'Lucky #$number',
+        context.l10n.luckyNumber(number),
         style: context.textTheme.titleMedium?.copyWith(
           color: context.themeColors.buttonColor2,
         ),
@@ -437,7 +437,7 @@ class _ScratchArea extends StatelessWidget {
                 left: AppSize.w16,
                 child: IgnorePointer(
                   child: Text(
-                    'MYSTERY',
+                    context.l10n.mystery,
                     style: context.textTheme.titleMedium?.copyWith(
                       color: context.themeColors.whiteColor.withValues(alpha: 0.7),
                       letterSpacing: 2,
@@ -454,7 +454,7 @@ class _ScratchArea extends StatelessWidget {
                 right: 0,
                 child: IgnorePointer(
                   child: Text(
-                    'Drag to scratch',
+                    context.l10n.dragToScratch,
                     textAlign: TextAlign.center,
                     style: context.textTheme.titleLarge?.copyWith(
                       fontSize: AppSize.sp24,
@@ -487,7 +487,7 @@ class _RevealedReward extends StatelessWidget {
               size: AppSize.r60, color: const Color(0xFFFF5183)),
           SizedBox(height: AppSize.h8),
           Text(
-            'Better Luck\nNext Time',
+            context.l10n.betterLuckNextTimeCard,
             textAlign: TextAlign.center,
             style: context.textTheme.titleLarge?.copyWith(
               fontSize: AppSize.sp22,
@@ -515,7 +515,7 @@ class _RevealedReward extends StatelessWidget {
         ),
         SizedBox(height: AppSize.h4),
         Text(
-          'Coins',
+          context.l10n.rankCoins,
           style: context.textTheme.titleLarge?.copyWith(
             fontSize: AppSize.sp18,
             fontWeight: FontWeight.w600,
@@ -580,7 +580,7 @@ class _ResultSheet extends StatelessWidget {
                   children: [
                     SizedBox(height: AppSize.h16),
                     Text(
-                      isLoss ? 'Oops!' : 'Congratulations..!',
+                      isLoss ? context.l10n.oops : context.l10n.congratulations,
                       textAlign: TextAlign.center,
                       style: context.textTheme.titleLarge?.copyWith(
                         fontSize: AppSize.sp26,
@@ -591,8 +591,8 @@ class _ResultSheet extends StatelessWidget {
                     SizedBox(height: AppSize.h8),
                     Text(
                       isLoss
-                          ? 'Better luck next time!'
-                          : 'You won $coins Coins',
+                          ? context.l10n.betterLuckNextTime
+                          : context.l10n.youWonCoins(coins),
                       textAlign: TextAlign.center,
                       style: context.textTheme.bodyLarge?.copyWith(
                         fontSize: AppSize.sp16,
@@ -602,7 +602,7 @@ class _ResultSheet extends StatelessWidget {
                     SizedBox(height: AppSize.h20),
                     if(!isLoss)
                       Text(
-                        'This section may contain ads',
+                        context.l10n.sectionContainsAds,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: context.textTheme.bodyMedium?.copyWith(
@@ -612,7 +612,7 @@ class _ResultSheet extends StatelessWidget {
                         ),
                       ),
                     AppButton(
-                      text: isLoss ? 'Try Again' : 'Claim Now',
+                      text: isLoss ? context.l10n.tryAgain : context.l10n.claimNow,
                       buttonColor: context.themeColors.buttonColor,
                       shadowColor: context.themeColors.buttonBorderColor,
                       foregroundColor: context.themeColors.whiteColor,

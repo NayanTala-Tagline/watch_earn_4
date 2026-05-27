@@ -73,8 +73,9 @@ class _ReferAndEarnBodyState extends State<_ReferAndEarnBody> {
 
   Future<void> _copyCode() async {
     if (_referralCode.isEmpty) return;
+    final msg = context.l10n.referralCodeCopied;
     await Clipboard.setData(ClipboardData(text: _referralCode));
-    'Referral code copied'.showSuccessAlert();
+    msg.showSuccessAlert();
   }
 
   Future<void> _shareLink() async {
@@ -109,7 +110,7 @@ class _ReferAndEarnBodyState extends State<_ReferAndEarnBody> {
       backgroundColor: context.themeColors.backgroundColor,
       body: Column(
         children: [
-          const CommonHeader(title: 'Refer & Earn'),
+          CommonHeader(title: context.l10n.referAndEarn),
           Expanded(
             child: StreamBuilder(
               stream: _db.userListenable(),
@@ -160,7 +161,7 @@ class _ReferAndEarnBodyState extends State<_ReferAndEarnBody> {
             SizedBox(width: AppSize.w12),
             Expanded(
               child: Text(
-                'Invite Friends,\nGet $_rewardAmount Coins!',
+                context.l10n.inviteFriendsTitle(_rewardAmount),
                 style: TextStyle(
                   fontFamily: FontFamily.kommonGrotesk,
                   fontSize: AppSize.sp24,
@@ -175,8 +176,7 @@ class _ReferAndEarnBodyState extends State<_ReferAndEarnBody> {
         ),
         SizedBox(height: AppSize.h8),
         Text(
-          'Share your code. When they sign up or enter '
-          'it, you both get $_rewardAmount coins!',
+          context.l10n.referralShareDesc(_rewardAmount),
           style: TextStyle(
             fontFamily: FontFamily.kommonGrotesk,
             fontSize: AppSize.sp14,
@@ -205,7 +205,7 @@ class _ReferAndEarnBodyState extends State<_ReferAndEarnBody> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Your Referral Code',
+            context.l10n.yourReferralCode,
             style: TextStyle(
               fontFamily: FontFamily.kommonGrotesk,
               fontSize: AppSize.sp15,
@@ -227,7 +227,7 @@ class _ReferAndEarnBodyState extends State<_ReferAndEarnBody> {
                 border: Border.all(color: context.themeColors.borderColor2),
               ),
               child: Text(
-                'Sign in to get your referral code',
+                context.l10n.signInForReferralCode,
                 style: TextStyle(
                   fontFamily: FontFamily.kommonGrotesk,
                   fontSize: AppSize.sp14,
@@ -242,7 +242,7 @@ class _ReferAndEarnBodyState extends State<_ReferAndEarnBody> {
             SizedBox(
               height: AppSize.h56,
               child: AppButton(
-                text: 'Share Link',
+                text: context.l10n.shareLink,
                 buttonColor: context.themeColors.buttonColor,
                 shadowColor: context.themeColors.buttonBorderColor,
                 foregroundColor: context.themeColors.whiteColor,
@@ -293,7 +293,7 @@ class _ReferAndEarnBodyState extends State<_ReferAndEarnBody> {
             ),
             SizedBox(width: AppSize.w10),
             Text(
-              'Referral code already applied!',
+              context.l10n.referralCodeAlreadyApplied,
               style: TextStyle(
                 fontFamily: FontFamily.kommonGrotesk,
                 fontSize: AppSize.sp14,
@@ -318,7 +318,7 @@ class _ReferAndEarnBodyState extends State<_ReferAndEarnBody> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Have a Promo Code?',
+            context.l10n.haveAPromoCode,
             style: TextStyle(
               fontFamily: FontFamily.kommonGrotesk,
               fontSize: AppSize.sp13,
@@ -359,7 +359,7 @@ class _ReferAndEarnBodyState extends State<_ReferAndEarnBody> {
                           decoration: InputDecoration(
                             isCollapsed: true,
                             border: InputBorder.none,
-                            hintText: 'Enter referral code',
+                            hintText: context.l10n.enterReferralCode,
                             hintStyle: TextStyle(
                               fontFamily: FontFamily.kommonGrotesk,
                               fontSize: AppSize.sp14,
@@ -376,7 +376,7 @@ class _ReferAndEarnBodyState extends State<_ReferAndEarnBody> {
               ),
               SizedBox(width: AppSize.w10),
               AppButton(
-                text: provider.isApplyingReferral ? '...' : 'Apply',
+                text: provider.isApplyingReferral ? '...' : context.l10n.apply,
                 isAdjust: true,
                 buttonColor: context.themeColors.buttonColor2,
                 shadowColor: context.themeColors.buttonBorderColor2,
@@ -398,7 +398,7 @@ class _ReferAndEarnBodyState extends State<_ReferAndEarnBody> {
                 ),
                 onPressed: () {
                   if (_isGuest) {
-                    'Please sign in to use a referral code.'.showInfoAlert();
+                    context.l10n.pleaseSignInForReferral.showInfoAlert();
                     return;
                   }
                   if (provider.isApplyingReferral) return;
@@ -454,7 +454,7 @@ class _ReferAndEarnBodyState extends State<_ReferAndEarnBody> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  'How Referrals Work',
+                  context.l10n.howReferralsWork,
                   style: TextStyle(
                     fontFamily: FontFamily.kommonGrotesk,
                     fontSize: AppSize.sp14,
@@ -464,7 +464,7 @@ class _ReferAndEarnBodyState extends State<_ReferAndEarnBody> {
                 ),
                 SizedBox(height: AppSize.h2),
                 Text(
-                  'Share code · Friend joins · You both earn $_rewardAmount coins',
+                  context.l10n.howReferralsWorkDesc(_rewardAmount),
                   style: TextStyle(
                     fontFamily: FontFamily.kommonGrotesk,
                     fontSize: AppSize.sp12,
@@ -491,7 +491,7 @@ class _ReferAndEarnBodyState extends State<_ReferAndEarnBody> {
               size: AppSize.sp20,
               color: context.themeColors.buttonColor,
             ),
-            label: 'Friends Invited',
+            label: context.l10n.friendsInvited,
             value: '${provider.friendsInvited}',
           ),
         ),
@@ -499,7 +499,7 @@ class _ReferAndEarnBodyState extends State<_ReferAndEarnBody> {
         Expanded(
           child: _StatCard(
             icon: Assets.icons.icCoin.svg(width: 20.w, height: 20.w),
-            label: 'Coins Earned',
+            label: context.l10n.coinsEarned,
             value: '${provider.coinsEarned}',
           ),
         ),

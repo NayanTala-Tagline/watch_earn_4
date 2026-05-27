@@ -61,7 +61,7 @@ class _Onboarding1ScreenState extends State<Onboarding1Screen> {
                       AppSize.h16,
                     ),
                     child: AppButton(
-                      text: 'Next',
+                      text: context.l10n.next,
                       isLoading: prov.isLoading,
                       buttonColor: context.themeColors.buttonColor,
                       shadowColor: context.themeColors.buttonBorderColor,
@@ -112,7 +112,7 @@ class _Onboarding1ScreenState extends State<Onboarding1Screen> {
                           left: AppSize.w40,
                         ),
                         child: Text(
-                          'Skip',
+                          context.l10n.skip,
                           style: context.textTheme.bodyLarge?.copyWith(
                             fontSize: AppSize.sp16,
                             color: context.themeColors.navyColor,
@@ -149,7 +149,7 @@ class _Onboarding1ScreenState extends State<Onboarding1Screen> {
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: AppSize.w24),
                     child: Text(
-                      'Daily Rewards',
+                      context.l10n.onboarding1Title,
                       style: context.textTheme.titleLarge?.copyWith(
                         fontSize: AppSize.sp28,
                         color: context.themeColors.navyColor,
@@ -173,7 +173,7 @@ class _Onboarding1ScreenState extends State<Onboarding1Screen> {
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: AppSize.w24),
                     child: Text(
-                      "You'll Get a Daily Points Reward, Which you can claim and increase you Points",
+                      context.l10n.onboarding1Desc,
                       style: context.textTheme.bodyMedium?.copyWith(
                         fontSize: AppSize.sp15,
                         color: context.themeTextColors.subtitleColor,

@@ -488,7 +488,7 @@ class _QuizAppBar extends StatelessWidget {
             ),
           ),
           Text(
-            'Quiz Master',
+            context.l10n.quizMaster,
             style: context.textTheme.titleLarge?.copyWith(
               fontSize: AppSize.sp18,
               color: context.themeColors.navyColor,
@@ -520,7 +520,7 @@ class _ProgressHeader extends StatelessWidget {
         Row(
           children: [
             Text(
-              '$current of $total',
+              context.l10n.currentOfTotal(current, total),
               style: context.textTheme.titleLarge?.copyWith(
                 color: context.themeColors.navyColor,
               ),
@@ -547,7 +547,7 @@ class _ProgressHeader extends StatelessWidget {
                   Assets.icons.icCoin.svg(width: AppSize.r16, height: AppSize.r16),
                   SizedBox(width: AppSize.w4),
                   Text(
-                    '+$coinsPerCorrect per correct',
+                    context.l10n.perCorrect(coinsPerCorrect),
                     style: context.textTheme.titleMedium?.copyWith(
                       fontSize: AppSize.sp12,
                       color: context.themeColors.coinAmberColor,
@@ -945,7 +945,7 @@ class _StreakRow extends StatelessWidget {
         SizedBox(width: AppSize.w8),
 
         Text(
-          '$streak in a row',
+          context.l10n.streakInARow(streak),
           style: context.textTheme.titleSmall?.copyWith(
             fontSize: AppSize.sp13,
             color: context.themeTextColors.mutedTextColor,
@@ -1025,7 +1025,7 @@ class _ResultSheet extends StatelessWidget {
 
                     // Title
                     Text(
-                      _isLoss ? 'Oops!' : 'Congratulations..!',
+                      _isLoss ? context.l10n.oops : context.l10n.congratulations,
                       textAlign: TextAlign.center,
                       style: context.textTheme.titleLarge?.copyWith(
                         fontSize: AppSize.sp26,
@@ -1038,8 +1038,8 @@ class _ResultSheet extends StatelessWidget {
 
                     Text(
                       _isLoss
-                          ? 'Better luck next time!'
-                          : 'You scored $correctCount/$totalQuestions',
+                          ? context.l10n.betterLuckNextTime
+                          : context.l10n.youScored(correctCount, totalQuestions),
                       textAlign: TextAlign.center,
                       style: context.textTheme.bodyLarge?.copyWith(
                         fontSize: AppSize.sp16,
@@ -1050,7 +1050,7 @@ class _ResultSheet extends StatelessWidget {
                     if (!_isLoss) ...[
                       SizedBox(height: AppSize.h4),
                       Text(
-                        'You won $totalCoins Coins',
+                        context.l10n.youWonCoins(totalCoins),
                         textAlign: TextAlign.center,
                         style: context.textTheme.titleSmall?.copyWith(
                           fontSize: AppSize.sp15,
@@ -1062,7 +1062,7 @@ class _ResultSheet extends StatelessWidget {
                     SizedBox(height: AppSize.h28),
                     if(!_isLoss)
                     Text(
-                      'This section may contain ads',
+                      context.l10n.sectionContainsAds,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: context.textTheme.bodyMedium?.copyWith(
@@ -1072,7 +1072,7 @@ class _ResultSheet extends StatelessWidget {
                       ),
                     ),
                     AppButton(
-                      text: _isLoss ? 'Try Again' : 'Claim Now',
+                      text: _isLoss ? context.l10n.tryAgain : context.l10n.claimNow,
                       buttonColor: context.themeColors.buttonColor,
                       shadowColor: context.themeColors.buttonBorderColor,
                       foregroundColor: context.themeColors.whiteColor,

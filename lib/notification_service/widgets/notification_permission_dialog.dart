@@ -114,7 +114,7 @@ class NotificationPermissionDialog extends StatelessWidget {
             animatedBell,
             SizedBox(height: AppSize.h12),
             Text(
-              'Stay in updated',
+              context.l10n.stayInUpdated,
               textAlign: TextAlign.center,
               style: context.textTheme.titleLarge?.copyWith(
                 color: textColors.textColor,
@@ -124,7 +124,7 @@ class NotificationPermissionDialog extends StatelessWidget {
             ),
             SizedBox(height: AppSize.h10),
             Text(
-              'Allow notifications so we can keep you posted on your loan application status and important updates.',
+              context.l10n.notificationPermissionDesc,
               textAlign: TextAlign.center,
               style: context.textTheme.bodyMedium?.copyWith(
                 color: textColors.descriptionColor,
@@ -138,7 +138,7 @@ class NotificationPermissionDialog extends StatelessWidget {
               children: [
                 Expanded(
                   child: AppButton(
-                    text: 'Allow',
+                    text: context.l10n.allow,
                     onPressed: () {
                       Navigator.of(context).pop();
                       onAllow();
@@ -165,7 +165,7 @@ class NotificationPermissionDialog extends StatelessWidget {
                         ),
                       ),
                       child: Text(
-                        'Not Now',
+                        context.l10n.notNow,
                         style: context.textTheme.titleSmall?.copyWith(
                           color: textColors.textColor,
                           fontWeight: FontWeight.w600,

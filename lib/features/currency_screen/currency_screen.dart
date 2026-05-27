@@ -72,7 +72,7 @@ class _CurrencyScreenState extends State<CurrencyScreen> {
 
   void _onConfirm() {
     if (_selectedName == null) {
-      'Please select a currency'.showInfoAlert();
+      context.l10n.pleaseSelectCurrency.showInfoAlert();
       return;
     }
     context.goNamed(AppRoutes.login);
@@ -101,7 +101,7 @@ class _CurrencyScreenState extends State<CurrencyScreen> {
                   children: [
                     Expanded(
                       child: Text(
-                        'Choose your currency',
+                        context.l10n.chooseYourCurrency,
                         style: context.textTheme.titleLarge?.copyWith(
                           fontSize: AppSize.sp28,
                           color: context.themeColors.navyColor,
@@ -126,7 +126,7 @@ class _CurrencyScreenState extends State<CurrencyScreen> {
                   children: [
                     Expanded(
                       child: Text(
-                        'Select your currency which are you like.',
+                        context.l10n.selectFavCurrency,
                         style: context.textTheme.bodyMedium?.copyWith(
                           color: context.themeTextColors.subtitleColor,
                           height: 1.5,
@@ -146,7 +146,7 @@ class _CurrencyScreenState extends State<CurrencyScreen> {
                     ),
                     SizedBox(width: AppSize.w8),
                     Text(
-                      'Available Currency',
+                      context.l10n.availableCurrency,
                       style: context.textTheme.titleSmall?.copyWith(
                         fontSize: AppSize.sp13,
                         color: context.themeColors.navyColor,
@@ -179,7 +179,7 @@ class _CurrencyScreenState extends State<CurrencyScreen> {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: AppSize.w24),
                   child: AppButton(
-                    text: 'Done',
+                    text: context.l10n.done,
                     buttonColor: context.themeColors.buttonColor,
                     shadowColor: context.themeColors.buttonBorderColor,
                     foregroundColor: context.themeColors.whiteColor,

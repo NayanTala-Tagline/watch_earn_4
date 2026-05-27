@@ -68,7 +68,7 @@ class WithdrawBottomSheet extends StatelessWidget {
                     ),
                     SizedBox(height: AppSize.h16),
                     Text(
-                      'Withdraw to ${item.title}',
+                      context.l10n.withdrawTo(item.title),
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontFamily: FontFamily.kommonGrotesk,
@@ -85,10 +85,10 @@ class WithdrawBottomSheet extends StatelessWidget {
                       prefixIcon: item.formData.icon,
                       validator: (v) {
                         if (v == null || v.trim().isEmpty) {
-                          return 'Field required';
+                          return context.l10n.fieldRequired;
                         }
                         if (!RegExp(item.formData.regex).hasMatch(v)) {
-                          return 'Invalid input';
+                          return context.l10n.invalidInput;
                         }
                         return null;
                       },
@@ -97,13 +97,13 @@ class WithdrawBottomSheet extends StatelessWidget {
                     _buildField(
                       context: context,
                       controller: provider.amountController,
-                      label: 'Amount (Coins)',
+                      label: context.l10n.amountCoins,
                       prefixIcon: Icon(
                         Icons.monetization_on_sharp,
                         color: item.color,
                       ),
-                      suffixText:
-                          'Min ${RemoteConfigService.instance.minWithdrawAmount.toDouble().toStringAsFixed(0)}',
+                      suffixText: context.l10n.minSuffix(
+                          RemoteConfigService.instance.minWithdrawAmount.toDouble().toStringAsFixed(0)),
                       keyboardType: const TextInputType.numberWithOptions(
                         decimal: true,
                       ),
@@ -113,12 +113,13 @@ class WithdrawBottomSheet extends StatelessWidget {
                       onChanged: provider.onAmountChanged,
                       validator: (v) {
                         if (v == null || v.trim().isEmpty) {
-                          return 'Field required';
+                          return context.l10n.fieldRequired;
                         }
                         final amount = double.tryParse(v.trim());
-                        if (amount == null) return 'Enter a valid amount';
+                        if (amount == null) return context.l10n.enterValidAmount;
                         if (amount < RemoteConfigService.instance.minWithdrawAmount.toDouble()) {
-                          return 'Minimum withdraw is ${RemoteConfigService.instance.minWithdrawAmount.toDouble().toStringAsFixed(0)} coins';
+                          return context.l10n.minimumWithdrawCoins(
+                              RemoteConfigService.instance.minWithdrawAmount.toDouble().toInt());
                         }
                         return null;
                       },
@@ -140,7 +141,7 @@ class WithdrawBottomSheet extends StatelessWidget {
                           ),
                         ),
                         child: Text(
-                          'Value \$${provider.convertedValue}',
+                          context.l10n.convertedValue('\$${provider.convertedValue}'),
                           style: TextStyle(
                             fontFamily: FontFamily.kommonGrotesk,
                             fontSize: AppSize.sp13,
@@ -154,7 +155,7 @@ class WithdrawBottomSheet extends StatelessWidget {
                     _buildField(
                       context: context,
                       controller: provider.noteController,
-                      label: 'Additional note (optional)',
+                      label: context.l10n.additionalNoteOptional,
                       prefixIcon: Icon(
                         Icons.note,
                         color: context.themeTextColors.bodyTextColor,
@@ -171,10 +172,11 @@ class WithdrawBottomSheet extends StatelessWidget {
                                     .validate()) {
                                   return;
                                 }
+                                final successMsg = context.l10n.withdrawRequestSent;
                                 final success = await provider.createWithdraw();
                                 if (success) {
                                   provider.resetWithdrawForm();
-                                  'Withdraw request sent'.showSuccessAlert();
+                                  successMsg.showSuccessAlert();
                                   if (context.mounted) {
                                     Navigator.pop(context);
                                   }
@@ -201,7 +203,7 @@ class WithdrawBottomSheet extends StatelessWidget {
                                 ),
                               )
                             : Text(
-                                'Confirm Withdrawal',
+                                context.l10n.confirmWithdrawal,
                                 style: TextStyle(
                                   fontFamily: FontFamily.kommonGrotesk,
                                   fontSize: AppSize.sp16,

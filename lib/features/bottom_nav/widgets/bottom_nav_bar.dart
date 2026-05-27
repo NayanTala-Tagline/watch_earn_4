@@ -11,12 +11,12 @@ class _NavItem {
   final String label;
 }
 
-const _items = <_NavItem>[
-  _NavItem(Icons.home_rounded, 'Home'),
-  _NavItem(Icons.emoji_events_rounded, 'Rank'),
-  _NavItem(Icons.card_giftcard_rounded, 'Rewards'),
-  _NavItem(Icons.person_rounded, 'Profile'),
-];
+List<_NavItem> _buildItems(BuildContext context) => [
+      _NavItem(Icons.home_rounded, context.l10n.home),
+      _NavItem(Icons.emoji_events_rounded, context.l10n.rank),
+      _NavItem(Icons.card_giftcard_rounded, context.l10n.rewards),
+      _NavItem(Icons.person_rounded, context.l10n.profile),
+    ];
 
 class BottomNavBar extends StatelessWidget {
   const BottomNavBar({
@@ -30,6 +30,7 @@ class BottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final items = _buildItems(context);
     return Padding(
       padding: EdgeInsets.fromLTRB(
         AppSize.w16,
@@ -56,8 +57,8 @@ class BottomNavBar extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
-          children: List.generate(_items.length, (i) {
-            final item = _items[i];
+          children: List.generate(items.length, (i) {
+            final item = items[i];
             if (i == currentIndex) {
               return ActiveNavTab(
                 icon: item.icon,

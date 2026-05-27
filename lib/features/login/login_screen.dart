@@ -96,7 +96,7 @@ class _LoginBodyState extends State<_LoginBody> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Start Earning\nRewards',
+            context.l10n.loginTitle,
             style: context.textTheme.titleLarge?.copyWith(
               fontSize: AppSize.sp38,
               color: context.themeColors.navyColor,
@@ -114,7 +114,7 @@ class _LoginBodyState extends State<_LoginBody> {
               ),
           SizedBox(height: AppSize.h14),
           Text(
-            'Complete tasks, play games, and earn coins that convert to real money!',
+            context.l10n.loginSubtitle,
             style: context.textTheme.bodyMedium?.copyWith(
               fontSize: AppSize.sp16,
               color: context.themeTextColors.subtitleColor,
@@ -145,7 +145,7 @@ class _LoginBodyState extends State<_LoginBody> {
           // Google sign-in
           Consumer<AuthProvider>(
             builder: (context, auth, _) => AppButton(
-              text: 'Continue with Google',
+              text: context.l10n.continueWithGoogle,
               icon: Assets.icons.icGoogle.svg(width: AppSize.w26, height: AppSize.w26),
               isLoginButton: true,
               isLoading: auth.isGoogleLoading,
@@ -172,7 +172,7 @@ class _LoginBodyState extends State<_LoginBody> {
           // Guest
           Consumer<AuthProvider>(
             builder: (context, auth, _) => AppButton(
-              text: 'Continue as Guest',
+              text: context.l10n.continueAsGuest,
               isLoading: auth.isGuestLoading,
               isDisabled: auth.isGoogleLoading,
               buttonColor: context.themeColors.whiteColor,
@@ -223,14 +223,14 @@ class _LoginBodyState extends State<_LoginBody> {
         TextSpan(
           children: [
             TextSpan(
-              text: 'By continuing, you agree to our ',
+              text: context.l10n.byContinuing,
               style: context.textTheme.bodyMedium?.copyWith(
                 fontSize: AppSize.sp13,
                 // color: context.themeTextColors.bodyTextColor,
               ),
             ),
             TextSpan(
-              text: 'Terms of Service',
+              text: context.l10n.termsOfService,
               recognizer: TapGestureRecognizer()..onTap = () {},
               style: context.textTheme.bodyLarge?.copyWith(
                 fontSize: AppSize.sp13,
@@ -240,14 +240,14 @@ class _LoginBodyState extends State<_LoginBody> {
               ),
             ),
             TextSpan(
-              text: ' and ',
+              text: context.l10n.and,
               style: context.textTheme.bodyMedium?.copyWith(
                 fontSize: AppSize.sp13,
                 color: context.themeTextColors.bodyTextColor,
               ),
             ),
             TextSpan(
-              text: 'Privacy Policy',
+              text: context.l10n.privacyPolicy,
               recognizer: TapGestureRecognizer()..onTap = () {},
               style: context.textTheme.bodyLarge?.copyWith(
                 fontSize: AppSize.sp13,

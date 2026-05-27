@@ -71,7 +71,7 @@ class _CountryScreenState extends State<CountryScreen> {
 
   void _onConfirm() {
     if (_selectedName == null) {
-      'Please select a country'.showInfoAlert();
+      context.l10n.pleaseSelectCountry.showInfoAlert();
       return;
     }
     context.goNamed(AppRoutes.gameSelect);
@@ -100,7 +100,7 @@ class _CountryScreenState extends State<CountryScreen> {
                   children: [
                     Expanded(
                       child: Text(
-                        'Which Country do you like?',
+                        context.l10n.whichCountry,
                         style: context.textTheme.titleLarge?.copyWith(
                           fontSize: AppSize.sp28,
                           color: context.themeColors.navyColor,
@@ -125,7 +125,7 @@ class _CountryScreenState extends State<CountryScreen> {
                   children: [
                     Expanded(
                       child: Text(
-                        'Select your fav countries which are you like.',
+                        context.l10n.selectFavCountries,
                         style: context.textTheme.bodyMedium?.copyWith(
                           color: context.themeTextColors.subtitleColor,
                           height: 1.5,
@@ -145,7 +145,7 @@ class _CountryScreenState extends State<CountryScreen> {
                     ),
                     SizedBox(width: AppSize.w8),
                     Text(
-                      'Available Country',
+                      context.l10n.availableCountry,
                       style: context.textTheme.titleSmall?.copyWith(
                         fontSize: AppSize.sp13,
                         color: context.themeColors.navyColor,
@@ -178,7 +178,7 @@ class _CountryScreenState extends State<CountryScreen> {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: AppSize.w24),
                   child: AppButton(
-                    text: 'Done',
+                    text: context.l10n.done,
                     buttonColor: context.themeColors.buttonColor,
                     shadowColor: context.themeColors.buttonBorderColor,
                     foregroundColor: context.themeColors.whiteColor,

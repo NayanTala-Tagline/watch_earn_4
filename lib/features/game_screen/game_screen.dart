@@ -13,19 +13,25 @@ import '../../utils/remote_config.dart';
 import '../../widgets/ad_slot.dart';
 import '../../widgets/app_button.dart';
 
-const _games = <String>[
-  'Spin Wheel',
-  'Treasure Hunt',
-  'Quiz Challenges',
-  'Puzzle Game',
-  'Block Game',
-  'Stack Tower',
-  'Bubble Shooter',
-  'Word Search',
-  'Memory Match',
-  'Card Flip',
-  'Sudoku',
-  'Tic Tac Toe',
+class _Game {
+  const _Game(this.name, this.emoji);
+  final String name;
+  final String emoji;
+}
+
+const _games = <_Game>[
+  _Game('Spin Wheel', '🎡'),
+  _Game('Treasure Hunt', '🗺️'),
+  _Game('Quiz Challenges', '❓'),
+  _Game('Puzzle Game', '🧩'),
+  _Game('Block Game', '🧱'),
+  _Game('Stack Tower', '🏗️'),
+  _Game('Bubble Shooter', '🫧'),
+  _Game('Word Search', '🔤'),
+  _Game('Memory Match', '🧠'),
+  _Game('Card Flip', '🃏'),
+  _Game('Sudoku', '🔢'),
+  _Game('Tic Tac Toe', '⭕'),
 ];
 
 class GameSelectScreen extends StatefulWidget {
@@ -161,9 +167,9 @@ class _GameSelectScreenState extends State<GameSelectScreen> {
                       children: [
                         for (var i = 0; i < _games.length; i++)
                           _GameChip(
-                            label: _games[i],
-                            isSelected: _selected.contains(_games[i]),
-                            onTap: () => _toggle(_games[i]),
+                            label: '${_games[i].emoji}  ${_games[i].name}',
+                            isSelected: _selected.contains(_games[i].name),
+                            onTap: () => _toggle(_games[i].name),
                             animationDelay: (i * 40).ms,
                           ),
                       ],
@@ -177,6 +183,11 @@ class _GameSelectScreenState extends State<GameSelectScreen> {
                     text: 'Done',
                     buttonColor: context.themeColors.buttonColor,
                     shadowColor: context.themeColors.buttonBorderColor,
+                    trailingIcon: Icon(
+                      Icons.arrow_forward_rounded,
+                      color: context.themeColors.whiteColor,
+                      size: 20,
+                    ),
                     foregroundColor: context.themeColors.whiteColor,
                     borderRadius: AppSize.r29,
                     onPressed: _onConfirm,

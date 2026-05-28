@@ -14,11 +14,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "671806358764-gls2ia07pp8tvv5942fne9c2dp94ck6g.apps.googleusercontent.com",
+          "client_id": "671806358764-09n5bhag0o41klkpkgabsa2egpuve873.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.reward.cash.rewardo.earn",
-            "certificate_hash": "657ed653226c7638be52f45c2b0e59f43dced130"
+            "certificate_hash": "5d562089cc683d2a634023f32e89cc8fddfa4a72"
           }
         },
         {

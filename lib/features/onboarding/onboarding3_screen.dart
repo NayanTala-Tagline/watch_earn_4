@@ -104,29 +104,6 @@ class _Onboarding3ScreenState extends State<Onboarding3Screen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Skip
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: GestureDetector(
-                      onTap: () => context.goNamed(AppRoutes.language),
-                      behavior: HitTestBehavior.opaque,
-                      child: Padding(
-                        padding: EdgeInsets.only(
-                          right: AppSize.w20,
-                          top: AppSize.h12,
-                          bottom: AppSize.h8,
-                          left: AppSize.w40,
-                        ),
-                        child: Text(
-                          context.l10n.skip,
-                          style: context.textTheme.bodyLarge?.copyWith(
-                            fontSize: AppSize.sp16,
-                            color: context.themeColors.navyColor,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
 
                   // Illustration
                   Expanded(
